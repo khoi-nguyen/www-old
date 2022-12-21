@@ -33,6 +33,7 @@ build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
 	@echo "Building $@"
 	@mkdir -p $(@D)
 	@$(ENV) ./bin/convert $< --citeproc --mathjax \
+		--csl templates/apa.csl \
 		--email-obfuscation=javascript \
 		--filter bin/filters/bootstrap.py \
 		--filter bin/filters/environments.py \

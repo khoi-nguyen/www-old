@@ -84,7 +84,7 @@ julia> sum(1/n for n in 10000:-1:1)
 :::
 :::
 
-# Binary representation of real numbers (p. 14) {.split}
+# Binary representation of real numbers [@vaes22, p. 5] {.split}
 
 ::: {.definition title="Positional notation"}
 Let $x \in \R$ and $\beta \in \N_0$.
@@ -125,13 +125,13 @@ Let $x = (110)_2$ and $y = (101)_2$.
 - Calculate $x \times y$ in base $2$.
 :::
 
-# Binary to decimal
+# Binary to decimal [@vaes22, p. 6]
 
 ::: example
 Convert $(0.\overline{10})_2$ to decimal notation.
 :::
 
-# Decimal to binary {.split}
+# Decimal to binary [@vaes22, p. 6] {.split}
 
 Converting to binary is more
 because negative powers of $10$ have
@@ -157,7 +157,7 @@ end
 Adapt the algorithm so that it works for integers.
 :::
 
-# Floating point formats
+# Floating point formats [@vaes22, p. 7]
 
 ::: {.definition title="Floating point format"}
 \begin{align}
@@ -198,9 +198,7 @@ np.Float32(0.1)
 ~~~
 :::
 
-# Machine $\epsilon$ {.split}
-
-[@vaes22, p. 9]
+# Machine $\epsilon$ [@vaes22, p.8] {.split}
 
 Let $x \in \F(p, E_\min, E_\max)$ be positive and **non-denormalized**, i.e.
 $$x = 2^n (1. b_1 \dots b_{p - 1})_2.$$
@@ -224,7 +222,7 @@ In Julia, $\epsilon_M$ can be calculated via the `eps` function,
 e.g. `eps(Float64)`{.julia},
 which yields `np.finfo(float).eps`{.sympy}.
 
-# Density
+# Density [@vaes22, pp. 9-10]
 
 In Julia, the fonction `nextfloat` gives the next representable number.
 
@@ -261,7 +259,7 @@ yticks!(
 :::
 :::
 
-# Relative distance to the next float
+# Relative distance to the next float [@vaes22, pp. 9-10]
 
 ~~~ {.plot .julia}
 p = -4:0.01:4
@@ -280,7 +278,7 @@ yticks!(
 )
 ~~~
 
-# Relative distance to the next float with denormalized numbers
+# Relative distance to the next float with denormalized numbers [@vaes22, p. 10]
 
 ~~~ {.plot .julia}
 p = -1024:0.01:-1016
@@ -299,7 +297,7 @@ yticks!(
 )
 ~~~
 
-# Round to nearest {.split}
+# Round to nearest [@vaes22, p. 10] {.split}
 
 Assume $x \notin \F$ is positive.
 
@@ -319,7 +317,7 @@ Assume $x \notin \F$ is positive.
 
 This define an operation $\fl_\F : \R \to \F$.
 
-# Operation on floating numbers
+# Operation on floating numbers [@vaes22, p. 11]
 
 Let $\F, \F'$, with $\F'' = \F \cup \F'$.
 
