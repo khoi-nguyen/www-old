@@ -1,0 +1,115 @@
+a {
+  text-decoration: none;
+}
+body {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 1.2em;
+}
+/* Fix margins */
+.container > h1,
+.container > h2,
+.container > h3,
+.container > h4,
+.container > h5,
+.container > h6 {
+  margin: 0.5em 0;
+}
+.card {
+  margin-bottom: 1em;
+}
+/* Definition lists */
+dl {
+  display: inline-grid;
+  grid-template-columns: 120px auto;
+}
+dl dl {
+  display: block;
+}
+dl dl dt, dl dl dd {
+  display: inline;
+}
+dl dl dt:after {
+  content: ":"
+}
+dt {
+  max-width: 250px;
+}
+/* Colors */
+.bg-primary {
+  background-color: #255994 !important;
+}
+.bg-nyu {
+  background-color: #57068c !important;
+}
+/* Reveal.js */
+.reveal .slides {
+  height: 100%;
+  position: relative;
+}
+.reveal .whiteboard {
+  cursor: crosshair;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.reveal #whiteboard-toolbar {
+  bottom: 20px;
+  left: 10px;
+  position: absolute;
+  z-index: 900;
+}
+.reveal a, .reveal button, .reveal iframe, .reveal iframe *, .reveal object, h5[data-bs-toggle="collapse"] {
+  position: relative;
+  z-index: 200 !important;
+}
+.reveal .slides {
+  text-align: left;
+  font-size: 1.4em;
+  line-height: 1.5em;
+}
+.reveal .slides pre {
+  line-height: 1.2em;
+}
+.reveal .slides section .slide-contents {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+.reveal .slides section.slide-title .slide-title {
+  background-color: #23373b;
+  color: #ebf0ef;
+  font-size: 1.7em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+  padding: 0.2em;
+}
+.reveal .slides section .card {
+  width: 90%;
+  margin: 0.5em auto;
+}
+.reveal .slides section.split .slide-contents {
+  width: 50%;
+}
+.reveal .slides .slide-contents .split {
+  width: 50%;
+}
+.reveal h2 {
+  color: #002147;
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 50px;
+}
+.reveal h3 {
+  color: #255994;
+  font-weight: bold;
+  font-size: 45px;
+}
+.reveal h4 {
+  color: #255994;
+  font-size: 40px;
+}
+.answer {
+  color: darkred;
+  display: block;
+  text-align: right;
+}

@@ -1,0 +1,13 @@
+---
+references:
+  - id: vaes22
+    title: "MATH-UA 9252: Numerical Analysis"
+    author:
+      family: Vaes
+      given: [Urbain, P.]
+    issued:
+      year: 2022
+    language: en-US
+    URL: https://urbain.vaes.uk/teaching/2022-fall-na/
+    type: manuscript
+...

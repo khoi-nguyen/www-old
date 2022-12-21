@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+FILES="$(grep -l -r "output:.*revealjs" teaching | sed 's/\.md$//')"
+
+while IFS= read -r path; do
+    url="https://nguyen.me.uk/boards/$path"
+    if curl --head --silent --fail $url 2> /dev/null; then
+      echo "Downloading $path.json"
+      curl $url --output $path.json
+    fi
+done <<< "$FILES"

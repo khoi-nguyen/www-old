@@ -1,0 +1,7 @@
+flask
+flask-login
+gunicorn
+matplotlib
+numpy
+panflute
+sympy

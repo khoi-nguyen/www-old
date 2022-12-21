@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+function sources {
+  local file
+  local meta
+  file="$1"
+  if [[ "$file" != "." && "$file" != "/" ]]; then
+    sources "$(dirname "$file")"
+  fi
+  meta="$file/meta.yaml"
+  [[ -f "$meta" ]] && echo $meta
+  [[ -f "$file" ]] && echo $file
+}
+
+function format {
+  if [[ "$@" == *"json"* ]]; then
+    echo
+  else
+    jsonfile="$(echo "build/$1" | sed 's/.md$/.json/')"
+    output="$(cat "$jsonfile" | jq -r '.output')"
+    echo "-t $output"
+  fi
+}
+
+pandoc $(sources $1 | xargs) $(format $@) "${@:2}"

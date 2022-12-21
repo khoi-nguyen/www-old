@@ -1,0 +1,37 @@
+experience:
+  - title: Lecturer in Mathematics
+    title_fr: Professeur en mathématiques
+    employer:
+      name: New York University
+      name_fr: Université de New York
+      website: https://nyu.edu/paris.html
+  - title: Teacher of Mathematics
+    title_fr: Enseignant en mathématiques
+education:
+  - title: PGCE in Mathematics
+    title_fr: Agrégation en mathématiques
+    institution:
+      name: University of Oxford
+      name_fr: Université d'Oxford
+      website: https://ox.ac.uk
+  - title: PhD in Mathematics
+    title_fr: Doctorat en mathématiques
+    institution:
+      name: Imperial College London
+      website: https://imperial.ac.uk
+  - title: MASt in Mathematics
+    title_fr: Master en mathématiques
+    institution:
+      name: University of Cambridge
+      name_fr: Université de Cambridge
+      website: https://cam.ac.uk
+languages:
+  - name: English
+    level: C2
+    desc: Native or bilingual proficiency
+  - name: French
+    level: C2
+    desc: Native or bilingual proficiency
+  - name: Spanish
+    level: C1
+    desc: Full professional proficiency
