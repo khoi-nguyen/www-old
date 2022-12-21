@@ -43,7 +43,7 @@ def explorer(
     self.vars["files"] = []
 
     def last_modified(path):
-        cmd = ["git", "log", "-1", "--pretty=%cd", "--date=format:%d %B %Y", path]
+        cmd = ["git", "log", "-1", "--pretty=%cd", "--date=format:%d %b %Y", path]
         return subprocess.check_output(cmd).decode("utf-8")
 
     for path in glob.glob(directory + "/" + globstr):
@@ -52,22 +52,26 @@ def explorer(
             meta = json.loads(file.read())
         show = all([meta[key] == val for key, val in filters.items()])
         if show and not meta.get("private"):
-            meta.update({
-                "href": "/" + path.replace("index", "").replace(".md", ""),
-                "last_modified": last_modified(path),
-                "path": path,
-            })
+            meta.update(
+                {
+                    "href": "/" + path.replace("index", "").replace(".md", ""),
+                    "last_modified": last_modified(path),
+                    "path": path,
+                }
+            )
             self.vars["files"].append(meta)
     self.vars["files"].sort(key=lambda f: f[order_by])
     return """
       <ul>
         {% for file in files %}
         <li>
+          <p class="float-end text-muted">
+            <small>Last modified: {{ file.last_modified }}</small>
+          </p>
           <h5><a href="{{ file.href }}">{{ file.title }}</a></h5>
           {% if file.notes %}
           <p>{{ file.notes }}</p>
           {% endif %}
-          <p><small>Last modified: {{ file.last_modified }}</small></p>
         </li>
         {% endfor %}
       </ul>
