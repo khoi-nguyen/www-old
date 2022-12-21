@@ -40,6 +40,3 @@ Recitations
 ~~~ {.yaml .widget name="explorer"}
 directory: teaching/nyu/2023-spring-na/recitations
 ~~~
-
-Assignments
------------
