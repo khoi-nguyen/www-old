@@ -2,7 +2,7 @@
 title: "Chapter 1: Floating Point Arithmetic"
 output: revealjs
 notes: |
-  - [Lecture notes](https://urbain.vaes.uk/static/teaching/numerical_analysis_fall/build/roundoff.pdf)
+  - [Lecture notes](/static/numerical-analysis/1-roundoff.pdf)
 ...
 
 # Welcome
@@ -45,7 +45,7 @@ notes: |
 # Lecture notes
 
 ~~~ {.yaml .widget name="pdf"}
-url: https://urbain.vaes.uk/static/teaching/numerical_analysis_fall/build/main.pdf
+url: /static/numerical-analysis/1-roundoff.pdf
 ~~~
 
 # Motivations {.row}
