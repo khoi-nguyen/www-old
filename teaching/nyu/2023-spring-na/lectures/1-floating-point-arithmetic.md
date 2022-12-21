@@ -60,7 +60,7 @@ julia> 0.1 * 0.1
 ~~~
 :::
 
-::: question
+::: {.question .fragment}
 What about this?
 
 ~~~ julia
@@ -71,7 +71,7 @@ julia> 10^19
 :::
 
 ::: col
-::: question
+::: {.question .fragment}
 Why do we have different results when we change the summation order?
 
 ~~~ julia
@@ -98,6 +98,7 @@ if
 \end{align}
 :::
 
+::: fragment
 $\beta = 2$
 :   **binary**, $a_k$ is called **bit**
 
@@ -107,8 +108,9 @@ $\beta = 10$
 $\beta = 16$
 :   **hexadecimal** (default),
     $\{a_k\} \subset \{1, 2, \dots, 9, A, B, \dots F\}$.
+:::
 
-::: remark
+::: {.remark .fragment}
 
 $$\beta = (10)_\beta$$
 
@@ -120,7 +122,7 @@ $$\beta = (10)_\beta$$
   work with minor adaptations in base $2$.
 - Multiplying by *powers of 2* is easy because $2 = (10)_2$
 
-::: example
+::: {.example .fragment}
 Let $x = (110)_2$ and $y = (101)_2$.
 
 - Calculate $x + y$ in base $2$.
@@ -139,7 +141,7 @@ Converting to binary is more
 because negative powers of $10$ have
 *infinite* binary representations.
 
-::: algorithm
+::: {.algorithm .fragment}
 ~~~ julia
 function to_binary(x, error = 0)
   bits = []
@@ -152,7 +154,7 @@ end
 ~~~
 :::
 
-::: exercise
+::: {.exercise .fragment}
 Adapt the algorithm so that it works for integers.
 :::
 
@@ -169,7 +171,7 @@ Adapt the algorithm so that it works for integers.
 \end{align}
 :::
 
-::: split
+::: {.split .fragment}
 An element such as
 $$(-1)^s 2^{E_\min} (0\cdot b_1 b_2 \dots b_{p - 1})_2$$
 is called **subnormal** or **denormalized**.
@@ -185,17 +187,10 @@ is called **subnormal** or **denormalized**.
 
 
 
-~~~ julia
+~~~ {.julia .fragment}
 Float64(0.1)
 
 Float64(0.1) == Float32(0.1) # false
-~~~
-
-~~~ python
-# In Python
-import numpy as np
-
-np.Float32(0.1)
 ~~~
 :::
 
@@ -207,11 +202,11 @@ If $\Delta : \F \to \R$ associates with $x \in \F$
 its distance to its successor, then
 $$\Delta(x) = 2^{n - p + 1}$$
 
-::: {.definition title="Machine epsilon"}
+::: {.definition title="Machine epsilon" .fragment}
 $$\epsilon_M \defeq 2^{-p + 1}$$
 :::
 
-::: proposition
+::: {.proposition .fragment}
 Let $\Delta : \F \to \R$ be the function which associates
 with $x$ its distance to its *successor*.
 The inequality
@@ -219,9 +214,11 @@ $$\frac {\epsilon_M} 2 \leq \frac {\Delta(x)} {|x|} \leq \epsilon_M$$
 holds for every non-denormalized $x \in \F \setminus \{0\}$.
 :::
 
+::: fragment
 In Julia, $\epsilon_M$ can be calculated via the `eps` function,
 e.g. `eps(Float64)`{.julia},
 which yields `np.finfo(float).eps`{.sympy}.
+:::
 
 # Density [@vaes22, pp. 9-10]
 
@@ -229,7 +226,7 @@ In Julia, the fonction `nextfloat` gives the next representable number.
 
 ::: row
 ::: col
-~~~ {.julia .plot}
+~~~ {.julia .plot .fragment}
 p = -4:0.01:4
 x = 2.0.^p
 y = @. nextfloat(x) - x
@@ -244,7 +241,7 @@ yticks!(
 ~~~
 :::
 ::: col
-~~~ {.julia .plot}
+~~~ {.julia .plot .fragment}
 p = -4:0.01:4
 x = 2.0.^p
 y = @. (nextfloat(x) - x) / x
@@ -302,7 +299,7 @@ yticks!(
 
 Assume $x \notin \F$ is positive.
 
-::: {.exampleblock title="Round to nearest"}
+::: {.exampleblock title="Round to nearest" .fragment}
 - **Standard case**
     the number $x$ is rounded to the nearest representable number
     if this number is unique.
@@ -316,22 +313,28 @@ Assume $x \notin \F$ is positive.
     - Otherwise, the special value `Inf` is delivered.
 :::
 
+::: fragment
 This define an operation $\fl_\F : \R \to \F$.
+:::
 
 # Operation on floating numbers [@vaes22, p. 11]
 
 Let $\F, \F'$, with $\F'' = \F \cup \F'$.
 
+::: fragment
 If $\circ : \R \times \R \to \R$,
 we can naturally define an operation
 
 $$\hat \circ : \F \times \F' \to \F'' : (x, y) \mapsto \fl_{\F''}(x \circ y).$$
 
 e.g. $\widehat +$, $\widehat -$, $\widehat \times$, $\widehat \div$
+:::
 
+::: fragment
 These operations **aren't associative**.
 
 $$x \widehat + (y \widehat + z) \neq (x \widehat + y) \widehat + z$$
+:::
 
 # Non-associativity [@vaes22, p. 12] {.split}
 
@@ -341,7 +344,7 @@ what order should we add them in
 if we want our answer to be as accurate as possible?
 :::
 
-::: example
+::: {.example .fragment}
 $$x = 1 \quad y = 3 \times 2^{-13} \quad z = 3 \times 2^{-13}$$
 
 Show that $(x \widehat + y) \widehat + z \neq x \widehat + (y \widehat + z)$.
