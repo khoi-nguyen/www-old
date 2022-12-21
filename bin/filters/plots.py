@@ -48,7 +48,7 @@ def plot(element, doc):
                 file.write(lib["code"] % (element.text, tmp))
             subprocess.run(lib["cmd"] + [tmp], stdout=subprocess.DEVNULL)
         output = pf.RawBlock(f"""<img src="/{tmp}.svg">""", format="html")
-        return pf.Div(output, classes=["text-center"])
+        return pf.Div(output, classes=["text-center"] + element.classes)
 
 
 if __name__ == "__main__":

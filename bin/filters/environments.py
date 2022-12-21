@@ -90,7 +90,11 @@ def environments(element, doc):
           """
             header = pf.RawBlock(header, format="html")
             element.classes.append("card-body")
-            return pf.Div(header, element, classes=["card"])
+            container_classes = ["card"]
+            if "fragment" in element.classes:
+                element.classes.remove("fragment")
+                container_classes.append("fragment")
+            return pf.Div(header, element, classes=container_classes)
 
 
 def collapsable_card(element, title="Solution"):

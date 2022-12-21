@@ -224,6 +224,10 @@ window.RevealWhiteboard = window.RevealWhiteboard || {
       const slideCopy = slide.cloneNode(true);
       slideCopy.removeAttribute("id");
       slideCopy.setAttribute("class", slideCopy.getAttribute("class").replace("present", "future"));
+      const slideCopyFragments = slideCopy.querySelectorAll(".fragment");
+      [].forEach.call(slideCopyFragments, function(el) {
+        el.classList.remove("fragment");
+      });
       this.slides.push(slideCopy);
       // Wrap into a higher level one
       const wrapper = document.createElement("section");
