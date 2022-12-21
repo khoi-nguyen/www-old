@@ -109,7 +109,9 @@ $\beta = 16$
     $\{a_k\} \subset \{1, 2, \dots, 9, A, B, \dots F\}$.
 
 ::: remark
+
 $$\beta = (10)_\beta$$
+
 :::
 
 # Binary arithmetic {.split}
@@ -140,9 +142,6 @@ because negative powers of $10$ have
 ::: algorithm
 ~~~ julia
 function to_binary(x, error = 0)
-  if (x < 0 || x > 1)
-    throw(DomainError(x, "x should be between 0 and 1"))
-  end
   bits = []
   while x ≥ error:
     x *= 2
@@ -183,6 +182,8 @@ is called **subnormal** or **denormalized**.
 
 `Float64`
 :   $\F(53, -1022, 1023)$, called *double precision*
+
+
 
 ~~~ julia
 Float64(0.1)
@@ -228,7 +229,7 @@ In Julia, the fonction `nextfloat` gives the next representable number.
 
 ::: row
 ::: col
-~~~ {.plot .julia}
+~~~ {.julia .plot}
 p = -4:0.01:4
 x = 2.0.^p
 y = @. nextfloat(x) - x
@@ -243,7 +244,7 @@ yticks!(
 ~~~
 :::
 ::: col
-~~~ {.plot .julia}
+~~~ {.julia .plot}
 p = -4:0.01:4
 x = 2.0.^p
 y = @. (nextfloat(x) - x) / x
@@ -261,7 +262,7 @@ yticks!(
 
 # Relative distance to the next float [@vaes22, pp. 9-10]
 
-~~~ {.plot .julia}
+~~~ {.julia .plot}
 p = -4:0.01:4
 x = 2.0.^p
 y = @. (nextfloat(x) - x) / x
@@ -280,7 +281,7 @@ yticks!(
 
 # Relative distance to the next float with denormalized numbers [@vaes22, p. 10]
 
-~~~ {.plot .julia}
+~~~ {.julia .plot}
 p = -1024:0.01:-1016
 x = 2.0.^p
 y = @. (nextfloat(x) - x) / x
