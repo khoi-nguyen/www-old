@@ -2,7 +2,7 @@
 title: "Chapter 1: Floating Point Arithmetic"
 output: revealjs
 notes: |
-  - [Lecture notes](/static/numerical-analysis/1-roundoff.pdf)
+  - [<i class="fa-solid fa-file-pdf"></i> Lecture notes](/static/numerical-analysis/1-roundoff.pdf)
 ...
 
 # Welcome
