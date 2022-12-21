@@ -74,6 +74,13 @@
 {% else %}
 <div class="reveal">
 <div class="slides">
+<section class="slide text-center">
+  <div class="title-slide">
+    <h1>{{ title }}</h1>
+    <h3>{{ author }}</h3>
+    <h4>{{ institute }}</h4>
+  </div>
+</section>
 {{ content | safe }}
 </div>
 <div id="whiteboard-toolbar">

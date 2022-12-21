@@ -42,6 +42,19 @@ dt {
   background-color: #57068c !important;
 }
 /* Reveal.js */
+.reveal .title-slide {
+  font-size: 2em;
+  margin-top: 350px;
+}
+.reveal .title-slide h1 {
+  color: #002147;
+  font-weight: bold;
+  font-size: 60px;
+}
+.reveal .title-slide h3, .reveal .title-slide h4 {
+  color: #aaaaaa;
+  font-weight: normal;
+}
 .reveal .slides {
   height: 100%;
   position: relative;
