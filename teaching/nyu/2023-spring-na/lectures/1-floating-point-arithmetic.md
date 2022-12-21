@@ -332,7 +332,7 @@ These operations **aren't associative**.
 
 $$x \widehat + (y \widehat + z) \neq (x \widehat + y) \widehat + z$$
 
-# Non-associativity {.split}
+# Non-associativity [@vaes22, p. 12] {.split}
 
 ::: question
 When we have three or more terms,
