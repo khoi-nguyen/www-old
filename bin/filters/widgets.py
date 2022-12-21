@@ -62,19 +62,23 @@ def explorer(
             self.vars["files"].append(meta)
     self.vars["files"].sort(key=lambda f: f[order_by])
     return """
-      <ul>
+      <div class="list-group container">
         {% for file in files %}
-        <li>
-          <p class="float-end text-muted">
-            <small>Last modified: {{ file.last_modified }}</small>
-          </p>
-          <h5><a href="{{ file.href }}">{{ file.title }}</a></h5>
+        <div class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ file.title }}</h5>
+            <small class="text-muted">Last modified: {{ file.last_modified }}</small>
+          </div>
+          <ul class="text-muted list-inline small">
+            <li class="list-inline-item small"><a href="{{ file.href }}"><i class="fa-brands fa-slideshare"></i> Slides</a></li>
+            <li class="list-inline-item small"><a href="{{ file.href }}?fragments=false"><i class="fa-solid fa-display"></i> Without transitions</a></li>
+          </ul>
           {% if file.notes %}
-          <p>{{ file.notes }}</p>
+          <p class="small">{{ file.notes }}</p>
           {% endif %}
-        </li>
+        </div>
         {% endfor %}
-      </ul>
+      </div>
     """
 
 
