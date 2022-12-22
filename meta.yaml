@@ -20,11 +20,11 @@ navbar:
   - text: CV
     icon: fa-solid fa-briefcase
     href: /cv
-  - dropdown: NYU
-    icon: fa-solid fa-building-columns
+  - dropdown: Teaching
+    icon: fa-solid fa-chalkboard-user
     links:
       - href: /teaching/nyu/2023-spring-na/
-        text: Numerical Analysis (MATH-UA 9252)
+        text: Numerical Analysis (NYU)
 output: html
 prefix: Khôi Nguyễn
 slide-level: 1
