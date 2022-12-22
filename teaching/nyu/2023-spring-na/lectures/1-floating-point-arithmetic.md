@@ -145,7 +145,7 @@ because negative powers of $10$ have
 ~~~ julia
 function to_binary(x, error = 0)
   bits = []
-  while x ≥ error:
+  while x ≥ error
     x *= 2
     bit = Int(x ≥ 1)
     x -= bit
