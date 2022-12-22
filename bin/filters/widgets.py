@@ -39,7 +39,7 @@ def explorer(
     globstr: str = "*.md",
     order_by: str = "path",
     filters: dict = {},
-):
+) -> str:
     self.vars["files"] = []
 
     def last_modified(path):
@@ -84,14 +84,14 @@ def explorer(
     """
 
 
-def iframe(url: str, width: int | str = "100%", height: int | str = 900):
+def iframe(url: str, width: int | str = "100%", height: int | str = 900) -> str:
     return f"""
       <iframe src="{url}" width="{width}" height={height}">
       </iframe>
     """
 
 
-def geogebra(url: str, width: int = 800, height: int = 600):
+def geogebra(url: str, width: int = 800, height: int = 600) -> str:
     url = url.split("/")[-1]
     url = f"https://www.geogebra.org/material/iframe/id/{url}"
     url += f"/width/{width}/height/{height}/ai/false/smb/false/stb/false"
@@ -105,7 +105,7 @@ def geogebra(url: str, width: int = 800, height: int = 600):
     """
 
 
-def pdf(url: str, width: int | str = "100%", height: int | str = 900):
+def pdf(url: str, width: int | str = "100%", height: int | str = 900) -> str:
     return f"""
       <object data="{url}" type="application/pdf"
         width="{width}"
