@@ -149,6 +149,7 @@ function to_binary(x, error = 0)
     x *= 2
     bit = Int(x ≥ 1)
     x -= bit
+  end
   bits
 end
 ~~~
