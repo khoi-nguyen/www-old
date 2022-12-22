@@ -7,6 +7,7 @@ RUN pacman --noconfirm --needed -Syy \
     make \
     pandoc \
     python-pip \
+    ripgrep \
     texlive-core \
     texlive-fontsextra \
     texlive-latexextra

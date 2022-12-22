@@ -8,13 +8,18 @@ PYTHON := $(ENV) python
 FIND := find ./ -not -path "*/.*" -not -path "*/julia/*" -type f -name
 
 META := $(shell $(FIND) '*.yaml')
-MARKDOWN := $(shell $(FIND) '*.md')
-JSON := $(addprefix build/, $(MARKDOWN:.md=.json))
+MARKDOWN := $(shell rg -l --files-without-match 'output:\s*exam' -g '*.md')
+TESTS := $(shell rg -l 'output:\s*exam' -g '*.md')
+PDF := $(addprefix build/, $(TESTS:.md=.pdf))
+TEX := $(addprefix build/, $(TESTS:.md=.tex))
+JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.md=.json))
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
 
 .PHONY: all backend clean watch
 
-all: $(JSON) $(PAGES) static/highlight.css 
+.PRECIOUS: $(TEX)
+
+all: $(JSON) $(PAGES) $(PDF) static/highlight.css 
 
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
@@ -43,6 +48,16 @@ build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
 		--filter bin/filters/cas.py \
 		--filter bin/filters/widgets.py \
 		> $@
+
+build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(META) $(ACTIVATE)
+	@$(ENV) ./bin/convert $< --citeproc \
+		--csl templates/apa.csl \
+		--filter bin/filters/cas.py \
+		> $@
+
+build/%.pdf: build/%.tex
+	@echo "Building $@"
+	latexmk -lualatex -cd -f $<
 
 clean:
 	@rm -fR build tmp
