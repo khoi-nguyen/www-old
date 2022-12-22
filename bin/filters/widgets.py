@@ -57,6 +57,7 @@ def explorer(
                     "href": "/" + path.replace("index", "").replace(".md", ""),
                     "last_modified": last_modified(path),
                     "path": path,
+                    "source": f"https://github.com/khoi-nguyen/www/blob/master/{path}?plain=1",
                 }
             )
             self.vars["files"].append(meta)
@@ -72,6 +73,7 @@ def explorer(
           <ul class="text-muted list-inline small">
             <li class="list-inline-item small"><a href="{{ file.href }}"><i class="fa-brands fa-slideshare"></i> Slides</a></li>
             <li class="list-inline-item small"><a href="{{ file.href }}?fragments=false"><i class="fa-solid fa-display"></i> Without transitions</a></li>
+            <li class="list-inline-item small"><a href="{{ file.source }}"><i class="fa-solid fa-code"></i> Source</a></li>
           </ul>
           {% if file.notes %}
           <p class="small">{{ file.notes }}</p>
