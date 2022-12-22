@@ -43,7 +43,7 @@ def explorer(
     self.vars["files"] = []
 
     def last_modified(path):
-        cmd = ["git", "log", "-1", "--pretty=%cd", "--date=format:%d %b %Y", path]
+        cmd = ["git", "log", "-1", "--pretty=%cd", "--date=format:%d %b %Y %H:%m", path]
         return subprocess.check_output(cmd).decode("utf-8")
 
     for path in glob.glob(directory + "/" + globstr):
