@@ -2,3 +2,4 @@
 __pycache__/
 build/
 static/plots
+static/tikz

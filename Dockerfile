@@ -1,7 +1,9 @@
 FROM archlinux:latest
 
 RUN pacman --noconfirm --needed -Syy \
+    ghostscript \
     git \
+    imagemagick \
     jq \
     julia \
     make \

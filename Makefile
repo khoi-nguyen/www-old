@@ -40,12 +40,13 @@ build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
 	@$(ENV) ./bin/convert $< --citeproc --mathjax \
 		--csl templates/apa.csl \
 		--email-obfuscation=javascript \
+		--filter bin/filters/cas.py \
 		--filter bin/filters/bootstrap.py \
 		--filter bin/filters/environments.py \
 		--filter bin/filters/mermaid.py \
 		--filter bin/filters/slideshow.py \
 		--filter bin/filters/plots.py \
-		--filter bin/filters/cas.py \
+		--filter bin/filters/tikz.py \
 		--filter bin/filters/widgets.py \
 		> $@
 
