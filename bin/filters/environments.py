@@ -106,6 +106,8 @@ def collapsable_card(element, title="Solution"):
     """
     header = pf.RawBlock(header, format="html")
     element.classes += ["collapse", "card-body"]
+    if not int(element.attributes.get("collapse", 1)):
+        element.classes.remove("collapse")
     element.identifier = f"proof{proofcount}"
     proofcount += 1
     return pf.Div(header, element, classes=["card"])
