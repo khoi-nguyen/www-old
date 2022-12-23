@@ -63,8 +63,13 @@ def logout():
 @app.route("/boards/<path:url>", methods=["POST"])
 @flask_login.login_required
 def save_board(url: str = ""):
-    boards = flask.request.get_json()
+    boards = flask.request.get_json() or []
     path = source_basepath(url) + ".json"
+    if os.path.exists(path):
+        old_boards = json.loads(file_contents(path))
+        changed = [int(boards[i] != old_boards[i]) for i in range(len(old_boards))]
+        if sum(changed) > 1:
+            raise ValueError("Boards have changed too much")
     with open(path, "w") as file:
         file.write(json.dumps(boards, separators=(",", ":")))
     return flask.jsonify({"success": True, "boards": boards})
@@ -72,9 +77,9 @@ def save_board(url: str = ""):
 
 @app.route("/boards/<path:url>", methods=["GET"])
 def get_board(url: str = ""):
-    path = source_basepath(url)
-    if path:
-        return flask.send_file(path + ".json")
+    path = source_basepath(url) + ".json"
+    if not path.startswith(".json") and os.path.exists(path):
+        return flask.send_file(path)
     flask.abort(404)
 
 
