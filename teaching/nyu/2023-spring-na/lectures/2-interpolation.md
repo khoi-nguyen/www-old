@@ -1,6 +1,7 @@
 ---
 title: "Chapter 2: Interpolation and Approximation"
 output: revealjs
+private: true
 ...
 
 # Interpolation {.split}
