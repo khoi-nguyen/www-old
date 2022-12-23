@@ -71,8 +71,17 @@ def save_board(url: str = ""):
         if sum(changed) > 1:
             raise ValueError("Boards have changed too much")
     with open(path, "w") as file:
-        file.write(json.dumps(boards, separators=(",", ":")))
+        file.write(json.dumps(clean(boards), separators=(",", ":")))
     return flask.jsonify({"success": True, "boards": boards})
+
+
+def clean(boards: list) -> list:
+    for slide in boards:
+        for board in slide:
+            for index, path in enumerate(board["paths"]):
+                if not path["points"]:
+                    del board["paths"][index]
+    return boards
 
 
 @app.route("/boards/<path:url>", methods=["GET"])
