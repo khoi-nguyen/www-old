@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES="$(grep -l -r "output:.*revealjs" teaching | sed 's/\.md$//')"
+FILES="$(rg -l 'output:.*revealjs' -g '*.md' | sed 's/\.md$//')"
 
 while IFS= read -r path; do
     url="https://nguyen.me.uk/boards/$path"
