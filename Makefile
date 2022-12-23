@@ -61,7 +61,7 @@ build/%.pdf: build/%.tex
 	latexmk -lualatex -cd -f $<
 
 clean:
-	@rm -fR build tmp
+	@rm -fR build tmp static/tikz static/plots
 
 static/highlight.css: bin/highlight
 	@./bin/highlight pygments > $@
