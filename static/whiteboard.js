@@ -70,9 +70,7 @@ window.RevealWhiteboard = window.RevealWhiteboard || {
         }
       }
     }
-    if (!this.paths) {
-      this.addPath();
-    }
+    this.addPath();
     this.redraw();
     this.addListeners();
   },
