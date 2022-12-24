@@ -63,7 +63,7 @@ build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(ME
 
 %.pdf: %.tex
 	@echo "Building $@"
-	latexmk -lualatex -cd -f $<
+	latexmk -lualatex -cd -f -interaction=nonstopmode $<
 
 clean:
 	@rm -fR build tmp static/tikz static/plots
