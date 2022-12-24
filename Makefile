@@ -25,7 +25,7 @@ all: $(JSON) $(PAGES) $(PDF) $(CV) static/highlight.css
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
 
-static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile
+static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@mkdir -p $(@D)
 	$(PYTHON) bin/cv.py $@ > $@
 
