@@ -18,6 +18,7 @@ COPY requirements.txt Manifest.toml Project.toml ./
 ENV JULIA_PROJECT=.
 RUN julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile()"
 RUN pip install -r requirements.txt
+RUN luaotfload-tool --update
 
 ENV ENVIRONMENT=production
 WORKDIR /www
