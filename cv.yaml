@@ -60,6 +60,8 @@ experience:
       website: https://odoo.com
       location: Belgium
       location_fr: Belgique
+    description_fr: |
+      - Membre de l'équipe Framework (côté Javascript)
 
 education:
   - title: PGCE in Mathematics
