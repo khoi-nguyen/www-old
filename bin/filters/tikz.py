@@ -13,7 +13,7 @@ template = r"""
 \usepackage{tikz}
 \begin{document}
 \usetikzlibrary{arrows}
-\scalebox{2}{
+\scalebox{%s}{
 \begin{tikzpicture}
 %s
 \end{tikzpicture}
@@ -25,7 +25,8 @@ template = r"""
 def tikz(element, doc):
     if not isinstance(element, pf.CodeBlock) or not "tikz" in element.classes:
         return element
-    code = template % element.text
+    scale = str(element.attributes.get("scale", 2))
+    code = template % (scale, element.text)
     pathlib.Path("static/tikz").mkdir(parents=True, exist_ok=True)
     tmp = "static/tikz/" + hashlib.sha256(code.encode("utf-8")).hexdigest()
     if not os.path.exists(tmp + ".png"):
