@@ -66,7 +66,7 @@ envs = {
 
 def environments(element, doc):
     if type(element) == pf.Div and "solution" in element.classes:
-        return collapsable_card(element, "Solution")
+        return collapsable_card(element, element.attributes.get("title", "Solution"))
     if type(element) == pf.Div and "proof" in element.classes:
         return collapsable_card(element, "Proof")
     elif type(element) == pf.Div:
@@ -110,7 +110,11 @@ def collapsable_card(element, title="Solution"):
         element.classes.remove("collapse")
     element.identifier = f"proof{proofcount}"
     proofcount += 1
-    return pf.Div(header, element, classes=["card"])
+    container_classes = ["card"]
+    if "fragment" in element.classes:
+        element.classes.remove("fragment")
+        container_classes.append("fragment")
+    return pf.Div(header, element, classes=container_classes)
 
 
 if __name__ == "__main__":
