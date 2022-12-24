@@ -60,6 +60,16 @@ julia> 0.1 * 0.1
 ~~~
 :::
 
+::: {.solution .fragment collapse=0}
+A bit like $\frac 1 3$ in base $10$,
+$\frac 1 {10}$ does not have a finite **binary representation**.
+
+The computer rounds it off,
+which leads to error propagation.
+:::
+:::
+
+::: col
 ::: {.question .fragment}
 What about this?
 
@@ -67,6 +77,10 @@ What about this?
 julia> 10^19
 -8446744073709551616
 ~~~
+:::
+
+::: {.solution .fragment}
+This is called **integer overflow**.
 :::
 :::
 
@@ -143,12 +157,12 @@ because negative powers of $10$ have
 
 ::: {.algorithm .fragment}
 ~~~ julia
-function to_binary(x, error = 0)
-  bits = []
-  while x ≥ error
+function to_binary(x, n)
+  bits = zeros(Bool, n)
+  for i in 1:n
     x *= 2
-    bit = Int(x ≥ 1)
-    x -= bit
+    bits[i] = x ≥ 1
+    x -= bits[i]
   end
   bits
 end
@@ -176,72 +190,125 @@ Adapt the algorithm so that it works for integers.
 An element such as
 $$(-1)^s 2^{E_\min} (0\cdot b_1 b_2 \dots b_{p - 1})_2$$
 is called **subnormal** or **denormalized**.
+:::
+
+# Floating points formats [@vaes22, p. 7] {.split}
+
+::: {.block title="Most widely used formats"}
 
 `Float16`
 :   $\F(11, -14, 15)$, called *half-precision*
 
 `Float32`
-:   $\F(-14, -126, 127)$, called *single precision*
+:   $\F(24, -126, 127)$, called *single precision*
 
 `Float64`
 :   $\F(53, -1022, 1023)$, called *double precision*
 
+:::
 
+::: {.question .fragment}
 
+Why is $\F(11, -14, 15)$ called `Float16`?
+
+:::
+
+::: {.solution .fragment collapse=0}
+
+- $1$ bit is used to store the sign
+- $5$ bits are used to represent the exponent
+  $$2^5 = 32 > 29$$
+- $10$ bits are used for the mantissa
+
+For more info, see [@vaes22, Section 1.4 pp. 13-15].
+
+:::
+
+# Floating point formats in Julia {.row}
+
+::: col
 ~~~ {.julia .fragment}
 Float64(0.1)
 
 Float64(0.1) == Float32(0.1) # false
+
+bitstring(0.1)
+bitstring(Float32(0.1))
 ~~~
 :::
 
-# Machine $\epsilon$ [@vaes22, p.8] {.split}
+::: col
+~~~ {.julia .fragment}
+julia> bitstring(0.1)
+"0011111110111001100110011001100110011001100110011001100110011010"
+~~~
+:::
 
-Let $x \in \F(p, E_\min, E_\max)$ be positive and **non-denormalized**, i.e.
-$$x = 2^n (1. b_1 \dots b_{p - 1})_2.$$
-If $\Delta : \F \to \R$ associates with $x \in \F$
-its distance to its successor, then
-$$\Delta(x) = 2^{n - p + 1}$$
+# Machine $\epsilon$ {.split}
 
-::: {.definition title="Machine epsilon" .fragment}
-$$\epsilon_M \defeq 2^{-p + 1}$$
+::: {.definition title="Machine epsilon"}
+Let $\F = \F(p, E_\min, E_\max)$.
+We define the *machine $\epsilon$* associated with $\F$ via
+
+$$\epsilon_{\F} \defeq 2^{-p + 1}$$
+
 :::
 
 ::: {.proposition .fragment}
-Let $\Delta : \F \to \R$ be the function which associates
-with $x$ its distance to its *successor*.
-The inequality
-$$\frac {\epsilon_M} 2 \leq \frac {\Delta(x)} {|x|} \leq \epsilon_M$$
-holds for every non-denormalized $x \in \F \setminus \{0\}$.
+Let $\F = \F(p, E_\min, E_\max)$.
+We have
+
+$$1 + \epsilon_\F = \min \{x \in \F : x > 1\}.$$
+
+~~~ {.latex .tikz}
+\draw (-1.75, 0) -- (4.5, 0);
+\draw[to-to] (0, 0.3) -- node[above] {$\varepsilon_{\mathbb F}$} (1, 0.3);
+\fill (0, 0) circle (0.05) node[below] {$1$};
+\foreach \x in {1, 2, 3, 4} \fill (\x, 0) circle (0.05);
+\foreach \x in {-0.5, -1, -1.5} \fill (\x, 0) circle (0.05);
+~~~
 :::
 
-::: fragment
-In Julia, $\epsilon_M$ can be calculated via the `eps` function,
-e.g. `eps(Float64)`{.julia},
-which yields `np.finfo(float).eps`{.sympy}.
+::: {.fragment .remark}
+In Julia, the machine $\epsilon$ can be calculated via the `eps` function.
+
+Format           Machine $\epsilon$
+-------          ------------------
+`Float16`        `np.finfo(np.float16).eps`{.sympy}
+`Float32`        `np.finfo(np.float32).eps`{.sympy}
+`Float64`        `np.finfo(np.float64).eps`{.sympy}
+
 :::
 
-# Density [@vaes22, pp. 9-10]
+# Machine $\epsilon$ [@vaes22, p.8] {.row}
 
-In Julia, the fonction `nextfloat` gives the next representable number.
-
-::: row
 ::: col
-~~~ {.julia .plot .fragment}
+
+~~~ {.julia .plot}
 p = -4:0.01:4
 x = 2.0.^p
 y = @. nextfloat(x) - x
 plot(x, y, label=L"\Delta(x)")
-title!("Distance to the next float")
+title!("Distance to the successor")
 xticks!(floor.(2.0.^(0:4)))
 xlabel!(L"x")
 yticks!(
   2.0.^(0:4).*eps(Float64),
-  [latexstring(string(2^i) * "\\epsilon_M") for i in 0:4]
+  [latexstring(string(2^i) * "\\epsilon_{\\mathbb{F}}") for i in 0:4]
 )
 ~~~
+
+::: {.proposition .fragment}
+Let $x_-, x_+ \in \F$ be two consecutive non-denormalized numbers.
+We have
+
+$$x_+ - x_- = 2^{\lfloor\log_2 x_-\rfloor} \epsilon_\F$$
 :::
+
+:::
+
 ::: col
+
 ~~~ {.julia .plot .fragment}
 p = -4:0.01:4
 x = 2.0.^p
@@ -255,7 +322,12 @@ yticks!(
   [latexstring(string(i) * "\\epsilon_M") for i in 0.5:0.5:1]
 )
 ~~~
+
+::: {.fragment}
+In particular, the relative distance satisfies:
+$$\frac {x_+ - x_-} {|x_-|} = \frac {2^{\lfloor\log_2 x_-\rfloor}} {|x_-|} \epsilon_\F$$
 :::
+
 :::
 
 # Relative distance to the next float [@vaes22, pp. 9-10]
@@ -276,6 +348,13 @@ yticks!(
   [latexstring(string(i) * "\\epsilon_M") for i in 0.5:0.5:1]
 )
 ~~~
+
+::: {.proposition .fragment}
+Let $x_\min, x_\max \in \F_{>0}$ be
+the smallest and largest denormalized numbers in $\F$.
+If $x \in \R$ satisfies $x_\min \leq |x| \leq x_\max$, then
+$$\min_{\widehat x \in \F} \left|\frac {x - \widehat x} x\right| \leq \frac 1 2 \epsilon_M.$$
+:::
 
 # Relative distance to the next float with denormalized numbers [@vaes22, p. 10]
 
