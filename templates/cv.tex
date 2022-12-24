@@ -1,0 +1,56 @@
+\documentclass[a4paper]{moderncv}
+\usepackage[scale=0.8]{geometry}
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\recomputelengths
+\usepackage[sfdefault,light]{FiraSans}
+\moderncvtheme[blue]{classic}
+\firstname{\var{first_name}}
+\familyname{\var{last_name}}
+\phone{\var{phone}}
+\email{\var{email}}
+\homepage{\var{homepage}}
+\begin{document}
+
+\makecvtitle
+
+\section{\var{sections.education}}
+
+\block{for degree in education}
+\cventry{%
+\var{degree.date}%
+}{%
+\var{degree.title}%
+}{%
+\var{degree.institution.name}%
+}{%
+\var{degree.institution.location}%
+}{%
+\var{degree.grade}%
+}{%
+\block{if degree.description}
+\var{degree.description | pandoc}%
+\block{endif}
+}
+\block{endfor}
+
+\section{\var{sections.experience}}
+
+\block{for job in experience}
+\cventry{%
+\var{job.date}%
+}{%
+\var{job.title}%
+}{%
+\var{job.employer.name}%
+}{%
+\var{job.employer.location}%
+}{%
+}{%
+\block{if job.description}
+\var{job.description | pandoc}%
+\block{endif}
+}
+\block{endfor}
+
+\end{document}

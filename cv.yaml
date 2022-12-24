@@ -1,30 +1,102 @@
+---
+first_name: Khôi
+last_name: Nguyễn
+phone: +32~499~19~24~02
+email: khoi@nguyen.me.uk
+homepage: https://nguyen.me.uk
+
+sections:
+  education: Education
+  education_fr: Formation
+  experience: Work Experience
+  experience_fr: Expérience professionnelle
+
 experience:
-  - title: Lecturer in Mathematics
-    title_fr: Professeur en mathématiques
+  - title: Part-time Lecturer in Mathematics
+    title_fr: Professeur en mathématiques appliquées
+    date: Since Jan 2023
+    date_fr: depuis 01/2023
     employer:
       name: New York University
       name_fr: Université de New York
       website: https://nyu.edu/paris.html
+      location: Paris
+    description_fr: |
+      - Titulaire du cours d'analyse numérique
+      - Utilisation de Numpy et Julia en séance d'exercices
+  - title: Teacher of Mathematics and Computer Science
+    title_fr: Enseignant en mathématiques et informatique
+    date: 2021--2023
+    employer:
+      name: The British School of Brussels
+      name_fr: École britannique de Bruxelles
+      website: https://britishschool.be
+    description_fr: |
+      - Préparation aux examens d'entrées de Cambridge et Oxford (math et informatique)
+      - Activités extra-curriculaires: First LEGO League, calcul scientifique
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
+    date: 2021--2023
+    employer:
+      name: King's College, Soto de Viñuelas
+      website: https://www.madrid-soto.kingscollegeschools.org/en
+      location: Spain
+      location_fr: Espagne
+    description_fr: |
+      - Préparation aux examens d'entrées de Cambridge et Oxford
+  - title: Teacher of Mathematics
+    title_fr: Enseignant en mathématiques
+    date: 2017-2019
+    employer:
+      name: Fédération Wallonie-Bruxelles
+      website: https://www.federation-wallonie-bruxelles.be/
+      location: Belgium
+      location_fr: Belgique
+  - title: Python and Javascript Developer
+    title_fr: Développeur Python et Javascript
+    date: 2017--2017
+    employer:
+      name: Odoo
+      website: https://odoo.com
+      location: Belgium
+      location_fr: Belgique
+
 education:
   - title: PGCE in Mathematics
     title_fr: Agrégation en mathématiques
+    date: 2019--2020
     institution:
       name: University of Oxford
       name_fr: Université d'Oxford
       website: https://ox.ac.uk
+      location: United Kingdom
+      location_fr: Royaume-Uni
   - title: PhD in Mathematics
     title_fr: Doctorat en mathématiques
+    date: 2012--2016
     institution:
       name: Imperial College London
       website: https://imperial.ac.uk
+      location: United Kingdom
+      location_fr: Royaume-Uni
   - title: MASt in Mathematics
     title_fr: Master en mathématiques
+    date: 2011--2012
     institution:
       name: University of Cambridge
       name_fr: Université de Cambridge
       website: https://cam.ac.uk
+      location: United Kingdom
+      location: Royaume-Uni
+  - title: BSc in Mathematics
+    title_fr: Bachelier en mathématiques
+    date: 2008-2011
+    institution:
+      name: UCLouvain
+      website: https://uclouvain.be
+      location: Belgium
+      location_fr: Belgique
+
 languages:
   - name: English
     level: C2
@@ -35,3 +107,9 @@ languages:
   - name: Spanish
     level: C1
     desc: Full professional proficiency
+
+programming:
+  - language: Python
+    level: Advanced
+    level_fr: Avancé
+...

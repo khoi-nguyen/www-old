@@ -7,22 +7,27 @@ endif
 PYTHON := $(ENV) python
 FIND := find ./ -not -path "*/.*" -not -path "*/julia/*" -type f -name
 
-META := $(shell $(FIND) '*.yaml')
+META := $(shell $(FIND) '*meta.yaml')
 MARKDOWN := $(shell rg -l --files-without-match 'output:\s*exam' -g '*.md')
 TESTS := $(shell rg -l 'output:\s*exam' -g '*.md')
 PDF := $(addprefix build/, $(TESTS:.md=.pdf))
 TEX := $(addprefix build/, $(TESTS:.md=.tex))
 JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.md=.json))
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
+CV := static/cv/cv_en.pdf static/cv/cv_fr.pdf
 
 .PHONY: all backend clean watch
 
 .PRECIOUS: $(TEX)
 
-all: $(JSON) $(PAGES) $(PDF) static/highlight.css 
+all: $(JSON) $(PAGES) $(PDF) $(CV) static/highlight.css 
 
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
+
+static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile
+	@mkdir -p $(@D)
+	$(PYTHON) bin/cv.py $@ > $@
 
 .venv/bin/activate: requirements.txt
 	@test -d .venv || python -m venv .venv
@@ -56,7 +61,7 @@ build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(ME
 		--filter bin/filters/cas.py \
 		> $@
 
-build/%.pdf: build/%.tex
+%.pdf: %.tex
 	@echo "Building $@"
 	latexmk -lualatex -cd -f $<
 
