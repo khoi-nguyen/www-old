@@ -76,6 +76,9 @@
 <div class="slides">
 <section class="slide text-center">
   <div class="title-slide">
+    {% if logo %}
+    <p><img src="{{ logo }}" height="100px"></p>
+    {% endif %}
     <h1>{{ title }}</h1>
     <h3>{{ author }}</h3>
     <h4>{{ institute }}</h4>

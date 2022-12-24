@@ -1,5 +1,6 @@
 ---
 institute: New York University
+logo: /static/nyu_logo.svg
 references:
   - id: vaes22
     title: "MATH-UA 9252: Numerical Analysis"
