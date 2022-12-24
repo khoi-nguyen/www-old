@@ -18,7 +18,7 @@ CV := static/cv/cv_en.pdf static/cv/cv_fr.pdf
 
 .PHONY: all backend clean watch
 
-.PRECIOUS: $(TEX)
+.PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
 all: $(JSON) $(PAGES) $(PDF) $(CV) static/highlight.css 
 
