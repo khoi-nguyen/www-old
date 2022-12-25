@@ -21,6 +21,25 @@
 \makecvtitle
 \vspace*{-15mm}
 
+\section{\var{sections.experience}}
+
+\block{for job in experience}
+\cventry{%
+\var{job.date}%
+}{%
+\var{job.title}%
+}{%
+\var{job.employer.name}%
+}{%
+\var{job.employer.location}%
+}{%
+}{%
+\block{if job.description}
+\var{job.description | pandoc}%
+\block{endif}
+}
+\block{endfor}
+
 \section{\var{sections.education}}
 
 \block{for degree in education}
@@ -37,25 +56,6 @@
 }{%
 \block{if degree.description}
 \var{degree.description | pandoc}%
-\block{endif}
-}
-\block{endfor}
-
-\section{\var{sections.experience}}
-
-\block{for job in experience}
-\cventry{%
-\var{job.date}%
-}{%
-\var{job.title}%
-}{%
-\var{job.employer.name}%
-}{%
-\var{job.employer.location}%
-}{%
-}{%
-\block{if job.description}
-\var{job.description | pandoc}%
 \block{endif}
 }
 \block{endfor}
