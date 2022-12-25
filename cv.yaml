@@ -1,5 +1,6 @@
 ---
-first_name: Khôi
+title: Curriculum Vitæ
+first_name: Bỉnh Khôi
 last_name: Nguyễn
 phone: +32~499~19~24~02
 email: khoi@nguyen.me.uk
@@ -7,9 +8,11 @@ homepage: https://nguyen.me.uk
 
 sections:
   education: Education
-  education_fr: Formation
+  education_fr: Formation académique
   experience: Work Experience
   experience_fr: Expérience professionnelle
+  languages: Languages
+  languages_fr: Compétences linguistiques
 
 experience:
   - title: Part-time Lecturer in Mathematics
@@ -22,8 +25,9 @@ experience:
       website: https://nyu.edu/paris.html
       location: Paris
     description_fr: |
-      - Titulaire du cours d'analyse numérique
-      - Utilisation de Numpy et Julia en séance d'exercices
+      - Cours magistral et séances d'exercices en *analyse numérique*
+      - Utilisation de Python (Numpy) et Julia
+      - Langue d'enseignement: anglais
   - title: Teacher of Mathematics and Computer Science
     title_fr: Enseignant en mathématiques et informatique
     date: 2021--2023
@@ -34,6 +38,8 @@ experience:
     description_fr: |
       - Préparation aux examens d'entrées de Cambridge et Oxford (math et informatique)
       - Activités extra-curriculaires: First LEGO League, calcul scientifique
+      - Cours enseignés: IBDP, IGCSE, A Levels
+      - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
     date: 2021--2023
@@ -44,6 +50,8 @@ experience:
       location_fr: Espagne
     description_fr: |
       - Préparation aux examens d'entrées de Cambridge et Oxford
+      - Programmes enseignés: IGCSE, A Levels
+      - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
     date: 2017-2019
@@ -62,6 +70,7 @@ experience:
       location_fr: Belgique
     description_fr: |
       - Membre de l'équipe Framework (côté Javascript)
+      - Technologies utiliées: git, odoo, python, node,
 
 education:
   - title: PGCE in Mathematics
@@ -73,6 +82,9 @@ education:
       website: https://ox.ac.uk
       location: United Kingdom
       location_fr: Royaume-Uni
+    description_fr: |
+      - Financé par une bourse gouvernementale
+      - Équipe première en tennis de table (Varsity contre Cambridge et "Town vs Gown")
   - title: PhD in Mathematics
     title_fr: Doctorat en mathématiques
     date: 2012--2016
@@ -81,6 +93,8 @@ education:
       website: https://imperial.ac.uk
       location: United Kingdom
       location_fr: Royaume-Uni
+    description_fr: |
+      - Financé par une bourse départementale
   - title: MASt in Mathematics
     title_fr: Master en mathématiques
     date: 2011--2012
@@ -90,6 +104,9 @@ education:
       website: https://cam.ac.uk
       location: United Kingdom
       location: Royaume-Uni
+    description_fr: |
+      - Obtenu avec le plus haut grade
+      - Équivalence de la Fédération Wallonie-Bruxelles
   - title: BSc in Mathematics
     title_fr: Bachelier en mathématiques
     date: 2008-2011
@@ -98,6 +115,9 @@ education:
       website: https://uclouvain.be
       location: Belgium
       location_fr: Belgique
+    description_fr: |
+      - Obtenu avec *la plus grande distinction*
+      - Preuve d'un résultat en théorie géométrique de la mesure
 
 languages:
   - name: English

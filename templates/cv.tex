@@ -1,15 +1,21 @@
 \documentclass[a4paper]{moderncv}
-\usepackage[scale=0.8]{geometry}
-\providecommand{\tightlist}{%
-\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[scale=0.85]{geometry}
 \recomputelengths
 \usepackage[sfdefault,light]{FiraSans}
 \moderncvtheme[blue]{classic}
+
+% Variables
+\title{\var{title}}
 \firstname{\var{first_name}}
 \familyname{\var{last_name}}
 \phone{\var{phone}}
 \email{\var{email}}
 \homepage{\var{homepage}}
+
+% Necessary for pandoc
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 \begin{document}
 
 \makecvtitle
@@ -52,5 +58,7 @@
 \block{endif}
 }
 \block{endfor}
+
+\section{\var{sections.languages}}
 
 \end{document}
