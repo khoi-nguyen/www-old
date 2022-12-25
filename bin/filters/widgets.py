@@ -108,8 +108,7 @@ def geogebra(url: str, width: int = 800, height: int = 600) -> str:
 def pdf(url: str, width: int | str = "100%", height: int | str = 900) -> str:
     return f"""
       <object data="{url}" type="application/pdf"
-        width="{width}"
-        height={height}">
+        width="{width}" height="{height}">
         <embed src="{url}" type="application/pdf">
         </embed>
       </object>
