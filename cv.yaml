@@ -1,6 +1,6 @@
 ---
 title: Curriculum Vitæ
-first_name: Bỉnh Khôi
+first_name: Khôi
 last_name: Nguyễn
 phone: +32~499~19~24~02
 email: khoi@nguyen.me.uk
@@ -9,21 +9,26 @@ homepage: https://nguyen.me.uk
 sections:
   education: Education
   education_fr: Formation académique
+  education_es: Formación académica
   experience: Work Experience
   experience_fr: Expérience professionnelle
+  experience_es: Experiencia profesional
   languages: Languages
   languages_fr: Compétences linguistiques
+  languages_es: Competencia lingüística
 
 experience:
-  - title: Part-time Lecturer in Mathematics
-    title_fr: Professeur en mathématiques appliquées
+  - title: Lecturer in Mathematics
+    title_fr: Professeur en mathématiques
+    title_es: Profesor de matemáticas
     date: Since Jan 2023
     date_fr: depuis 01/2023
     employer:
       name: New York University
-      name_fr: Université de New York
       website: https://nyu.edu/paris.html
       location: Paris
+    description: |
+      - Lectures *numerical analysis*
     description_fr: |
       - Cours magistral et séances d'exercices en *analyse numérique*
       - Utilisation de Python (Numpy) et Julia
@@ -35,10 +40,14 @@ experience:
       name: The British School of Brussels
       name_fr: École britannique de Bruxelles
       website: https://britishschool.be
+    description: |
+      - Oxbridge entrance exam preparation
+      - Taught courses: IBDP, IGCSE, A Levels
+      - Extra-curricular: First LEGO League, programming club
     description_fr: |
-      - Préparation aux examens d'entrées de Cambridge et Oxford (math et informatique)
+      - Préparation aux examens d'entrée de Cambridge et Oxford (math et informatique)
       - Activités extra-curriculaires: First LEGO League, calcul scientifique
-      - Cours enseignés: IBDP, IGCSE, A Levels
+      - Programmes enseignés: IBDP, IGCSE, A Levels
       - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
@@ -48,8 +57,11 @@ experience:
       website: https://www.madrid-soto.kingscollegeschools.org/en
       location: Spain
       location_fr: Espagne
+    description: |
+      - Oxbridge entrance exam preparation
+      - Taught courses: IBDP, IGCSE, A Levels
     description_fr: |
-      - Préparation aux examens d'entrées de Cambridge et Oxford
+      - Préparation aux examens d'entrée de Cambridge et Oxford
       - Programmes enseignés: IGCSE, A Levels
       - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
@@ -60,14 +72,18 @@ experience:
       website: https://www.federation-wallonie-bruxelles.be/
       location: Belgium
       location_fr: Belgique
+    description_fr: |
+      - Préparation au CESS
   - title: Python and Javascript Developer
     title_fr: Développeur Python et Javascript
+    title_es: Desarollador Python y Javascript
     date: 2017--2017
     employer:
       name: Odoo
       website: https://odoo.com
       location: Belgium
       location_fr: Belgique
+      location_es: Bélgica
     description_fr: |
       - Membre de l'équipe Framework (côté Javascript)
       - Technologies utiliées: git, odoo, python, node,
@@ -75,60 +91,81 @@ experience:
 education:
   - title: PGCE in Mathematics
     title_fr: Agrégation en mathématiques
+    title_es: Maestría en enseñanza de las matemáticas
     date: 2019--2020
     institution:
       name: University of Oxford
       name_fr: Université d'Oxford
+      name_es: Universidad de Oxford
       website: https://ox.ac.uk
       location: United Kingdom
       location_fr: Royaume-Uni
+      location_es: Reino Unido
     description_fr: |
       - Financé par une bourse gouvernementale
       - Équipe première en tennis de table (Varsity contre Cambridge et "Town vs Gown")
   - title: PhD in Mathematics
     title_fr: Doctorat en mathématiques
+    title_es: Doctorado en matemáticas
     date: 2012--2016
     institution:
       name: Imperial College London
       website: https://imperial.ac.uk
       location: United Kingdom
       location_fr: Royaume-Uni
+      location_es: Reino Unido
     description_fr: |
       - Financé par une bourse départementale
   - title: MASt in Mathematics
     title_fr: Master en mathématiques
+    title_es: Maestría en matemáticas
     date: 2011--2012
     institution:
       name: University of Cambridge
       name_fr: Université de Cambridge
+      name_es: Universidad de Cambridge
       website: https://cam.ac.uk
       location: United Kingdom
-      location: Royaume-Uni
+      location_fr: Royaume-Uni
+      location_es: Reino Unido
     description_fr: |
       - Obtenu avec le plus haut grade
       - Équivalence de la Fédération Wallonie-Bruxelles
   - title: BSc in Mathematics
     title_fr: Bachelier en mathématiques
+    title_es: Licenciatura en matemáticas
     date: 2008-2011
     institution:
       name: UCLouvain
       website: https://uclouvain.be
       location: Belgium
       location_fr: Belgique
+      location_es: Bélgica
     description_fr: |
       - Obtenu avec *la plus grande distinction*
       - Preuve d'un résultat en théorie géométrique de la mesure
 
 languages:
   - name: English
+    name_fr: Anglais
+    name_es: Inglés
     level: C2
     desc: Native or bilingual proficiency
+    desc_fr: Compétence native ou bilingue
+    desc_es: Competencia nativa o bilingüe
   - name: French
+    name_fr: Français
     level: C2
     desc: Native or bilingual proficiency
+    desc_fr: Compétence native ou bilingue
+    desc_es: Competencia nativa o bilingüe
   - name: Spanish
+    name_fr: Espagnol
+    name_es: Español
     level: C1
     desc: Full professional proficiency
+    desc_fr: Compétence professionnelle
+    desc_es: Competencia profesional
 
 programming:
   - language: Python
