@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import hashlib
 import glob
 import json
 import subprocess
@@ -102,6 +103,23 @@ def geogebra(url: str, width: int = 800, height: int = 600) -> str:
         width="{width}"
         style="border: 0px; margin: auto" allowfullscreen>
       </iframe>
+    """
+    
+def a4(url: str):
+    url += "#view=FitH&toolbar=0"
+    ident = hashlib.sha256(url.encode("utf-8")).hexdigest()
+    return f"""
+      <object data="{url}" type="application/pdf" width="100%" id="{ident}">
+        <embed src="{url}" type="application/pdf" id="{ident}">
+        </embed>
+      </object>
+      <script type="text/javascript">
+        const pdf = document.getElementById("{ident}");
+        const resizeObserver = new ResizeObserver(function () {{
+          pdf.setAttribute("height", 1.414 * pdf.offsetWidth);
+        }});
+        resizeObserver.observe(pdf)
+      </script>
     """
 
 
