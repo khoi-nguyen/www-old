@@ -28,7 +28,8 @@ experience:
       website: https://nyu.edu/paris.html
       location: Paris
     description: |
-      - Lectures *numerical analysis*
+      - Taught modules: Numerical Analysis (MATH-UA 9252)
+      - Programming languages used: Julia and Python
     description_fr: |
       - Cours magistral et séances d'exercices en *analyse numérique*
       - Utilisation de Python (Numpy) et Julia
@@ -41,13 +42,13 @@ experience:
       name_fr: École britannique de Bruxelles
       website: https://britishschool.be
     description: |
-      - Oxbridge entrance exam preparation
       - Taught courses: IBDP, IGCSE, A Levels
+      - Oxbridge entrance exam preparation
       - Extra-curricular: First LEGO League, programming club
     description_fr: |
+      - Programmes enseignés: IBDP, IGCSE, A Levels
       - Préparation aux examens d'entrée de Cambridge et Oxford (math et informatique)
       - Activités extra-curriculaires: First LEGO League, calcul scientifique
-      - Programmes enseignés: IBDP, IGCSE, A Levels
       - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
@@ -58,11 +59,11 @@ experience:
       location: Spain
       location_fr: Espagne
     description: |
-      - Oxbridge entrance exam preparation
       - Taught courses: IBDP, IGCSE, A Levels
+      - Oxbridge entrance exam preparation
     description_fr: |
-      - Préparation aux examens d'entrée de Cambridge et Oxford
       - Programmes enseignés: IGCSE, A Levels
+      - Préparation aux examens d'entrée de Cambridge et Oxford
       - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
@@ -101,6 +102,9 @@ education:
       location: United Kingdom
       location_fr: Royaume-Uni
       location_es: Reino Unido
+    description: |
+      - Funded by a governmental scholarship
+      - Half-blue for playing the "Varsity" and "Town vs Gown" matches in table tennis
     description_fr: |
       - Financé par une bourse gouvernementale
       - Équipe première en tennis de table (Varsity contre Cambridge et "Town vs Gown")
@@ -114,6 +118,8 @@ education:
       location: United Kingdom
       location_fr: Royaume-Uni
       location_es: Reino Unido
+    description: |
+      - Funded by a departmental scholarship
     description_fr: |
       - Financé par une bourse départementale
   - title: MASt in Mathematics
@@ -128,6 +134,8 @@ education:
       location: United Kingdom
       location_fr: Royaume-Uni
       location_es: Reino Unido
+    description: |
+      - Distinction
     description_fr: |
       - Obtenu avec le plus haut grade
       - Équivalence de la Fédération Wallonie-Bruxelles
@@ -141,6 +149,9 @@ education:
       location: Belgium
       location_fr: Belgique
       location_es: Bélgica
+    description: |
+      - Graduated *summa cum laude*
+      - Proved a covering result in geometric measure theory
     description_fr: |
       - Obtenu avec *la plus grande distinction*
       - Preuve d'un résultat en théorie géométrique de la mesure
