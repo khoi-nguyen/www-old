@@ -23,6 +23,6 @@ RUN luaotfload-tool --update
 ENV ENVIRONMENT=production
 WORKDIR /www
 COPY . .
-RUN make -j 4 all
+RUN make all
 
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
