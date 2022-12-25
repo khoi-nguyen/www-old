@@ -1,5 +1,6 @@
 ---
 title: Curriculum Vitæ
+hide_title: true
 ...
 
 ~~~ {.yaml .widget name="a4"}
