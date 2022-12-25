@@ -14,7 +14,7 @@ PDF := $(addprefix build/, $(TESTS:.md=.pdf))
 TEX := $(addprefix build/, $(TESTS:.md=.tex))
 JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.md=.json))
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
-CV := static/cv/cv_en.pdf static/cv/cv_fr.pdf
+CV := static/cv/cv_en.pdf static/cv/cv_fr.pdf static/cv/cv_es.pdf
 
 .PHONY: all backend clean watch
 
