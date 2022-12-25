@@ -25,6 +25,7 @@ navbar:
     links:
       - href: /teaching/nyu/2023-spring-na/
         text: Numerical Analysis (NYU)
+dir: /
 output: html
 prefix: Khôi Nguyễn
 slide-level: 1
