@@ -105,8 +105,8 @@ def geogebra(url: str, width: int = 800, height: int = 600) -> str:
       </iframe>
     """
     
-def a4(url: str):
-    url += "#view=FitH&toolbar=0"
+def a4(url: str, page: int = 1):
+    url += f"#view=FitH&toolbar=0&page={page}&scrollbar=0"
     ident = hashlib.sha256(url.encode("utf-8")).hexdigest()
     return f"""
       <object data="{url}" type="application/pdf" width="100%" id="{ident}">
