@@ -73,6 +73,7 @@ class Whiteboard {
    * @param stroke Stroke to draw on the canvas
    */
   drawStroke(stroke: Stroke): void {
+    this.context.beginPath();
     this.context.fillStyle = stroke.color;
     this.context.strokeStyle = stroke.color;
     this.context.lineCap = "round";
@@ -163,7 +164,6 @@ class Whiteboard {
    * Start a new stroke
    */
   startStroke(): void {
-    this.context.beginPath();
     this.strokes.push({
       color: this.color,
       lineWidth: this.lineWidth,
