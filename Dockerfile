@@ -12,7 +12,8 @@ RUN pacman --noconfirm --needed -Syy \
     ripgrep \
     texlive-core \
     texlive-fontsextra \
-    texlive-latexextra
+    texlive-latexextra \
+    typescript
 
 RUN luaotfload-tool --update
 COPY requirements.txt Manifest.toml Project.toml ./

@@ -16,11 +16,14 @@ JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
 CV := static/cv/cv_en.pdf static/cv/cv_fr.pdf static/cv/cv_es.pdf
 
+TS := $(shell $(FIND) *.ts)
+JS := $(addprefix static/, $(TS:.ts=.js))
+
 .PHONY: all backend clean lint watch
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
-all: lint $(JSON) $(PAGES) $(PDF) $(CV) static/highlight.css 
+all: lint $(JSON) $(PAGES) $(PDF) $(CV) $(JS) static/highlight.css 
 
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
@@ -59,6 +62,11 @@ build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
 		--filter bin/filters/tikz.py \
 		--filter bin/filters/widgets.py \
 		> $@
+
+static/%.js: %.ts
+	@echo "Building $@"
+	@mkdir -p $(@D)
+	@tsc $< --outFile $@ --lib ES2015,dom
 
 build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(META) $(ACTIVATE)
 	@$(ENV) ./bin/convert $< --citeproc \
