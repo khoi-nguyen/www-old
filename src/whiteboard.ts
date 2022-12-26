@@ -10,7 +10,6 @@ type BoardMode = "draw" | "erase";
 interface Stroke {
   color: string;
   lineWidth: number;
-  path?: Path2D;
   points: Point[];
 }
 
@@ -35,7 +34,6 @@ class Whiteboard {
   addPoint(point: Point): void {
     const stroke = this.strokes[this.strokes.length - 1];
     stroke.points.push(point);
-    stroke.path!.lineTo(...point);
     this.drawStroke(stroke);
     this.hasUnsavedChanges = true;
   }
@@ -66,12 +64,7 @@ class Whiteboard {
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
     this.width = width;
     this.height = height;
-    strokes.forEach((stroke: Stroke) => {
-      stroke.path = new Path2D();
-      stroke.points.forEach((point: Point) => {
-        stroke.path!.lineTo(...point)
-      });
-    });
+    this.strokes = strokes;
     this.redraw();
   }
 
@@ -84,30 +77,30 @@ class Whiteboard {
     this.context.strokeStyle = stroke.color;
     this.context.lineCap = "round";
     this.context.lineWidth = stroke.lineWidth;
-    this.context.stroke(stroke.path!);
+    for(const point of stroke.points) {
+      this.context.lineTo(...point);
+    }
+    this.context.stroke();
+    this.context.closePath();
   }
 
   /**
-   * Erase all strokes that contains a certain point
+   * Erase all strokes that contain a certain point
    * @param point Point
    */
   eraseStroke(point: Point): void {
     for (let i = 0; i < this.strokes.length; i++) {
       const stroke = this.strokes[i];
-      if (this.context.isPointInPath(stroke.path!, ...point)) {
-        this.strokes.splice(i, 1);
-        this.hasUnsavedChanges = true;
-        this.redraw();
+      for (const p of stroke.points) {
+        const dist = (p[0] - point[0]) ** 2 + (p[1] - point[1]) ** 2
+        if (dist <= 1) {
+          this.strokes.splice(i, 1);
+          this.hasUnsavedChanges = true;
+          this.redraw();
+          return;
+        }
       }
     }
-  }
-
-  /**
-   * Redraw all the strokes on the canvas
-   */
-  redraw(): void {
-    this.clearBoard();
-    this.strokes.forEach((stroke) => this.drawStroke(stroke));
   }
   
   /**
@@ -157,14 +150,28 @@ class Whiteboard {
   }
 
   /**
+   * Redraw all the strokes on the canvas
+   */
+  redraw(): void {
+    this.clearBoard();
+    for(const stroke of this.strokes) {
+      this.drawStroke(stroke);
+    }
+  }
+
+  /**
    * Start a new stroke
    */
   startStroke(): void {
+    this.context.beginPath();
     this.strokes.push({
       color: this.color,
       lineWidth: this.lineWidth,
-      path: new Path2D(),
       points: [],
     });
+  }
+  
+  toJSON(): Stroke[] {
+    return this.strokes;
   }
 }
