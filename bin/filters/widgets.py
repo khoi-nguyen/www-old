@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 
-import hashlib
 import glob
+import hashlib
 import json
 import subprocess
 import sys
-import yaml
 
 import jinja2
 import panflute as pf
-
+import yaml
 
 this_module = sys.modules[__name__]
 environment = jinja2.Environment()
@@ -104,7 +103,8 @@ def geogebra(url: str, width: int = 800, height: int = 600) -> str:
         style="border: 0px; margin: auto" allowfullscreen>
       </iframe>
     """
-    
+
+
 def a4(url: str, page: int = 1):
     url += f"#view=FitH&toolbar=0&page={page}&scrollbar=0"
     ident = hashlib.sha256(url.encode("utf-8")).hexdigest()

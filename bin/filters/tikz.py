@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import hashlib
-import pathlib
 import os
+import pathlib
 import subprocess
 
 import panflute as pf

@@ -3,9 +3,9 @@
 import os
 import subprocess
 import sys
-import yaml
 
 import jinja2
+import yaml
 
 output = sys.argv[-1]
 lang = output[output.rfind("_") + 1 : -4]
