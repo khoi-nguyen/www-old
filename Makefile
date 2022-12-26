@@ -68,9 +68,10 @@ build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(ME
 %.pdf: %.tex
 	@echo "Building $@"
 	-latexmk -lualatex -cd -f -quiet $<
+	@test -f $@ && touch $@ || exit 1
 
 clean:
-	@rm -fR build tmp static/tikz static/plots
+	@rm -fR build tmp static/tikz static/plots static/cv
 
 static/highlight.css: bin/highlight
 	@./bin/highlight pygments > $@
