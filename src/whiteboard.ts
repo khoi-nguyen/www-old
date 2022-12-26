@@ -25,6 +25,7 @@ class Whiteboard {
   lineWidth: number = 2;
   mode: Mode = "draw";
   isActive: boolean = false;
+  hasUnsavedChanges: boolean = false;
 
   width: number;
   height: number;
@@ -38,6 +39,7 @@ class Whiteboard {
     stroke.points.push(point);
     stroke.path.lineTo(...point);
     this.drawStroke(stroke);
+    this.hasUnsavedChanges = true;
   }
 
   /**
@@ -47,6 +49,7 @@ class Whiteboard {
   clearBoard(removeStrokes: boolean = false): void {
     if (removeStrokes) {
       this.strokes.splice(0, this.strokes.length);
+      this.hasUnsavedChanges = true;
     }
     this.context.clearRect(0, 0, this.width, this.height)
   }
@@ -87,6 +90,7 @@ class Whiteboard {
       const stroke = this.strokes[i];
       if (this.context.isPointInPath(stroke.path, ...point) {
         this.strokes.splice(i, 1);
+        this.hasUnsavedChanges = true;
         this.redraw();
       }
     }
