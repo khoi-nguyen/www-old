@@ -27,6 +27,7 @@ backend: $(ACTIVATE) $(JSON) $(PAGES)
 
 lint:
 	@$(PYTHON) -m black .
+	@$(PYTHON) -m isort .
 
 static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@mkdir -p $(@D)
