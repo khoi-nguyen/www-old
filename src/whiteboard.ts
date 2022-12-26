@@ -19,7 +19,6 @@ class Whiteboard {
   private context: CanvasRenderingContext2D;
   private height: number;
   private isActive: boolean = false;
-  private mode: BoardMode = "draw";
   private strokes: Stroke[];
   private width: number;
 
@@ -27,6 +26,7 @@ class Whiteboard {
   public color: Color = "#255994";
   public hasUnsavedChanges: boolean = false;
   public lineWidth: number = 2;
+  public mode: BoardMode = "draw";
 
   /**
    * Add a point to the last stroke
