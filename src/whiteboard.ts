@@ -142,8 +142,8 @@ class Whiteboard {
   onMouseUp(event: MouseEvent): void {
     this.isActive = false;
     if (this.mode === "draw") {
-      this.startStroke();
       this.redraw();
+      this.startStroke();
     }
     if (event.button === 2) {
       this.mode = "draw";
