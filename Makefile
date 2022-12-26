@@ -16,14 +16,17 @@ JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
 CV := static/cv/cv_en.pdf static/cv/cv_fr.pdf static/cv/cv_es.pdf
 
-.PHONY: all backend clean watch
+.PHONY: all backend clean lint watch
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
-all: $(JSON) $(PAGES) $(PDF) $(CV) static/highlight.css 
+all: lint $(JSON) $(PAGES) $(PDF) $(CV) static/highlight.css 
 
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
+
+lint:
+	@$(PYTHON) -m black .
 
 static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@mkdir -p $(@D)
