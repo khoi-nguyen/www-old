@@ -3,32 +3,30 @@ type Point = [number, number];
 type RGB = `rgb(${number}, ${number}, ${number})`;
 type RGBA = `rgba(${number}, ${number}, ${number}, ${number})`;
 type HEX = `#${string}`;
-
 type Color = RGB | RGBA | HEX;
 
-type Mode = "draw" | "erase";
+type BoardMode = "draw" | "erase";
 
 interface Stroke {
   color: string;
   lineWidth: number;
-  path: Path2D;
+  path?: Path2D;
   points: Point[];
 }
 
 class Whiteboard {
 
-  private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D;
+  private height: number;
+  private isActive: boolean = false;
+  private mode: BoardMode = "draw";
   private strokes: Stroke[];
+  private width: number;
 
-  color: Color = "#255994";
-  lineWidth: number = 2;
-  mode: Mode = "draw";
-  isActive: boolean = false;
-  hasUnsavedChanges: boolean = false;
-
-  width: number;
-  height: number;
+  public canvas: HTMLCanvasElement;
+  public color: Color = "#255994";
+  public hasUnsavedChanges: boolean = false;
+  public lineWidth: number = 2;
 
   /**
    * Add a point to the last stroke
@@ -37,7 +35,7 @@ class Whiteboard {
   addPoint(point: Point): void {
     const stroke = this.strokes[this.strokes.length - 1];
     stroke.points.push(point);
-    stroke.path.lineTo(...point);
+    stroke.path!.lineTo(...point);
     this.drawStroke(stroke);
     this.hasUnsavedChanges = true;
   }
@@ -58,8 +56,9 @@ class Whiteboard {
    * Create a canvas with its 2D context
    * @param width Width of the canvas
    * @param height Height of the canvas
+   * @param strokes Strokes to draw
    */
-  constructor(width: number, height: number): void {
+  constructor(width: number, height: number, strokes: Stroke[] = []) {
     this.canvas = document.createElement("canvas");
     this.context = this.canvas.getContext("2d")!;
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
@@ -67,6 +66,13 @@ class Whiteboard {
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
     this.width = width;
     this.height = height;
+    strokes.forEach((stroke: Stroke) => {
+      stroke.path = new Path2D();
+      stroke.points.forEach((point: Point) => {
+        stroke.path!.lineTo(...point)
+      });
+    });
+    this.redraw();
   }
 
   /**
@@ -78,7 +84,7 @@ class Whiteboard {
     this.context.strokeStyle = stroke.color;
     this.context.lineCap = "round";
     this.context.lineWidth = stroke.lineWidth;
-    this.context.stroke(stroke.path);
+    this.context.stroke(stroke.path!);
   }
 
   /**
@@ -88,7 +94,7 @@ class Whiteboard {
   eraseStroke(point: Point): void {
     for (let i = 0; i < this.strokes.length; i++) {
       const stroke = this.strokes[i];
-      if (this.context.isPointInPath(stroke.path, ...point) {
+      if (this.context.isPointInPath(stroke.path!, ...point)) {
         this.strokes.splice(i, 1);
         this.hasUnsavedChanges = true;
         this.redraw();
