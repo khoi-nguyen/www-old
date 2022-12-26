@@ -30,8 +30,9 @@ lint:
 	@$(PYTHON) -m isort *.py
 
 static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
+	@echo "Building $@"
 	@mkdir -p $(@D)
-	$(PYTHON) bin/cv.py $@ > $@
+	@$(PYTHON) bin/cv.py $@ > $@
 
 .venv/bin/activate: requirements.txt
 	@test -d .venv || python -m venv .venv
