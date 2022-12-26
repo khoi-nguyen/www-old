@@ -26,4 +26,4 @@ function format {
   fi
 }
 
-pandoc $(sources $1 | xargs) $(format $@) "${@:2}"
+pandoc --quiet $(sources $1 | xargs) $(format $@) "${@:2}"
