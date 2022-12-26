@@ -40,7 +40,14 @@ class Whiteboard {
     this.drawStroke(stroke);
   }
 
-  clearBoard(): void {
+  /**
+   * Clear the whiteboard
+   * @param removeStrokes Whether to remove the stored strokes
+   */
+  clearBoard(removeStrokes: boolean = false): void {
+    if (removeStrokes) {
+      this.strokes.splice(0, this.strokes.length);
+    }
     this.context.clearRect(0, 0, this.width, this.height)
   }
 
