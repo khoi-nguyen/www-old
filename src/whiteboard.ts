@@ -202,6 +202,7 @@ type EventHandler = (event: RevealEvent) => void;
 
 interface RevealDeck {
   down(): void;
+  getConfig(): {admin: boolean};
   getIndices(): {h: number, v: number};
   left(): void;
   on(eventName: string, eventHandler: EventHandler): void;
@@ -358,6 +359,9 @@ class WhiteboardPlugin {
    * Send all boards to the backend
    */
   async save() {
+    if (!this.deck.getConfig().admin) {
+      return;
+    }
     const requestOptions: RequestInit = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
