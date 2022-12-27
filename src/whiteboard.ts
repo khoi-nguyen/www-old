@@ -193,6 +193,10 @@ class Whiteboard {
     });
   }
   
+  /**
+   * Describe how JSON serialization should happen
+   * @returns strokes sh
+   */
   toJSON(): Stroke[] {
     return this.strokes;
   }
@@ -224,6 +228,9 @@ class WhiteboardPlugin {
   private deck: RevealDeck;
   private slides: HTMLElement[] = [];
 
+  /**
+   * Add a board
+   */
   addVerticalSlide(): void {
     const indexh = this.deck.getIndices().h;
     const indexv = this.deck.getIndices().v + 1;
@@ -248,6 +255,10 @@ class WhiteboardPlugin {
     this.save();
   }
 
+  /**
+   * Set up event listeners
+   * @param deck Reveal.js object
+   */
   init(deck: RevealDeck) {
     this.deck = deck;
     this.deck.on("slidechanged", this.onSlideChanged.bind(this));
@@ -333,7 +344,10 @@ class WhiteboardPlugin {
     }
   }
 
-  removeVerticalSlide() {
+  /**
+   * Remove current board
+   */
+  removeVerticalSlide(): void {
     const pos = this.deck.getIndices();
     if (this.boards[pos.h].length === 1) {
       this.board.clearBoard(true);
