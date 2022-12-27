@@ -3,7 +3,7 @@ title: Numerical Analysis (MATH-UA 9252)
 ...
 
 ::: text-center
-![](/static/nyu_logo.svg){width="200px"}
+![](/static/assets/nyu_logo.svg){width="200px"}
 :::
 
 ::: {.card .bg-light .card-body}

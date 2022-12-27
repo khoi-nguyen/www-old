@@ -10,5 +10,5 @@ Personal
 :   <khoi@nguyen.me.uk>
 
 Public Key
-:   [rsa3072/0x56B257F7A8C47C8C](/static/public.txt)
+:   [rsa3072/0x56B257F7A8C47C8C](/static/assets/public.txt)
 :::

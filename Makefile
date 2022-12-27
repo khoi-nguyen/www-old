@@ -23,7 +23,7 @@ JS := $(addprefix static/, $(TS:.ts=.js))
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
-all: lint $(JSON) $(PAGES) $(PDF) $(CV) $(JS) static/highlight.css 
+all: lint $(JSON) $(PAGES) $(PDF) $(CV) $(JS)
 
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
@@ -81,9 +81,6 @@ build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(ME
 
 clean:
 	@rm -fR build tmp static/tikz static/plots static/cv
-
-static/highlight.css: bin/highlight
-	@./bin/highlight pygments > $@
 
 watch:
 	while true; do\
