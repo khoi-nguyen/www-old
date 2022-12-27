@@ -179,6 +179,12 @@ class Whiteboard {
    * Start a new stroke
    */
   startStroke(): void {
+    if (this.strokes.length) {
+      const lastStroke = this.strokes[this.strokes.length - 1];
+      if (lastStroke.points.length === 0) {
+        this.strokes.splice(this.strokes.length - 1, 1);
+      }
+    }
     this.strokes.push({
       color: this.color,
       lineWidth: this.lineWidth,
