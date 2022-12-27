@@ -263,6 +263,8 @@ class WhiteboardPlugin {
     this.deck = deck;
     this.deck.on("slidechanged", this.onSlideChanged.bind(this));
     this.deck.on("ready", this.onReady.bind(this));
+    document.oncontextmenu = (event) => false;
+    document.onselectstart = (event) => false;
   }
 
   /**
