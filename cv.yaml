@@ -23,10 +23,12 @@ experience:
     title_es: Profesor de matemáticas
     date: Since Jan 2023
     date_fr: depuis 01/2023
+    date_es: desde 01/2023
     employer:
       name: New York University
       website: https://nyu.edu/paris.html
       location: Paris
+      location_es: París
     description: |
       - Taught modules: Numerical Analysis (MATH-UA 9252)
       - Programming languages used: Julia and Python
@@ -36,6 +38,7 @@ experience:
       - Langue d'enseignement: anglais
   - title: Teacher of Mathematics and Computer Science
     title_fr: Enseignant en mathématiques et informatique
+    title_es: Profesor de matemáticas e informática
     date: 2021--2023
     employer:
       name: The British School of Brussels
@@ -49,15 +52,17 @@ experience:
       - Programmes enseignés: IBDP, IGCSE, A Levels
       - Préparation aux examens d'entrée de Cambridge et Oxford (math et informatique)
       - Activités extra-curriculaires: First LEGO League, calcul scientifique
-      - Langue d'enseignement: anglais
+      - Langues d'enseignement: français et anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
+    title_es: Profesor de matemáticas
     date: 2021--2023
     employer:
       name: King's College, Soto de Viñuelas
       website: https://www.madrid-soto.kingscollegeschools.org/en
       location: Spain
       location_fr: Espagne
+      location_es: España
     description: |
       - Taught courses: IBDP, IGCSE, A Levels
       - Oxbridge entrance exam preparation
@@ -67,14 +72,17 @@ experience:
       - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
+    title_es: Profesor de matemáticas
     date: 2017-2019
     employer:
       name: Fédération Wallonie-Bruxelles
       website: https://www.federation-wallonie-bruxelles.be/
       location: Belgium
       location_fr: Belgique
+    description: |
+      - Taught the Belgium curriculum to pupils aged 12 to 18
     description_fr: |
-      - Préparation au CESS
+      - Intérims en secondaire inférieur et supérieur
   - title: Python and Javascript Developer
     title_fr: Développeur Python et Javascript
     title_es: Desarollador Python y Javascript
@@ -85,9 +93,12 @@ experience:
       location: Belgium
       location_fr: Belgique
       location_es: Bélgica
+    description: |
+      - Part of the Javascript framework team
+      - Stack: git, odoo, python, Node.js
     description_fr: |
       - Membre de l'équipe Framework (côté Javascript)
-      - Technologies utiliées: git, odoo, python, node,
+      - Technologies utiliées: git, odoo, python, Node.js
 
 education:
   - title: PGCE in Mathematics
@@ -104,9 +115,13 @@ education:
       location_es: Reino Unido
     description: |
       - Funded by a governmental scholarship
+      - I helped maths and language departments in local schools
       - Half-blue for playing the "Varsity" and "Town vs Gown" matches in table tennis
     description_fr: |
-      - Financé par une bourse gouvernementale
+      - Qualification pour enseigner dans le secondaire inférieur et supérieur
+      - Financé par une bourse du gouvernement britannique
+      - Support des départements de mathématiques et FLE dans des écoles locales
+      - Participation dans des groupes de conversation FLE à l'université
       - Équipe première en tennis de table (Varsity contre Cambridge et "Town vs Gown")
   - title: PhD in Mathematics
     title_fr: Doctorat en mathématiques
@@ -139,6 +154,7 @@ education:
     description_fr: |
       - Obtenu avec le plus haut grade
       - Équivalence de la Fédération Wallonie-Bruxelles
+      - Extra-curriculaire: responsable d'un groupe de conversation en français
   - title: BSc in Mathematics
     title_fr: Bachelier en mathématiques
     title_es: Licenciatura en matemáticas
