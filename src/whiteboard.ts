@@ -263,15 +263,15 @@ class WhiteboardPlugin {
     this.deck = deck;
     this.deck.on("slidechanged", this.onSlideChanged.bind(this));
     this.deck.on("ready", this.onReady.bind(this));
-    document.oncontextmenu = (event) => false;
-    document.onselectstart = (event) => false;
+    document.oncontextmenu = () => false;
+    document.onselectstart = () => false;
   }
 
   /**
    * Create the canvas and draw them
    * @param event Reveal.js event
    */
-  async onReady(event: RevealEvent) {
+  async onReady() {
     let data: Stroke[][][] = [[]];
     this.boards = [[]];
     await fetch("/boards" + window.location.pathname).then(response => {
@@ -279,7 +279,7 @@ class WhiteboardPlugin {
         return response.json();
       }
       throw new Error("No board file");
-    }).then((jsonData) => { data = jsonData; }).catch((error) => {});
+    }).then((jsonData) => { data = jsonData; }).catch(() => {});
 
     const slides = document.querySelectorAll(".slides > section");
     for (let i = 0; i < slides.length; i++) {
