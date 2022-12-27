@@ -11,13 +11,13 @@
       <i class="fa-solid fa-pen fa-xl" style="color: #255994" id="current-brush"></i>
     </span>
     <ul class="dropdown-menu">
+      <li>
       {% for button in whiteboard %}
-      <li class="dropdown-item" onclick="changeBrush('{{ button.color }}', {{ button.width }});">
-      <span class="btn">
+      <span class="btn" onclick="changeBrush('{{ button.color }}', {{ button.width }});">
         <i class="{{ button.icon }} fa-xl" style="color: {{ button.color }}"></i>
       </span>
-      </li>
       {% endfor %}
+      </li>
     </ul>
   </span>
   <span class="btn" onclick="RevealWhiteboard.board.mode = 'erase';">
