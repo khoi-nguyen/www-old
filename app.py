@@ -107,7 +107,8 @@ def render_page(path: str) -> str:
     data.update({"content": content})
     if data.get("private") and not getattr(data["user"], "is_authenticated"):
         return ""
-    return flask.render_template("main.html", **data)
+    template_file = data.get("output") + ".html"
+    return flask.render_template(template_file, **data)
 
 
 if __name__ == "__main__":

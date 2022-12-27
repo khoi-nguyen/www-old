@@ -1,0 +1,58 @@
+{% extends "main.html" %}
+{% block content %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">{{ prefix }}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% for link in navbar %}
+        {% if link.href %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ link.href }}">
+            {% if link.icon %}
+            <i class="{{ link.icon }}"></i>
+            {% endif %}
+            {{ link.text }}
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if link.icon %}
+            <i class="{{ link.icon }}"></i>
+            {% endif %}
+            {{ link.dropdown }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+            {% for item in link.links %}
+            <li>
+              {% if item.icon %}
+              <i class="{{ item.icon }}"></i>
+              {% endif %}
+              <a class="dropdown-item" href="{{ item.href }}">
+              {{ item.text }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% endfor %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-3">
+{% if title and not hide_title %}
+<h1 class="text-center">{{ title }}</h1>
+{% endif %}
+{{ content | safe }}
+{% if user.is_authenticated %}
+<hr />
+<p class="small text-center"><a href="/login">Log out</a></p>
+{% endif %}
+</div>
+{% endblock %}

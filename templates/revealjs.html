@@ -1,0 +1,73 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="reveal">
+<div class="slides">
+<section class="slide text-center">
+  <div class="title-slide">
+    {% if logo %}
+    <p><img src="{{ logo }}" height="100px"></p>
+    {% endif %}
+    <h1>{{ title }}</h1>
+    <h3>{{ author }}</h3>
+    <h4>{{ institute }}</h4>
+  </div>
+</section>
+{{ content | safe }}
+</div>
+<div id="whiteboard-toolbar">
+  <a class="btn" href="{{ dir }}">
+    <i class="fa-solid fa-folder-open fa-xl"></i>
+  </a>
+  {% if user.is_authenticated %}
+  <span class="btn" onclick="RevealWhiteboard.save();">
+    <i class="fa-solid fa-floppy-disk fa-xl"></i>
+  </span>
+  {% for button in whiteboard %}
+  <span class="btn" onclick="RevealWhiteboard.board.changeBrush('{{ button.color }}', {{ button.width }});">
+    <i class="{{ button.icon }} fa-xl" style="color: {{ button.color }}"></i>
+  </span>
+  {% endfor %}
+  <span class="btn" onclick="RevealWhiteboard.addVerticalSlide();">
+    <i class="fa-solid fa-plus fa-xl"></i>
+  </span>
+  <span class="btn" onclick="RevealWhiteboard.removeVerticalSlide();">
+    <i class="fa-solid fa-trash fa-xl"></i>
+  </span>
+  <span class="btn" onclick="RevealWhiteboard.board.mode = 'erase';">
+    <i class="fa-solid fa-eraser fa-xl"></i>
+  </span>
+  <span class="btn" onclick="RevealWhiteboard.board.clearBoard(true);">
+    <i class="fa-solid fa-chalkboard fa-xl"></i>
+  </span>
+  <span class="btn" onclick="logout()">
+    <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+  </span>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+    <i class="fa-solid fa-calculator"></i>
+  </button>
+  <div class="dropdown-menu dropdown-menu-lg">
+  <iframe src="https://www.desmos.com/testing/virginia/scientific" width="600" height="600"></iframe>
+  </div>
+  {% endif %}
+</div>
+</div>
+<script>
+  function logout() {
+    RevealWhiteboard.save();
+    fetch("/logout").then(response => response.json()).then(() => {
+      location.reload();
+    });
+  }
+  Reveal.initialize({
+    admin: {{ "true" if user.is_authenticated else "false" }},
+    center: false,
+    hash: true,
+    margin: 0,
+    height: 1080,
+    overview: true,
+    touch: false,
+    width: 1920,
+    plugins: [ RevealWhiteboard ],
+  })
+</script>
+{% endblock %}
