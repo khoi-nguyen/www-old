@@ -20,17 +20,33 @@
       {% endfor %}
     </ul>
   </span>
-  <span class="btn" onclick="RevealWhiteboard.addVerticalSlide();">
-    <i class="fa-solid fa-plus fa-xl"></i>
-  </span>
-  <span class="btn" onclick="RevealWhiteboard.removeVerticalSlide();">
-    <i class="fa-solid fa-trash fa-xl"></i>
-  </span>
   <span class="btn" onclick="RevealWhiteboard.board.mode = 'erase';">
     <i class="fa-solid fa-eraser fa-xl"></i>
   </span>
-  <span class="btn" onclick="RevealWhiteboard.board.clearBoard(true);">
-    <i class="fa-solid fa-chalkboard fa-xl"></i>
+  <span class="dropdown">
+    <span class="btn dropdown-toggle text-success" data-bs-toggle="dropdown">
+      <i class="fa-solid fa-chalkboard fa-xl"></i>
+    </span>
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" onclick="RevealWhiteboard.addVerticalSlide();">
+        <span class="btn">
+          <i class="fa-solid fa-plus fa-xl"></i>
+        </span>
+        Add board
+      </li>
+      <li class="dropdown-item" onclick="RevealWhiteboard.removeVerticalSlide();">
+        <span class="btn">
+          <i class="fa-solid fa-trash fa-xl"></i>
+        </span>
+        Remove board
+      </li>
+      <li class="dropdown-item" onclick="RevealWhiteboard.board.clearBoard(true);">
+        <span class="btn">
+          <i class="fa-solid fa-broom fa-xl"></i>
+        </span>
+        Clear current board
+      </li>
+    </ul>
   </span>
   <span class="btn" onclick="logout()">
     <i class="fa-solid fa-right-from-bracket fa-xl"></i>
