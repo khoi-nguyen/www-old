@@ -60,9 +60,12 @@
   {% endif %}
 </div>
 <script>
-function changeBrush(color, lineWidth) {
+function changeBrush(color, lineWidth, board=undefined) {
   const currentBrush = document.getElementById("current-brush");
-  RevealWhiteboard.board.changeBrush(color, lineWidth);
+  if (board === undefined) {
+    board = RevealWhiteboard.board
+  }
+  board.changeBrush(color, lineWidth);
   if (lineWidth > 5) {
     currentBrush.setAttribute("class", "fa-solid fa-highlighter fa-xl");
   } else {
@@ -70,4 +73,10 @@ function changeBrush(color, lineWidth) {
   }
   currentBrush.setAttribute("style", "color:" + color);
 }
+Reveal.on("slidechanged", (event) => {
+  if (RevealWhiteboard.boards) {
+    const board = RevealWhiteboard.boards[event.indexh][event.indexv];
+    changeBrush(board.color, board.lineWidth, board);
+  }
+});
 </script>
