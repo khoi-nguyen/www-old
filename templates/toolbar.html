@@ -17,11 +17,11 @@
         <i class="{{ button.icon }} fa-xl" style="color: {{ button.color }}"></i>
       </span>
       {% endfor %}
+      <span class="btn" onclick="changeMode('erase');">
+        <i class="fa-solid fa-eraser fa-xl"></i>
+      </span>
       </li>
     </ul>
-  </span>
-  <span class="btn" onclick="RevealWhiteboard.board.mode = 'erase';">
-    <i class="fa-solid fa-eraser fa-xl"></i>
   </span>
   <span class="dropdown">
     <span class="btn dropdown-toggle text-success" data-bs-toggle="dropdown">
@@ -65,6 +65,7 @@ function changeBrush(color, lineWidth, board=undefined) {
   if (board === undefined) {
     board = RevealWhiteboard.board
   }
+  board.mode = "draw";
   board.changeBrush(color, lineWidth);
   if (lineWidth > 5) {
     currentBrush.setAttribute("class", "fa-solid fa-highlighter fa-xl");
@@ -73,10 +74,23 @@ function changeBrush(color, lineWidth, board=undefined) {
   }
   currentBrush.setAttribute("style", "color:" + color);
 }
+function changeMode(mode, board=undefined) {
+  const currentBrush = document.getElementById("current-brush");
+  if (board === undefined) {
+    board = RevealWhiteboard.board
+  }
+  board.mode = mode;
+  if (mode === "erase") {
+    currentBrush.setAttribute("style", "");
+    currentBrush.setAttribute("class", "fa-solid fa-eraser fa-xl");
+  } else {
+    changeBrush(board.color, board.lineWidth, board);
+  }
+}
 Reveal.on("slidechanged", (event) => {
   if (RevealWhiteboard.boards) {
     const board = RevealWhiteboard.boards[event.indexh][event.indexv];
-    changeBrush(board.color, board.lineWidth, board);
+    changeMode(board.mode, board);
   }
 });
 </script>
