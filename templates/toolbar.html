@@ -6,11 +6,20 @@
   <span class="btn" onclick="RevealWhiteboard.save();">
     <i class="fa-solid fa-floppy-disk fa-xl"></i>
   </span>
-  {% for button in whiteboard %}
-  <span class="btn" onclick="RevealWhiteboard.board.changeBrush('{{ button.color }}', {{ button.width }});">
-    <i class="{{ button.icon }} fa-xl" style="color: {{ button.color }}"></i>
+  <span class="dropdown">
+    <span class="btn dropdown-toggle" data-bs-toggle="dropdown">
+      <i class="fa-solid fa-pen fa-xl" style="color: #255994" id="current-brush"></i>
+    </span>
+    <ul class="dropdown-menu">
+      {% for button in whiteboard %}
+      <li class="dropdown-item" onclick="changeBrush('{{ button.color }}', {{ button.width }});">
+      <span class="btn">
+        <i class="{{ button.icon }} fa-xl" style="color: {{ button.color }}"></i>
+      </span>
+      </li>
+      {% endfor %}
+    </ul>
   </span>
-  {% endfor %}
   <span class="btn" onclick="RevealWhiteboard.addVerticalSlide();">
     <i class="fa-solid fa-plus fa-xl"></i>
   </span>
@@ -34,3 +43,15 @@
   </div>
   {% endif %}
 </div>
+<script>
+function changeBrush(color, lineWidth) {
+  const currentBrush = document.getElementById("current-brush");
+  RevealWhiteboard.board.changeBrush(color, lineWidth);
+  if (lineWidth > 5) {
+    currentBrush.setAttribute("class", "fa-solid fa-highlighter fa-xl");
+  } else {
+    currentBrush.setAttribute("class", "fa-solid fa-pen fa-xl");
+  }
+  currentBrush.setAttribute("style", "color:" + color);
+}
+</script>
