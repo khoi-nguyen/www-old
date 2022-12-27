@@ -141,8 +141,8 @@ class Whiteboard {
     const scaleX = this.canvas.offsetWidth / this.canvas.getBoundingClientRect().width;
     const scaleY = this.canvas.offsetHeight / this.canvas.getBoundingClientRect().height;
     const container = document.querySelector(".reveal .slides")!.getBoundingClientRect();
-    const x = (event.clientX - container.left) * scaleX
-    const y = (event.clientY - container.top) * scaleY
+    const x = Math.round((event.clientX - container.left) * scaleX)
+    const y = Math.round((event.clientY - container.top) * scaleY)
     if (this.mode === "draw") {
       this.addPoint([x, y]);
     } else if (this.mode === "erase") {
