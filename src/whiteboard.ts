@@ -201,12 +201,14 @@ class Whiteboard {
 type EventHandler = (event: RevealEvent) => void;
 
 interface RevealDeck {
+  down(): void;
   getIndices(): {h: number, v: number};
   left(): void;
   on(eventName: string, eventHandler: EventHandler): void;
   right(): void;
   slide(indexh: number, indexv: number, fragment: number): void;
   sync(): void;
+  up(): void;
 }
 
 interface RevealEvent {
@@ -328,6 +330,28 @@ class WhiteboardPlugin {
     if (this.boards !== undefined) {
       this.board = this.boards[event.indexh][event.indexv];
     }
+  }
+
+  removeVerticalSlide() {
+    const pos = this.deck.getIndices();
+    if (this.boards[pos.h].length === 1) {
+      this.board.clearBoard(true);
+      return;
+    }
+    if (pos.v === 0) {
+      this.deck.down();
+    } else {
+      this.deck.up();
+    }
+    this.boards[pos.h].splice(pos.v, 1);
+    document.querySelector(`.slides > section:nth-child(${pos.h + 1}) > section:nth-child(${pos.v + 1}`)!.remove();
+    this.deck.sync();
+    if (pos.v === 0) {
+      this.deck.up();
+    } else {
+      this.deck.down();
+    }
+    this.save();
   }
 
   /**
