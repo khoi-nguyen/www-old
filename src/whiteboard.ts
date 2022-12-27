@@ -195,7 +195,7 @@ class Whiteboard {
   
   /**
    * Describe how JSON serialization should happen
-   * @returns strokes sh
+   * @returns List of all the strokes on the whiteboard
    */
   toJSON(): Stroke[] {
     return this.strokes;
