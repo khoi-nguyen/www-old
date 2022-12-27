@@ -72,6 +72,7 @@ class Whiteboard {
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
     this.canvas.width = width;
     this.canvas.height = height;
+    this.canvas.classList.add("whiteboard");
     this.width = width;
     this.height = height;
     this.strokes = strokes;
@@ -204,6 +205,7 @@ interface RevealDeck {
   left(): void;
   on(eventName: string, eventHandler: EventHandler): void;
   right(): void;
+  slide(indexh: number, indexv: number, fragment: number): void;
   sync(): void;
 }
 
@@ -218,6 +220,30 @@ class WhiteboardPlugin {
   public boards: Whiteboard[][];
   private deck: RevealDeck;
   private slides: HTMLElement[] = [];
+
+  addVerticalSlide(): void {
+    const indexh = this.deck.getIndices().h;
+    const indexv = this.deck.getIndices().v + 1;
+    const parent = document.querySelector(`.slides > section:nth-child(${indexh + 1})`)
+    this.boards[indexh].splice(indexv, 0, new Whiteboard(1920, 1080, []));
+    const board = this.boards[indexh][indexv];
+
+    // Add vertical slide
+    if (indexv === this.boards[indexh].length) {
+      parent.appendChild(this.slides[indexh].cloneNode(true));
+    } else {
+      const next = document.querySelector(`.slides > section:nth-child(${indexh + 1}) > section:nth-child(${indexv + 1})`)
+      parent.insertBefore(this.slides[indexh].cloneNode(true), next)
+    }
+
+    // Adding the canvas
+    const slide = document.querySelector(`.slides > section:nth-child(${indexh + 1}) > section:nth-child(${indexv + 1})`);
+    slide.appendChild(board.canvas);
+
+    this.deck.sync();
+    this.deck.slide(indexh, indexv, 0);
+    this.save();
+  }
 
   init(deck: RevealDeck) {
     this.deck = deck;
@@ -277,7 +303,6 @@ class WhiteboardPlugin {
         }
         this.boards[i][j] = new Whiteboard(1920, 1080, strokes);
         const canvas = this.boards[i][j].canvas;
-        canvas.classList.add("whiteboard");
         const selector = `.reveal .slides > section:nth-child(${i + 1}) > section:nth-child(${j + 1})`;
         document.querySelector(selector)!.appendChild(canvas);
       }
