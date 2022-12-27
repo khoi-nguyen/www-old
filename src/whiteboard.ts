@@ -3,7 +3,7 @@ type Point = [number, number];
 type RGB = `rgb(${number}, ${number}, ${number})`;
 type RGBA = `rgba(${number}, ${number}, ${number}, ${number})`;
 type HEX = `#${string}`;
-type Color = RGB | RGBA | HEX;
+type Color = RGB | RGBA | HEX | string;
 
 type BoardMode = "draw" | "erase";
 
@@ -38,6 +38,14 @@ class Whiteboard {
     this.hasUnsavedChanges = true;
   }
 
+  changeBrush(color: Color, lineWidth: number) {
+    const stroke = this.strokes[this.strokes.length - 1];
+    stroke.color = color;
+    stroke.lineWidth = lineWidth;
+    this.color = color;
+    this.lineWidth = lineWidth;
+  }
+
   /**
    * Clear the whiteboard
    * @param removeStrokes Whether to remove the stored strokes
@@ -62,10 +70,13 @@ class Whiteboard {
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
     this.canvas.addEventListener("mousemove", this.onMouseMove.bind(this));
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
+    this.canvas.width = width;
+    this.canvas.height = height;
     this.width = width;
     this.height = height;
     this.strokes = strokes;
     this.redraw();
+    this.startStroke();
   }
 
   /**
@@ -94,7 +105,7 @@ class Whiteboard {
       const stroke = this.strokes[i];
       for (const p of stroke.points) {
         const dist = (p[0] - point[0]) ** 2 + (p[1] - point[1]) ** 2
-        if (dist <= 1) {
+        if (dist <= 5) {
           this.strokes.splice(i, 1);
           this.hasUnsavedChanges = true;
           this.redraw();
@@ -127,11 +138,15 @@ class Whiteboard {
     if (!this.isActive) {
       return;
     }
-    const point: Point = [event.clientX, event.clientY];
+    const scaleX = this.canvas.offsetWidth / this.canvas.getBoundingClientRect().width;
+    const scaleY = this.canvas.offsetHeight / this.canvas.getBoundingClientRect().height;
+    const container = document.querySelector(".reveal .slides")!.getBoundingClientRect();
+    const x = (event.clientX - container.left) * scaleX
+    const y = (event.clientY - container.top) * scaleY
     if (this.mode === "draw") {
-      this.addPoint(point);
+      this.addPoint([x, y]);
     } else if (this.mode === "erase") {
-      this.eraseStroke(point);
+      this.eraseStroke([x, y]);
     }
   }
   
@@ -175,3 +190,126 @@ class Whiteboard {
     return this.strokes;
   }
 }
+
+type EventHandler = (event: RevealEvent) => void;
+
+interface RevealDeck {
+  getIndices(): {h: number, v: number};
+  left(): void;
+  on(eventName: string, eventHandler: EventHandler): void;
+  right(): void;
+  sync(): void;
+}
+
+interface RevealEvent {
+  indexh: number,
+  indexv: number,
+}
+
+class WhiteboardPlugin {
+  public id: string = "RevealWhiteboard";
+  public board: Whiteboard;
+  public boards: Whiteboard[][];
+  private deck: RevealDeck;
+  private slides: HTMLElement[] = [];
+
+  init(deck: RevealDeck) {
+    this.deck = deck;
+    this.deck.on("slidechanged", this.onSlideChanged.bind(this));
+    this.deck.on("ready", this.onReady.bind(this));
+  }
+
+  /**
+   * Create the canvas and draw them
+   * @param event Reveal.js event
+   */
+  async onReady(event: RevealEvent) {
+    let data: Stroke[][][] = [[]];
+    this.boards = [[]];
+    await fetch("/boards" + window.location.pathname).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("No board file");
+    }).then((jsonData) => { data = jsonData; }).catch((error) => {});
+
+    const slides = document.querySelectorAll(".slides > section");
+    for (let i = 0; i < slides.length; i++) {
+      const slide = slides[i];
+
+      // Complete missing data
+      if (i >= data.length) {
+        data.push([[]]);
+      }
+      this.boards.push([]);
+
+      // Keep a copy of the slide without transitions
+      const slideCopy = slide.cloneNode(true) as HTMLElement;
+      const classAttr = slideCopy.getAttribute("class") || ""
+      slideCopy.removeAttribute("id");
+      slideCopy.setAttribute("class", classAttr.replace("present", "future"));
+      const slideCopyFragments = slideCopy.querySelectorAll(".fragment");
+      [].forEach.call(slideCopyFragments, function(el: HTMLElement) {
+        el.classList.remove("fragment");
+      });
+      this.slides.push(slideCopy);
+
+      // Wrap slide into a container
+      const wrapper = document.createElement("section");
+      slide.parentNode!.insertBefore(wrapper, slide);
+      wrapper.appendChild(slide)
+
+      for (let j = 0; j < data[i].length; j++) {
+        // Create the vertical slide
+        if (j > 0) {
+          wrapper.appendChild(slideCopy.cloneNode(true))
+        }
+        // Create the canvas and add it to the DOM
+        let strokes: Stroke[] = [];
+        if (j < data[i].length) {
+          strokes = data[i][j];
+        }
+        this.boards[i][j] = new Whiteboard(1920, 1080, strokes);
+        const canvas = this.boards[i][j].canvas;
+        canvas.classList.add("whiteboard");
+        const selector = `.reveal .slides > section:nth-child(${i + 1}) > section:nth-child(${j + 1})`;
+        document.querySelector(selector)!.appendChild(canvas);
+      }
+    }
+    const indices = this.deck.getIndices();
+    this.board = this.boards[indices.h][indices.v];
+
+    // Fix missing arrow issue on slideshow
+    this.deck.sync();
+    this.deck.right();
+    this.deck.left();
+  }
+
+  /**
+   * Deal with slide transitions, save if necessary
+   * @param event Reveal.js event
+   */
+  async onSlideChanged(event: RevealEvent) {
+    if (this.board !== undefined && this.board.hasUnsavedChanges) {
+      await this.save();
+      this.board.hasUnsavedChanges = false;
+    }
+    if (this.boards !== undefined) {
+      this.board = this.boards[event.indexh][event.indexv];
+    }
+  }
+
+  /**
+   * Send all boards to the backend
+   */
+  async save() {
+    const requestOptions: RequestInit = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(this.boards),
+    };
+    return fetch("/boards" + window.location.pathname, requestOptions);
+  }
+}
+
+(<any>window).RevealWhiteboard = new WhiteboardPlugin();

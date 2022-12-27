@@ -3,4 +3,5 @@ __pycache__/
 build/
 static/cv
 static/plots
+static/src
 static/tikz
