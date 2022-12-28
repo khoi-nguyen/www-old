@@ -237,27 +237,36 @@ class WhiteboardPlugin {
    * Add a board
    */
   addVerticalSlide(): void {
-    const indexh = this.deck.getIndices().h;
-    const indexv = this.deck.getIndices().v + 1;
-    const parent = document.querySelector(`.slides > section:nth-child(${indexh + 1})`);
-    this.boards[indexh].splice(indexv, 0, new Whiteboard(1920, 1080, this.parentNode, []));
-    const board = this.boards[indexh][indexv];
+    const i = this.deck.getIndices().h;
+    const j = this.deck.getIndices().v + 1;
+    const parent = document.querySelector(`.slides > section:nth-child(${i + 1})`)!;
+    this.boards[i].splice(j, 0, new Whiteboard(1920, 1080, this.parentNode, []));
+    const board = this.boards[i][j];
 
     // Add vertical slide
-    if (indexv === this.boards[indexh].length) {
-      parent!.appendChild(this.slides[indexh].cloneNode(true));
+    if (j === this.boards[i].length) {
+      parent.appendChild(this.slides[i].cloneNode(true));
     } else {
-      const next = document.querySelector(`.slides > section:nth-child(${indexh + 1}) > section:nth-child(${indexv + 1})`)
-      parent!.insertBefore(this.slides[indexh].cloneNode(true), next)
+      parent.insertBefore(this.slides[i].cloneNode(true), this.getSlide(i, j))
     }
 
     // Adding the canvas
-    const slide = document.querySelector(`.slides > section:nth-child(${indexh + 1}) > section:nth-child(${indexv + 1})`);
-    slide!.appendChild(board.canvas);
+    this.getSlide(i, j).appendChild(board.canvas);
 
     this.deck.sync();
-    this.deck.slide(indexh, indexv, 0);
+    this.deck.slide(i, j, 0);
     this.save();
+  }
+
+  /**
+   * Get the HTML element associated with a vertical slide
+   *
+   * @param i horizontal index (starts from 0)
+   * @param j vertical index (starts from 0)
+   */
+  getSlide(i: number, j: number): HTMLElement {
+    let selector = `section:nth-child(${i + 1}) > section:nth-child(${j + 1})`;
+    return document.querySelector(`.reveal .slides > ${selector}`)!;
   }
 
   /**
@@ -324,9 +333,7 @@ class WhiteboardPlugin {
           strokes = data[i][j];
         }
         this.boards[i][j] = new Whiteboard(1920, 1080, this.parentNode, strokes);
-        const canvas = this.boards[i][j].canvas;
-        const selector = `.reveal .slides > section:nth-child(${i + 1}) > section:nth-child(${j + 1})`;
-        document.querySelector(selector)!.appendChild(canvas);
+        this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
       }
     }
     const indices = this.deck.getIndices();
@@ -367,7 +374,7 @@ class WhiteboardPlugin {
       this.deck.up();
     }
     this.boards[pos.h].splice(pos.v, 1);
-    document.querySelector(`.slides > section:nth-child(${pos.h + 1}) > section:nth-child(${pos.v + 1}`)!.remove();
+    this.getSlide(pos.h, pos.v).remove();
     this.deck.sync();
     if (pos.v === 0) {
       this.deck.up();
