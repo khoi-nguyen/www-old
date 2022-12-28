@@ -66,7 +66,7 @@ build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
 static/%.js: %.ts
 	@echo "Building $@"
 	@mkdir -p $(@D)
-	@tsc $< --outFile $@ --lib ES2015,dom
+	@tsc $< --outFile $@ --lib ES2015,dom --target es6
 
 build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(META) $(ACTIVATE)
 	@$(ENV) ./bin/convert $< --citeproc \

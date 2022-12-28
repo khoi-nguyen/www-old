@@ -105,24 +105,6 @@ def geogebra(url: str, width: int = 800, height: int = 600) -> str:
     """
 
 
-def a4(url: str, page: int = 1):
-    url += f"#view=FitH&toolbar=0&page={page}&scrollbar=0"
-    ident = hashlib.sha256(url.encode("utf-8")).hexdigest()
-    return f"""
-      <object data="{url}" type="application/pdf" width="100%" id="{ident}">
-        <embed src="{url}" type="application/pdf" id="{ident}">
-        </embed>
-      </object>
-      <script type="text/javascript">
-        const pdf = document.getElementById("{ident}");
-        const resizeObserver = new ResizeObserver(function () {{
-          pdf.setAttribute("height", 1.414 * pdf.offsetWidth);
-        }});
-        resizeObserver.observe(pdf)
-      </script>
-    """
-
-
 def pdf(url: str, width: int | str = "100%", height: int | str = 900) -> str:
     return f"""
       <object data="{url}" type="application/pdf"
