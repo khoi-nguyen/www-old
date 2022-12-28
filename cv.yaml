@@ -116,6 +116,9 @@ experience:
     description_fr: |
       - Membre de l'équipe Framework (côté Javascript)
       - Technologies utiliées: git, odoo, python, Node.js
+    description_es: |
+      - Parte del equipo "Framework" (Javascript)
+      - Herramientas utilizadas: git, odoo, python, Node.js
 
 education:
   - title: PGCE in Mathematics
@@ -141,7 +144,7 @@ education:
       - Participation dans des groupes de conversation FLE à l'université
       - Équipe première en tennis de table (Varsity contre Cambridge et "Town vs Gown")
     description_es: |
-      - Becca del gobierno británico
+      - Beca del gobierno británico
   - title: PhD in Mathematics
     title_fr: Doctorat en mathématiques
     title_es: Doctorado en matemáticas
@@ -156,6 +159,8 @@ education:
       - Funded by a departmental scholarship
     description_fr: |
       - Financé par une bourse départementale
+    description_es: |
+      - Beca departamental
   - title: MASt in Mathematics
     title_fr: Master en mathématiques
     title_es: Maestría en matemáticas
@@ -175,6 +180,8 @@ education:
       - Obtenu avec le plus haut grade
       - Équivalence de la Fédération Wallonie-Bruxelles
       - Extra-curriculaire: responsable d'un groupe de conversation en français
+    description_es: |
+      - Con los máximos honores
   - title: BSc in Mathematics
     title_fr: Bachelier en mathématiques
     title_es: Licenciatura en matemáticas
@@ -191,6 +198,9 @@ education:
     description_fr: |
       - Obtenu avec *la plus grande distinction*
       - Preuve d'un résultat en théorie géométrique de la mesure
+    description_es: |
+      - Con la mención *summa cum laude* (sobresaliente)
+      - Prueba de un resultado en teoría de la medida geométrica
 
 languages:
   - name: English
