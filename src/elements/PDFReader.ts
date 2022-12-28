@@ -1,4 +1,4 @@
-class PDFReader extends HTMLElement {
+class PdfReader extends HTMLElement {
 
   public shadowRoot: ShadowRoot;
 
@@ -33,4 +33,4 @@ class PDFReader extends HTMLElement {
   }
 }
 
-customElements.define("pdf-reader", PDFReader);
+customElements.define("pdf-reader", PdfReader);
