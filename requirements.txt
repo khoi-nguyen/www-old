@@ -1,8 +1,9 @@
+IPython
 black
 flask
 flask-login
-isort
 gunicorn
+isort
 matplotlib
 numpy
 panflute
