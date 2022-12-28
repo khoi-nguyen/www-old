@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import glob
-import hashlib
 import json
 import subprocess
 import sys
