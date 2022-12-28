@@ -204,16 +204,21 @@ skills:
     section_es: Informática
     list:
       - Bash
+      - CSS
       - Docker
       - Dokku/Heroku
       - Git
+      - HTML5
       - Javascript
       - Julia
       - \LaTeX{}
       - Linux
       - Node.js
+      - NoSQL (MongoDB)
       - Odoo
+      - PHP
       - Python
+      - SQL
       - TypeScript
       - Vue.js
 ...
