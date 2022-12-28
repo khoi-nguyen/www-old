@@ -28,21 +28,26 @@ class Whiteboard {
   public lineWidth: number = 2;
   public mode: BoardMode = "draw";
 
+  get lastStroke() {
+    if (!this.strokes.length) {
+      this.startStroke();
+    }
+    return this.strokes[this.strokes.length - 1];
+  }
+
   /**
    * Add a point to the last stroke
    * @param point Point to add
    */
   addPoint(point: Point): void {
-    const stroke = this.strokes[this.strokes.length - 1];
-    stroke.points.push(point);
-    this.drawStroke(stroke);
+    this.lastStroke.points.push(point);
+    this.drawStroke(this.lastStroke);
     this.hasUnsavedChanges = true;
   }
 
   changeBrush(color: Color, lineWidth: number) {
-    const stroke = this.strokes[this.strokes.length - 1];
-    stroke.color = color;
-    stroke.lineWidth = lineWidth;
+    this.lastStroke.color = color;
+    this.lastStroke.lineWidth = lineWidth;
     this.color = color;
     this.lineWidth = lineWidth;
   }
@@ -182,11 +187,8 @@ class Whiteboard {
    * Start a new stroke
    */
   startStroke(): void {
-    if (this.strokes.length) {
-      const lastStroke = this.strokes[this.strokes.length - 1];
-      if (lastStroke.points.length === 0) {
+    if (this.strokes.length && this.lastStroke.points.length === 0) {
         this.strokes.splice(this.strokes.length - 1, 1);
-      }
     }
     this.strokes.push({
       color: this.color,
