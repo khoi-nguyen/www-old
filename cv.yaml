@@ -16,6 +16,9 @@ sections:
   languages: Languages
   languages_fr: Compétences linguistiques
   languages_es: Competencia lingüística
+  skills: Skills
+  skills_fr: Compétences
+  skills_es: Competencia
 
 experience:
   - title: Lecturer in Mathematics
@@ -31,11 +34,10 @@ experience:
       location_es: París
     description: |
       - Taught modules: Numerical Analysis (MATH-UA 9252)
-      - Programming languages used: Julia and Python
+      - Programming languages used: Julia and Python (Numpy)
     description_fr: |
       - Cours magistral et séances d'exercices en *analyse numérique*
       - Utilisation de Python (Numpy) et Julia
-      - Langue d'enseignement: anglais
   - title: Teacher of Mathematics and Computer Science
     title_fr: Enseignant en mathématiques et informatique
     title_es: Profesor de matemáticas e informática
@@ -46,13 +48,14 @@ experience:
       website: https://britishschool.be
     description: |
       - Taught courses: IBDP, IGCSE, A Levels
-      - Oxbridge entrance exam preparation
+      - Supervision of IBDP Extended Essays
+      - Oxbridge entrance exams preparation
       - Extra-curricular: First LEGO League, programming club
     description_fr: |
       - Programmes enseignés: IBDP, IGCSE, A Levels
+      - Supervision de travaux de fin d'études pour le baccalauréat international
       - Préparation aux examens d'entrée de Cambridge et Oxford (math et informatique)
       - Activités extra-curriculaires: First LEGO League, calcul scientifique
-      - Langues d'enseignement: français et anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
     title_es: Profesor de matemáticas
@@ -64,12 +67,11 @@ experience:
       location_fr: Espagne
       location_es: España
     description: |
-      - Taught courses: IBDP, IGCSE, A Levels
-      - Oxbridge entrance exam preparation
+      - Taught courses: IGCSE, A Levels
+      - Oxbridge entrance exams preparation
     description_fr: |
       - Programmes enseignés: IGCSE, A Levels
       - Préparation aux examens d'entrée de Cambridge et Oxford
-      - Langue d'enseignement: anglais
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
     title_es: Profesor de matemáticas
@@ -81,6 +83,7 @@ experience:
       location_fr: Belgique
     description: |
       - Taught the Belgium curriculum to pupils aged 12 to 18
+      - Language of instruction: French
     description_fr: |
       - Intérims en secondaire inférieur et supérieur
   - title: Python and Javascript Developer
@@ -114,7 +117,7 @@ education:
       location_fr: Royaume-Uni
       location_es: Reino Unido
     description: |
-      - Funded by a governmental scholarship
+      - Funded by a scholarship from the British government
       - I helped maths and language departments in local schools
       - Half-blue for playing the "Varsity" and "Town vs Gown" matches in table tennis
     description_fr: |
@@ -150,7 +153,8 @@ education:
       location_fr: Royaume-Uni
       location_es: Reino Unido
     description: |
-      - Distinction
+      - Grade: distinction (highest passing grade)
+      - Offered a PhD position for academic performance
     description_fr: |
       - Obtenu avec le plus haut grade
       - Équivalence de la Fédération Wallonie-Bruxelles
@@ -166,7 +170,7 @@ education:
       location_fr: Belgique
       location_es: Bélgica
     description: |
-      - Graduated *summa cum laude*
+      - Grade: *summa cum laude* (highest passing grade)
       - Proved a covering result in geometric measure theory
     description_fr: |
       - Obtenu avec *la plus grande distinction*
@@ -194,8 +198,22 @@ languages:
     desc_fr: Compétence professionnelle
     desc_es: Competencia profesional
 
-programming:
-  - language: Python
-    level: Advanced
-    level_fr: Avancé
+skills:
+  - section: Computer skills
+    section_fr: Informatique
+    section_es: Informática
+    list:
+      - Bash
+      - Docker
+      - Dokku/Heroku
+      - Git
+      - Javascript
+      - Julia
+      - \LaTeX{}
+      - Linux
+      - Node.js
+      - Odoo
+      - Python
+      - TypeScript
+      - Vue.js
 ...

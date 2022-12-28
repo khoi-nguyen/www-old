@@ -66,4 +66,12 @@
 \cvitemwithcomment{\var{language.name}}{\var{language.desc}}{\var{language.level}}
 \block{endfor}
 
+\section{\var{sections.skills}}
+
+\block{for section in skills}
+\cvitem{\var{section.section}}{%
+  \var{ ",\\ ".join(section.list) }
+}
+\block{endfor}
+
 \end{document}
