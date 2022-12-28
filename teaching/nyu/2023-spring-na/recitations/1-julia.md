@@ -12,9 +12,7 @@ output: revealjs
 
 # Learn X in Y minutes
 
-~~~ {.yaml .widget name="iframe"}
-url: https://learnxinyminutes.com/docs/julia/
-~~~
+<iframe src="https://learnxinyminutes.com/docs/julia/" width="100%" height="900">
 
 # Help and documentation {.row}
 

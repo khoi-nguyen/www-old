@@ -44,9 +44,7 @@ notes: |
 
 # Lecture notes
 
-~~~ {.yaml .widget name="pdf"}
-url: /static/numerical-analysis/1-roundoff.pdf
-~~~
+<pdf-reader src="/static/numerical-analysis/1-roundoff.pdf">
 
 # Motivations {.row}
 
