@@ -38,6 +38,9 @@ experience:
     description_fr: |
       - Cours magistral et séances d'exercices en *analyse numérique*
       - Utilisation de Python (Numpy) et Julia
+    description_es: |
+      - Clase impartida: análisis numérico
+      - Utilización de Python y Julia
   - title: Teacher of Mathematics and Computer Science
     title_fr: Enseignant en mathématiques et informatique
     title_es: Profesor de matemáticas e informática
@@ -56,10 +59,15 @@ experience:
       - Supervision de travaux de fin d'études pour le baccalauréat international
       - Préparation aux examens d'entrée de Cambridge et Oxford (math et informatique)
       - Activités extra-curriculaires: First LEGO League, calcul scientifique
+    description_es: |
+      - Programas enseñados: Bachillerato internacional, IGCSE, A Levels
+      - Supervisión de trabajos de fin de Bachillerato
+      - Preparación a los examenes de admision de Cambridge y Oxford
+      - Actividades extracurriculares: First LEGO League, calculo cientifico
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
     title_es: Profesor de matemáticas
-    date: 2021--2023
+    date: 2020--2021
     employer:
       name: King's College, Soto de Viñuelas
       website: https://www.madrid-soto.kingscollegeschools.org/en
@@ -72,6 +80,9 @@ experience:
     description_fr: |
       - Programmes enseignés: IGCSE, A Levels
       - Préparation aux examens d'entrée de Cambridge et Oxford
+    description_es: |
+      - Programas enseñados: IGCSE, A Levels
+      - Preparación a los examenes de admision de Cambridge y Oxford
   - title: Teacher of Mathematics
     title_fr: Enseignant en mathématiques
     title_es: Profesor de matemáticas
@@ -81,11 +92,14 @@ experience:
       website: https://www.federation-wallonie-bruxelles.be/
       location: Belgium
       location_fr: Belgique
+      location_es: Bélgica
     description: |
       - Taught the Belgium curriculum to pupils aged 12 to 18
       - Language of instruction: French
     description_fr: |
       - Intérims en secondaire inférieur et supérieur
+    description_es: |
+      - Programa enseñado: bachillerato belga francófono
   - title: Python and Javascript Developer
     title_fr: Développeur Python et Javascript
     title_es: Desarollador Python y Javascript
@@ -126,6 +140,8 @@ education:
       - Support des départements de mathématiques et FLE dans des écoles locales
       - Participation dans des groupes de conversation FLE à l'université
       - Équipe première en tennis de table (Varsity contre Cambridge et "Town vs Gown")
+    description_es: |
+      - Becca del gobierno británico
   - title: PhD in Mathematics
     title_fr: Doctorat en mathématiques
     title_es: Doctorado en matemáticas
