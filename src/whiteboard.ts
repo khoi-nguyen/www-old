@@ -28,7 +28,7 @@ class Whiteboard {
   public lineWidth: number = 2;
   public mode: BoardMode = "draw";
 
-  get lastStroke() {
+  get lastStroke(): Stroke {
     if (!this.strokes.length) {
       this.startStroke();
     }
