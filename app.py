@@ -66,7 +66,7 @@ def save_board(url: str = ""):
     boards = flask.request.get_json() or []
     path = source_basepath(url) + ".json"
     with open(path, "w") as file:
-        file.write(to_json(boards))
+        file.write(to_json(clean(boards)))
     return flask.jsonify({"success": True, "boards": boards})
 
 
@@ -111,8 +111,17 @@ def render_page(path: str) -> str:
     return flask.render_template(template_file, **data)
 
 
-FOLD_LEVEL = 4
-INDENT = 2
+def clean(boards):
+    for slide in boards:
+        for board in slide:
+            for i, stroke in enumerate(board):
+                if len(stroke["points"]) == 0:
+                    del board[i]
+    return boards
+
+
+FOLD_LEVEL = 3
+INDENT = 1
 
 
 def to_json(o, level=0):
