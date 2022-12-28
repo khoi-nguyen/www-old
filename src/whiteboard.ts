@@ -18,6 +18,7 @@ class Whiteboard {
   private context: CanvasRenderingContext2D;
   private height: number;
   private isActive: boolean = false;
+  private parentNode: HTMLElement;
   private strokes: Stroke[];
   private width: number;
 
@@ -62,9 +63,10 @@ class Whiteboard {
    * Create a canvas with its 2D context
    * @param width Width of the canvas
    * @param height Height of the canvas
+   * @param parentNode Parent node (useful to calculate offset)
    * @param strokes Strokes to draw
    */
-  constructor(width: number, height: number, strokes: Stroke[] = []) {
+  constructor(width: number, height: number, parentNode: HTMLElement, strokes: Stroke[] = []) {
     this.canvas = document.createElement("canvas");
     this.context = this.canvas.getContext("2d")!;
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
@@ -73,6 +75,7 @@ class Whiteboard {
     this.canvas.width = width;
     this.canvas.height = height;
     this.canvas.classList.add("whiteboard");
+    this.parentNode = parentNode;
     this.width = width;
     this.height = height;
     this.strokes = strokes;
@@ -141,7 +144,7 @@ class Whiteboard {
     }
     const scaleX = this.canvas.offsetWidth / this.canvas.getBoundingClientRect().width;
     const scaleY = this.canvas.offsetHeight / this.canvas.getBoundingClientRect().height;
-    const container = document.querySelector(".reveal .slides")!.getBoundingClientRect();
+    const container = this.parentNode.getBoundingClientRect();
     const x = Math.round((event.clientX - container.left) * scaleX)
     const y = Math.round((event.clientY - container.top) * scaleY)
     if (this.mode === "draw") {
@@ -226,6 +229,7 @@ class WhiteboardPlugin {
   public board: Whiteboard;
   public boards: Whiteboard[][];
   private deck: RevealDeck;
+  private parentNode: HTMLElement;
   private slides: HTMLElement[] = [];
 
   /**
@@ -235,7 +239,7 @@ class WhiteboardPlugin {
     const indexh = this.deck.getIndices().h;
     const indexv = this.deck.getIndices().v + 1;
     const parent = document.querySelector(`.slides > section:nth-child(${indexh + 1})`);
-    this.boards[indexh].splice(indexv, 0, new Whiteboard(1920, 1080, []));
+    this.boards[indexh].splice(indexv, 0, new Whiteboard(1920, 1080, this.parentNode, []));
     const board = this.boards[indexh][indexv];
 
     // Add vertical slide
@@ -263,6 +267,7 @@ class WhiteboardPlugin {
     this.deck = deck;
     this.deck.on("slidechanged", this.onSlideChanged.bind(this));
     this.deck.on("ready", this.onReady.bind(this));
+    this.parentNode = document.querySelector(".reveal .slides")!;
     document.oncontextmenu = () => false;
     document.onselectstart = () => false;
   }
@@ -317,7 +322,7 @@ class WhiteboardPlugin {
         if (j < data[i].length) {
           strokes = data[i][j];
         }
-        this.boards[i][j] = new Whiteboard(1920, 1080, strokes);
+        this.boards[i][j] = new Whiteboard(1920, 1080, this.parentNode, strokes);
         const canvas = this.boards[i][j].canvas;
         const selector = `.reveal .slides > section:nth-child(${i + 1}) > section:nth-child(${j + 1})`;
         document.querySelector(selector)!.appendChild(canvas);
