@@ -80,7 +80,6 @@ class Whiteboard {
     this.height = height;
     this.strokes = strokes;
     this.redraw();
-    this.startStroke();
   }
 
   /**
@@ -162,7 +161,6 @@ class Whiteboard {
     this.isActive = false;
     if (this.mode === "draw") {
       this.redraw();
-      this.startStroke();
     }
     if (event.button === 2) {
       this.mode = "draw";
@@ -177,6 +175,7 @@ class Whiteboard {
     for(const stroke of this.strokes) {
       this.drawStroke(stroke);
     }
+    this.startStroke();
   }
 
   /**
