@@ -258,7 +258,7 @@ We have
 
 $$1 + \epsilon_\F = \min \{x \in \F : x > 1\}.$$
 
-~~~ {.latex .tikz}
+~~~ {.tex .tikz}
 \draw (-1.75, 0) -- (4.5, 0);
 \draw[to-to] (0, 0.3) -- node[above] {$\varepsilon_{\mathbb F}$} (1, 0.3);
 \fill (0, 0) circle (0.05) node[below] {$1$};
