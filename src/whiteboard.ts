@@ -240,7 +240,7 @@ class WhiteboardPlugin {
     const i = this.deck.getIndices().h;
     const j = this.deck.getIndices().v + 1;
     const parent = document.querySelector(`.slides > section:nth-child(${i + 1})`)!;
-    this.boards[i].splice(j, 0, new Whiteboard(1920, 1080, this.parentNode, []));
+    this.boards[i].splice(j, 0, this.newBoard());
 
     // Add vertical slide
     if (j === this.boards[i].length) {
@@ -279,6 +279,15 @@ class WhiteboardPlugin {
     this.parentNode = document.querySelector(".reveal .slides")!;
     document.oncontextmenu = () => false;
     document.onselectstart = () => false;
+  }
+
+  /**
+   * Create a new whiteboard with predefined strokes
+   * @param strokes Strokes to add on the whiteboard
+   * @return Created whiteboard
+   */
+  newBoard(strokes: Stroke[] = []): Whiteboard {
+    return new Whiteboard(1920, 1080, this.parentNode, strokes);
   }
 
   /**
@@ -327,11 +336,7 @@ class WhiteboardPlugin {
           wrapper.appendChild(slideCopy.cloneNode(true))
         }
         // Create the canvas and add it to the DOM
-        let strokes: Stroke[] = [];
-        if (j < data[i].length) {
-          strokes = data[i][j];
-        }
-        this.boards[i][j] = new Whiteboard(1920, 1080, this.parentNode, strokes);
+        this.boards[i][j] = this.newBoard((j < data[i].length) ? data[i][j] : []);
         this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
       }
     }
