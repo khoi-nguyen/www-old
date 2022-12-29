@@ -241,17 +241,16 @@ class WhiteboardPlugin {
     const j = this.deck.getIndices().v + 1;
     const parent = document.querySelector(`.slides > section:nth-child(${i + 1})`)!;
     this.boards[i].splice(j, 0, new Whiteboard(1920, 1080, this.parentNode, []));
-    const board = this.boards[i][j];
 
     // Add vertical slide
     if (j === this.boards[i].length) {
       parent.appendChild(this.slides[i].cloneNode(true));
     } else {
-      parent.insertBefore(this.slides[i].cloneNode(true), this.getSlide(i, j))
+      parent.insertBefore(this.slides[i].cloneNode(true), this.getSlide(i, j));
     }
 
     // Adding the canvas
-    this.getSlide(i, j).appendChild(board.canvas);
+    this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
 
     this.deck.sync();
     this.deck.slide(i, j, 0);
