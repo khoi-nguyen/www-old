@@ -8,6 +8,7 @@ RUN pacman --noconfirm --needed -Syy \
     julia \
     make \
     pandoc \
+    prettier \
     python-pip \
     ripgrep \
     texlive-core \
