@@ -42,84 +42,85 @@ dt {
   background-color: #57068c !important;
 }
 /* Reveal.js */
-.reveal .title-slide {
-  font-size: 2em;
-  margin-top: 350px;
-}
-.reveal .title-slide h1 {
-  color: #002147;
-  font-weight: bold;
-  font-size: 60px;
-}
-.reveal .title-slide h3, .reveal .title-slide h4 {
-  color: #aaaaaa;
-  font-weight: normal;
-}
-.reveal .slides {
-  height: 100%;
-  position: relative;
-}
-.reveal .whiteboard {
-  cursor: crosshair;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.reveal #whiteboard-toolbar {
-  bottom: 20px;
-  left: 10px;
-  position: absolute;
-  z-index: 900;
-}
-.reveal a, .reveal button, .reveal iframe, .reveal iframe *, .reveal object, h5[data-bs-toggle="collapse"] {
-  position: relative;
-  z-index: 200 !important;
-}
-.reveal .slides {
-  text-align: left;
-  font-size: 1.4em;
-  line-height: 1.5em;
-}
-.reveal .slides pre {
-  line-height: 1.2em;
-}
-.reveal .slides section .slide-contents {
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-}
-.reveal .slides section.slide-title .slide-title {
-  background-color: #23373b;
-  color: #ebf0ef;
-  font-size: 1.7em;
-  font-weight: 600;
-  margin-bottom: 0.5em;
-  margin-top: 0;
-  padding: 0.2em;
-}
-.reveal .slides section .card {
-  width: 90%;
-  margin: 0.5em auto;
-}
-.reveal .slides section.split .slide-contents {
-  width: 50%;
-}
-.reveal .slides .slide-contents .split {
-  width: 50%;
-}
-.reveal h2 {
-  color: #002147;
-  font-variant: small-caps;
-  font-weight: bold;
-  font-size: 50px;
-}
-.reveal h3 {
-  color: #255994;
-  font-weight: bold;
-  font-size: 45px;
-}
-.reveal h4 {
-  color: #255994;
-  font-size: 40px;
+.reveal {
+  .title-slide {
+    font-size: 2em;
+    margin-top: 350px;
+
+    h1 {
+      color: #002147;
+      font-weight: bold;
+      font-size: 60px;
+    }
+    h3, h4 {
+      color: #aaaaaa;
+      font-weight: normal;
+    }
+  }
+  .whiteboard {
+    cursor: crosshair;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  #whiteboard-toolbar {
+    bottom: 20px;
+    left: 10px;
+    position: absolute;
+    z-index: 900;
+  }
+  a, button, iframe, iframe *, object, h5[data-bs-toggle="collapse"] {
+    position: relative;
+    z-index: 200 !important;
+  }
+  .slides {
+    height: 100%;
+    text-align: left;
+    font-size: 1.4em;
+    line-height: 1.5em;
+    position: relative;
+    pre {
+      line-height: 1.2em;
+    }
+    section .slide-contents {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
+    section.slide-title .slide-title {
+      background-color: #23373b;
+      color: #ebf0ef;
+      font-size: 1.7em;
+      font-weight: 600;
+      margin-bottom: 0.5em;
+      margin-top: 0;
+      padding: 0.2em;
+    }
+    section .card {
+      width: 90%;
+      margin: 0.5em auto;
+    }
+    section.split .slide-contents {
+      width: 50%;
+    }
+    .slide-contents .split {
+      width: 50%;
+    }
+  }
+  h2 {
+    color: #002147;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 50px;
+  }
+  h3 {
+    color: #255994;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  h4 {
+    color: #255994;
+    font-size: 40px;
+  }
 }
 .answer {
   color: darkred;
