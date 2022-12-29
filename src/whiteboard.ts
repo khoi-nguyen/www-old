@@ -277,8 +277,8 @@ class WhiteboardPlugin {
     this.deck.on("slidechanged", this.onSlideChanged.bind(this));
     this.deck.on("ready", this.onReady.bind(this));
     this.parentNode = document.querySelector(".reveal .slides")!;
-    document.oncontextmenu = () => false;
-    document.onselectstart = () => false;
+    this.parentNode.oncontextmenu = () => false;
+    this.parentNode.onselectstart = () => false;
   }
 
   /**
