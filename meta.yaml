@@ -33,16 +33,16 @@ prefix: Khôi Nguyễn
 slide-level: 1
 whiteboard:
   - icon: fa-solid fa-pen
-    color: '#255994'
+    color: "#255994"
     width: 2
   - icon: fa-solid fa-pen
-    color: 'darkred'
+    color: darkred
     width: 2
   - icon: fa-solid fa-pen
-    color: 'green'
+    color: green
     width: 2
   - icon: fa-solid fa-pen
-    color: 'black'
+    color: black
     width: 2
   - icon: fa-solid fa-highlighter
     color: rgb(241, 231, 64, 0.4)
@@ -56,8 +56,7 @@ whiteboard:
   - icon: fa-solid fa-highlighter
     color: rgba(233, 79, 88, 0.4)
     width: 30
-...
-
+---
 \newcommand{\dd}{\,\mathrm{d}}
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand{\defeq}{:=}
