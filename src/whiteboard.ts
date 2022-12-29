@@ -14,7 +14,6 @@ interface Stroke {
 }
 
 class Whiteboard {
-
   private context: CanvasRenderingContext2D;
   private height: number;
   private isActive: boolean = false;
@@ -61,7 +60,7 @@ class Whiteboard {
       this.strokes.splice(0, this.strokes.length);
       this.hasUnsavedChanges = true;
     }
-    this.context.clearRect(0, 0, this.width, this.height)
+    this.context.clearRect(0, 0, this.width, this.height);
   }
 
   /**
@@ -71,7 +70,12 @@ class Whiteboard {
    * @param parentNode Parent node (useful to calculate offset)
    * @param strokes Strokes to draw
    */
-  constructor(width: number, height: number, parentNode: HTMLElement, strokes: Stroke[] = []) {
+  constructor(
+    width: number,
+    height: number,
+    parentNode: HTMLElement,
+    strokes: Stroke[] = []
+  ) {
     this.canvas = document.createElement("canvas");
     this.context = this.canvas.getContext("2d")!;
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
@@ -97,7 +101,7 @@ class Whiteboard {
     this.context.strokeStyle = stroke.color;
     this.context.lineCap = "round";
     this.context.lineWidth = stroke.lineWidth;
-    for(const point of stroke.points) {
+    for (const point of stroke.points) {
       this.context.lineTo(...point);
     }
     this.context.stroke();
@@ -112,7 +116,7 @@ class Whiteboard {
     for (let i = 0; i < this.strokes.length; i++) {
       const stroke = this.strokes[i];
       for (const p of stroke.points) {
-        const dist = (p[0] - point[0]) ** 2 + (p[1] - point[1]) ** 2
+        const dist = (p[0] - point[0]) ** 2 + (p[1] - point[1]) ** 2;
         if (dist <= 5) {
           this.strokes.splice(i, 1);
           this.hasUnsavedChanges = true;
@@ -122,7 +126,7 @@ class Whiteboard {
       }
     }
   }
-  
+
   /**
    * Mouse down event listener
    * @param event Mouse event
@@ -137,7 +141,7 @@ class Whiteboard {
       }
     }
   }
-  
+
   /**
    * Mouse move event listener
    * @param event Mouse event
@@ -146,18 +150,20 @@ class Whiteboard {
     if (!this.isActive) {
       return;
     }
-    const scaleX = this.canvas.offsetWidth / this.canvas.getBoundingClientRect().width;
-    const scaleY = this.canvas.offsetHeight / this.canvas.getBoundingClientRect().height;
+    const scaleX =
+      this.canvas.offsetWidth / this.canvas.getBoundingClientRect().width;
+    const scaleY =
+      this.canvas.offsetHeight / this.canvas.getBoundingClientRect().height;
     const container = this.parentNode.getBoundingClientRect();
-    const x = Math.round((event.clientX - container.left) * scaleX)
-    const y = Math.round((event.clientY - container.top) * scaleY)
+    const x = Math.round((event.clientX - container.left) * scaleX);
+    const y = Math.round((event.clientY - container.top) * scaleY);
     if (this.mode === "draw") {
       this.addPoint([x, y]);
     } else if (this.mode === "erase") {
       this.eraseStroke([x, y]);
     }
   }
-  
+
   /**
    * Mouse up event listener
    * @param event Mouse event
@@ -177,7 +183,7 @@ class Whiteboard {
    */
   redraw(): void {
     this.clearBoard();
-    for(const stroke of this.strokes) {
+    for (const stroke of this.strokes) {
       this.drawStroke(stroke);
     }
     this.startStroke();
@@ -188,7 +194,7 @@ class Whiteboard {
    */
   startStroke(): void {
     if (this.strokes.length && this.lastStroke.points.length === 0) {
-        this.strokes.splice(this.strokes.length - 1, 1);
+      this.strokes.splice(this.strokes.length - 1, 1);
     }
     this.strokes.push({
       color: this.color,
@@ -196,7 +202,7 @@ class Whiteboard {
       points: [],
     });
   }
-  
+
   /**
    * Describe how JSON serialization should happen
    * @returns List of all the strokes on the whiteboard
@@ -210,8 +216,8 @@ type EventHandler = (event: RevealEvent) => void;
 
 interface RevealDeck {
   down(): void;
-  getConfig(): {admin: boolean};
-  getIndices(): {h: number, v: number};
+  getConfig(): { admin: boolean };
+  getIndices(): { h: number; v: number };
   left(): void;
   on(eventName: string, eventHandler: EventHandler): void;
   right(): void;
@@ -221,8 +227,8 @@ interface RevealDeck {
 }
 
 interface RevealEvent {
-  indexh: number,
-  indexv: number,
+  indexh: number;
+  indexv: number;
 }
 
 class WhiteboardPlugin {
@@ -239,7 +245,9 @@ class WhiteboardPlugin {
   addVerticalSlide(): void {
     const i = this.deck.getIndices().h;
     const j = this.deck.getIndices().v + 1;
-    const parent = document.querySelector(`.slides > section:nth-child(${i + 1})`)!;
+    const parent = document.querySelector(
+      `.slides > section:nth-child(${i + 1})`
+    )!;
     this.boards[i].splice(j, 0, this.newBoard());
 
     // Add vertical slide
@@ -297,12 +305,17 @@ class WhiteboardPlugin {
   async onReady() {
     let data: Stroke[][][] = [[]];
     this.boards = [[]];
-    await fetch("/boards" + window.location.pathname).then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error("No board file");
-    }).then((jsonData) => { data = jsonData; }).catch(() => {});
+    await fetch("/boards" + window.location.pathname)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("No board file");
+      })
+      .then((jsonData) => {
+        data = jsonData;
+      })
+      .catch(() => {});
 
     const slides = document.querySelectorAll(".slides > section");
     for (let i = 0; i < slides.length; i++) {
@@ -316,11 +329,11 @@ class WhiteboardPlugin {
 
       // Keep a copy of the slide without transitions
       const slideCopy = slide.cloneNode(true) as HTMLElement;
-      const classAttr = slideCopy.getAttribute("class") || ""
+      const classAttr = slideCopy.getAttribute("class") || "";
       slideCopy.removeAttribute("id");
       slideCopy.setAttribute("class", classAttr.replace("present", "future"));
       const slideCopyFragments = slideCopy.querySelectorAll(".fragment");
-      [].forEach.call(slideCopyFragments, function(el: HTMLElement) {
+      [].forEach.call(slideCopyFragments, function (el: HTMLElement) {
         el.classList.remove("fragment");
       });
       this.slides.push(slideCopy);
@@ -328,15 +341,15 @@ class WhiteboardPlugin {
       // Wrap slide into a container
       const wrapper = document.createElement("section");
       slide.parentNode!.insertBefore(wrapper, slide);
-      wrapper.appendChild(slide)
+      wrapper.appendChild(slide);
 
       for (let j = 0; j < data[i].length; j++) {
         // Create the vertical slide
         if (j > 0) {
-          wrapper.appendChild(slideCopy.cloneNode(true))
+          wrapper.appendChild(slideCopy.cloneNode(true));
         }
         // Create the canvas and add it to the DOM
-        this.boards[i][j] = this.newBoard((j < data[i].length) ? data[i][j] : []);
+        this.boards[i][j] = this.newBoard(j < data[i].length ? data[i][j] : []);
         this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
       }
     }
