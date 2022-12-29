@@ -1,5 +1,4 @@
 class PdfReader extends HTMLElement {
-
   public shadowRoot: ShadowRoot;
 
   constructor() {
@@ -20,10 +19,10 @@ class PdfReader extends HTMLElement {
     let src = this.getAttribute("src") || "";
     if (this.getAttribute("mode") === "A4") {
       const page = this.getAttribute("page") || "1";
-      src += `#view=FitH&toolbar=0&page=${page}`
+      src += `#view=FitH&toolbar=0&page=${page}`;
       const resizeObserver = new ResizeObserver(() => {
         object.setAttribute("height", String(1.414 * object.offsetWidth));
-      })
+      });
       resizeObserver.observe(object);
     }
     object.setAttribute("data", src);
