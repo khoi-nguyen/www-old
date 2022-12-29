@@ -5,7 +5,11 @@
   <meta name="author" content="{{ author }}" />
   {% endif %}
   {% for href in css %}
-  <link rel="stylesheet" href="{{ href }}" />
+  {% if href.endswith(".less") %}
+  <link rel="stylesheet/less" type="text/css" href="{{ href }}" />
+  {% else %}
+  <link rel="stylesheet" type="text/css" href="{{ href }}" />
+  {% endif %}
   {% endfor %}
   {% if icon %}
   <link rel="icon" type="image/x-icon" href="{{ icon }}" />
