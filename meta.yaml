@@ -56,7 +56,7 @@ whiteboard:
   - icon: fa-solid fa-highlighter
     color: rgba(233, 79, 88, 0.4)
     width: 30
----
+...
 \newcommand{\dd}{\,\mathrm{d}}
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand{\defeq}{:=}

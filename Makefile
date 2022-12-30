@@ -31,7 +31,7 @@ backend: $(ACTIVATE) $(JSON) $(PAGES)
 lint:
 	@$(PYTHON) -m black .
 	@$(PYTHON) -m isort *.py
-	prettier -w $(shell $(FIND) '*.ts') $(shell $(FIND) '*.yaml')
+	prettier -w $(shell $(FIND) '*.ts')
 
 static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@echo "Building $@"
