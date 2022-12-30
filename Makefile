@@ -73,6 +73,7 @@ build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(ME
 	@$(ENV) ./bin/convert $< --citeproc \
 		--csl templates/apa.csl \
 		--filter bin/filters/cas.py \
+		--filter bin/filters/exam.py \
 		> $@
 
 %.pdf: %.tex

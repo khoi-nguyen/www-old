@@ -12,8 +12,14 @@
 \begin{document}
 
 \maketitle
-\qformat{Question \thequestion \dotfill \thepoints}
 
+\begin{center}
+  \gradetable[h][questions]
+\end{center}
+
+\qformat{Question \thequestion: \thequestiontitle \dotfill \thepoints}
+\begin{questions}
 $body$
+\end{questions}
 
 \end{document}
