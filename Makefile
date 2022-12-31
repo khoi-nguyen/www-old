@@ -23,7 +23,7 @@ JS := $(addprefix static/, $(TS:.ts=.js))
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
-all: lint $(JSON) $(PAGES) $(PDF) $(CV) $(JS)
+all: lint $(JSON) $(PAGES) $(PDF) $(CV) $(CV:.pdf=.png) $(JS)
 
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
@@ -32,6 +32,10 @@ lint:
 	@$(PYTHON) -m black .
 	@$(PYTHON) -m isort *.py
 	prettier -w $(shell $(FIND) '*.ts')
+
+static/cv/%.png: static/cv/%.pdf
+	@echo "Building $@"
+	@convert $< $@
 
 static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@echo "Building $@"

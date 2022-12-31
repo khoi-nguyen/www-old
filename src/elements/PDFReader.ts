@@ -16,6 +16,14 @@ class PdfReader extends HTMLElement {
     object.setAttribute("width", this.getAttribute("width") || "100%");
     object.setAttribute("height", this.getAttribute("height") || "900");
 
+    const alt = this.getAttribute("alt") || "";
+    if (alt) {
+      const img = document.createElement("img");
+      img.src = alt;
+      img.setAttribute("width", "100%");
+      embed.append(img);
+    }
+
     let src = this.getAttribute("src") || "";
     if (this.getAttribute("mode") === "A4") {
       const page = this.getAttribute("page") || "1";
