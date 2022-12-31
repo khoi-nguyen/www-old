@@ -30,6 +30,15 @@
     margin: 0,
     height: 1080,
     overview: true,
+    pdfSeparateFragments: false,
+    slideNumber: slide => {
+      const { h, v } = Reveal.getIndices(slide);
+      return [
+        `${h + 1}.${v + 1}`,
+        "/",
+        (RevealWhiteboard.boards || []).length
+      ]
+    },
     touch: false,
     width: 1920,
     plugins: [ RevealWhiteboard ],
