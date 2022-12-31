@@ -305,7 +305,7 @@ class WhiteboardPlugin {
   async onReady() {
     let data: Stroke[][][] = [[]];
     this.boards = [[]];
-    await fetch("/boards" + window.location.pathname)
+    await fetch(window.location.pathname + ".json")
       .then((response) => {
         if (response.ok) {
           return response.json();

@@ -64,43 +64,33 @@ def logout():
 @flask_login.login_required
 def save_board(url: str = ""):
     boards = flask.request.get_json() or []
-    path = source_basepath(url) + ".json"
-    with open(path, "w") as file:
+    with open(url + ".json", "w") as file:
         file.write(to_json(clean(boards)))
     return flask.jsonify({"success": True, "boards": boards})
-
-
-@app.route("/boards/<path:url>", methods=["GET"])
-def get_board(url: str = ""):
-    path = source_basepath(url) + ".json"
-    if not path.startswith(".json") and os.path.exists(path):
-        return flask.send_file(path)
-    flask.abort(404)
 
 
 @app.route("/")
 @app.route("/<path:url>")
 def default_route(url: str = ""):
-    path = "build/" + source_basepath(url) + ".html"
-    if os.path.exists(path):
-        return render_page(path)
-    flask.abort(404)
-
-
-def source_basepath(url: str) -> str:
-    for suffix in ["", ".html", "index.html"]:
-        path = f"build/{url}{suffix}"
-        if os.path.exists(path) and not os.path.isdir(path):
-            return path[6:-5]
-    return ""
-
-
-def file_contents(path: str) -> str:
-    with open(path) as f:
-        return f.read()
+    if url.endswith("/") or not url:
+        url += "index.html"
+    elif "." not in url:
+        url += ".html"
+    if url.endswith(".json") and os.path.exists(url):
+        return flask.send_file(url)
+    url = "build/" + url
+    if not os.path.exists(url):
+        flask.abort(404)
+    if url.endswith(".html"):
+        return render_page(url)
+    return flask.send_file(url)
 
 
 def render_page(path: str) -> str:
+    def file_contents(path: str) -> str:
+        with open(path) as f:
+            return f.read()
+
     data = json.loads(file_contents(path.replace(".html", ".json")))
     data["user"] = flask_login.current_user
     content = flask.render_template_string(file_contents(path), **data)
