@@ -29,9 +29,6 @@ class PdfReader extends HTMLElement {
       });
       resizeObserver.observe(object);
     }
-    if (/(android)/i.test(navigator.userAgent)) {
-      src = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + src;
-    }
 
     object.setAttribute("data", src);
     embed.setAttribute("src", src);
