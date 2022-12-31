@@ -6,6 +6,8 @@ import textwrap
 import panflute as pf
 import sympy
 
+stack = []
+
 
 def exec_then_eval(code):
     block = ast.parse(code, mode="exec")
@@ -16,15 +18,25 @@ def exec_then_eval(code):
 
 
 def cas(element, doc):
+    global stack
     if type(element) in [pf.Code, pf.CodeBlock] and "sympy" in element.classes:
         code = textwrap.dedent(
-            f"""
+            """
             import numpy as np
             from sympy import *
             x, y, z, t = symbols("x y z t")
             k, m, n = symbols("k m n", integer=True)
         """
         )
+        for index, block in enumerate(stack):
+            code += block["code"] + "\n"
+            block["stack"] -= 1
+            if not block["stack"]:
+                del stack[index]
+        if element.attributes.get("stack"):
+            stack.append(
+                {"code": element.text, "stack": int(element.attributes.get("stack"))}
+            )
         code += element.text
         result = exec_then_eval(code)
         if type(element) == pf.Code:
