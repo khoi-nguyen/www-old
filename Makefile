@@ -35,7 +35,7 @@ lint:
 
 static/cv/%.png: static/cv/%.pdf
 	@echo "Building $@"
-	@convert $< $@
+	@convert -quality 100 -density 150 -flatten -trim $< $@
 
 static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@echo "Building $@"

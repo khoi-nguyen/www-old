@@ -34,7 +34,17 @@ def tikz(element, doc):
             file.write(code)
         cmds = [
             ["latexmk", "-pdf", "-cd", "-f", tmp + ".tex"],
-            ["convert", tmp + ".pdf", tmp + ".png"],
+            [
+                "convert",
+                "-quality",
+                "100",
+                "-density",
+                "150",
+                "-flatten",
+                "-trim",
+                tmp + ".pdf",
+                tmp + ".png",
+            ],
         ]
         for cmd in cmds:
             subprocess.run(cmd, stdout=subprocess.DEVNULL)
