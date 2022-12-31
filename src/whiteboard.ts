@@ -401,7 +401,7 @@ class WhiteboardPlugin {
     if (this.board.strokes.length <= 1) {
       this.removeVerticalSlide();
     }
-    this.deck.slide(h, Math.max(v - 1, 0));
+    this.deck.slide(h, Math.max(v - 1, 0), 0);
   }
 
   /**
