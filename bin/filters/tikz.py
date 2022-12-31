@@ -23,9 +23,9 @@ template = r"""
 
 
 def tikz(element, doc):
-    if not isinstance(element, pf.CodeBlock) or not "tikz" in element.classes:
+    if not isinstance(element, pf.CodeBlock) or "tikz" not in element.classes:
         return element
-    scale = str(element.attributes.get("scale", 2))
+    scale = str(element.attributes.get("scale", 1))
     code = template % (scale, element.text)
     pathlib.Path("build/tikz").mkdir(parents=True, exist_ok=True)
     tmp = "build/tikz/" + hashlib.sha256(code.encode("utf-8")).hexdigest()
