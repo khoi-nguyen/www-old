@@ -22,7 +22,10 @@ def slides(element, doc):
             element.classes.remove("row")
             classes += " row"
         post = pf.RawBlock(f"""<div class="{classes}">""", format="html")
-        element.classes.append("slide-title")
+        element.classes += ["slide-title", "position-relative"]
+        cls = 'class="position-absolute top-50 end-0 translate-middle-y clock"'
+        clock = pf.RawInline(f"<ticking-clock {cls}>", format="html")
+        element.content.append(clock)
         if first_slide:
             first_slide = False
             return [element, post]

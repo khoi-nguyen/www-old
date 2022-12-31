@@ -15,6 +15,7 @@ js:
   - https://cdn.jsdelivr.net/npm/less
   - /src/whiteboard.js
   - /src/elements/PDFReader.js
+  - /src/elements/Clock.js
 navbar:
   - text: Contact
     icon: fa-solid fa-info-circle
