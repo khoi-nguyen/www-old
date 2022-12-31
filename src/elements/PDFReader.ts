@@ -1,4 +1,5 @@
 class PdfReader extends HTMLElement {
+  public count: number = 0;
   public shadowRoot: ShadowRoot;
 
   constructor() {
@@ -7,6 +8,10 @@ class PdfReader extends HTMLElement {
   }
 
   connectedCallback() {
+    if (this.count) {
+      return;
+    }
+    this.count++;
     const object = document.createElement("object");
     const embed = document.createElement("embed");
     object.append(embed);
