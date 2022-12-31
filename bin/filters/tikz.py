@@ -27,8 +27,8 @@ def tikz(element, doc):
         return element
     scale = str(element.attributes.get("scale", 2))
     code = template % (scale, element.text)
-    pathlib.Path("static/tikz").mkdir(parents=True, exist_ok=True)
-    tmp = "static/tikz/" + hashlib.sha256(code.encode("utf-8")).hexdigest()
+    pathlib.Path("build/tikz").mkdir(parents=True, exist_ok=True)
+    tmp = "build/tikz/" + hashlib.sha256(code.encode("utf-8")).hexdigest()
     if not os.path.exists(tmp + ".png"):
         with open(tmp + ".tex", "w+") as file:
             file.write(code)
@@ -48,7 +48,8 @@ def tikz(element, doc):
         ]
         for cmd in cmds:
             subprocess.run(cmd, stdout=subprocess.DEVNULL)
-    output = pf.RawBlock(f"""<img src="/{tmp}.png">""", format="html")
+    tmp = tmp.replace("build/", "/")
+    output = pf.RawBlock(f"""<img src="{tmp}.png">""", format="html")
     return pf.Div(output, classes=["text-center"] + element.classes)
 
 

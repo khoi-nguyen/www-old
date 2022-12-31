@@ -41,13 +41,14 @@ def plot(element, doc):
             return element
         lib = config[list(lib)[0]]
         to_hash = lib["code"] + element.text
-        pathlib.Path("static/plots").mkdir(parents=True, exist_ok=True)
-        tmp = "static/plots/" + hashlib.sha256(to_hash.encode("utf-8")).hexdigest()
+        pathlib.Path("build/plots").mkdir(parents=True, exist_ok=True)
+        tmp = "build/plots/" + hashlib.sha256(to_hash.encode("utf-8")).hexdigest()
         if not os.path.exists(tmp + ".svg"):
             with open(tmp, "w+") as file:
                 file.write(lib["code"] % (element.text, tmp))
             subprocess.run(lib["cmd"] + [tmp], stdout=subprocess.DEVNULL)
-        output = pf.RawBlock(f"""<img src="/{tmp}.svg">""", format="html")
+        tmp = tmp.replace("build/", "/")
+        output = pf.RawBlock(f"""<img src="{tmp}.svg">""", format="html")
         return pf.Div(output, classes=["text-center"] + element.classes)
 
 

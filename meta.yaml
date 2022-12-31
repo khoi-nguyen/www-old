@@ -13,8 +13,8 @@ js:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js
   - https://cdn.jsdelivr.net/npm/less
-  - /static/src/whiteboard.js
-  - /static/src/elements/PDFReader.js
+  - /src/whiteboard.js
+  - /src/elements/PDFReader.js
 navbar:
   - text: Contact
     icon: fa-solid fa-info-circle

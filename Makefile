@@ -17,7 +17,7 @@ PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
 CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
 TS := $(shell $(FIND) *.ts)
-JS := $(addprefix static/, $(TS:.ts=.js))
+JS := $(addprefix build/, $(TS:.ts=.js))
 
 .PHONY: all backend clean lint watch
 
@@ -68,7 +68,7 @@ build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
 		--filter bin/filters/widgets.py \
 		> $@
 
-static/%.js: %.ts
+build/%.js: %.ts
 	@echo "Building $@"
 	@mkdir -p $(@D)
 	@tsc $< --outFile $@ --lib ES2015,dom --target es6
@@ -86,7 +86,7 @@ build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(ME
 	@test -f $@ && touch $@ || exit 1
 
 clean:
-	@rm -fR build tmp static/tikz static/plots static/cv
+	@rm -fR build
 
 watch:
 	while true; do\
