@@ -79,7 +79,7 @@ def default_route(url: str = ""):
     if url.endswith(".json") and os.path.exists(url):
         return flask.send_file(url)
     url = "build/" + url
-    if not os.path.exists(url):
+    if not os.path.exists(url) or url.endswith(".json"):
         flask.abort(404)
     if url.endswith(".html"):
         return render_page(url)
