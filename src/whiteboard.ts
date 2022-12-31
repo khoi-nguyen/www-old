@@ -18,7 +18,6 @@ class Whiteboard {
   private height: number;
   private isActive: boolean = false;
   private parentNode: HTMLElement;
-  private strokes: Stroke[];
   private width: number;
 
   public canvas: HTMLCanvasElement;
@@ -26,6 +25,7 @@ class Whiteboard {
   public hasUnsavedChanges: boolean = false;
   public lineWidth: number = 2;
   public mode: BoardMode = "draw";
+  public strokes: Stroke[];
 
   get lastStroke(): Stroke {
     if (!this.strokes.length) {
@@ -215,6 +215,7 @@ class Whiteboard {
 type EventHandler = (event: RevealEvent) => void;
 
 interface RevealDeck {
+  addKeyBinding(keyCode: number, EventHandler): void;
   down(): void;
   getConfig(): { admin: boolean };
   getIndices(): { h: number; v: number };
@@ -284,6 +285,8 @@ class WhiteboardPlugin {
     this.deck = deck;
     this.deck.on("slidechanged", this.onSlideChanged.bind(this));
     this.deck.on("ready", this.onReady.bind(this));
+    this.deck.addKeyBinding(38, this.onUpArrow.bind(this));
+    this.deck.addKeyBinding(40, this.onDownArrow.bind(this));
     this.parentNode = document.querySelector(".reveal .slides")!;
     this.parentNode.oncontextmenu = () => false;
     this.parentNode.onselectstart = () => false;
@@ -296,6 +299,17 @@ class WhiteboardPlugin {
    */
   newBoard(strokes: Stroke[] = []): Whiteboard {
     return new Whiteboard(1920, 1080, this.parentNode, strokes);
+  }
+
+  /**
+   * Actions to perform when pressing the down arrow
+   */
+  onDownArrow() {
+    const { h, v } = this.deck.getIndices();
+    if (v === this.boards[h].length - 1) {
+      this.addVerticalSlide();
+    }
+    this.deck.down();
   }
 
   /**
@@ -374,6 +388,17 @@ class WhiteboardPlugin {
     if (this.boards !== undefined) {
       this.board = this.boards[event.indexh][event.indexv];
     }
+  }
+
+  /**
+   * Actions to perform when pressing the up arrow
+   */
+  onUpArrow() {
+    const { h, v } = this.deck.getIndices();
+    if (this.board.strokes.length <= 1) {
+      this.removeVerticalSlide();
+    }
+    this.deck.slide(h, Math.max(v - 1, 0));
   }
 
   /**
