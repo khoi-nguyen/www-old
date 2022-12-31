@@ -42,7 +42,8 @@ def explorer(
     self.vars["files"] = []
 
     def last_modified(path):
-        cmd = ["git", "log", "-1", "--pretty=%cd", "--date=format:%d %b %Y %H:%m", path]
+        cmd = ["git", "log", "-1", "--pretty=%cd"]
+        cmd += ["--date=format:%d %b %Y %H:%m", path]
         return subprocess.check_output(cmd).decode("utf-8")
 
     for path in glob.glob(directory + "/" + globstr):
@@ -51,12 +52,13 @@ def explorer(
             meta = json.loads(file.read())
         show = all([meta[key] == val for key, val in filters.items()])
         if show and not meta.get("private"):
+            source_link = "https://github.com/khoi-nguyen/www/plob/master?"
             meta.update(
                 {
                     "href": "/" + path.replace("index", "").replace(".md", ""),
                     "last_modified": last_modified(path),
                     "path": path,
-                    "source": f"https://github.com/khoi-nguyen/www/blob/master/{path}?plain=1",
+                    "source": f"{source_link}/{path}?plain=1",
                 }
             )
             self.vars["files"].append(meta)
@@ -67,12 +69,26 @@ def explorer(
         <div class="list-group-item list-group-item-action">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ file.title }}</h5>
-            <small class="text-muted">Last modified: {{ file.last_modified }}</small>
+            <small class="text-muted">
+              Last modified: {{ file.last_modified }}
+            </small>
           </div>
           <ul class="text-muted list-inline small">
-            <li class="list-inline-item small"><a href="{{ file.href }}"><i class="fa-brands fa-slideshare"></i> Slides</a></li>
-            <li class="list-inline-item small"><a href="{{ file.href }}?fragments=false"><i class="fa-solid fa-display"></i> Without transitions</a></li>
-            <li class="list-inline-item small"><a href="{{ file.source }}"><i class="fa-solid fa-code"></i> Source</a></li>
+            <li class="list-inline-item small">
+              <a href="{{ file.href }}">
+                <i class="fa-brands fa-slideshare"></i> Slides
+              </a>
+            </li>
+            <li class="list-inline-item small">
+              <a href="{{ file.href }}?fragments=false">
+                <i class="fa-solid fa-display"></i> Without transitions
+              </a>
+            </li>
+            <li class="list-inline-item small">
+              <a href="{{ file.source }}">
+                <i class="fa-solid fa-code"></i> Source
+              </a>
+            </li>
           </ul>
           {% if file.notes %}
           <p class="small">{{ file.notes }}</p>
