@@ -307,6 +307,9 @@ class WhiteboardPlugin {
   onDownArrow() {
     const { h, v } = this.deck.getIndices();
     if (v === this.boards[h].length - 1) {
+      if (this.board.strokes.length <= 1) {
+        return;
+      }
       this.addVerticalSlide();
     }
     this.deck.down();
