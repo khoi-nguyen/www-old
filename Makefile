@@ -33,7 +33,7 @@ lint:
 	@$(PYTHON) -m isort *.py
 	prettier -w $(shell $(FIND) '*.ts')
 
-build/cv/%.png: static/cv/%.pdf
+build/cv/%.png: build/cv/%.pdf
 	@echo "Building $@"
 	@convert -quality 100 -density 150 -flatten -trim $< $@
 
