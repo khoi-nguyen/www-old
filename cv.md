@@ -12,12 +12,12 @@ hide_title: true
 </nav>
 <div class="tab-content" id="nav-tabContent">
 <div class="tab-pane fade show active" id="cv-en" role="tabpanel" aria-labelledby="cv-en-tab" tabindex="0">
-<pdf-reader src="/static/cv/cv_en.pdf" mode="A4" alt="/static/cv/cv_en.png">
+<pdf-reader src="/cv/cv_en.pdf" mode="A4" alt="/cv/cv_en.png">
 </div>
 <div class="tab-pane fade" id="cv-fr" role="tabpanel" aria-labelledby="cv-fr-tab" tabindex="0">
-<pdf-reader src="/static/cv/cv_fr.pdf" mode="A4" alt="/static/cv/cv_fr.png">
+<pdf-reader src="/cv/cv_fr.pdf" mode="A4" alt="/cv/cv_fr.png">
 </div>
 <div class="tab-pane fade" id="cv-es" role="tabpanel" aria-labelledby="cv-es-tab" tabindex="0">
-<pdf-reader src="/static/cv/cv_es.pdf" mode="A4" alt="/static/cv/cv_es.png">
+<pdf-reader src="/cv/cv_es.pdf" mode="A4" alt="/cv/cv_es.png">
 </div>
 </div>

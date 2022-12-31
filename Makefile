@@ -14,7 +14,7 @@ PDF := $(addprefix build/, $(TESTS:.md=.pdf))
 TEX := $(addprefix build/, $(TESTS:.md=.tex))
 JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.md=.json))
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
-CV := static/cv/cv_en.pdf static/cv/cv_fr.pdf static/cv/cv_es.pdf
+CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
 TS := $(shell $(FIND) *.ts)
 JS := $(addprefix static/, $(TS:.ts=.js))
@@ -33,11 +33,11 @@ lint:
 	@$(PYTHON) -m isort *.py
 	prettier -w $(shell $(FIND) '*.ts')
 
-static/cv/%.png: static/cv/%.pdf
+build/cv/%.png: static/cv/%.pdf
 	@echo "Building $@"
 	@convert -quality 100 -density 150 -flatten -trim $< $@
 
-static/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
+build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@echo "Building $@"
 	@mkdir -p $(@D)
 	@$(PYTHON) bin/cv.py $@ > $@
