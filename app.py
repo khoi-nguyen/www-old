@@ -38,7 +38,7 @@ def page_not_found(error):
 def favicon():
     static = os.path.join(app.root_path, "static")
     return flask.send_from_directory(
-        static, "assets/favicon.ico", mimetype="image/vnd.microsoft.icon"
+        static, "favicon.ico", mimetype="image/vnd.microsoft.icon"
     )
 
 
