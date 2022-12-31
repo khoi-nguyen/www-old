@@ -3,11 +3,10 @@ class PdfReader extends HTMLElement {
 
   constructor() {
     super();
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
-    this.attachShadow({ mode: "open" });
-
     const object = document.createElement("object");
     const embed = document.createElement("embed");
     object.append(embed);
