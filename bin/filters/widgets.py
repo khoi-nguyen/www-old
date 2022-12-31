@@ -52,7 +52,7 @@ def explorer(
             meta = json.loads(file.read())
         show = all([meta[key] == val for key, val in filters.items()])
         if show and not meta.get("private"):
-            source_link = "https://github.com/khoi-nguyen/www/plob/master?"
+            source_link = "https://github.com/khoi-nguyen/www/blob/master"
             meta.update(
                 {
                     "href": "/" + path.replace("index", "").replace(".md", ""),
