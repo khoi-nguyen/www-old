@@ -303,7 +303,7 @@ class WhiteboardPlugin {
    * @param event Reveal.js event
    */
   async onReady() {
-    let data: Stroke[][][] = [[]];
+    let data: Stroke[][][] = [[[]]];
     this.boards = [[]];
     await fetch(window.location.pathname + ".json")
       .then((response) => {
