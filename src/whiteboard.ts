@@ -14,7 +14,7 @@ interface Stroke {
 }
 
 class Whiteboard {
-  private context: CanvasRenderingContext2D;
+  private ctx: CanvasRenderingContext2D;
   private height: number;
   private isActive: boolean = false;
   private parentNode: HTMLElement;
@@ -60,7 +60,7 @@ class Whiteboard {
       this.strokes.splice(0, this.strokes.length);
       this.hasUnsavedChanges = true;
     }
-    this.context.clearRect(0, 0, this.width, this.height);
+    this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
   /**
@@ -77,7 +77,7 @@ class Whiteboard {
     strokes: Stroke[] = []
   ) {
     this.canvas = document.createElement("canvas");
-    this.context = this.canvas.getContext("2d")!;
+    this.ctx = this.canvas.getContext("2d")!;
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
     this.canvas.addEventListener("mousemove", this.onMouseMove.bind(this));
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
@@ -96,16 +96,16 @@ class Whiteboard {
    * @param stroke Stroke to draw on the canvas
    */
   drawStroke(stroke: Stroke): void {
-    this.context.beginPath();
-    this.context.fillStyle = stroke.color;
-    this.context.strokeStyle = stroke.color;
-    this.context.lineCap = "round";
-    this.context.lineWidth = stroke.lineWidth;
+    this.ctx.beginPath();
+    this.ctx.fillStyle = stroke.color;
+    this.ctx.strokeStyle = stroke.color;
+    this.ctx.lineCap = "round";
+    this.ctx.lineWidth = stroke.lineWidth;
     for (const point of stroke.points) {
-      this.context.lineTo(...point);
+      this.ctx.lineTo(...point);
     }
-    this.context.stroke();
-    this.context.closePath();
+    this.ctx.stroke();
+    this.ctx.closePath();
   }
 
   /**
