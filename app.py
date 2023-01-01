@@ -5,7 +5,7 @@ import flask
 import flask_login
 import flask_socketio
 
-DEBUG = os.environ.get("ENV", "") != "production"
+DEBUG = os.environ.get("ENVIRONMENT", "") != "production"
 
 app = flask.Flask(__name__, template_folder="templates")
 app.secret_key = os.environ.get("SECRET_KEY", "hello").encode("UTF-8")
