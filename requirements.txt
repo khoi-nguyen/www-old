@@ -10,5 +10,4 @@ isort
 matplotlib
 numpy
 panflute
-simple-websocket
 sympy
