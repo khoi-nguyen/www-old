@@ -130,7 +130,7 @@ class Whiteboard {
       for (const p of stroke.points) {
         const dist = (p[0] - point[0]) ** 2 + (p[1] - point[1]) ** 2;
         if (dist <= 5) {
-          this.emit("removeStroke", i);
+          this.emit("removeStroke", point);
           this.strokes.splice(i, 1);
           this.hasUnsavedChanges = true;
           this.redraw();
@@ -358,8 +358,7 @@ class WhiteboardPlugin {
       this.boards[i][j].strokes.push(data);
       this.boards[i][j].redraw();
     } else if (eventName === "removeStroke") {
-      this.boards[i][j].strokes.splice(parseInt(data), 1);
-      this.boards[i][j].redraw();
+      this.boards[i][j].eraseStroke(data);
     } else if (eventName === "clearBoard") {
       this.boards[i][j].clearBoard(true);
     }
