@@ -328,7 +328,9 @@ class WhiteboardPlugin {
   newBoard(i: number, j: number, strokes: Stroke[] = []): Whiteboard {
     const board = new Whiteboard(1920, 1080, this.parentNode, strokes);
     if (!this.deck.getConfig().admin) {
-      board.mode = "readonly";
+      setTimeout(() => {
+        board.mode = "readonly";
+      }, 0);
     }
     board.canvas.addEventListener("change", async (event: any) => {
       if (!this.deck.getConfig().admin) {
