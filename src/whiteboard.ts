@@ -215,7 +215,7 @@ class Whiteboard {
 type EventHandler = (event: RevealEvent) => void;
 
 interface RevealDeck {
-  addKeyBinding(keyCode: number, EventHandler): void;
+  addKeyBinding(keyCode: number, callback: EventHandler): void;
   down(): void;
   getConfig(): { admin: boolean };
   getIndices(): { h: number; v: number };
