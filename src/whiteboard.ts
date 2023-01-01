@@ -5,7 +5,7 @@ type RGBA = `rgba(${number}, ${number}, ${number}, ${number})`;
 type HEX = `#${string}`;
 type Color = RGB | RGBA | HEX | string;
 
-type BoardMode = "draw" | "erase";
+type BoardMode = "draw" | "erase" | "readonly";
 type BoardEventName = "addStroke" | "removeStroke" | "clearBoard";
 
 interface Stroke {
@@ -145,6 +145,9 @@ class Whiteboard {
    * @param event Mouse event
    */
   onMouseDown(event: MouseEvent): void {
+    if (this.mode === "readonly") {
+      return;
+    }
     const leftClick = event.button === 0 || event.button === 1;
     const rightClick = event.button === 2;
     if (leftClick || rightClick) {
@@ -323,6 +326,9 @@ class WhiteboardPlugin {
    */
   newBoard(i: number, j: number, strokes: Stroke[] = []): Whiteboard {
     const board = new Whiteboard(1920, 1080, this.parentNode, strokes);
+    if (!this.deck.getConfig().admin) {
+      board.mode = "readonly";
+    }
     board.canvas.addEventListener("change", async (event: any) => {
       if (!this.deck.getConfig().admin) {
         return;
