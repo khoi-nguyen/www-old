@@ -4,6 +4,7 @@ flask
 flask-login
 flask-socketio
 gevent
+gevent-websocket
 gunicorn
 isort
 matplotlib
