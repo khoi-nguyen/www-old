@@ -254,7 +254,7 @@ type EventDetail = { eventName: BoardEventName; data: any };
 interface BoardEvent {
   i: number;
   j: number;
-  url: str;
+  url: string;
   event: { detail: EventDetail };
 }
 
