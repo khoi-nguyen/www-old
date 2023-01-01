@@ -50,7 +50,7 @@ def favicon():
 @flask_login.login_required
 def socket(url: str = ""):
     json = flask.request.get_json() or {}
-    json.update({"url": url})
+    json.update({"url": "/" + url})
     socketio.emit("changeReceived", json, broadcast=True)
     return flask.jsonify({"success": True})
 

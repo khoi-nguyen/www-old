@@ -254,6 +254,7 @@ type EventDetail = { eventName: BoardEventName; data: any };
 interface BoardEvent {
   i: number;
   j: number;
+  url: str;
   event: { detail: EventDetail };
 }
 
@@ -348,10 +349,10 @@ class WhiteboardPlugin {
    * @param change Change received from the backend
    */
   onBoardChangeReceived(change: BoardEvent) {
-    if (this.deck.getConfig().admin) {
+    const { i, j, url, event } = change;
+    if (this.deck.getConfig().admin || url !== window.location.pathname) {
       return;
     }
-    const { i, j, event } = change;
     const eventName = event.detail.eventName;
     const data = event.detail.data;
     if (eventName === "addStroke") {
