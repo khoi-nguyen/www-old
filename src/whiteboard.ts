@@ -6,6 +6,7 @@ type HEX = `#${string}`;
 type Color = RGB | RGBA | HEX | string;
 
 type BoardMode = "draw" | "erase";
+type BoardEventName = "addStroke" | "removeStroke" | "clearBoard";
 
 interface Stroke {
   color: string;
@@ -57,6 +58,7 @@ class Whiteboard {
    */
   clearBoard(removeStrokes: boolean = false): void {
     if (removeStrokes) {
+      this.emit("clearBoard", true);
       this.strokes.splice(0, this.strokes.length);
       this.hasUnsavedChanges = true;
     }
@@ -109,6 +111,16 @@ class Whiteboard {
   }
 
   /**
+   * Emit an event
+   * @param eventName event name
+   * @param data
+   */
+  emit(eventName: BoardEventName, data: any): void {
+    const event = new CustomEvent("change", { detail: { eventName, data } });
+    this.canvas.dispatchEvent(event);
+  }
+
+  /**
    * Erase all strokes that contain a certain point
    * @param point Point
    */
@@ -118,6 +130,7 @@ class Whiteboard {
       for (const p of stroke.points) {
         const dist = (p[0] - point[0]) ** 2 + (p[1] - point[1]) ** 2;
         if (dist <= 5) {
+          this.emit("removeStroke", i);
           this.strokes.splice(i, 1);
           this.hasUnsavedChanges = true;
           this.redraw();
@@ -171,6 +184,7 @@ class Whiteboard {
   onMouseUp(event: MouseEvent): void {
     this.isActive = false;
     if (this.mode === "draw") {
+      this.emit("addStroke", this.lastStroke);
       this.redraw();
     }
     if (event.button === 2) {
@@ -232,6 +246,14 @@ interface RevealEvent {
   indexv: number;
 }
 
+type EventDetail = { eventName: BoardEventName; data: any };
+
+interface BoardEvent {
+  i: number;
+  j: number;
+  event: { detail: EventDetail };
+}
+
 class WhiteboardPlugin {
   public id: string = "RevealWhiteboard";
   public board: Whiteboard;
@@ -249,7 +271,7 @@ class WhiteboardPlugin {
     const parent = document.querySelector(
       `.slides > section:nth-child(${i + 1})`
     )!;
-    this.boards[i].splice(j, 0, this.newBoard());
+    this.boards[i].splice(j, 0, this.newBoard(i, j));
 
     // Add vertical slide
     if (j === this.boards[i].length) {
@@ -294,11 +316,47 @@ class WhiteboardPlugin {
 
   /**
    * Create a new whiteboard with predefined strokes
+   * @param i horizontal index
+   * @param j vertical index
    * @param strokes Strokes to add on the whiteboard
    * @return Created whiteboard
    */
-  newBoard(strokes: Stroke[] = []): Whiteboard {
-    return new Whiteboard(1920, 1080, this.parentNode, strokes);
+  newBoard(i: number, j: number, strokes: Stroke[] = []): Whiteboard {
+    const board = new Whiteboard(1920, 1080, this.parentNode, strokes);
+    board.canvas.addEventListener("change", async (event: any) => {
+      if (!this.deck.getConfig().admin) {
+        return;
+      }
+      const requestOptions: RequestInit = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ i, j, event: { detail: event.detail } }),
+      };
+      return fetch("/socketio" + window.location.pathname, requestOptions);
+    });
+    return board;
+  }
+
+  /**
+   * When receiving a change via SocketIO, apply it to all non-admin clients
+   * @param change Change received from the backend
+   */
+  onBoardChangeReceived(change: BoardEvent) {
+    if (this.deck.getConfig().admin) {
+      return;
+    }
+    const { i, j, event } = change;
+    const eventName = event.detail.eventName;
+    const data = event.detail.data;
+    if (eventName === "addStroke") {
+      this.boards[i][j].strokes.push(data);
+      this.boards[i][j].redraw();
+    } else if (eventName === "removeStroke") {
+      this.boards[i][j].strokes.splice(parseInt(data), 1);
+      this.boards[i][j].redraw();
+    } else if (eventName === "clearBoard") {
+      this.boards[i][j].clearBoard(true);
+    }
   }
 
   /**
@@ -366,7 +424,8 @@ class WhiteboardPlugin {
           wrapper.appendChild(slideCopy.cloneNode(true));
         }
         // Create the canvas and add it to the DOM
-        this.boards[i][j] = this.newBoard(j < data[i].length ? data[i][j] : []);
+        const strokes = j < data[i].length ? data[i][j] : [];
+        this.boards[i][j] = this.newBoard(i, j, strokes);
         this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
       }
     }
