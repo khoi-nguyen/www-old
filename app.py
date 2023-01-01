@@ -3,9 +3,13 @@ import os
 
 import flask
 import flask_login
+import flask_socketio
+
+DEBUG = os.environ.get("ENV", "") != "production"
 
 app = flask.Flask(__name__, template_folder="templates")
 app.secret_key = os.environ.get("SECRET_KEY", "hello").encode("UTF-8")
+socketio = flask_socketio.SocketIO(app, logger=DEBUG, engineio_logger=DEBUG)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
@@ -40,6 +44,15 @@ def favicon():
     return flask.send_from_directory(
         static, "favicon.ico", mimetype="image/vnd.microsoft.icon"
     )
+
+
+@app.route("/socketio/<path:url>", methods=["POST"])
+@flask_login.login_required
+def socket(url: str = ""):
+    json = flask.request.get_json() or {}
+    json.update({"url": url})
+    socketio.emit("changeReceived", json, broadcast=True)
+    return flask.jsonify({"success": True})
 
 
 @app.route("/login", methods=["POST"])
@@ -157,4 +170,4 @@ def to_json(o, level=0):
 
 
 if __name__ == "__main__":
-    app.run(debug=os.environ.get("ENV", "") != "production")
+    socketio.run(app, debug=DEBUG)

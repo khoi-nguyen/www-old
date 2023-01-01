@@ -2,9 +2,11 @@ IPython
 black
 flask
 flask-login
+flask-socketio
 gunicorn
 isort
 matplotlib
 numpy
 panflute
+simple-websocket
 sympy
