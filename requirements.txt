@@ -1,5 +1,6 @@
 IPython
 black
+eventlet
 flask
 flask-login
 flask-socketio
