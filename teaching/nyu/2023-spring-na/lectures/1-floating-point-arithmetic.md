@@ -193,7 +193,6 @@ is called **subnormal** or **denormalized**.
 # Floating points formats [@vaes22, p. 7] {.split}
 
 ::: {.block title="Most widely used formats"}
-
 `Float16`
 :   $\F(11, -14, 15)$, called *half-precision*
 
@@ -202,7 +201,6 @@ is called **subnormal** or **denormalized**.
 
 `Float64`
 :   $\F(53, -1022, 1023)$, called *double precision*
-
 :::
 
 ::: {.question .fragment}
