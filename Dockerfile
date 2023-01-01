@@ -17,9 +17,10 @@ RUN pacman --noconfirm --needed -Syy \
     typescript
 
 RUN luaotfload-tool --update
-COPY requirements.txt Manifest.toml Project.toml ./
+COPY Manifest.toml Project.toml ./
 ENV JULIA_PROJECT=.
 RUN julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile()"
+COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
 ENV ENVIRONMENT=production
@@ -27,4 +28,4 @@ WORKDIR /www
 COPY . .
 RUN make all
 
-CMD ["gunicorn", "--worker-class", "eventlet", "-w", "1", "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "-k", "gevent", "-w", "1", "--bind", "0.0.0.0:5000", "app:app"]

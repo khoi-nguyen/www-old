@@ -1,9 +1,9 @@
 IPython
 black
-eventlet
 flask
 flask-login
 flask-socketio
+gevent
 gunicorn
 isort
 matplotlib
