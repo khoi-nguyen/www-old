@@ -10,7 +10,8 @@ type BoardEventName =
   | "addStroke"
   | "removeStroke"
   | "clearBoard"
-  | "removeBoard";
+  | "removeBoard"
+  | "addBoard";
 
 interface Stroke {
   color: string;
@@ -271,10 +272,16 @@ class WhiteboardPlugin {
 
   /**
    * Add a board
+   * @ param i horizontal index
+   * @ param j vertical index
    */
-  addVerticalSlide(): void {
-    const i = this.deck.getIndices().h;
-    const j = this.deck.getIndices().v + 1;
+  addVerticalSlide(i?: number, j?: number): void {
+    const pos = this.deck.getIndices();
+    if (i === undefined || j === undefined) {
+      i = this.deck.getIndices().h;
+      j = this.deck.getIndices().v + 1;
+    }
+    this.broadcast({ i, j, eventName: "addBoard", data: true });
     const parent = document.querySelector(
       `.slides > section:nth-child(${i + 1})`
     )!;
@@ -291,7 +298,7 @@ class WhiteboardPlugin {
     this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
 
     this.deck.sync();
-    this.deck.slide(i, j, 0);
+    this.deck.slide(pos.h, pos.v, 0);
     this.save();
   }
 
@@ -378,6 +385,8 @@ class WhiteboardPlugin {
       this.boards[i][j].clearBoard(true);
     } else if (eventName === "removeBoard") {
       this.removeVerticalSlide({ h: i, v: j });
+    } else if (eventName === "addBoard") {
+      this.addVerticalSlide(i, j);
     }
   }
 
