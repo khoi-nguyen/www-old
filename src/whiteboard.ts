@@ -505,7 +505,7 @@ class WhiteboardPlugin {
       j = currentPos.v;
     }
     if (this.boards[i].length === 1) {
-      this.board.clearBoard(true);
+      this.board[i][0].clearBoard(true);
     } else {
       this.boards[i][j].emit("removeBoard", true);
       this.boards[i].splice(j, 1);
