@@ -82,7 +82,7 @@ build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(ME
 	@test -f $@ && touch $@ || exit 1
 
 clean:
-	@rm -fR build
+	@rm -fR build .venv
 
 watch:
 	while true; do\
