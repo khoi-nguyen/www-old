@@ -7,11 +7,12 @@ type Color = RGB | RGBA | HEX | string;
 
 type BoardMode = "draw" | "erase" | "readonly";
 type BoardEventName =
+  | "addBoard"
   | "addStroke"
-  | "removeStroke"
   | "clearBoard"
   | "removeBoard"
-  | "addBoard";
+  | "removeStroke"
+  | "slideChange";
 
 interface Stroke {
   color: string;
@@ -407,6 +408,8 @@ class WhiteboardPlugin {
       this.removeVerticalSlide(i, j);
     } else if (eventName === "addBoard") {
       this.addVerticalSlide(i, j);
+    } else if (eventName === "slideChange") {
+      this.deck.slide(i, j, 0);
     }
   }
 
@@ -494,6 +497,12 @@ class WhiteboardPlugin {
    * @param event Reveal.js event
    */
   async onSlideChanged(event: RevealEvent) {
+    this.broadcast({
+      i: event.indexh,
+      j: event.indexv,
+      eventName: "slideChange",
+      data: true,
+    });
     if (this.board !== undefined && this.board.hasUnsavedChanges) {
       await this.save();
       this.board.hasUnsavedChanges = false;
