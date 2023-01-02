@@ -78,7 +78,7 @@ def logout():
 def save_board(url: str = ""):
     boards = flask.request.get_json() or []
     with open(url + ".json", "w") as file:
-        file.write(to_json(clean(boards)))
+        file.write(json.dumps(clean(boards), separators=(",", ":")))
     return flask.jsonify({"success": True, "boards": boards})
 
 
@@ -121,52 +121,6 @@ def clean(boards):
                 if len(stroke["points"]) == 0:
                     del board[i]
     return boards
-
-
-FOLD_LEVEL = 3
-INDENT = 1
-
-
-def to_json(o, level=0):
-    if level < FOLD_LEVEL:
-        newline = "\n"
-        space = " "
-    else:
-        newline = ""
-        space = ""
-    ret = ""
-    if isinstance(o, str):
-        ret += '"' + o + '"'
-    elif isinstance(o, bool):
-        ret += "true" if o else "false"
-    elif isinstance(o, float):
-        ret += "%.7g" % o
-    elif isinstance(o, int):
-        ret += str(o)
-    elif isinstance(o, list):
-        ret += "[" + newline
-        comma = ""
-        for e in o:
-            ret += comma
-            comma = "," + newline
-            ret += space * INDENT * (level + 1)
-            ret += to_json(e, level + 1)
-        ret += newline + space * INDENT * level + "]"
-    elif isinstance(o, dict):
-        ret += "{" + newline
-        comma = ""
-        for k, v in o.items():
-            ret += comma
-            comma = "," + newline
-            ret += space * INDENT * (level + 1)
-            ret += '"' + str(k) + '":' + space
-            ret += to_json(v, level + 1)
-        ret += newline + space * INDENT * level + "}"
-    elif o is None:
-        ret += "null"
-    else:
-        ret += str(o)
-    return ret
 
 
 if __name__ == "__main__":
