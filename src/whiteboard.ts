@@ -383,7 +383,7 @@ class WhiteboardPlugin {
     } else if (eventName === "clearBoard") {
       this.boards[i][j].clearBoard(true);
     } else if (eventName === "removeBoard") {
-      this.removeVerticalSlide({ h: i, v: j });
+      this.removeVerticalSlide(i, j);
     } else if (eventName === "addBoard") {
       this.addVerticalSlide(i, j);
     }
@@ -495,18 +495,21 @@ class WhiteboardPlugin {
 
   /**
    * Remove current board
+   * @param i horizontal index of board to be removed
+   * @param j vertical index of board to be removed
    */
-  removeVerticalSlide(pos?: { h: number; v: number }): void {
+  removeVerticalSlide(i?: number, j?: number): void {
     const currentPos = this.deck.getIndices();
-    if (pos === undefined) {
-      pos = currentPos;
+    if (i === undefined || j === undefined) {
+      i = currentPos.h;
+      j = currentPos.v;
     }
-    if (this.boards[pos.h].length === 1) {
+    if (this.boards[i].length === 1) {
       this.board.clearBoard(true);
     } else {
-      this.boards[pos.h][pos.v].emit("removeBoard", true);
-      this.boards[pos.h].splice(pos.v, 1);
-      this.getSlide(pos.h, pos.v).remove();
+      this.boards[i][j].emit("removeBoard", true);
+      this.boards[i].splice(j, 1);
+      this.getSlide(i, j).remove();
       this.deck.sync();
       this.deck.slide(currentPos.h, currentPos.v, 0);
     }
