@@ -9,7 +9,7 @@ DEBUG = os.environ.get("ENVIRONMENT", "") != "production"
 
 app = flask.Flask(__name__, template_folder="templates")
 app.secret_key = os.environ.get("SECRET_KEY", "hello").encode("UTF-8")
-socketio = flask_socketio.SocketIO(app, logger=DEBUG, engineio_logger=DEBUG)
+socketio = flask_socketio.SocketIO(app, logger=DEBUG)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
