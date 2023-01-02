@@ -6,7 +6,11 @@ type HEX = `#${string}`;
 type Color = RGB | RGBA | HEX | string;
 
 type BoardMode = "draw" | "erase" | "readonly";
-type BoardEventName = "addStroke" | "removeStroke" | "clearBoard";
+type BoardEventName =
+  | "addStroke"
+  | "removeStroke"
+  | "clearBoard"
+  | "removeBoard";
 
 interface Stroke {
   color: string;
@@ -249,13 +253,12 @@ interface RevealEvent {
   indexv: number;
 }
 
-type EventDetail = { eventName: BoardEventName; data: any };
-
 interface BoardEvent {
   i: number;
   j: number;
   url: string;
-  event: { detail: EventDetail };
+  eventName: BoardEventName;
+  data: any;
 }
 
 class WhiteboardPlugin {
@@ -290,6 +293,22 @@ class WhiteboardPlugin {
     this.deck.sync();
     this.deck.slide(i, j, 0);
     this.save();
+  }
+
+  /**
+   * Send data to socketio route for broadcasting
+   * @param data
+   */
+  async broadcast(boardEvent: BoardEvent) {
+    if (!this.deck.getConfig().admin) {
+      return;
+    }
+    const requestOptions: RequestInit = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(boardEvent),
+    };
+    return fetch("/socketio" + window.location.pathname, requestOptions);
   }
 
   /**
@@ -333,15 +352,10 @@ class WhiteboardPlugin {
       }, 0);
     }
     board.canvas.addEventListener("change", async (event: any) => {
-      if (!this.deck.getConfig().admin) {
-        return;
-      }
-      const requestOptions: RequestInit = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ i, j, event: { detail: event.detail } }),
-      };
-      return fetch("/socketio" + window.location.pathname, requestOptions);
+      const eventName: BoardEventName = event.detail.eventName;
+      const data: any = event.detail.data;
+      const url: string = window.location.pathname;
+      this.broadcast({ i, j, eventName, url, data });
     });
     return board;
   }
@@ -351,12 +365,10 @@ class WhiteboardPlugin {
    * @param change Change received from the backend
    */
   onBoardChangeReceived(change: BoardEvent) {
-    const { i, j, url, event } = change;
+    const { i, j, url, eventName, data } = change;
     if (this.deck.getConfig().admin || url !== window.location.pathname) {
       return;
     }
-    const eventName = event.detail.eventName;
-    const data = event.detail.data;
     if (eventName === "addStroke") {
       this.boards[i][j].strokes.push(data);
       this.boards[i][j].redraw();
@@ -364,6 +376,8 @@ class WhiteboardPlugin {
       this.boards[i][j].eraseStroke(data);
     } else if (eventName === "clearBoard") {
       this.boards[i][j].clearBoard(true);
+    } else if (eventName === "removeBoard") {
+      this.removeVerticalSlide({ h: i, v: j });
     }
   }
 
@@ -474,24 +488,19 @@ class WhiteboardPlugin {
   /**
    * Remove current board
    */
-  removeVerticalSlide(): void {
-    const pos = this.deck.getIndices();
+  removeVerticalSlide(pos?: { h: number; v: number }): void {
+    const currentPos = this.deck.getIndices();
+    if (pos === undefined) {
+      pos = currentPos;
+    }
     if (this.boards[pos.h].length === 1) {
       this.board.clearBoard(true);
-      return;
-    }
-    if (pos.v === 0) {
-      this.deck.down();
     } else {
-      this.deck.up();
-    }
-    this.boards[pos.h].splice(pos.v, 1);
-    this.getSlide(pos.h, pos.v).remove();
-    this.deck.sync();
-    if (pos.v === 0) {
-      this.deck.up();
-    } else {
-      this.deck.down();
+      this.boards[pos.h][pos.v].emit("removeBoard", true);
+      this.boards[pos.h].splice(pos.v, 1);
+      this.getSlide(pos.h, pos.v).remove();
+      this.deck.sync();
+      this.deck.slide(currentPos.h, currentPos.v, 0);
     }
     this.save();
   }
