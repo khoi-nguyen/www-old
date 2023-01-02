@@ -88,6 +88,7 @@ class Whiteboard {
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
     this.canvas.addEventListener("mousemove", this.onMouseMove.bind(this));
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
+    this.setUpTouchEvents();
     this.canvas.width = width;
     this.canvas.height = height;
     this.canvas.classList.add("whiteboard");
@@ -209,6 +210,26 @@ class Whiteboard {
       this.drawStroke(stroke);
     }
     this.startStroke();
+  }
+
+  /**
+   * Convert touch events to mouse events
+   */
+  setUpTouchEvents(): void {
+    type TouchEventName = "touchstart" | "touchmove" | "touchend";
+    const convert = (touchEvent: TouchEventName, mouseEvent: string) => {
+      this.canvas.addEventListener(touchEvent, (event: TouchEvent) => {
+        this.canvas.dispatchEvent(
+          new MouseEvent(mouseEvent, {
+            clientX: event.changedTouches[0].clientX,
+            clientY: event.changedTouches[0].clientY,
+          })
+        );
+      });
+    };
+    convert("touchstart", "mousedown");
+    convert("touchmove", "mousemove");
+    convert("touchend", "mouseup");
   }
 
   /**
