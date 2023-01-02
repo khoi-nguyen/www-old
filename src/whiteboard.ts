@@ -257,7 +257,7 @@ interface RevealEvent {
 interface BoardEvent {
   i: number;
   j: number;
-  url: string;
+  url?: string;
   eventName: BoardEventName;
   data: any;
 }
@@ -361,8 +361,7 @@ class WhiteboardPlugin {
     board.canvas.addEventListener("change", async (event: any) => {
       const eventName: BoardEventName = event.detail.eventName;
       const data: any = event.detail.data;
-      const url: string = window.location.pathname;
-      this.broadcast({ i, j, eventName, url, data });
+      this.broadcast({ i, j, eventName, data });
     });
     return board;
   }
