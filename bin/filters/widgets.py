@@ -91,7 +91,7 @@ def explorer(
             </li>
           </ul>
           {% if file.notes %}
-          <p class="small">{{ file.notes }}</p>
+          <div class="small">{{ file.notes }}</div>
           {% endif %}
         </div>
         {% endfor %}
