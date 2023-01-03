@@ -397,19 +397,26 @@ class WhiteboardPlugin {
     if (this.deck.getConfig().admin || url !== window.location.pathname) {
       return;
     }
-    if (eventName === "addStroke") {
-      this.boards[i][j].strokes.push(data);
-      this.boards[i][j].redraw();
-    } else if (eventName === "removeStroke") {
-      this.boards[i][j].eraseStroke(data);
-    } else if (eventName === "clearBoard") {
-      this.boards[i][j].clearBoard(true);
-    } else if (eventName === "removeBoard") {
-      this.removeVerticalSlide(i, j);
-    } else if (eventName === "addBoard") {
-      this.addVerticalSlide(i, j);
-    } else if (eventName === "slideChange") {
-      this.deck.slide(i, j, 0);
+    switch (eventName) {
+      case "addStroke":
+        this.boards[i][j].strokes.push(data);
+        this.boards[i][j].redraw();
+        break;
+      case "removeStroke":
+        this.boards[i][j].eraseStroke(data);
+        break;
+      case "clearBoard":
+        this.boards[i][j].clearBoard(true);
+        break;
+      case "removeBoard":
+        this.removeVerticalSlide(i, j);
+        break;
+      case "addBoard":
+        this.addVerticalSlide(i, j);
+        break;
+      case "slideChange":
+        this.deck.slide(i, j, 0);
+        break;
     }
   }
 
