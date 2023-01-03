@@ -35,7 +35,7 @@ app.jinja_env.lstrip_blocks = True
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_page("build/404.html")
+    return render_page("build/404.html", {"error": str(error)})
 
 
 @app.route("/favicon.ico")
@@ -99,13 +99,14 @@ def default_route(url: str = ""):
     return flask.send_file(url)
 
 
-def render_page(path: str) -> str:
+def render_page(path: str, variables: dict = {}) -> str:
     def file_contents(path: str) -> str:
         with open(path) as f:
             return f.read()
 
     data = json.loads(file_contents(path.replace(".html", ".json")))
     data["user"] = flask_login.current_user
+    data.update(variables)
     content = flask.render_template_string(file_contents(path), **data)
     data.update({"content": content})
     if data.get("private") and not getattr(data["user"], "is_authenticated"):
