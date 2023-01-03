@@ -8,7 +8,7 @@
     <p><img src="{{ logo }}" height="100px"></p>
     {% endif %}
     <h1>{{ title }}</h1>
-    <h3>{{ author }}</h3>
+    <h3>{{ author | safe }}</h3>
     <h4>{{ institute }}</h4>
   </div>
 </section>
