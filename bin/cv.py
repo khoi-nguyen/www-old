@@ -48,4 +48,5 @@ env = jinja2.Environment(
 env.filters["pandoc"] = pandoc
 
 template = env.get_template("templates/cv.tex")
-print(template.render(**data))
+if isinstance(data, dict):
+    print(template.render(**data))
