@@ -1,6 +1,7 @@
 ---
 dir: /teaching/nyu/
 institute: New York University
+author: NGUYỄN Khôi <<nguyen.khoi@nyu.edu>>
 logo: /static/nyu_logo.svg
 references:
   - id: vaes22
