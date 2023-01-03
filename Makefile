@@ -28,7 +28,7 @@ all: lint $(JSON) $(PAGES) $(PDF) $(CV) $(JS)
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
 
-lint:
+lint: $(ACTIVATE)
 	@$(PYTHON) -m black .
 	@$(PYTHON) -m isort *.py
 	prettier -w $(shell $(FIND) '*.ts')
