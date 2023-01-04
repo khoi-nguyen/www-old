@@ -15,7 +15,7 @@ class PlotEnv(typing.TypedDict):
     cmd: list[str]
 
 
-config: dict[str, PlotEnv] = {
+CONFIG: dict[str, PlotEnv] = {
     "python": {
         "code": textwrap.dedent(
             """
@@ -44,7 +44,6 @@ config: dict[str, PlotEnv] = {
         "cmd": ["env", "julia", "--project=."],
     },
 }
-
 PATH = "build/figures/"
 ROOT = "/figures/"
 
@@ -59,10 +58,10 @@ def plot(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
         return None
 
     # Determine the plotting environment (e.g. matplotlib)
-    candidates = list(set(config.keys()) & set(element.classes))
+    candidates = list(set(CONFIG.keys()) & set(element.classes))
     if not candidates:
         return None
-    env: PlotEnv = config[candidates[0]]
+    env: PlotEnv = CONFIG[candidates[0]]
 
     # Determine the plot's filename
     to_hash: bytes = (env["code"] + element.text).encode("utf-8")
