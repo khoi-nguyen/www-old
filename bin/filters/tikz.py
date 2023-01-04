@@ -8,8 +8,8 @@ import subprocess
 import panflute as pf
 
 
-PATH: str = "build/tikz/"
-ROOT: str = "/tikz/"
+PATH: str = "build/figures/"
+ROOT: str = "/figures/"
 TEMPLATE: str = r"""
 \documentclass{standalone}
 \usepackage{amsmath,amssymb}

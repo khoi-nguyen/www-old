@@ -45,8 +45,8 @@ config: dict[str, PlotEnv] = {
     },
 }
 
-PATH = "build/plots/"
-ROOT = "/plots/"
+PATH = "build/figures/"
+ROOT = "/figures/"
 
 
 def plot(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
