@@ -38,7 +38,7 @@ def load_user(user_id: str) -> flask_login.UserMixin | None:
 def login() -> werkzeug.Response:
     data = flask.request.form
     if data.get("password") != os.environ.get("PASSWORD", "admin"):
-        raise ValueError(data)
+        raise ValueError("Incorrect password")
     flask_login.login_user(admin, remember=True)
     return flask.redirect("/")
 
