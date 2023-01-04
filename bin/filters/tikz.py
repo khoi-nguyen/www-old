@@ -7,7 +7,10 @@ import subprocess
 
 import panflute as pf
 
-template = r"""
+
+PATH: str = "build/tikz/"
+ROOT: str = "/tikz/"
+TEMPLATE: str = r"""
 \documentclass{standalone}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
@@ -22,17 +25,27 @@ template = r"""
 """
 
 
-def tikz(element, doc):
+def tikz(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
+    """Replace CodeBlocks.tikz with a PNG image of the figure"""
+    del doc
     if not isinstance(element, pf.CodeBlock) or "tikz" not in element.classes:
-        return element
-    scale = str(element.attributes.get("scale", 1))
-    code = template % (scale, element.text)
-    pathlib.Path("build/tikz").mkdir(parents=True, exist_ok=True)
-    tmp = "build/tikz/" + hashlib.sha256(code.encode("utf-8")).hexdigest()
+        return None
+
+    # Get code
+    scale: str = element.attributes.get("scale", "1")
+    code: str = TEMPLATE % (scale, element.text)
+
+    # Useful paths
+    basename: str = hashlib.sha256(code.encode("utf-8")).hexdigest()
+    tmp: str = PATH + basename
+    src: str = ROOT + basename + ".png"
+
+    # Generating the image if necessary
+    pathlib.Path(PATH).mkdir(parents=True, exist_ok=True)
     if not os.path.exists(tmp + ".png"):
         with open(tmp + ".tex", "w+") as file:
             file.write(code)
-        cmds = [
+        cmds: list[list[str]] = [
             ["latexmk", "-pdf", "-cd", "-f", tmp + ".tex"],
             [
                 "convert",
@@ -48,9 +61,10 @@ def tikz(element, doc):
         ]
         for cmd in cmds:
             subprocess.run(cmd, stdout=subprocess.DEVNULL)
-    tmp = tmp.replace("build/", "/")
-    output = pf.RawBlock(f"""<img src="{tmp}.png">""", format="html")
-    return pf.Div(output, classes=["text-center"] + element.classes)
+
+    # Creating the plot element
+    img: pf.Element = pf.Para(pf.Image(url=src))
+    return pf.Div(img, classes=["text-center"] + element.classes)
 
 
 if __name__ == "__main__":
