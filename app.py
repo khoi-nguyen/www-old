@@ -87,6 +87,7 @@ def save_board(url: str = "") -> werkzeug.Response:
 
 
 def clean(boards: BoardList) -> BoardList:
+    """Delete empty strokes from a board list"""
     for slide in boards:
         for board in slide:
             for i, stroke in enumerate(board):
@@ -126,14 +127,21 @@ def default_route(url: str = "") -> werkzeug.Response | str:
 
 
 def render_page(path: str) -> str:
+    """Render a static HTML page"""
+
     def file_contents(path: str) -> str:
         with open(path) as f:
             return f.read()
 
+    # Collect metadata
     json_path: str = path.replace(".html", ".json")
     data: dict[str, typing.Any] = json.loads(file_contents(json_path))
     data.update({"user": flask_login.current_user})
+
+    # Render subtemplate
     content: str = flask.render_template_string(file_contents(path), **data)
+
+    # Render master template if allowed
     data.update({"content": content})
     if data.get("private") and not getattr(data["user"], "is_authenticated"):
         return ""
