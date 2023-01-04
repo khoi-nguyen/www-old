@@ -1,9 +1,11 @@
 import json
 import os
+import typing
 
 import flask
 import flask_login
 import flask_socketio
+import werkzeug
 
 DEBUG = os.environ.get("ENVIRONMENT", "") != "production"
 
@@ -26,14 +28,14 @@ setattr(admin, "id", "admin")
 
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_id: str) -> flask_login.UserMixin | None:
     if user_id == "admin":
         return admin
     return None
 
 
 @app.route("/login", methods=["POST"])
-def login():
+def login() -> werkzeug.Response:
     data = flask.request.form
     if data.get("password") != os.environ.get("PASSWORD", "admin"):
         raise ValueError(data)
@@ -42,7 +44,7 @@ def login():
 
 
 @app.route("/logout", methods=["GET"])
-def logout():
+def logout() -> werkzeug.Response:
     flask_login.logout_user()
     redirect = flask.request.args.get("redirect")
     if redirect:
@@ -57,9 +59,18 @@ def logout():
 socketio = flask_socketio.SocketIO(app, logger=DEBUG)
 
 
+class Stroke(typing.TypedDict):
+    color: str
+    lineWidth: int
+    points: list[list[float]]
+
+
+BoardList = list[list[list[Stroke]]]
+
+
 @app.route("/socketio/<path:url>", methods=["POST"])
 @flask_login.login_required
-def socket(url: str = ""):
+def socket(url: str = "") -> werkzeug.Response:
     json = flask.request.get_json() or {}
     json.update({"url": "/" + url})
     socketio.emit("changeReceived", json, broadcast=True)
@@ -68,14 +79,14 @@ def socket(url: str = ""):
 
 @app.route("/boards/<path:url>", methods=["POST"])
 @flask_login.login_required
-def save_board(url: str = ""):
-    boards = flask.request.get_json() or []
+def save_board(url: str = "") -> werkzeug.Response:
+    boards: BoardList = flask.request.get_json() or []
     with open(url + ".json", "w") as file:
         file.write(json.dumps(clean(boards), separators=(",", ":")))
-    return flask.jsonify({"success": True, "boards": boards})
+    return flask.jsonify({"success": True})
 
 
-def clean(boards):
+def clean(boards: BoardList) -> BoardList:
     for slide in boards:
         for board in slide:
             for i, stroke in enumerate(board):
@@ -91,20 +102,22 @@ def clean(boards):
 
 @app.route("/")
 @app.route("/<path:url>")
-def default_route(url: str = ""):
+def default_route(url: str = "") -> werkzeug.Response | str:
     if url == "favicon.ico":
         return flask.send_file("static/favicon.ico")
-
-    if url.endswith("/") or not url:
-        url += "index.html"
-    elif "." not in url:
-        url += ".html"
 
     # Protect metadata files and send board files instead
     if url.endswith(".json") and os.path.exists(url):
         return flask.send_file(url)
 
+    # Adapt path
     url = "build/" + url
+    if url.endswith("/") or not url:
+        url += "index.html"
+    elif "." not in url:
+        url += ".html"
+
+    # Serve file or trigger error 404
     if not os.path.exists(url) or url.endswith(".json"):
         flask.abort(404)
     if url.endswith(".html"):
@@ -117,13 +130,14 @@ def render_page(path: str) -> str:
         with open(path) as f:
             return f.read()
 
-    data = json.loads(file_contents(path.replace(".html", ".json")))
-    data["user"] = flask_login.current_user
-    content = flask.render_template_string(file_contents(path), **data)
+    json_path: str = path.replace(".html", ".json")
+    data: dict[str, typing.Any] = json.loads(file_contents(json_path))
+    data.update({"user": flask_login.current_user})
+    content: str = flask.render_template_string(file_contents(path), **data)
     data.update({"content": content})
     if data.get("private") and not getattr(data["user"], "is_authenticated"):
         return ""
-    template_file = data.get("output") + ".html"
+    template_file: str = data.get("output", "") + ".html"
     return flask.render_template(template_file, **data)
 
 
