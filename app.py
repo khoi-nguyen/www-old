@@ -118,7 +118,7 @@ def default_route(url: str = "") -> werkzeug.Response | str:
     elif "." not in url:
         url += ".html"
 
-    # Serve file or trigger error 404
+    # Serve file or trigger 404 error
     if not os.path.exists(url) or url.endswith(".json"):
         flask.abort(404)
     if url.endswith(".html"):
