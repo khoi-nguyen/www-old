@@ -13,6 +13,7 @@ import panflute as pf
 class PlotEnv(typing.TypedDict):
     code: str
     cmd: list[str]
+    ext: str
 
 
 CONFIG: dict[str, PlotEnv] = {
@@ -28,6 +29,7 @@ CONFIG: dict[str, PlotEnv] = {
             savefig("%s.svg")
         """
         ),
+        "ext": ".py",
         "cmd": ["env", "python"],
     },
     "julia": {
@@ -41,6 +43,7 @@ CONFIG: dict[str, PlotEnv] = {
             savefig("%s.svg")
         """
         ),
+        "ext": ".jl",
         "cmd": ["env", "julia", "--project=."],
     },
 }
@@ -72,9 +75,9 @@ def plot(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
     # Generating the plot if necessary
     pathlib.Path(PATH).mkdir(parents=True, exist_ok=True)
     if not os.path.exists(tmp + ".svg"):
-        with open(tmp, "w+") as file:
+        with open(tmp + env["ext"], "w+") as file:
             file.write(env["code"] % (element.text, tmp))
-        subprocess.run(env["cmd"] + [tmp], stdout=subprocess.DEVNULL)
+        subprocess.run(env["cmd"] + [tmp + env["ext"]], stdout=subprocess.DEVNULL)
 
     img = pf.Para(pf.Image(url=src))
     return pf.Div(img, classes=["text-center"] + element.classes)
