@@ -10,7 +10,8 @@ import subprocess
 # Parsing args
 parser = argparse.ArgumentParser()
 parser.add_argument("path", type=str)
-parser.add_argument("--meta", action="store_true")
+parser.add_argument("--meta-only", action="store_true")
+parser.add_argument("--meta-file", type=str, default="")
 args: argparse.Namespace = parser.parse_args()
 
 # Getting source files
@@ -27,11 +28,11 @@ sources.reverse()
 
 # Calling pandoc
 cmd: list[str] = ["pandoc", "--quiet"] + sources
-if args.meta:
+if args.meta_only:
     cmd.append("--template=templates/json.html")
 else:
     # Determining output format
-    with open("build/" + args.path.replace(".md", ".json"), "r") as file:
+    with open(args.meta_file) as file:
         metadata = json.loads(file.read())
     output: str = metadata.get("output", "html")
     if output == "exam":
