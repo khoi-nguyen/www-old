@@ -32,9 +32,11 @@ if args.meta_only:
     cmd.append("--template=templates/json.html")
 else:
     # Determining output format
-    with open(args.meta_file) as file:
-        metadata = json.loads(file.read())
-    output: str = metadata.get("output", "html")
+    output: str = "html"
+    if args.meta_file:
+        with open(args.meta_file) as file:
+            metadata = json.loads(file.read())
+        output = metadata.get("output", "html")
     if output == "exam":
         cmd += ["-t", "latex", "--template=templates/exam.tex"]
     else:
