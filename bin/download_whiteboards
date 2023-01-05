@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-FILES="$(rg -l 'output:.*revealjs' -g '*.md' | sed 's/\.md$//')"
+FILES="$(rg -l 'output:.*revealjs' -g '*.md' | sed 's/\.md$/.json/')"
 
 while IFS= read -r path; do
-    url="https://nguyen.me.uk/boards/$path"
+    url="https://nguyen.me.uk/$path"
     if curl --head --silent --fail $url 2> /dev/null; then
-      echo "Downloading $path.json"
-      curl $url --output $path.json
+      echo "Downloading $path"
+      curl $url --output $path
     fi
 done <<< "$FILES"
