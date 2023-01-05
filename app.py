@@ -31,7 +31,6 @@ setattr(admin, "id", "admin")
 def load_user(user_id: str) -> flask_login.UserMixin | None:
     if user_id == "admin":
         return admin
-    return None
 
 
 @app.route("/login", methods=["POST"])
