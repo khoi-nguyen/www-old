@@ -27,6 +27,7 @@ Useful links
 ------------
 
 - [Curriculum Vitæ](/cv)
+- [Github page](https://github.com/khoi-nguyen)
 - [LinkedIn page](https://www.linkedin.com/in/binh-khoi-nguyen/)
 - [NYU teaching](/teaching/nyu/2023-spring-na/)
 - [PhD Thesis](https://spiral.imperial.ac.uk/handle/10044/1/44081)
