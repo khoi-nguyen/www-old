@@ -157,7 +157,7 @@ def render_page(path: str) -> str:
 @app.errorhandler(404)
 def page_not_found(error):
     del error
-    return render_page("build/404.html")
+    return render_page("build/404.html"), 404
 
 
 if __name__ == "__main__":
