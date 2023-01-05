@@ -43,12 +43,17 @@ build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@$(PYTHON) -m pip install -Ur requirements.txt
 	@touch .venv/bin/activate
 
-build/%.json: %.md Makefile bin/ $(META)
+build/%.json: %.md templates/ bin/ $(META)
 	@echo "Building $@"
 	@mkdir -p $(@D)
 	@$(ENV) ./bin/pandoc.py $< --meta=true > $@
 
-build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
+build/%.html: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
+	@echo "Building $@"
+	@mkdir -p $(@D)
+	@$(ENV) ./bin/pandoc.py $< > $@
+
+build/%.tex: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
 	@echo "Building $@"
 	@mkdir -p $(@D)
 	@$(ENV) ./bin/pandoc.py $< > $@
@@ -57,11 +62,6 @@ build/%.js: %.ts
 	@echo "Building $@"
 	@mkdir -p $(@D)
 	@tsc $< --outFile $@ --lib ES2015,dom --target es6
-
-build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(META) $(ACTIVATE)
-	@echo "Building $@"
-	@mkdir -p $(@D)
-	@$(ENV) ./bin/pandoc.py $< > $@
 
 %.pdf: %.tex
 	@echo "Building $@"
