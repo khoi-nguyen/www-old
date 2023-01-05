@@ -10,7 +10,7 @@ import subprocess
 # Parsing args
 parser = argparse.ArgumentParser()
 parser.add_argument("path", type=str)
-parser.add_argument("--meta", default=False, type=bool)
+parser.add_argument("--meta", action="store_true")
 args: argparse.Namespace = parser.parse_args()
 
 # Getting source files

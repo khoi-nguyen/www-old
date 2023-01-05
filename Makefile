@@ -46,7 +46,7 @@ build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 build/%.json: %.md templates/ bin/ $(META)
 	@echo "Building $@"
 	@mkdir -p $(@D)
-	@$(ENV) ./bin/pandoc.py $< --meta=true > $@
+	@$(ENV) ./bin/pandoc.py $< --meta > $@
 
 build/%.html: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
 	@echo "Building $@"
