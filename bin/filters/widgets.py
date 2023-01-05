@@ -113,5 +113,15 @@ def geogebra(url: str, width: int = 800, height: int = 600) -> str:
     """
 
 
+def youtube(url: str, width: float = 560, height: float = 315, zoom: float = 1):
+    url = url.replace("watch?v=", "embed/")
+    return f"""
+    <iframe width="{width * zoom}" height="{height * zoom}"
+        src="{url}" frameborder="0" style="margin: auto"
+        allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+    """
+
+
 if __name__ == "__main__":
     pf.toJSONFilter(widget)
