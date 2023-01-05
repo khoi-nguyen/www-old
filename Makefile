@@ -46,22 +46,12 @@ build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 build/%.json: %.md Makefile bin/ $(META)
 	@echo "Building $@"
 	@mkdir -p $(@D)
-	@./bin/convert $< --template="templates/json.html" > $@
+	@$(ENV) ./bin/pandoc.py $< --meta=true > $@
 
 build/%.html: %.md build/%.json Makefile bin/ bin/filters $(META) $(ACTIVATE)
 	@echo "Building $@"
 	@mkdir -p $(@D)
-	@$(ENV) ./bin/convert $< --citeproc --mathjax \
-		--csl templates/apa.csl \
-		--email-obfuscation=javascript \
-		--filter bin/filters/cas.py \
-		--filter bin/filters/bootstrap.py \
-		--filter bin/filters/environments.py \
-		--filter bin/filters/slideshow.py \
-		--filter bin/filters/plots.py \
-		--filter bin/filters/tikz.py \
-		--filter bin/filters/widgets.py \
-		> $@
+	@$(ENV) ./bin/pandoc.py $< > $@
 
 build/%.js: %.ts
 	@echo "Building $@"
@@ -69,11 +59,9 @@ build/%.js: %.ts
 	@tsc $< --outFile $@ --lib ES2015,dom --target es6
 
 build/%.tex: %.md build/%.json templates/exam.tex Makefile bin/ bin/filters $(META) $(ACTIVATE)
-	@$(ENV) ./bin/convert $< --citeproc \
-		--csl templates/apa.csl \
-		--filter bin/filters/cas.py \
-		--filter bin/filters/exam.py \
-		> $@
+	@echo "Building $@"
+	@mkdir -p $(@D)
+	@$(ENV) ./bin/pandoc.py $< > $@
 
 %.pdf: %.tex
 	@echo "Building $@"
