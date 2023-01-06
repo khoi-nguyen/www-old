@@ -2,7 +2,7 @@
 title: "Chapter 1: Floating Point Arithmetic"
 output: revealjs
 notes: |
-  - [<i class="fa-solid fa-file-pdf"></i> Lecture notes](/static/numerical-analysis/1-roundoff.pdf)
+  - Started on 27 January 2023
 ...
 
 # Welcome
@@ -31,9 +31,26 @@ notes: |
 </tr>
 </table>
 
+::: {.info .fragment title="Lecture notes"}
 - Slides: <https://nguyen.me.uk/teaching/nyu/2023-spring-na/>
 - Lecture notes: <https://urbain.vaes.uk/teaching/2022-fall-na/>
+:::
+
+# How to pronounce my name {.row}
+
+::::: {.col}
+::: {.info title="How to pronounce my name?"}
+According to Google,
+
 - Nguyen: A thi**ng we in**tend to do...
+:::
+:::::
+
+::::: {.col .fragment}
+~~~ {.yaml .widget name="youtube"}
+url: https://www.youtube.com/watch?v=32wBZwWFGT4
+~~~
+:::::
 
 # Prerequisites
 

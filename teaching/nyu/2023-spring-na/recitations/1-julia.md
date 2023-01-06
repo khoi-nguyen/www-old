@@ -1,5 +1,5 @@
 ---
-title: Introduction to Julia
+title: "Session 1: Introduction to Julia"
 output: revealjs
 ...
 
