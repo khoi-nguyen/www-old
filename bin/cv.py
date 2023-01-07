@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 
+import argparse
 import os
 import subprocess
-import sys
 
 import jinja2
 import yaml
 
-output = sys.argv[-1]
-lang = output[output.rfind("_") + 1 : -4]
+# Parsing args
+parser = argparse.ArgumentParser()
+parser.add_argument("output", type=str)
+args: argparse.Namespace = parser.parse_args()
+
+output: str = args.output
+lang: str = output[output.rfind("_") + 1 : -4]
 
 
 def translate(data, lang="en"):
