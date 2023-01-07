@@ -10,6 +10,7 @@ import subprocess
 # Parsing args
 parser = argparse.ArgumentParser()
 parser.add_argument("path", type=str)
+parser.add_argument("outfile", type=str)
 parser.add_argument("--meta-only", action="store_true")
 parser.add_argument("--meta-file", type=str, default="")
 args: argparse.Namespace = parser.parse_args()
@@ -47,4 +48,7 @@ else:
     cmd += ["--mathjax", "--email-obfuscation=javascript"]
     for pandocfilter in glob.glob("bin/filters/*.py"):
         cmd += ["--filter", pandocfilter]
-print(subprocess.run(cmd, capture_output=True, text=True).stdout)
+
+pathlib.Path(args.outfile).parent.mkdir(parents=True, exist_ok=True)
+with open(args.outfile, "w") as file:
+    file.write(subprocess.run(cmd, capture_output=True, text=True).stdout)
