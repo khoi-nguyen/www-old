@@ -10,6 +10,7 @@ import yaml
 # Parsing args
 parser = argparse.ArgumentParser()
 parser.add_argument("output", type=str)
+parser.add_argument("template", type=str)
 args: argparse.Namespace = parser.parse_args()
 
 output: str = args.output
@@ -52,6 +53,6 @@ env = jinja2.Environment(
 )
 env.filters["pandoc"] = pandoc
 
-template = env.get_template("templates/cv.tex")
+template = env.get_template(args.template)
 if isinstance(data, dict):
     print(template.render(**data))
