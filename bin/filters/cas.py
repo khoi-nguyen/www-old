@@ -51,7 +51,7 @@ def exec_then_eval(code: str, lang: LANG) -> str:
         lines = code.split("\n")
         lines[-1] = CONFIG[lang]["println"] % lines[-1]
         tmp.write(CONFIG[lang]["code"] + "\n".join(lines))
-        cmd = CONFIG[lang]["cmd"] + [name]
+    cmd = CONFIG[lang]["cmd"] + [name]
     out = subprocess.run(cmd, capture_output=True, text=True).stdout
     os.remove(name)
     try:
