@@ -23,7 +23,7 @@ def widget(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
         return pf.RawBlock(html, format="html")
 
 
-def template(func: abc.Callable[..., str]):
+def template(func: abc.Callable[..., str]) -> abc.Callable[..., str]:
     def wrapped(*args, **kwargs):
         wrapped.vars = kwargs
         template = func(wrapped, *args, **kwargs)
@@ -35,7 +35,7 @@ def template(func: abc.Callable[..., str]):
 
 @template
 def explorer(
-    self,
+    self: abc.Callable[..., str],
     directory: str = ".",
     globstr: str = "*.md",
     order_by: str = "path",
