@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from collections import abc
 import glob
 import json
 import subprocess
@@ -13,7 +14,8 @@ this_module = sys.modules[__name__]
 environment = jinja2.Environment()
 
 
-def widget(element, doc):
+def widget(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
+    del doc
     if isinstance(element, pf.CodeBlock) and "widget" in element.classes:
         name = element.attributes.get("name")
         function = getattr(this_module, name)
@@ -21,7 +23,7 @@ def widget(element, doc):
         return pf.RawBlock(html, format="html")
 
 
-def template(func):
+def template(func: abc.Callable[..., str]):
     def wrapped(*args, **kwargs):
         wrapped.vars = kwargs
         template = func(wrapped, *args, **kwargs)
