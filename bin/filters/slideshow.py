@@ -20,7 +20,7 @@ def finalize(doc: pf.Doc):
         doc.content.append(pf.RawBlock("</div>", format="html"))
 
 
-def slides(element: pf.Element, doc: pf.Doc) -> pf.Element | list[pf.Element]:
+def slides(element: pf.Element, doc: pf.Doc) -> None | list[pf.Element]:
     """Wrap the slide contents in a div and customise the slide title
 
     - Try as much as possible to fit the slide contents inside a div
@@ -32,7 +32,7 @@ def slides(element: pf.Element, doc: pf.Doc) -> pf.Element | list[pf.Element]:
         or not isinstance(element, pf.Header)
         or element.level > 1
     ):
-        return element
+        return None
 
     block_list: list[pf.Element] = []
 
