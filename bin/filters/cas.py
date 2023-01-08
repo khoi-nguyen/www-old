@@ -22,7 +22,8 @@ class Env(typing.TypedDict):
 
 
 stack: list[StackElement] = []
-CONFIG: dict[str, Env] = {
+LANG = typing.Literal["python", "julia"]
+CONFIG: dict[LANG, Env] = {
     "python": {
         "code": textwrap.dedent(
             """
@@ -41,7 +42,6 @@ CONFIG: dict[str, Env] = {
         "println": "println(%s)",
     },
 }
-LANG = typing.Literal["python", "julia"]
 
 
 def exec_then_eval(code: str, lang: LANG) -> str:
@@ -82,8 +82,8 @@ def cas(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
         stack.append({"code": element.text, "stack": int(element.attributes["stack"])})
 
     code += element.text
-    lang = "julia" if "julia" in element.classes else "python"
-    result = exec_then_eval(code, lang)
+    lang = list(set(typing.get_args(LANG)) & set(element.classes))[0]
+    result = exec_then_eval(code, lang or "python")
     if type(element) == pf.Code:
         return pf.Math(result, format="InlineMath")
     return pf.Para(pf.Math(result, format="DisplayMath"))
