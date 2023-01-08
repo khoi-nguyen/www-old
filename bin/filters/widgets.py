@@ -82,8 +82,8 @@ def explorer(
               </a>
             </li>
             <li class="list-inline-item small">
-              <a href="{{ file.href }}?fragments=false">
-                <i class="fa-solid fa-display"></i> Without transitions
+              <a href="{{ file.href }}?print-pdf">
+                <i class="fa-solid fa-print"></i> Printable version
               </a>
             </li>
             <li class="list-inline-item small">
