@@ -287,9 +287,9 @@ In Julia, the machine $\epsilon$ can be calculated via the `eps` function.
 
 Format           Machine $\epsilon$
 -------          ------------------
-`Float16`        `np.finfo(np.float16).eps`{.sympy}
-`Float32`        `np.finfo(np.float32).eps`{.sympy}
-`Float64`        `np.finfo(np.float64).eps`{.sympy}
+`Float16`        `eps(Float16)`{.julia .eval}
+`Float32`        `eps(Float32)`{.julia .eval}
+`Float64`        `eps(Float64)`{.julia .eval}
 
 :::
 
