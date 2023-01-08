@@ -45,15 +45,15 @@ build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 
 build/%.json: %.md templates/ bin/ $(META)
 	@echo "Building $@"
-	@$(ENV) ./bin/pandoc.py --meta-only $< $@
+	@$(ENV) ./bin/pandoc.py --meta-only $< -o $@
 
 build/%.html: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
 	@echo "Building $@"
-	@$(ENV) ./bin/pandoc.py --meta-file=$(word 2, $^) $< $@
+	@$(ENV) ./bin/pandoc.py --meta-file=$(word 2, $^) $< -o $@
 
 build/%.tex: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
 	@echo "Building $@"
-	@$(ENV) ./bin/pandoc.py $< $@
+	@$(ENV) ./bin/pandoc.py $< -o $@
 
 build/%.js: %.ts
 	@echo "Building $@"
