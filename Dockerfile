@@ -9,7 +9,6 @@ RUN pacman --noconfirm --needed -Syy \
     make \
     npm \
     pandoc \
-    prettier \
     python-pip \
     ripgrep \
     texlive-core \
