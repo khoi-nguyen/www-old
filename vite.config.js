@@ -4,11 +4,14 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   build: {
-    lib: {
-      entry: resolve(__dirname, 'src/main.ts'),
-      fileName: 'main',
-      formats: ['cjs', 'es'],
+    rollupOptions: {
+      input: resolve(__dirname, 'src/main.ts'),
+      output: {
+        entryFileNames: "[name].js",
+        assetFileNames: "[name].[ext]",
+      }
     },
+    emptyOutDir: false,
     outDir: 'build/',
   },
   plugins: [vue()]
