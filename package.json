@@ -18,6 +18,7 @@
   "homepage": "https://nguyen.me.uk/",
   "dependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "jsxgraph": "^1.4.6",
     "prettier": "^2.8.2",
     "vite": "^4.0.4",
     "vue": "^3.2.45"
