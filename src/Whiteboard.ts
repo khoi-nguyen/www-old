@@ -22,10 +22,8 @@ export interface Stroke {
 
 export class Whiteboard {
   private ctx: CanvasRenderingContext2D;
-  private height: number;
   private isActive: boolean = false;
   private parentNode: HTMLElement;
-  private width: number;
 
   public canvas: HTMLCanvasElement;
   public color: Color = "#255994";
@@ -66,34 +64,25 @@ export class Whiteboard {
       this.emit("clearBoard", true);
       this.strokes.splice(0, this.strokes.length);
     }
-    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   /**
    * Create a canvas with its 2D context
-   * @param width Width of the canvas
-   * @param height Height of the canvas
    * @param parentNode Parent node (useful to calculate offset)
    * @param strokes Strokes to draw
    */
-  constructor(
-    width: number,
-    height: number,
-    parentNode: HTMLElement,
-    strokes: Stroke[] = []
-  ) {
+  constructor(parentNode: HTMLElement, strokes: Stroke[] = []) {
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d")!;
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
     this.canvas.addEventListener("mousemove", this.onMouseMove.bind(this));
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
     this.setUpTouchEvents();
-    this.canvas.width = width;
-    this.canvas.height = height;
+    this.canvas.width = parentNode.offsetWidth;
+    this.canvas.height = parentNode.offsetHeight;
     this.canvas.classList.add("whiteboard");
     this.parentNode = parentNode;
-    this.width = width;
-    this.height = height;
     this.strokes = strokes;
     this.redraw();
   }
@@ -171,10 +160,9 @@ export class Whiteboard {
     if (!this.isActive) {
       return;
     }
-    const scaleX =
-      this.canvas.offsetWidth / this.canvas.getBoundingClientRect().width;
-    const scaleY =
-      this.canvas.offsetHeight / this.canvas.getBoundingClientRect().height;
+    const boundingClientRect = this.canvas.getBoundingClientRect();
+    const scaleX = this.canvas.offsetWidth / boundingClientRect.width;
+    const scaleY = this.canvas.offsetHeight / boundingClientRect.height;
     const container = this.parentNode.getBoundingClientRect();
     const x = Math.round((event.clientX - container.left) * scaleX);
     const y = Math.round((event.clientY - container.top) * scaleY);

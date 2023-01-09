@@ -118,7 +118,7 @@ export default class WhiteboardPlugin {
    * @return Created whiteboard
    */
   newBoard(i: number, j: number, strokes: Stroke[] = []): Whiteboard {
-    const board = new Whiteboard(1920, 1080, this.parentNode, strokes);
+    const board = new Whiteboard(this.parentNode, strokes);
     if (!this.deck.getConfig().admin) {
       setTimeout(() => {
         board.mode = "readonly";
