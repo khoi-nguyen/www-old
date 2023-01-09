@@ -1,4 +1,4 @@
-import { BoardEventName, Stroke, Whiteboard } from "./whiteboard";
+import { BoardEventName, Stroke, Whiteboard } from "./Whiteboard";
 
 type EventHandler = (event: RevealEvent) => void;
 
