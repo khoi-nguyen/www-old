@@ -7,14 +7,17 @@ RUN pacman --noconfirm --needed -Syy \
     jq \
     julia \
     make \
+    npm \
     pandoc \
     prettier \
     python-pip \
     ripgrep \
     texlive-core \
     texlive-fontsextra \
-    texlive-latexextra \
-    typescript
+    texlive-latexextra
+
+ENV ENVIRONMENT=production
+WORKDIR /www
 
 RUN luaotfload-tool --update
 COPY Manifest.toml Project.toml ./
@@ -22,9 +25,9 @@ ENV JULIA_PROJECT=.
 RUN julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile()"
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
+COPY package.json package-lock.json ./
+RUN npm install
 
-ENV ENVIRONMENT=production
-WORKDIR /www
 COPY . .
 RUN make all
 
