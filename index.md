@@ -21,7 +21,7 @@ My research focused on
 [pseudo-differential operators](https://en.wikipedia.org/wiki/Pseudo-differential_operator)
 on [Lie groups](https://en.wikipedia.org/wiki/Lie_group).
 
-This website is build from markdown files using [pandoc](https://pandoc.org).
+This website is built from markdown files using [pandoc](https://pandoc.org).
 You can view the source code [here](https://github.com/khoi-nguyen/www).
 
 ---
