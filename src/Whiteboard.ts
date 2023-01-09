@@ -48,7 +48,6 @@ export class Whiteboard {
   addPoint(point: Point): void {
     this.lastStroke.points.push(point);
     this.drawStroke(this.lastStroke);
-    this.hasUnsavedChanges = true;
   }
 
   changeBrush(color: Color, lineWidth: number) {
@@ -66,7 +65,6 @@ export class Whiteboard {
     if (removeStrokes) {
       this.emit("clearBoard", true);
       this.strokes.splice(0, this.strokes.length);
-      this.hasUnsavedChanges = true;
     }
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
@@ -125,6 +123,7 @@ export class Whiteboard {
   emit(eventName: BoardEventName, data: any): void {
     const event = new CustomEvent("change", { detail: { eventName, data } });
     this.canvas.dispatchEvent(event);
+    this.hasUnsavedChanges = true;
   }
 
   /**
@@ -139,7 +138,6 @@ export class Whiteboard {
         if (dist <= 5) {
           this.emit("removeStroke", point);
           this.strokes.splice(i, 1);
-          this.hasUnsavedChanges = true;
           this.redraw();
           return;
         }
