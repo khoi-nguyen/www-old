@@ -1,6 +1,6 @@
 import { defineCustomElement } from "vue";
-import Clock from "./elements/Clock.vue";
-import PdfReader from "./elements/PdfReader.vue";
+import Clock from "./elements/Clock.ce.vue";
+import PdfReader from "./elements/PdfReader.ce.vue";
 import WhiteboardPlugin from "./WhiteboardPlugin";
 
 const ClockElement = defineCustomElement(Clock);
