@@ -73,17 +73,27 @@ export class Whiteboard {
    * @param strokes Strokes to draw
    */
   constructor(parentNode: HTMLElement, strokes: Stroke[] = []) {
+    this.parentNode = parentNode;
+    this.strokes = strokes;
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d")!;
+
     this.canvas.addEventListener("mousedown", this.onMouseDown.bind(this));
     this.canvas.addEventListener("mousemove", this.onMouseMove.bind(this));
     this.canvas.addEventListener("mouseup", this.onMouseUp.bind(this));
     this.setUpTouchEvents();
+
+    parentNode.style.position = "relative";
     this.canvas.width = parentNode.offsetWidth;
     this.canvas.height = parentNode.offsetHeight;
-    this.canvas.classList.add("whiteboard");
-    this.parentNode = parentNode;
-    this.strokes = strokes;
+    this.canvas.style.position = "absolute";
+    Object.assign(this.canvas.style, {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      cursor: "crosshair",
+    });
+
     this.redraw();
   }
 
