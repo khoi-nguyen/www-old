@@ -2,14 +2,8 @@
   "name": "www",
   "version": "1.0.0",
   "description": "Personal website",
-  "source": "src/main.ts",
-  "targets": {
-    "default": {
-      "distDir": "build/"
-    }
-  },
   "scripts": {
-    "build": "parcel build",
+    "build": "vite build",
     "lint": "prettier src/ -w"
   },
   "repository": {
@@ -22,12 +16,10 @@
     "url": "https://github.com/khoi-nguyen/www/issues"
   },
   "homepage": "https://nguyen.me.uk/",
-  "devDependencies": {
-    "@parcel/transformer-vue": "^2.8.2",
-    "parcel": "^2.8.2"
-  },
   "dependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
     "prettier": "^2.8.2",
+    "vite": "^4.0.4",
     "vue": "^3.2.45"
   }
 }
