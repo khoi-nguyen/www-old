@@ -1,7 +1,7 @@
 import { defineCustomElement } from "vue";
 import Clock from "./elements/Clock.vue";
 import PdfReader from "./elements/PdfReader.vue";
-import WhiteboardPlugin from "./whiteboard";
+import WhiteboardPlugin from "./WhiteboardPlugin";
 
 const ClockElement = defineCustomElement(Clock);
 customElements.define("ticking-clock", ClockElement);
