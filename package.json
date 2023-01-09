@@ -1,0 +1,33 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "description": "Personal website",
+  "source": "src/main.ts",
+  "targets": {
+    "default": {
+      "distDir": "build/"
+    }
+  },
+  "scripts": {
+    "build": "parcel build",
+    "lint": "prettier src/ -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khoi-nguyen/www.git"
+  },
+  "author": "Khoi Nguyen",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/khoi-nguyen/www/issues"
+  },
+  "homepage": "https://nguyen.me.uk/",
+  "devDependencies": {
+    "@parcel/transformer-vue": "^2.8.2",
+    "parcel": "^2.8.2"
+  },
+  "dependencies": {
+    "prettier": "^2.8.2",
+    "vue": "^3.2.45"
+  }
+}

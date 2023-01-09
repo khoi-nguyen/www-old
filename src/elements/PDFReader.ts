@@ -1,4 +1,4 @@
-class PdfReader extends HTMLElement {
+export default class PdfReader extends HTMLElement {
   public count: number = 0;
   public shadowRoot: ShadowRoot;
 
@@ -36,5 +36,3 @@ class PdfReader extends HTMLElement {
     this.shadowRoot.append(object);
   }
 }
-
-customElements.define("pdf-reader", PdfReader);

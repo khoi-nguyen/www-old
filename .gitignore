@@ -1,6 +1,8 @@
+.parcel-cache/
 .venv/
 __pycache__/
 build/
+node_modules/
 static/cv
 static/plots
 static/src

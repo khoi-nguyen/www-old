@@ -284,7 +284,7 @@ interface BoardEvent {
   data: any;
 }
 
-class WhiteboardPlugin {
+export default class WhiteboardPlugin {
   public id: string = "RevealWhiteboard";
   public board: Whiteboard;
   public boards: Whiteboard[][];
@@ -568,5 +568,3 @@ class WhiteboardPlugin {
     return fetch("/boards" + window.location.pathname, requestOptions);
   }
 }
-
-(<any>window).RevealWhiteboard = new WhiteboardPlugin();

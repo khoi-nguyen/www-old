@@ -16,22 +16,19 @@ JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
 CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
-TS := $(shell $(FIND) *.ts)
-JS := $(addprefix build/, $(TS:.ts=.js))
-
 .PHONY: all backend clean lint watch
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
-all: lint $(JSON) $(PAGES) $(PDF) $(CV) $(JS)
+all: lint $(JSON) $(PAGES) $(PDF) $(CV) build/main.js
 
 backend: $(ACTIVATE) $(JSON) $(PAGES)
 	@$(PYTHON) -m app
 
-lint: $(ACTIVATE)
+lint: $(ACTIVATE) node_modules
 	@$(PYTHON) -m black .
 	@$(PYTHON) -m isort *.py
-	prettier -w $(shell $(FIND) '*.ts')
+	@npm run lint
 
 build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@echo "Building $@"
@@ -55,10 +52,13 @@ build/%.tex: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
 	@echo "Building $@"
 	@$(ENV) ./bin/pandoc.py $< -o $@
 
-build/%.js: %.ts
+build/main.js: node_modules src/ src/elements
 	@echo "Building $@"
 	@mkdir -p $(@D)
-	@tsc $< --outFile $@ --lib ES2015,dom --target es6
+	@npm run build
+
+node_modules: package.json
+	@npm install
 
 %.pdf: %.tex
 	@echo "Building $@"
@@ -66,7 +66,7 @@ build/%.js: %.ts
 	@test -f $@ && touch $@ || exit 1
 
 clean:
-	@rm -fR build .venv
+	@rm -fR build .venv node_modules
 
 watch:
 	while true; do\
