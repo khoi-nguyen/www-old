@@ -22,7 +22,7 @@ CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
 all: lint $(JSON) $(PAGES) $(PDF) $(CV) build/main.js
 
-backend: $(ACTIVATE) $(JSON) $(PAGES)
+backend: $(ACTIVATE)
 	@$(PYTHON) -m app
 
 lint: $(ACTIVATE) node_modules
