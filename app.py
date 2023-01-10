@@ -153,6 +153,12 @@ def render_page(path: str) -> str:
 # ==============
 
 
+@app.errorhandler(401)
+def unauthorized(error):
+    del error
+    return render_page("build/401.html"), 401
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     del error
