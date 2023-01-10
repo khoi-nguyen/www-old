@@ -24,7 +24,6 @@ export class Whiteboard {
   private ctx: CanvasRenderingContext2D;
   private isActive: boolean = false;
   private container: HTMLElement;
-  private parentNode: HTMLElement;
 
   public canvas: HTMLCanvasElement;
   public color: Color = "#255994";
