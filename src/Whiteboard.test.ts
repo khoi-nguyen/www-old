@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import puppeteer from "puppeteer";
 
 const browser = await puppeteer.launch({ headless: true });
@@ -20,6 +20,24 @@ describe("whiteboard class", () => {
     await type("input#password", "admin");
     await click('button[type="submit"]');
     await page.goto("http://localhost:5000/test");
+    await page.waitForSelector(".reveal");
+  });
+
+  it("creates the vertical slides", async () => {
+    const count = (elements: HTMLElement[]): number => elements.length;
+    const horizontalSlidesCount = await page.$$eval(".slides > section", count);
+    const verticalSlidesCount = await page.$$eval(
+      ".slides > section > section",
+      count
+    );
+    expect(verticalSlidesCount).toBe(horizontalSlidesCount);
+  });
+
+  it("creates the canvases", async () => {
+    const count = (elements: HTMLElement[]): number => elements.length;
+    const slidesCount = await page.$$eval(".slides > section > section", count);
+    const canvasCount = await page.$$eval("canvas", count);
+    expect(canvasCount).toBe(slidesCount);
   });
 
   afterAll(async () => {
