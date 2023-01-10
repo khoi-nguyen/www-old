@@ -16,7 +16,7 @@ JSON := $(addprefix build/, $(MARKDOWN:.md=.json)) $(addprefix build/, $(TESTS:.
 PAGES := $(addprefix build/, $(MARKDOWN:.md=.html))
 CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
-.PHONY: all backend clean lint watch
+.PHONY: all backend clean lint test watch
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
@@ -67,6 +67,9 @@ node_modules: package.json
 
 clean:
 	@rm -fR build .venv node_modules
+
+test: node_modules
+	@npm run test
 
 watch:
 	while true; do\
