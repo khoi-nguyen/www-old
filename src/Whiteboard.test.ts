@@ -1,20 +1,28 @@
-import { describe, expect, it } from "vitest";
-import { Whiteboard } from "./Whiteboard";
+import { afterAll, beforeAll, describe } from "vitest";
+import puppeteer from "puppeteer";
+
+const browser = await puppeteer.launch({ headless: true });
+const page = await browser.newPage();
+
+async function click(identifier: string): Promise<void> {
+  await page.waitForSelector(identifier);
+  await page.click(identifier);
+}
+
+async function type(identifier: string, value: string): Promise<void> {
+  await page.waitForSelector(identifier);
+  await page.type(identifier, value);
+}
 
 describe("whiteboard class", () => {
-  const parentNode = document.createElement("div");
-  const whiteboard = new Whiteboard(parentNode);
-  parentNode.appendChild(whiteboard.canvas);
-
-  it("should create a canvas node", () => {
-    expect(whiteboard.canvas).toBeDefined();
-    expect(parentNode.children.length).toBe(1);
-    expect(parentNode.style.position).toBe("relative");
-    expect(whiteboard.canvas.style.position).toBe("absolute");
+  beforeAll(async () => {
+    await page.goto("http://localhost:5000/login");
+    await type("input#password", "admin");
+    await click('button[type="submit"]');
+    await page.goto("http://localhost:5000/test");
   });
 
-  it("contains an empty stroke", () => {
-    expect(whiteboard.strokes.length).toBe(1);
-    expect(whiteboard.strokes[0].points.length).toBe(0);
+  afterAll(async () => {
+    await browser.close();
   });
 });

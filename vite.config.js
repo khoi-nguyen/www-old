@@ -15,7 +15,4 @@ export default defineConfig({
     outDir: "build/",
   },
   plugins: [vue()],
-  test: {
-    environment: "jsdom",
-  },
 });
