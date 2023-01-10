@@ -4,7 +4,8 @@
   "description": "Personal website",
   "scripts": {
     "build": "vite build",
-    "lint": "prettier src/ -w"
+    "lint": "prettier src/ -w",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,10 @@
     "prettier": "^2.8.2",
     "vite": "^4.0.4",
     "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "canvas": "^2.11.0",
+    "jsdom": "^21.0.0",
+    "vitest": "^0.27.0"
   }
 }
