@@ -2,6 +2,10 @@ import { Board } from "jsxgraph";
 
 type RealFunction = (x: number) => number;
 
+type plotOptions = {
+  strokecolor?: string;
+};
+
 export default class JSXBoard {
   axis: boolean = true;
   board: Board;
@@ -10,6 +14,7 @@ export default class JSXBoard {
   keepAspectRatio: boolean = true;
   showCopyright: boolean = false;
   width: number = 500;
+  colors: string[] = ["#255994", "darkred", "darkgreen", "black"];
 
   get options() {
     return {
@@ -21,6 +26,11 @@ export default class JSXBoard {
   }
 
   plot(func: RealFunction) {
-    return this.board.create("functiongraph", [func], {});
+    let options: plotOptions = {};
+    if (this.colors.length) {
+      options.strokecolor = this.colors.shift()!;
+      this.colors.push(options.strokecolor);
+    }
+    return this.board.create("functiongraph", [func], options);
   }
 }
