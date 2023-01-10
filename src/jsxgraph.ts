@@ -1,6 +1,16 @@
 import { Board } from "jsxgraph";
 
 type RealFunction = (x: number) => number;
+type Parameter = () => number | number;
+type RiemannSumType =
+  | "left"
+  | "lower"
+  | "middle"
+  | "random"
+  | "right"
+  | "simpson"
+  | "trapezoidal"
+  | "upper";
 
 type plotOptions = {
   strokecolor?: string;
@@ -32,5 +42,17 @@ export default class JSXBoard {
       this.colors.push(options.strokecolor);
     }
     return this.board.create("functiongraph", [func], options);
+  }
+
+  riemannSum(
+    func: RealFunction,
+    n: Parameter,
+    a: Parameter,
+    b: Parameter,
+    type: RiemannSumType = "middle"
+  ) {
+    return this.board.create("riemannsum", [func, n, type, a, b], {
+      fillOpacity: 0.4,
+    });
   }
 }
