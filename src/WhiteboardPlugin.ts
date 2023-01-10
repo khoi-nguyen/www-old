@@ -32,8 +32,8 @@ export default class WhiteboardPlugin {
   public id: string = "RevealWhiteboard";
   public board: Whiteboard;
   public boards: Whiteboard[][];
+  private container: HTMLElement;
   private deck: RevealDeck;
-  private parentNode: HTMLElement;
   private slides: HTMLElement[] = [];
 
   /**
@@ -51,7 +51,6 @@ export default class WhiteboardPlugin {
     const parent = document.querySelector(
       `.slides > section:nth-child(${i + 1})`
     )!;
-    this.boards[i].splice(j, 0, this.newBoard(i, j));
 
     // Add vertical slide
     if (j === this.boards[i].length) {
@@ -61,7 +60,7 @@ export default class WhiteboardPlugin {
     }
 
     // Adding the canvas
-    this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
+    this.boards[i].splice(j, 0, this.newBoard(i, j));
 
     this.deck.sync();
     this.deck.slide(pos.h, pos.v, 0);
@@ -105,9 +104,9 @@ export default class WhiteboardPlugin {
     this.deck.on("ready", this.onReady.bind(this));
     this.deck.addKeyBinding(38, this.onUpArrow.bind(this));
     this.deck.addKeyBinding(40, this.onDownArrow.bind(this));
-    this.parentNode = document.querySelector(".reveal .slides")!;
-    this.parentNode.oncontextmenu = () => false;
-    this.parentNode.onselectstart = () => false;
+    this.container = document.querySelector(".reveal .slides")!;
+    this.container.oncontextmenu = () => false;
+    this.container.onselectstart = () => false;
   }
 
   /**
@@ -118,7 +117,7 @@ export default class WhiteboardPlugin {
    * @return Created whiteboard
    */
   newBoard(i: number, j: number, strokes: Stroke[] = []): Whiteboard {
-    const board = new Whiteboard(this.parentNode, strokes);
+    const board = new Whiteboard(this.getSlide(i, j), this.container, strokes);
     if (!this.deck.getConfig().admin) {
       setTimeout(() => {
         board.mode = "readonly";
@@ -231,7 +230,6 @@ export default class WhiteboardPlugin {
         // Create the canvas and add it to the DOM
         const strokes = j < data[i].length ? data[i][j] : [];
         this.boards[i][j] = this.newBoard(i, j, strokes);
-        this.getSlide(i, j).appendChild(this.boards[i][j].canvas);
       }
     }
     const indices = this.deck.getIndices();

@@ -23,6 +23,7 @@ export interface Stroke {
 export class Whiteboard {
   private ctx: CanvasRenderingContext2D;
   private isActive: boolean = false;
+  private container: HTMLElement;
   private parentNode: HTMLElement;
 
   public canvas: HTMLCanvasElement;
@@ -69,10 +70,16 @@ export class Whiteboard {
 
   /**
    * Create a canvas with its 2D context
-   * @param parentNode Parent node (useful to calculate offset)
+   * @param parentNode Where to append the canvas
+   * @param container Used to calculate the dimension and the offset
    * @param strokes Strokes to draw
    */
-  constructor(parentNode: HTMLElement, strokes: Stroke[] = []) {
+  constructor(
+    parentNode: HTMLElement,
+    container: HTMLElement,
+    strokes: Stroke[] = []
+  ) {
+    this.container = container;
     this.parentNode = parentNode;
     this.strokes = strokes;
     this.canvas = document.createElement("canvas");
@@ -84,8 +91,8 @@ export class Whiteboard {
     this.setUpTouchEvents();
 
     parentNode.style.position = "relative";
-    this.canvas.width = parentNode.offsetWidth;
-    this.canvas.height = parentNode.offsetHeight;
+    this.canvas.width = container.offsetWidth;
+    this.canvas.height = container.offsetHeight;
     this.canvas.style.position = "absolute";
     Object.assign(this.canvas.style, {
       position: "absolute",
@@ -93,6 +100,7 @@ export class Whiteboard {
       left: 0,
       cursor: "crosshair",
     });
+    parentNode.appendChild(this.canvas);
 
     this.redraw();
   }
@@ -173,7 +181,7 @@ export class Whiteboard {
     const boundingClientRect = this.canvas.getBoundingClientRect();
     const scaleX = this.canvas.offsetWidth / boundingClientRect.width;
     const scaleY = this.canvas.offsetHeight / boundingClientRect.height;
-    const container = this.parentNode.getBoundingClientRect();
+    const container = this.container.getBoundingClientRect();
     const x = Math.round((event.clientX - container.left) * scaleX);
     const y = Math.round((event.clientY - container.top) * scaleY);
     if (this.mode === "draw") {
