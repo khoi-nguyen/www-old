@@ -5,9 +5,8 @@ import hashlib
 import panflute as pf
 
 TEMPLATE: str = """
-<script>
-const board = new JSXBoard();
-board.board = JXG.JSXGraph.initBoard("%s", board.options);
+<script type="text/javascript">
+const board = new JSXBoard("%s");
 %s
 </script>
 """
@@ -24,7 +23,7 @@ def jsxgraph(element: pf.Element, doc: pf.Doc) -> list[pf.Element] | None:
     div.classes += ["jxgbox"]
     width: str = element.attributes.get("width", "500")
     height: str = element.attributes.get("height", "500")
-    div.attributes = {"style": f"width: {width}px; height: {height}px;"}
+    div.attributes = {"style": f"width: {width}px; height: {height}px; margin: auto;"}
     div.attributes.update(element.attributes)
     js = pf.RawBlock(TEMPLATE % (div.identifier, element.text), format="html")
     return [div, js]
