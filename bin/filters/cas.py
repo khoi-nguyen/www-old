@@ -41,7 +41,7 @@ CONFIG: dict[LANG, Env] = {
             """
             using SymPy
             @vars x y z t
-            k, m, n = symbols("k  m  n", integer=True)
+            k, m, n = symbols("k m n", integer=True)
         """
         ),
         "cmd": ["env", "julia", "--project=."],
