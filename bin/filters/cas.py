@@ -37,7 +37,13 @@ CONFIG: dict[LANG, Env] = {
         "println": "print(%s)",
     },
     "julia": {
-        "code": "",
+        "code": textwrap.dedent(
+            """
+            using SymPy
+            @vars x y z t
+            k, m, n = symbols("k  m  n", integer=True)
+        """
+        ),
         "cmd": ["env", "julia", "--project=."],
         "println": "println(%s)",
     },
