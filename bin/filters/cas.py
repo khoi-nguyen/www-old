@@ -67,7 +67,7 @@ def exec_then_eval(code: str, lang: LANG) -> str:
         return out
 
 
-def cas(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
+def cas(element: pf.Element, doc: pf.Doc) -> None | pf.Element | list[pf.Element]:
     del doc
     if (
         not (isinstance(element, pf.Code) or isinstance(element, pf.CodeBlock))
@@ -92,7 +92,12 @@ def cas(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
     result = exec_then_eval(code, lang or "python")
     if type(element) == pf.Code:
         return pf.Math(result, format="InlineMath")
-    return pf.Para(pf.Math(result, format="DisplayMath"))
+
+    elements: list[pf.Element] = [pf.Para(pf.Math(result, format="DisplayMath"))]
+    if element.attributes.get("keep-code"):
+        element.classes.remove("eval")
+        elements.insert(0, element)
+    return elements
 
 
 if __name__ == "__main__":
