@@ -25,7 +25,6 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
-    "@types/puppeteer": "^7.0.4",
     "puppeteer": "^19.5.0",
     "vitest": "^0.27.0"
   }
