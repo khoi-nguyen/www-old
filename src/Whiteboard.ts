@@ -79,7 +79,6 @@ export class Whiteboard {
     strokes: Stroke[] = []
   ) {
     this.container = container;
-    this.parentNode = parentNode;
     this.strokes = strokes;
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d")!;
