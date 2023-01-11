@@ -94,7 +94,7 @@ def cas(element: pf.Element, doc: pf.Doc) -> None | pf.Element | list[pf.Element
         return pf.Math(result, format="InlineMath")
 
     elements: list[pf.Element] = [pf.Para(pf.Math(result, format="DisplayMath"))]
-    if element.attributes.get("keep-code") or "keep-code" in element.classes:
+    if "keep" in element.classes:
         element.classes.remove("eval")
         elements.insert(0, element)
     return elements
