@@ -10,6 +10,9 @@ title: Numerical Analysis (MATH-UA 9252)
 
 #### Practical information {.card-title}
 
+My email
+:   <nguyen.khoi@nyu.edu>
+
 Lectures
 :   - Monday 16:45-18:00
     - Wednesday 16:45-18:00
