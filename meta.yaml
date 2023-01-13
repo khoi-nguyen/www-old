@@ -83,7 +83,7 @@ envs:
     name: Definition
     icon: fa-solid fa-book
     classes:
-      - bg-success
+      - bg-primary
       - text-white
   example:
     name: Example
