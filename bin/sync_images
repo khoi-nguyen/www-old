@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for f in static/images/*.png; do
+  n=$(rg -l $f | wc -l)
+  if [[ "$n" == "0" ]]; then
+    rm $f
+  fi
+done
+
+rsync -avz --delete static/images root@nguyen.me.uk:/var/lib/dokku/data/storage
