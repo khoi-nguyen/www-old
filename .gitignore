@@ -4,6 +4,7 @@ __pycache__/
 build/
 node_modules/
 static/cv
+static/images
 static/plots
 static/src
 static/tikz
