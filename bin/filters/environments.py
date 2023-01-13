@@ -25,7 +25,7 @@ def environments(element: pf.Element, doc: pf.Doc):
         header = f"""
         <h5 class="card-header {' '.join(env["classes"])}">
           {icon}
-          <strong>{env.get("name")}</strong>
+          <strong>{env.get("name", "")}</strong>
           {'(' if "title" in element.attributes and env.get("name") else ""}
           {element.attributes.get("title", "")}
           {')' if "title" in element.attributes and env.get("name") else ""}
