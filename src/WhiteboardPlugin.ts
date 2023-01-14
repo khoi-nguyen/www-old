@@ -4,9 +4,15 @@ type EventHandler = (event: RevealEvent) => void;
 
 interface RevealDeck {
   addKeyBinding(keyCode: number, callback: EventHandler): void;
+  availableRoutes(): {
+    top: boolean;
+    right: boolean;
+    bottom: boolean;
+    left: boolean;
+  };
   down(): void;
   getConfig(): { admin: boolean };
-  getIndices(): { h: number; v: number };
+  getIndices(): { h: number; v: number; f: number };
   left(): void;
   on(eventName: string, eventHandler: EventHandler): void;
   right(): void;
@@ -167,8 +173,7 @@ export default class WhiteboardPlugin {
    * Actions to perform when pressing the down arrow
    */
   onDownArrow() {
-    const { h, v } = this.deck.getIndices();
-    if (v === this.boards[h].length - 1) {
+    if (!this.deck.availableRoutes().bottom) {
       if (this.board.strokes.length <= 1) {
         return;
       }
@@ -265,11 +270,12 @@ export default class WhiteboardPlugin {
    * Actions to perform when pressing the up arrow
    */
   onUpArrow() {
-    const { h, v } = this.deck.getIndices();
-    if (this.board.strokes.length <= 1) {
+    const fragmentIndex = this.deck.getIndices().f;
+    const emptyBoard = this.board.strokes.length <= 1;
+    if (emptyBoard && fragmentIndex === 0) {
       this.removeVerticalSlide();
     }
-    this.deck.slide(h, Math.max(v - 1, 0), 0);
+    this.deck.up();
   }
 
   /**
