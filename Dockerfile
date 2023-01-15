@@ -1,6 +1,7 @@
 FROM archlinux:latest
 
 RUN pacman --noconfirm --needed -Syy \
+    biber \
     ghostscript \
     git \
     imagemagick \
@@ -11,19 +12,25 @@ RUN pacman --noconfirm --needed -Syy \
     pandoc \
     python-pip \
     ripgrep \
-    texlive-core \
-    texlive-fontsextra \
-    texlive-latexextra
+    texlive-most
 
 ENV ENVIRONMENT=production
 WORKDIR /www
 
 RUN luaotfload-tool --update
-COPY Makefile requirements.txt ./
-RUN make .venv/bin/activate
+COPY Makefile ./
+
+# Build Urbain's lecture notes
+RUN make static/numerical_analysis
+
+# Precompile Julia environment
 COPY Manifest.toml Project.toml ./
 ENV JULIA_PROJECT=.
 RUN julia -e "using Pkg; Pkg.instantiate(); Pkg.precompile()"
+
+# Python virtual env
+COPY requirements.txt ./
+RUN make .venv/bin/activate
 COPY package.json package-lock.json ./
 RUN npm install
 

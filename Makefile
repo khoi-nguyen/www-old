@@ -14,7 +14,7 @@ CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
-all: lint $(JSON) $(PAGES) $(PDF) $(CV) build/main.js
+all: lint $(JSON) $(PAGES) $(PDF) $(CV) build/main.js static/numerical_analysis
 
 backend: .venv/bin/activate
 	@$(PYTHON) -m app
@@ -53,6 +53,10 @@ build/main.js: node_modules src/ src/elements
 
 node_modules: package.json
 	@npm install
+
+static/numerical_analysis:
+	git clone https://github.com/khoi-nguyen/numerical_analysis.git $@
+	cd $@ && make
 
 %.pdf: %.tex
 	@echo "Building $@"
