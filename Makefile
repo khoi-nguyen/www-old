@@ -40,7 +40,7 @@ build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@$(PYTHON) -m pip install -Ur requirements.txt
 	@touch .venv/bin/activate
 
-build/%.json: %.md templates/ bin/ $(META)
+build/%.json: %.md templates/ bin/ $(META) $(ACTIVATE)
 	@echo "Building $@"
 	@$(ENV) ./bin/pandoc.py --meta-only $< -o $@
 
@@ -73,6 +73,6 @@ test: node_modules
 
 watch:
 	while true; do\
-		make all;\
+		make -j 4 all;\
 		inotifywait -qre close_write .;\
 	done
