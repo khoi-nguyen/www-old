@@ -1,4 +1,5 @@
 IPython
+Pygments
 black
 flask
 flask-login

@@ -1,4 +1,5 @@
-PYTHON := . .venv/bin/activate; python
+ENV := . .venv/bin/activate;
+PYTHON := $(ENV) python
 FIND := find ./ -not -path "*/.*" -not -path "*/julia/*" -type f -name
 
 META := $(shell $(FIND) '*meta.yaml')
@@ -54,9 +55,9 @@ build/main.js: node_modules src/ src/elements
 node_modules: package.json
 	@npm install
 
-static/numerical_analysis:
+static/numerical_analysis: .venv/bin/activate
 	@git clone https://github.com/khoi-nguyen/numerical_analysis.git $@
-	@-cd $@ && make all
+	@-$(ENV) cd $@ && make all
 
 %.pdf: %.tex
 	@echo "Building $@"
