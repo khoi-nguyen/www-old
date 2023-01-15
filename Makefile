@@ -1,10 +1,4 @@
-ACTIVATE := .venv/bin/activate
-ENV := . $(ACTIVATE);
-ifeq (${ENVIRONMENT},production)
-	ACTIVATE :=
-	ENV :=
-endif
-PYTHON := $(ENV) python
+PYTHON := .venv/bin/activate; python
 FIND := find ./ -not -path "*/.*" -not -path "*/julia/*" -type f -name
 
 META := $(shell $(FIND) '*meta.yaml')
@@ -22,15 +16,15 @@ CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
 all: lint $(JSON) $(PAGES) $(PDF) $(CV) build/main.js
 
-backend: $(ACTIVATE)
+backend: .venv/bin/activate
 	@$(PYTHON) -m app
 
-lint: $(ACTIVATE) node_modules
+lint: .venv/bin/activate node_modules
 	@$(PYTHON) -m black .
 	@$(PYTHON) -m isort *.py
 	@npm run lint
 
-build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
+build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile .venv/bin/activate
 	@echo "Building $@"
 	@mkdir -p $(@D)
 	@$(PYTHON) bin/cv.py $@ $(word 2, $^) > $@
@@ -40,17 +34,17 @@ build/cv/%.tex: cv.yaml templates/cv.tex bin/cv.py Makefile $(ACTIVATE)
 	@$(PYTHON) -m pip install -Ur requirements.txt
 	@touch .venv/bin/activate
 
-build/%.json: %.md templates/ bin/ $(META) $(ACTIVATE)
+build/%.json: %.md templates/ bin/ $(META) .venv/bin/activate
 	@echo "Building $@"
-	@$(ENV) ./bin/pandoc.py --meta-only $< -o $@
+	@$(PYTHON) ./bin/pandoc.py --meta-only $< -o $@
 
-build/%.html: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
+build/%.html: %.md build/%.json templates/ bin/ bin/filters $(META) .venv/bin/activate
 	@echo "Building $@"
-	@$(ENV) ./bin/pandoc.py --meta-file=$(word 2, $^) $< -o $@
+	@$(PYTHON) ./bin/pandoc.py --meta-file=$(word 2, $^) $< -o $@
 
-build/%.tex: %.md build/%.json templates/ bin/ bin/filters $(META) $(ACTIVATE)
+build/%.tex: %.md build/%.json templates/ bin/ bin/filters $(META) .venv/bin/activate
 	@echo "Building $@"
-	@$(ENV) ./bin/pandoc.py $< -o $@
+	@$(PYTHON) ./bin/pandoc.py $< -o $@
 
 build/main.js: node_modules src/ src/elements
 	@echo "Building $@"
