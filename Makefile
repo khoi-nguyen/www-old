@@ -56,7 +56,7 @@ node_modules: package.json
 
 static/numerical_analysis:
 	@git clone https://github.com/khoi-nguyen/numerical_analysis.git $@
-	@-cd $@ && make
+	@-cd $@ && make all
 
 %.pdf: %.tex
 	@echo "Building $@"
