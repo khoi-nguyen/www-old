@@ -61,7 +61,7 @@ url: https://www.youtube.com/watch?v=32wBZwWFGT4
 
 # Lecture notes
 
-<pdf-reader src="/static/numerical-analysis/1-roundoff.pdf">
+<pdf-reader src="/static/numerical_analysis/build/roundoff.pdf">
 
 # Motivations {.row}
 
