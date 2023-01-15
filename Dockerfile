@@ -11,7 +11,6 @@ RUN pacman --noconfirm --needed -Syy \
     npm \
     pandoc \
     python-pip \
-    python-pygments \
     ripgrep \
     texlive-most
 
@@ -20,9 +19,6 @@ WORKDIR /www
 
 RUN luaotfload-tool --update
 COPY Makefile ./
-
-# Build Urbain's lecture notes
-RUN make static/numerical_analysis
 
 # Precompile Julia environment
 COPY Manifest.toml Project.toml ./
@@ -36,7 +32,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
-RUN make all
+RUN make -j 4 all
 
 ENV PATH="/www/.venv/bin:$PATH"
 CMD ["gunicorn", "-k", "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "-w", "1", "--bind", "0.0.0.0:5000", "app:app"]
