@@ -11,6 +11,7 @@ RUN pacman --noconfirm --needed -Syy \
     npm \
     pandoc \
     python-pip \
+    python-pygments \
     ripgrep \
     texlive-most
 
