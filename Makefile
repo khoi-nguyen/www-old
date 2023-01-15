@@ -1,4 +1,4 @@
-PYTHON := .venv/bin/activate; python
+PYTHON := . .venv/bin/activate; python
 FIND := find ./ -not -path "*/.*" -not -path "*/julia/*" -type f -name
 
 META := $(shell $(FIND) '*meta.yaml')
