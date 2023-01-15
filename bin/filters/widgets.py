@@ -107,7 +107,7 @@ def geogebra(url: str, width: int = 800, height: int = 600) -> str:
     url += f"/width/{width}/height/{height}/ai/false/smb/false/stb/false"
     return f"""
       <iframe scrolling="no"
-        src="{url}"
+        data-src="{url}"
         height="{height}"
         width="{width}"
         style="border: 0px; margin: auto" allowfullscreen>
@@ -119,7 +119,7 @@ def youtube(url: str, width: float = 560, height: float = 315, zoom: float = 1):
     url = url.replace("watch?v=", "embed/")
     return f"""
     <iframe width="{width * zoom}" height="{height * zoom}"
-        src="{url}" frameborder="0" style="margin: auto"
+        data-src="{url}" frameborder="0" style="margin: auto"
         allow="autoplay; encrypted-media" allowfullscreen>
     </iframe>
     """
