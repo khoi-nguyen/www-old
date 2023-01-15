@@ -1,3 +1,5 @@
+import * as io from "socket.io-client";
+
 import { BoardEventName, Stroke, Whiteboard } from "./Whiteboard";
 
 type EventHandler = (event: RevealEvent) => void;
@@ -113,6 +115,8 @@ export default class WhiteboardPlugin {
     this.container = document.querySelector(".reveal .slides")!;
     this.container.oncontextmenu = () => false;
     this.container.onselectstart = () => false;
+    const socket = io.connect(window.location.origin);
+    socket.on("changeReceived", this.onBoardChangeReceived.bind(this));
   }
 
   /**
