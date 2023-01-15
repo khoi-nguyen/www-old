@@ -55,8 +55,8 @@ node_modules: package.json
 	@npm install
 
 static/numerical_analysis:
-	git clone https://github.com/khoi-nguyen/numerical_analysis.git $@
-	cd $@ && make
+	@git clone https://github.com/khoi-nguyen/numerical_analysis.git $@
+	@-cd $@ && make
 
 %.pdf: %.tex
 	@echo "Building $@"
