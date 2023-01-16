@@ -252,7 +252,7 @@ url: https://www.geogebra.org/m/tpfebt9w
 $$f(x) = a \sin(b(x - c)) + d$$
 
 ~~~ {.yaml .widget name="geogebra"}
-https://www.geogebra.org/m/QgE48Y5j
+url: https://www.geogebra.org/m/QgE48Y5j
 ~~~
 
 # Graphe de $x \mapsto a \sin(bx + c) + d$
