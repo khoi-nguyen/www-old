@@ -201,7 +201,7 @@ Aire de secteur        $A = \frac {\pi} {360} \alpha r^2$       $A = \frac \alph
 
 ![](/static/images/1673866837.png){width=100%}
 
-# Problème 2: arcs et secteurs {.split}
+# Problème 2: arcs et secteurs
 
 ![](/static/images/1673867014.png){width=100%}
 
