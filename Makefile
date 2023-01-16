@@ -15,7 +15,7 @@ CV := build/cv/cv_en.pdf build/cv/cv_fr.pdf build/cv/cv_es.pdf
 
 .PRECIOUS: $(TEX) $(CV:.pdf=.tex)
 
-all: static/numerical_analysis lint $(JSON) $(PAGES) $(PDF) $(CV) build/main.js
+all: lint $(JSON) $(PAGES) $(PDF) $(CV) build/main.js
 
 backend: .venv/bin/activate
 	@$(PYTHON) -m app
