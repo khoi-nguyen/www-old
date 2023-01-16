@@ -33,7 +33,7 @@ entre $0$ et $1$.
 const f = x => x ** 2;
 board.boundingbox = [-0.4, 1.2, 1.2, -1.2];
 let n = board.slider([-0.2, 0.6], 0.6, [5, 10, 30]);
-board.riemannSum(f, () => n.Value(), 0, 1, "left");
+board.riemannSum(f, () => n.Value(), 0, 1, "right");
 board.plot(f)
 ~~~
 
@@ -64,7 +64,7 @@ plot(x, y, aspect_ratio=:equal, framestyle=:origin)
 ::::: {.col}
 ~~~ julia
 # La fonction dont on cherche à calculer l'aire, càd le quart de cercle
-f(x) = sqrt(1 - x^2)
+f(x) = √(1 - x^2)
 
 # Le nombre d'intervalles qu'on utilisera
 n = 1000000
@@ -77,6 +77,42 @@ aire = sum(1/n * f.(x))
 
 # On multiplie par 4 pour avoir l'aire du disque
 4 * aire
+~~~
+:::::
+
+# La méthode de Monte-Carlo {.row}
+
+::::: {.col}
+![](https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif)
+:::::
+
+::::: {.col}
+::: {.idea .fragment}
+On estime l'aire rouge sous la courbe $\frac \pi 4$ via
+
+$$\frac {\pi} 4 = \frac {\text{nombre de points rouge (n)}} {\text{nombre total de points (N)}}$$
+:::
+
+~~~ {.python .fragment}
+import random
+
+n = 0 # Nombre de points rouges
+N = 0 # Nombre total de points
+
+# Répète indéfiniment:
+while True is True:
+    # Choisis un point (x, y) dans le carré
+    x = random.uniform(0, 1)
+    y = random.uniform(0, 1)
+
+    # Si on est dans la zone rouge...
+    if x ** 2 + y ** 2 < 1:
+        n += 1
+
+    # Dans tous les cas, on a ajouté un point
+    N += 1
+
+    print("Notre estimation de pi est", 4 * n / N)
 ~~~
 :::::
 
@@ -128,3 +164,28 @@ $$\text{moyenne} = \frac {\text{intégrale}} {\text{longueur de l'intervalle}}$$
 Étant donné qu'une **moyenne peut être négative**,
 ce résultat n'est possible que parce que l'intégrale peut être négative.
 :::
+
+# Définition: l'intégrale {.split}
+
+::: {.definition title="Intégrale"}
+Soit $f$ une fonction continue sur $[a, b]$.
+L'intégrale de $f$ sur $[a, b]$, dénotée $\int_a^b f(x) \dd x$, est la limite
+
+$$\int_a^b f(x) \dd x = \lim_{n \to \infty} \sum_{i = 1}^n f(x_i) \Delta x,
+\quad \text{où }
+\begin{cases}
+\Delta x &= \frac {b - a} n\\
+x_i &= a + i \Delta x
+\end{cases}.$$
+:::
+
+::: remark
+Nous admettrons que la limite existe,
+et que l'on peut considérer des divisions de $[a, b]$ non équidistantes
+et choisir le point $x_i$ plus librement.
+:::
+
+# L'intégrale indéfinie
+
+$$F(x) = \int_a^x f(t) \dd t$$
+
