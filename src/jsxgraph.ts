@@ -56,6 +56,15 @@ export default class JSXBoard {
     return this.create("functiongraph", [func], options);
   }
 
+  slider(
+    startPoint: [number, number],
+    len: number,
+    data: [number, number, number]
+  ) {
+    const endPoint = [startPoint[0] + len, startPoint[1]];
+    return this.create("slider", [startPoint, endPoint, data], {});
+  }
+
   riemannSum(
     func: RealFunction,
     n: Parameter,
