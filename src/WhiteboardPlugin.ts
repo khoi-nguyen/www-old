@@ -210,7 +210,7 @@ export default class WhiteboardPlugin {
       const slide = slides[i];
 
       // Complete missing data
-      if (i >= data.length) {
+      while (i >= data.length) {
         data.push([[]]);
       }
       this.boards.push([]);
