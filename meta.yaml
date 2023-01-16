@@ -97,6 +97,12 @@ envs:
     classes:
       - bg-success
       - text-white
+  idea:
+    name: Idea
+    icon: fa-solid fa-lightbulb
+    classes:
+      - bg-primary
+      - text-white
   info:
     name: Information
     icon: fa-solid fa-circle-info
