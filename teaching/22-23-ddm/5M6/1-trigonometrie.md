@@ -197,6 +197,18 @@ Aire de secteur        $A = \frac {\pi} {360} \alpha r^2$       $A = \frac \alph
 
 ![](/static/images/1673825546.png){width=100%}
 
+# Problème: arcs et secteurs {.split}
+
+![](/static/images/1673866837.png){width=100%}
+
+# Problème 2: arcs et secteurs {.split}
+
+![](/static/images/1673867014.png){width=100%}
+
+# Problème 3: arcs et secteurs
+
+![](/static/images/1673867176.png){width=100%}
+
 # La fonction $x \mapsto \sin x$ {.row}
 
 ::::: {.col}
@@ -258,3 +270,37 @@ url: https://www.geogebra.org/m/QgE48Y5j
 # Graphe de $x \mapsto a \sin(bx + c) + d$
 
 ![](/static/images/1673827851.png)
+
+# Exercice {.split}
+
+![](/static/images/1673866723.png){width=100%}
+
+# Exemple
+
+Tracer le graphe de $f(x) = 3 \sin\left(2 \left(x + \frac \pi 8\right)\right) + 1$.
+
+![](/static/images/1673865621.png){width=80%}
+
+# Exercices
+
+![](/static/images/1673865849.png){height=100%}
+
+# Trouver l'équation analytique depuis un graphe {.split}
+
+![](/static/images/1673866353.png){width=100%}
+
+# Exercices
+
+![](/static/images/1673866268.png)
+
+# Problème: trouver l'équation analytique
+
+![](/static/images/1673868777.png){width=50%}
+
+# Problème 2: trouver l'équation analytique
+
+![](/static/images/1673868856.png)
+
+# Problème 3: trouver l'équation analytique
+
+![](/static/images/1673868894.png)
