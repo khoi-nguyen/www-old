@@ -185,7 +185,76 @@ et que l'on peut considérer des divisions de $[a, b]$ non équidistantes
 et choisir le point $x_i$ plus librement.
 :::
 
-# L'intégrale indéfinie
+# Propriétés de l'intégrale indéfinie {.split}
+
+![](/static/images/1673859961.png)
+
+# Propriétés de l'intégrale indéfinie {.split}
+
+![](/static/images/1673859988.png)
+
+# Propriétés de l'intégrale indéfinie: exercices {.split}
+
+![](/static/images/1673859537.png){width=100%}
+
+# L'intégrale indéfinie {.split}
+
+::: {.definition title="Intégrale indéfinie"}
+Soit $f$ une fonction continue sur $[a, b]$.
+Une fonction de la forme
+$$F(x) = \int_c^x f(t) \dd t$$
+est appelée **intégrale indéfinie** de $f$.
+:::
+
+::: {.proposition title="Flux"}
+Notons que
+$$F(b) - F(a) = \int_a^b f(t) \dd t$$
+:::
+
+# Théorème fondamental de l'analyse {.split}
+
+::: {.theorem title="Théorème fondamental de l'analyse, partie I"}
+Soit $f$ une fonction continue sur $[a, b]$.
+L'intégrale indéfinie
 
 $$F(x) = \int_a^x f(t) \dd t$$
 
+satisfait $F' = f$.
+:::
+
+::: {.theorem .fragment title="Théorème fondamental de l'analyse, partie II"}
+Soit $f$ une fonction continue sur $[a, b]$
+Si $F$ satisfait $F' = f$, alors
+$$\int_a^b f(x) \dd x = F(b) - F(a).$$
+:::
+
+::: {.definition .fragment}
+Soit $F$ une fonction dérivable sur $[a, b]$.
+On dit que $F$ est une **primitive** de $F'$.
+:::
+
+# Vérifier que c'est une primitive {.split}
+
+![](/static/images/1673859464.png){width=100%}
+
+# Primitive et non-unicité {.split}
+
+::: {.definition .fragment}
+Soit $F$ une fonction dérivable sur $[a, b]$.
+On dit que $F$ est une **primitive** de $f = F'$.
+:::
+
+Généralement, la primitive n'est **pas unique**.
+
+Par exemple, $\frac {x^3} 3 + 3$ et $\frac {x^3} 3$
+sont des primitives de $x^2$.
+
+On notera
+
+$$\int x^2 \dd x = \frac {x^3} 3 + c$$
+
+# Primitives de fonctions usuelles
+
+Primitiver c'est l'opération inverse de la dérivation.
+
+![](/static/images/1673858086.png){width=100%}
