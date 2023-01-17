@@ -197,6 +197,22 @@ et choisir le point $x_i$ plus librement.
 
 ![](/static/images/1673859537.png){width=100%}
 
+# L'idée de Newton
+
+::: {.block title="Citation (Isaac Newton)"}
+I consider mathematical quantities in this place not as consisting of parts;
+but as described by a **continued motion**.
+Lines are described, and thereby generated not by the apposition of parts,
+but by the continued motion of points;
+**surfaces by the motion of lines**;
+Solids by the motion of surfaces;
+Angles by the rotation of the sides; Portion of time by a continual flux: and so in other quantities. These geneses really take place in nature of things, and are daily seen in the motion of bodies. And after this manner the ancients, by drawing moveable right lines along immoveable right lines taught the genesis of reflection...
+:::
+
+~~~ {.yaml .widget name="geogebra"}
+url: https://www.geogebra.org/m/tcgmvhje
+~~~
+
 # L'intégrale indéfinie {.split}
 
 ::: {.definition title="Intégrale indéfinie"}
@@ -227,6 +243,10 @@ Soit $f$ une fonction continue sur $[a, b]$
 Si $F$ satisfait $F' = f$, alors
 $$\int_a^b f(x) \dd x = F(b) - F(a).$$
 :::
+
+Aire et dérivées sont des opérations inverses!
+
+# Primitives {.split}
 
 ::: {.definition .fragment}
 Soit $F$ une fonction dérivable sur $[a, b]$.
