@@ -100,6 +100,26 @@ $n!$ se lit "$n$ factorielle".
 
 ![](/static/images/1673570571.png){width=100%}
 
+# Rappels du vendredi {.split}
+
+::: question
+- Parfois, le nombre de possibilités décroît ($8 \cdot 7 \cdot 6 \dots$) mais
+  parfois reste constant. Dans quelles situation a-t-on chaque cas?
+- Ecris $23 \times 22 \times \dots 7 \times 6$ comme un quotient de **factorielles**.
+:::
+
+::: exercise
+#. De combien de façon différentes peut-on ranger 8 élèves en file indienne parmi les 24
+élèves de la classe?
+#. Combien de mots de 3 lettres peut-on former avec les lettres h, j, k l, i et e?
+#. Combien de nombre impairs y a-t-il entre 12000 et 13000 ?
+#. Une séquence d’ADN est constituée d’un enchaînement de 4 nucléotides : A
+(Adenine), C(Cytosine), G(Guanine) et T (Thymine). Combien y a-t-il de
+trinucléotides (ensemble formé de 3 nucléotides) possibles?
+#. Dans un local, il y a 20 bancs individuels. La classe est composée de 12 élèves. De
+combien de manières peuvent-ils se placer ?
+:::
+
 # Nombre de permutations {.split}
 
 ::: question
