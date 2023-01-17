@@ -227,6 +227,23 @@ Notons que
 $$F(b) - F(a) = \int_a^b f(t) \dd t$$
 :::
 
+# Primitives {.split}
+
+::: {.definition .fragment}
+Soit $f$ une fonction dérivable sur $[a, b]$.
+On dit que $F$ est une **primitive** de $f$ sur $[a, b]$
+si $F$ est dérivable et $F' = f$ sur $[a, b]$.
+:::
+
+::: example
+- $\frac {x^2} 2$ et $\frac {x^2} 2 + 4$ sont des primitives de $x$.
+:::
+
+::: proposition
+Soient $F_1, F_2$ deux primitives de $f$ sur $[a, b]$.
+Alors $F_1 = F_2 + C$ pour $C \in \R$.
+:::
+
 # Théorème fondamental de l'analyse {.split}
 
 ::: {.theorem title="Théorème fondamental de l'analyse, partie I"}
@@ -235,23 +252,20 @@ L'intégrale indéfinie
 
 $$F(x) = \int_a^x f(t) \dd t$$
 
-satisfait $F' = f$.
+est une **primitive** de $f$.
 :::
 
 ::: {.theorem .fragment title="Théorème fondamental de l'analyse, partie II"}
 Soit $f$ une fonction continue sur $[a, b]$
-Si $F$ satisfait $F' = f$, alors
+Si $F$ est une primitive de $f$ sur $[a, b]$,
 $$\int_a^b f(x) \dd x = F(b) - F(a).$$
 :::
 
-Aire et dérivées sont des opérations inverses!
-
-# Primitives {.split}
-
-::: {.definition .fragment}
-Soit $F$ une fonction dérivable sur $[a, b]$.
-On dit que $F$ est une **primitive** de $F'$.
+::: example
+- Calculer $\int_0^1 x^2 \dd x$
+- Calculer $\int_0^1 e^x \dd x$
 :::
+
 
 # Vérifier que c'est une primitive {.split}
 
@@ -260,11 +274,12 @@ On dit que $F$ est une **primitive** de $F'$.
 # Primitive et non-unicité {.split}
 
 ::: {.definition .fragment}
-Soit $F$ une fonction dérivable sur $[a, b]$.
-On dit que $F$ est une **primitive** de $f = F'$.
+Soit $f$ une fonction dérivable sur $[a, b]$.
+On dit que $F$ est une **primitive** de $f$ sur $[a, b]$
+si $F$ est dérivable et $F' = f$ sur $[a, b]$.
 :::
 
-Généralement, la primitive n'est **pas unique**.
+Rappelons que la primitive n'est **pas unique**.
 
 Par exemple, $\frac {x^3} 3 + 3$ et $\frac {x^3} 3$
 sont des primitives de $x^2$.
