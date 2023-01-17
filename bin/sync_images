@@ -7,4 +7,4 @@ for f in static/images/*.png; do
   fi
 done
 
-rsync -avz --delete static/images root@nguyen.me.uk:/var/lib/dokku/data/storage
+rsync -avz static/images root@nguyen.me.uk:/var/lib/dokku/data/storage
