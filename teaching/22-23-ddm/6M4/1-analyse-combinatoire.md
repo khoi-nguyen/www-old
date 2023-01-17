@@ -137,6 +137,9 @@ Combien existe-t-il d'anagrammes du mot:
 
 - BAOBAB ?
 - MISSISSIPI ?
+- CELLULE ?
+- VACANCES ?
+- CHOCOLAT ?
 :::
 
 ::: {.exercise}
