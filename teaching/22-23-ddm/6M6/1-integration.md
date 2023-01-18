@@ -274,6 +274,11 @@ $$\int_a^b f(x) \dd x = G(b) - G(a).$$
   change les bornes de l'intégrale.
 - Primitiver: inverse de la dérivée
 - Lien entre primitive et intégrale
+  - L'intégrale indéfinie
+    $$\int_c^x f(t) \dd t$$
+    est une primitive
+  - Calculer une intégrale est immédiat lorsque l'on connaît une primitive
+    $$\int_a^b f(x) \dd x = F(b) - F(a).$$
 
 # Vérifier que c'est une primitive {.split}
 
