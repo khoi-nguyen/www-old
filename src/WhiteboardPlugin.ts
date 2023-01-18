@@ -238,7 +238,7 @@ export default class WhiteboardPlugin {
         }
         // Create the canvas and add it to the DOM
         const strokes = j < data[i].length ? data[i][j] : [];
-        this.boards[i][j] = this.newBoard(i, j, strokes);
+        this.boards[i].splice(j, 0, this.newBoard(i, j, strokes));
       }
     }
     const indices = this.deck.getIndices();
