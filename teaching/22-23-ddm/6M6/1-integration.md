@@ -303,7 +303,7 @@ $$\int x^2 \dd x = \frac {x^3} 3 + c$$
 
 # Primitives de fonctions usuelles {.split}
 
-$$\int x^n \dd x = \frac {x^{n + 1}} {n + 1} + c$$
+$$\int x^n \dd x = \frac {x^{n + 1}} {n + 1} + c, \quad n \neq -1$$
 
 $$\int \frac 1 x \dd x = \ln |x| + c$$
 
@@ -319,6 +319,30 @@ $$\int \frac 1 {\sin^2 x} \dd x = \int 1 + \cot^2 x \dd x = -\cot x + c$$
 
 $$\int \frac 1 {1 + x^2} \dd x = \arctan x + c$$
 
-# Primitives immédiates: exercices
+# Primitives immédiates: exercices {.split}
 
-![](/static/images/1674008702.png)
+![](/static/images/1674008702.png){width=100%}
+
+# Primitives de fonctions composées {.split}
+
+::: proposition
+Soit $u$ une fonction dérivable sur $[a, b]$.
+Supposons que $f$ soit primitivable sur $u([a, b])$
+et dénotons par $F$ une telle primitive.
+On a
+
+$$\int f(u(x)) u'(x) \dd x = F(u(x)) + c.$$
+:::
+
+::: example
+$$\int 2x \sin x^2 \dd x$$
+$$\int \frac {8x - 3} {4x^2 - 3x + 1} \dd x$$
+:::
+
+::: remark
+Note à moi-même: introduire la substitution par $\dd u$.
+:::
+
+# Primitives de fonctions composées: exercices {.split}
+
+![](/static/images/1674019422.png){width=100%}
