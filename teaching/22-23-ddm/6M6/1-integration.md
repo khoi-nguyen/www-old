@@ -275,7 +275,7 @@ $$\int_a^b f(x) \dd x = G(b) - G(a).$$
 - Primitiver: inverse de la dérivée
 - Lien entre primitive et intégrale
   - L'intégrale indéfinie
-    $$\int_c^x f(t) \dd t$$
+    $$x \mapsto \int_c^x f(t) \dd t$$
     est une primitive
   - Calculer une intégrale est immédiat lorsque l'on connaît une primitive
     $$\int_a^b f(x) \dd x = F(b) - F(a).$$
@@ -301,11 +301,23 @@ On notera
 
 $$\int x^2 \dd x = \frac {x^3} 3 + c$$
 
-# Primitives de fonctions usuelles
+# Primitives de fonctions usuelles {.split}
 
-Primitiver c'est l'opération inverse de la dérivation.
+$$\int x^n \dd x = \frac {x^{n + 1}} {n + 1} + c$$
 
-![](/static/images/1673858086.png){width=100%}
+$$\int \frac 1 x \dd x = \ln |x| + c$$
+
+$$\int a^x \dd x = \frac {a^x} {\ln a} + c$$
+
+$$\int \sin x \dd x = -\cos x + c$$
+
+$$\int \cos x \dd x = \sin x + c$$
+
+$$\int \frac 1 {\cos^2 x} \dd x = \int 1 + \tan^2 x \dd x = \tan x + c$$
+
+$$\int \frac 1 {\sin^2 x} \dd x = \int 1 + \cot^2 x \dd x = -\cot x + c$$
+
+$$\int \frac 1 {1 + x^2} \dd x = \arctan x + c$$
 
 # Primitives immédiates: exercices
 
