@@ -250,15 +250,15 @@ Alors $F_1 = F_2 + C$ pour $C \in \R$.
 Soit $f$ une fonction continue sur $[a, b]$.
 L'intégrale indéfinie
 
-$$F(x) = \int_a^x f(t) \dd t$$
+$$F(x) = \int_c^x f(t) \dd t$$
 
 est une **primitive** de $f$.
 :::
 
 ::: {.theorem .fragment title="Théorème fondamental de l'analyse, partie II"}
 Soit $f$ une fonction continue sur $[a, b]$
-Si $F$ est une primitive de $f$ sur $[a, b]$,
-$$\int_a^b f(x) \dd x = F(b) - F(a).$$
+Si $G$ est une primitive de $f$ sur $[a, b]$,
+$$\int_a^b f(x) \dd x = G(b) - G(a).$$
 :::
 
 ::: example
@@ -266,6 +266,14 @@ $$\int_a^b f(x) \dd x = F(b) - F(a).$$
 - Calculer $\int_0^1 e^x \dd x$
 :::
 
+# Rappel 18/01 {.split}
+
+- Aire algébrique sous $f$ (intégrale) entre $a$ et $b$:
+  $$\int_a^b f(x) \dd x$$
+- Changer le signe de la fonction ou l'ordre des bornes
+  change les bornes de l'intégrale.
+- Primitiver: inverse de la dérivée
+- Lien entre primitive et intégrale
 
 # Vérifier que c'est une primitive {.split}
 
@@ -293,3 +301,7 @@ $$\int x^2 \dd x = \frac {x^3} 3 + c$$
 Primitiver c'est l'opération inverse de la dérivation.
 
 ![](/static/images/1673858086.png){width=100%}
+
+# Primitives immédiates: exercices
+
+![](/static/images/1674008702.png)
