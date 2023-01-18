@@ -88,7 +88,9 @@ def save_board(url: str = "") -> werkzeug.Response:
 def clean(boards: BoardList) -> BoardList:
     """Delete empty strokes from a board list"""
     for slide in boards:
-        for board in slide:
+        for indexv, board in enumerate(slide):
+            if not board:
+                del slide[indexv]
             for i, stroke in enumerate(board):
                 if len(stroke["points"]) == 0:
                     del board[i]
