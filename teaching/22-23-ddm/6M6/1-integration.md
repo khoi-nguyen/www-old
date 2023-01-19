@@ -346,3 +346,26 @@ Note à moi-même: introduire la substitution par $\dd u$.
 # Primitives de fonctions composées: exercices {.split}
 
 ![](/static/images/1674019422.png){width=100%}
+
+# Primitives par substitution {.split}
+
+![](/static/images/1674087170.png){width=100%}
+
+# Primitivation par parties {.split}
+
+::: proposition
+Soient $f, g$ deux fonctions dérivables.
+Alors $f' g$ est primitivable et
+
+$$\int f'(x) g(x) \dd x = f(x) g(x) - \int f(x) g'(x) \dd x$$
+:::
+
+::: example
+- Calculer $\int x e^x \dd x$
+- Calculer $\int x \ln x \dd x$
+- Calculer $\int e^x \sin x\dd x$
+:::
+
+# Exercices de primitivation par parties {.split}
+
+![](/static/images/1674087511.png){width=100%}
