@@ -181,3 +181,7 @@ Combien peut-on former d'équipe de trois personnes à partir d'un ensemble de d
 # Exercices {.split}
 
 ![](/static/images/1673571669.png){height=100%}
+
+# Exercices du dossier {.split}
+
+p. 2-12
