@@ -347,6 +347,34 @@ Note à moi-même: introduire la substitution par $\dd u$.
 
 ![](/static/images/1674019422.png){width=100%}
 
+# Rappels {.row}
+
+::::: {.col}
+::: {.block title="Semaine SIDAMOUR"}
+- Exposition "Que portais-tu ce jour-là"?
+:::
+:::::
+
+::::: {.col}
+$$\int x^n \dd x = \frac {x^{n + 1}} {n + 1} + c, \quad n \neq -1$$
+
+$$\int \frac 1 x \dd x = \ln |x| + c$$
+
+$$\int a^x \dd x = \frac {a^x} {\ln a} + c$$
+
+$$\int \sin x \dd x = -\cos x + c$$
+
+$$\int \cos x \dd x = \sin x + c$$
+
+$$\int \frac 1 {\cos^2 x} \dd x = \int 1 + \tan^2 x \dd x = \tan x + c$$
+
+$$\int \frac 1 {\sin^2 x} \dd x = \int 1 + \cot^2 x \dd x = -\cot x + c$$
+
+$$\int \frac 1 {1 + x^2} \dd x = \arctan x + c$$
+
+$$\int \frac 1 {\sqrt{1 + x^2}} \dd x = \arcsin - + c$$
+:::::
+
 # Primitives par substitution {.split}
 
 ![](/static/images/1674087170.png){width=100%}
