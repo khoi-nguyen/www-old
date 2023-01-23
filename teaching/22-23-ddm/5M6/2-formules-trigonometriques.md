@@ -146,6 +146,7 @@ $$\sin a + \sin b = 2 \sin \frac {a + b} 2 \cos \frac {a - b} 2$$
 $$\sin a - \sin b = 2 \sin \frac {a - b} 2 \cos \frac {a + b} 2$$
 $$\cos a + \cos b = 2 \cos \frac {a + b} 2 \cos \frac {a - b} 2$$
 $$\cos a - \cos b = -2 \sin \frac {a + b} 2 \sin \frac {a - b} 2$$
+$$\tan a + \tan b = $$
 :::
 
 # Exercices dirigés sur les formules de Simpson 5-39
