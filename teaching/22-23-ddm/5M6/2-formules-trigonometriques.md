@@ -114,3 +114,45 @@ $$\sin (a \pm b) = \sin a \cos b \pm \cos a \sin b$$
 $$\cos (a \pm b) = \cos a \cos b \mp \sin a \sin b$$
 $$\tan (a \pm b) = \frac {\tan a \pm \tan b} {1 \mp \tan a \tan b}$$
 :::
+
+# Formules de Carnot 5-36 {.split}
+
+::: {.proposition title="Formules de Carnot"}
+$$\cos^2 a = \frac {1 + \cos 2a} 2.$$
+$$\sin^2 a = \frac {1 - \cos 2a} 2.$$
+:::
+
+::: exercise
+- Calcule, sans calculatrice, $\cos 15^\circ$.
+- Montre que
+  $$\frac {\cos a} {1 + \cos a} \cdot \frac {\sin 2a} {1 + \cos 2a} = \tan \frac a 2$$
+:::
+
+# Formules de Simpson 5-37 {.split}
+
+::: {.proposition title="Formules de Simpson"}
+$$\sin a + \sin b = 2 \sin \frac {a + b} 2 \cos \frac {a - b} 2$$
+$$\sin a - \sin b = 2 \sin \frac {a - b} 2 \cos \frac {a + b} 2$$
+:::
+
+::: example
+$$\sin 4x + \sin 2x = \dots$$
+:::
+
+# Formules de Simpson 5-38 {.split}
+
+::: {.proposition title="Formules de Simpson"}
+$$\sin a + \sin b = 2 \sin \frac {a + b} 2 \cos \frac {a - b} 2$$
+$$\sin a - \sin b = 2 \sin \frac {a - b} 2 \cos \frac {a + b} 2$$
+$$\cos a + \cos b = 2 \cos \frac {a + b} 2 \cos \frac {a - b} 2$$
+$$\cos a - \cos b = -2 \sin \frac {a + b} 2 \sin \frac {a - b} 2$$
+:::
+
+# Exercices dirigés sur les formules de Simpson 5-39
+
+::: {.proposition title="Formules de Simpson"}
+$$\sin a + \sin b = 2 \sin \frac {a + b} 2 \cos \frac {a - b} 2$$
+$$\sin a - \sin b = 2 \sin \frac {a - b} 2 \cos \frac {a + b} 2$$
+$$\cos a + \cos b = 2 \cos \frac {a + b} 2 \cos \frac {a - b} 2$$
+$$\cos a - \cos b = -2 \sin \frac {a + b} 2 \sin \frac {a - b} 2$$
+:::
