@@ -239,7 +239,7 @@ export default class WhiteboardPlugin {
           wrapper.appendChild(slideCopy.cloneNode(true));
         }
         // Create the canvas and add it to the DOM
-        const strokes = data[i].length ? data[i][j] : [];
+        const strokes = data[i][j].length ? data[i][j] : [];
         this.boards[i].splice(j, 0, this.newBoard(i, j, strokes));
       }
     }
