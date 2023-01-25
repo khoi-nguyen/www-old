@@ -36,22 +36,6 @@ notes: |
 - Lecture notes: <https://urbain.vaes.uk/teaching/2022-fall-na/>
 :::
 
-# How to pronounce my name {.row}
-
-::::: {.col}
-::: {.info title="How to pronounce my name?"}
-According to Google,
-
-- Nguyen: A thi**ng we in**tend to do...
-:::
-:::::
-
-::::: {.col .fragment}
-~~~ {.yaml .widget name="youtube"}
-url: https://www.youtube.com/watch?v=32wBZwWFGT4
-~~~
-:::::
-
 # Prerequisites
 
 - Linear Algebra
@@ -237,25 +221,13 @@ For more info, see [@vaes22, Section 1.4 pp. 13-15].
 
 :::
 
-# Floating point formats in Julia {.row}
+# Floating point formats in Julia {.split}
 
-::: col
-~~~ {.julia .fragment}
-Float64(0.1)
+`Float16`, `Float32`, `Float64`
+:   Convert a float to a `Float16`, `Float32` or `Float64`.
 
-Float64(0.1) == Float32(0.1) # false
-
-bitstring(0.1)
-bitstring(Float32(0.1))
-~~~
-:::
-
-::: col
-~~~ {.julia .fragment}
-julia> bitstring(0.1)
-"0011111110111001100110011001100110011001100110011001100110011010"
-~~~
-:::
+`bitstring`
+:   String giving the literat bit representation of a float
 
 # Machine $\epsilon$ {.split}
 
