@@ -8,3 +8,4 @@ for f in static/images/*.png; do
 done
 
 rsync -avz static/images root@nguyen.me.uk:/var/lib/dokku/data/storage
+rsync -avz static/documents root@nguyen.me.uk:/var/lib/dokku/data/storage

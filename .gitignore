@@ -2,5 +2,5 @@
 __pycache__/
 build/
 node_modules/
+static/documents
 static/images
-static/numerical_analysis
