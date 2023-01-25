@@ -34,6 +34,7 @@ notes: |
 ::: {.info .fragment title="Lecture notes"}
 - Slides: <https://nguyen.me.uk/teaching/nyu/2023-spring-na/>
 - Lecture notes: <https://urbain.vaes.uk/teaching/2022-fall-na/>
+- Can be purchased at *Mistral Photo*, 40 rue Saint-Jacques.
 :::
 
 # Prerequisites
