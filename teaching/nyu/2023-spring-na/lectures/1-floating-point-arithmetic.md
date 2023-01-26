@@ -37,16 +37,35 @@ notes: |
 - Can be purchased at *Mistral Photo*, 40 rue Saint-Jacques.
 :::
 
-# Prerequisites
+# Prerequisites and TOC {.row}
+
+::::: {.col}
+
+### Prerequisites
 
 - Linear Algebra
 - Real Analysis
 - (Desirable) Some familiarity with a programming language,
   ideally `python` or `julia`.
 
+:::::
+
+::::: {.col .fragment}
+
+### Contents
+
+#. Floating point arithmetics
+#. Interpolation and approximation
+#. Numerical integration
+#. Linear systems of equations
+#. Nonlinear systems
+#. Numerical computation of eigenvalues
+
+:::::
+
 # Lecture notes
 
-<pdf-reader src="/static/numerical_analysis/build/roundoff.pdf">
+<pdf-reader src="/static/documents/math-ua_9252.pdf">
 
 # Motivations {.row}
 
@@ -59,14 +78,6 @@ julia> 0.1 * 0.1
 0.010000000000000002
 ~~~
 :::
-
-::: {.solution .fragment collapse=0}
-A bit like $\frac 1 3$ in base $10$,
-$\frac 1 {10}$ does not have a finite **binary representation**.
-
-The computer rounds it off,
-which leads to error propagation.
-:::
 :::
 
 ::: col
@@ -77,10 +88,6 @@ What about this?
 julia> 10^19
 -8446744073709551616
 ~~~
-:::
-
-::: {.solution .fragment}
-This is called **integer overflow**.
 :::
 :::
 
