@@ -397,3 +397,31 @@ $$\int f'(x) g(x) \dd x = f(x) g(x) - \int f(x) g'(x) \dd x$$
 # Exercices de primitivation par parties {.split}
 
 ![](/static/images/1674087511.png){width=100%}
+
+# Exercice (Cambridge, STEP II, 1987) {.split}
+
+<!-- Question 2 -->
+
+![](/static/images/1674762085.png)
+
+# Intégrale par changement de variable {.split}
+
+Nous verrons les cas suivants:
+
+Contient                 Changement de variable
+--------                 ----------------------
+$\sqrt{a^2 + x^2}$       $x = a \tan t$
+$\sqrt{a^2 - x^2}$       $x = a \sin t$
+$\sqrt{x^2 - a^2}$       $x = \frac a t$
+
+Exemples:
+
+$$\int \frac 1 {(1 + x^2) \sqrt{1 + x^2}} \dd x$$
+
+$$\int \frac {x^3} {\sqrt{1 - x^2}} \dd x$$
+
+$$\int \frac 1 {x \sqrt{x^2 - 1}} \dd x$$
+
+# Exercices: intégrale par changement de variable {.split}
+
+![](/static/images/1674763393.png)
