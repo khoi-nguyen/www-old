@@ -63,9 +63,16 @@ notes: |
 
 :::::
 
-# Lecture notes
+# Lecture notes {.row}
 
+::: col
 <pdf-reader src="/static/documents/math-ua_9252.pdf">
+:::
+
+::: col
+- List of examinable proofs (will be emphasized during the lecture as well)
+- Exercises at the end of each chapter
+:::
 
 # Motivations {.row}
 
@@ -194,9 +201,10 @@ Adapt the algorithm so that it works for integers.
 :::
 
 ::: {.split .fragment}
-An element such as
-$$(-1)^s 2^{E_\min} (0\cdot b_1 b_2 \dots b_{p - 1})_2$$
-is called **subnormal** or **denormalized**.
+- Note that floats can have **different representations**.
+- An element such as
+  $$(-1)^s 2^{E_\min} (0\cdot b_1 b_2 \dots b_{p - 1})_2$$
+  is called **subnormal** or **denormalized**.
 :::
 
 # Floating points formats [@vaes22, p. 7] {.split}
@@ -237,13 +245,18 @@ For more info, see [@vaes22, Section 1.4 pp. 13-15].
 `bitstring`
 :   String giving the literat bit representation of a float
 
+`typeof`
+:   Get the type of an element.
+
+Appending `f0` to a float turns it into a `Float32`.
+
 # Machine $\epsilon$ {.split}
 
 ::: {.definition title="Machine epsilon"}
 Let $\F = \F(p, E_\min, E_\max)$.
 We define the *machine $\epsilon$* associated with $\F$ via
 
-$$\epsilon_{\F} \defeq 2^{-p + 1}$$
+$$\epsilon_{\F} \defeq 2^{-p + 1} = (\underbrace{0.000\dots 1}_{p \text{ bits}})_2$$
 
 :::
 
@@ -382,7 +395,7 @@ Assume $x \notin \F$ is positive.
 
 - **Infinities**
 
-    - If $x_\max \leq x < 2^{E_\max} (2 - 2^{-p - 1})$, return $x_\max$
+    - If $x_\max \leq x < 2^{E_\max} (2 - \frac \epsilon 2)$, return $x_\max$
     - Otherwise, the special value `Inf` is delivered.
 :::
 
