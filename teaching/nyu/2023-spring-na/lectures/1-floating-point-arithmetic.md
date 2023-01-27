@@ -390,7 +390,7 @@ Assume $x \notin \F$ is positive.
 This define an operation $\fl_\F : \R \to \F$.
 :::
 
-# Operation on floating numbers [@vaes22, p. 11]
+# Operation on floating numbers [@vaes22, p. 11] {.split}
 
 Let $\F, \F'$, with $\F'' = \F \cup \F'$.
 
