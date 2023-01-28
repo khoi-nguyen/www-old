@@ -46,8 +46,8 @@ export default class WhiteboardPlugin {
 
   /**
    * Add a board
-   * @ param i horizontal index
-   * @ param j vertical index
+   * @param i horizontal index
+   * @param j vertical index
    */
   addVerticalSlide(i?: number, j?: number): void {
     const pos = this.deck.getIndices();
