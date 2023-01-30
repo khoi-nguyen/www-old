@@ -3,8 +3,9 @@ title: "Chapter 2: Interpolation and Approximation"
 output: revealjs
 ...
 
-# Chapter 1 summary {.split}
+# Chapter 1 summary {.row}
 
+::::: {.col}
 - Floats are stored in binary with **finite precision**
 - Computers can represent a finite subset of rational numbers
 - Floats are denser around $0$ and are less dense as we get away from it.
@@ -12,6 +13,35 @@ output: revealjs
 - Machine operations ($\widehat +, \widehat \times$):
   - Perform the exact operation
   - Pick the closest number in floating format
+:::::
+
+::::: {.col}
+~~~ {.julia .plot}
+p = -4:0.01:4
+x = 2.0.^p
+y = @. nextfloat(x) - x
+plot(x, y, label=L"\Delta(x)")
+title!("Distance to the successor")
+xticks!(floor.(2.0.^(0:4)))
+xlabel!(L"x")
+yticks!(
+  2.0.^(0:4).*eps(Float64),
+  [latexstring(string(2^i) * "\\epsilon_{\\mathbb{F}}") for i in 0:4]
+)
+~~~
+:::::
+
+# Homework
+
+::: question
+Explain why `Float32(sqrt(6))^2 - 6` is not zero in Julia.
+:::
+
+::: info
+- Have a look at $1.19$, $1.21$ for inspiration.
+- Hand in as `.ipynb` file by email
+- Due next Monday
+:::
 
 # Interpolation {.split}
 
@@ -244,10 +274,10 @@ $$(-1, 10) \quad (0, 4) \quad (2, -2) \quad (4, -40)$$
 ::: {.theorem title="Interpolation Error (examinable)"}
 Assume that $u \in C^{n + 1}([a, b])$
 and let $x_0, \dots, x_n$ denote $n + 1$.
-Then
+Then for each $x \in [a, b]$,
+we can find $\xi \in [a, b]$ such that
 $$u(x) - \widehat u(x) =
-\frac {u^{(n + 1)}(\xi(x))}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
-for some function $\xi : [a, b] \to [a, b]$.
+\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
 :::
 
 # Bibliography
