@@ -1,8 +1,17 @@
 ---
 title: "Chapter 2: Interpolation and Approximation"
 output: revealjs
-private: true
 ...
+
+# Chapter 1 summary {.split}
+
+- Floats are stored in binary with **finite precision**
+- Computers can represent a finite subset of rational numbers
+- Floats are denser around $0$ and are less dense as we get away from it.
+- Machine $\epsilon$, useful to measure **relative** distance.
+- Machine operations ($\widehat +, \widehat \times$):
+  - Perform the exact operation
+  - Pick the closest number in floating format
 
 # Interpolation {.split}
 
@@ -79,13 +88,6 @@ We will try to have $\varphi_i(x_j) = \delta_{ij}$ (identity matrix).
 
 # Lagrange interpolation formula {.split}
 
-Define
-$$\phi_i(x) = \prod_{\substack{j = 0\\ j \neq i}} (x - x_j),
-\quad i = 0, \dots, n.$$
-
-We easily check that $\phi_i(x_j) = 0$ when $i \neq j$.
-As $\phi_i(x_j)$
-
 ::: {.definition title="Lagrange polynomials"}
 $$\varphi_i(x) = \frac{
 \prod_{j \neq i} (x - x_j)
@@ -93,3 +95,159 @@ $$\varphi_i(x) = \frac{
 \prod_{j \neq i} (x_i - x_j)
 }$$
 :::
+
+::: {.proposition .fragment}
+$$\varphi_i(x_j) = \delta_{ij} = \begin{cases}
+1 & \text{if } i = j\\
+0 & \text{otherwise}.
+\end{cases}$$
+:::
+
+::: {.proposition .fragment}
+The polynomial
+
+$$\widehat u(x) = u_0 \varphi_0(x) + u_1 \varphi_1(x) + \dots + u_n \varphi_n(x)$$
+
+goes through $(x_0, u_0)$, $(x_1, u_1)$, \dots, $(x_n, u_n)$.
+:::
+
+# Lagrange interpolation [@vaes22, pp. 27-28] {.split}
+
+$$\varphi_i(x) = \frac{
+\prod_{j \neq i} (x - x_j)
+}{
+\prod_{j \neq i} (x_i - x_j)
+}$$
+$$\widehat u(x) = u_0 \varphi_0(x) + u_1 \varphi_1(x) + \dots + u_n \varphi_n(x)$$
+
+- Evaluating $\widehat u$ is costly when $n$ is large
+- All the basis functions change when adding an interpolation node
+- Numerically unstable because of cancellation between large terms
+  see figure next slide).
+
+# Lagrange polynomials [@vaes22, p. 28] {.split}
+
+![](/static/images/1674991770.png)
+
+# Gregory-Newton interpolation [@vaes22, p. 28] {.split}
+
+This time, we'll work with **equidistant nodes**,
+which we assume to be $0$, $1$, $\dots$, $n$,
+as they provide a useful analogy with the Taylor formula.
+
+Again, let's look for an interpolating polynomial $p$,
+which can be written
+
+$$p(x) = p(0) + p'(0) x + \frac {p''(0)} 2 x^2 + \dots + \frac {p^{(n)}(0)} {n!} x^n.$$
+
+An idea would be approximate $p'(0) \approx \frac {p(1) - p(0)} {1}$.
+
+# Forward difference $\Delta$ and falling powers [@vaes22, pp. 28-29] {.split}
+
+::: {.definition title="Forward difference operator"}
+$$\Delta f(x) = f(x + 1) - f(x)$$
+:::
+
+::: {.definition .fragment title="Falling power"}
+$$x^{\underline k} = x (x - 1) (x - 2) \dots (x - k + 1)$$
+:::
+
+::: {.proposition .fragment title="Difference of falling power"}
+$$\Delta x^{\underline k} = k x^{\underline{k - 1}}$$
+:::
+
+# Newton series [@vaes22, p. 29] {.split}
+
+$$\boxed{
+p(x) = p(0) + \Delta p(0) x^{\underline 1}
++ \frac {\Delta^2 p(0)} {2!} x^{\underline 2}
++ \dots
++ \frac {\Delta^n p(0)} {n!} x^{\underline n}
+}$$
+
+- The right-hand side only requires knowledge of $p(0), p(1), \dots p(n)$.
+
+# Example [@vaes22, p. 29] {.split}
+
+::: example
+Find a closed expression of
+$$S(n) = \sum_{i = 0}^n i^2$$
+:::
+
+# Lagrange vs Gregory-Newton [@vaes22, p. 29] {.split}
+
+- When adding one interpolation node, only one coefficient needs be recalculated
+- GN is more numerically stable, as the basis functions do not take very large values
+- Efficient evaluation
+$$p(x) = \alpha_0 + x\left(
+\alpha_1 + (x - 1) \left(
+\alpha_2 + (x - 2) \left(\dots\right)
+\right)
+\right)$$
+
+# Non-equidistant nodes [@vaes22, p. 30] {.split}
+
+\begin{align}
+\varphi_0(x) &= 1\\
+\varphi_1(x) &= (x - x_0),\\
+\varphi_2(x) &= (x - x_0) (x - x_1),\\
+&\vdots \\
+\varphi_i(x) &= (x - x_0) (x - x_1) \dots (x - x_{i - 1}),\\
+\end{align}
+
+::: question
+What does the system
+\begin{align}
+\begin{pmatrix}
+  \varphi_0(x_0) & \varphi_1(x_0) & \dots & \varphi_n(x_0)\\
+  \varphi_0(x_1) & \varphi_1(x_1) & \dots & \varphi_n(x_1)\\
+  \vdots & \vdots & & \vdots\\
+  \varphi_0(x_n) & \varphi_1(x_n) & \dots & \varphi_n(x_n)\\
+\end{pmatrix}
+\begin{pmatrix}
+\alpha_0 \\ \alpha_1 \\ \vdots \\ \alpha_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+u_0 \\ u_1 \\ \vdots \\ u_n
+\end{pmatrix}
+\end{align}
+become?
+:::
+
+# Non-equidistant Gregory-Newton interpolation [@vaes22, p. 30] {.split}
+
+\begin{align}
+[u_i] &= u_i\\
+[u_i, u_j] &= \frac {u_j - u_i} {x_j - x_i}\\
+[u_0, u_1, \dots, u_d] &= \frac {[u_1, \dots, u_d] - [u_0, \dots, u_{d - 1}]} {x_d - x_0}
+\end{align}
+
+::: proposition
+Assume that $(x_0, u_0), \dots, (x_n, u_n)$ are such that the $x_i$ are distincts.
+
+The interpolating polynomial of degree $n$ can be expressed by
+$$\widehat u(x) = \sum_{i = 0}^n [u_0, u_1 \dots, u_i] \varphi_i(x),$$
+where
+$$\varphi_i(x) = (x - x_0) \dots (x - x_{i - 1})$$
+:::
+
+# Example of Gregory-Newton interpolation [@vaes22, p. 31] {.split}
+
+::: example
+Find the polynomial of degree $3$ that goes through
+$$(-1, 10) \quad (0, 4) \quad (2, -2) \quad (4, -40)$$
+:::
+
+# Interpolation error [@vaes22, p.32] {.split}
+
+::: {.theorem title="Interpolation Error (examinable)"}
+Assume that $u \in C^{n + 1}([a, b])$
+and let $x_0, \dots, x_n$ denote $n + 1$.
+Then
+$$u(x) - \widehat u(x) =
+\frac {u^{(n + 1)}(\xi(x))}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
+for some function $\xi : [a, b] \to [a, b]$.
+:::
+
+# Bibliography
