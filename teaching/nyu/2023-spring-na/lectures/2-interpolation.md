@@ -1,6 +1,8 @@
 ---
 title: "Chapter 2: Interpolation and Approximation"
 output: revealjs
+notes: |
+  - 30/01: Lagrange and equidistant Gregory-Newton interpolation (slides 1-14)
 ...
 
 # Chapter 1 summary {.row}
