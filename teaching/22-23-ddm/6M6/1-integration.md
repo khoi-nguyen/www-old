@@ -425,3 +425,29 @@ $$\int \frac 1 {x \sqrt{x^2 - 1}} \dd x$$
 # Exercices: intégrale par changement de variable {.split}
 
 ![](/static/images/1674763393.png)
+
+# Fonctions rationnelles: dénominateur non factorisable {.split}
+
+$$\int \frac 1 {x^2 + x + 1} \dd x$$
+
+$$\int \frac {x + 2} {x^2 + x + 1} \dd x$$
+
+# Décomposition en fractions simples {.split}
+
+$$f(x) = \frac {2x - 5} {x^2 - 4x + 3}$$
+
+$$f(x) = \frac {3} {x^3 - 1}$$
+
+(Remarque $x^3 - 1 = (x - 1) (x^2 + x + 1)$.)
+
+# Décomposition en fractions simples {.split}
+
+$$\int \frac{x^2 + 2x + 4} {x^2 + 1} \dd x$$
+
+$$\int \frac {2x - 5} {x^2 - 4x + 3} \dd x$$
+
+$$\int \frac {3} {x^3 - 1} \dd x$$
+
+# Intégration de fractions rationnelles {.split}
+
+![](/static/images/1675110560.png){width=100%}
