@@ -424,7 +424,7 @@ $$\int \frac 1 {x \sqrt{x^2 - 1}} \dd x$$
 
 # Exercices: intégrale par changement de variable {.split}
 
-![](/static/images/1674763393.png)
+![](/static/images/1674763393.png){width=100%}
 
 # Fonctions rationnelles: dénominateur non factorisable {.split}
 
