@@ -3,6 +3,7 @@ title: "Chapter 2: Interpolation and Approximation"
 output: revealjs
 notes: |
   - 30/01: Lagrange and equidistant Gregory-Newton interpolation (slides 1-14)
+  - 01/02: Non equidistant Gregory-Newton, interpolation error (15-22)
 ...
 
 # Chapter 1 summary {.row}
