@@ -77,6 +77,12 @@ envs:
     classes:
       - bg-primary
       - text-white
+  corollary:
+    name: Corollary
+    icon: fa-solid fa-book
+    classes:
+      - bg-primary
+      - text-white
   exampleblock:
     classes:
       - bg-success
