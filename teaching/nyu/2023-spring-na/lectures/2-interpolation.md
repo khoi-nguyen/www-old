@@ -217,7 +217,12 @@ $$p(x) = \alpha_0 + x\left(
 \right)
 \right)$$
 
-# Summary {.row}
+# Summary
+
+- Homework due on Monday!
+- Read Julia appendix
+
+::::: row
 
 ::::: {.col}
 
@@ -225,12 +230,14 @@ $$p(x) = \alpha_0 + x\left(
 
 $$\widehat u(x)
 = \sum_{i = 0}^n u_i
+\overbrace{
 \underbrace{\frac {\prod_{j \neq i} (x - x_j)} {\prod_{j \neq i} (x_i - x_j)}}_{
 \substack{
 1 \text{ when } x = x_i,\\
 0 \text{ when } x = x_j \neq x_i
 }
-}$$
+}
+}^{\text{Lagrange polynomial}}$$
 
 - Evaluating $\widehat u$ is costly
 - Lagrange polynomials change when adding nodes
@@ -243,11 +250,14 @@ $$\widehat u(x)
 ## Gregory-Newton
 
 $$\widehat u(x) = \sum_{i = 0}^n \frac 1 {i!}
-\underbrace{\Delta^i u(0)}_{\text{depends only on } \left. u \right|_{\N}} x^{\underline i}$$
+\underbrace{\Delta^i u(0)}_{\text{depends only on } u(n)}
+\overbrace{\prod_{j = 0}^{i - 1} (x - x_j)}^{\text{falling powers}}$$
 
 - Good for incremental interpolation
 - Numerically more stable
 - Efficient evaluation possible via Horner's method
+
+:::::
 
 :::::
 
@@ -397,7 +407,7 @@ y = @. 1 / (1 + 25 * x^2)
 plot(x, y)
 ~~~
 
-::: {.proposition title="Upper bound on the interpolation error"}
+::: {.proposition title="Upper bound on the interpolation error (examinable)"}
 Assume that $u$ is smooth on $[a, b]$. Then
 $$\sup_{[a, b]} |u - \widehat u| \leq
 \frac 1 {4(n + 1)} \left(\sup_{[a, b]} |u^{(n + 1)}|\right) h^{n + 1}$$
@@ -454,13 +464,33 @@ Moreover, the bound is achieved for
 $$p_\star(x) = 2^{-n + 1} \underbrace{\cos (n \arccos x)}_{\text{Chebyshev polynomial}}.$$
 :::
 
-# Are Chebyshev polynomials really polynomials [@vaes22, p. 184] {.split}
+# Are Chebyshev polynomials really polynomials? [@vaes22, p. 184] {.split}
 
 ::: proposition
-$$\cos(n \arccos x) = \sum_{j = 0}^{\lfloor n/2 \rfloor} \binom n {2j} x^{n - 2j} (x - 1)^j$$
+\begin{align}
+\cos(n \arccos x)
+= \sum_{j = 0}^{\lfloor n/2 \rfloor} \binom n {2j} x^{n - 2j} (x^2 - 1)^j &= 2^{n - 1} x^n + \dots
+\end{align}
 :::
 
 **Hint**. Write $\theta = \arccos x.$
+
+# Chebyshev polynomials
+
+\begin{align}
+T_0(x) &= 1 \\
+T_1(x) &= x \\
+T_2(x) &= 2x^2 - 1 \\
+T_3(x) &= 4x^3 - 3x \\
+T_4(x) &= 8x^4 - 8x^2 + 1 \\
+T_5(x) &= 16x^5 - 20x^3 + 5x \\
+T_6(x) &= 32x^6 - 48x^4 + 18x^2 - 1 \\
+T_7(x) &= 64x^7 - 112x^5 + 56x^3 - 7x \\
+T_8(x) &= 128x^8 - 256x^6 + 160x^4 - 32x^2 + 1 \\
+T_9(x) &= 256x^9 - 576x^7 + 432x^5 - 120x^3 + 9x \\
+T_{10}(x) &= 512x^{10} - 1280x^8 + 1120x^6 - 400x^4 + 50x^2-1 \\
+T_{11}(x) &= 1024x^{11} - 2816x^9 + 2816x^7 - 1232x^5 +220x^3 - 11x
+\end{align}
 
 # Chebyshev polynomials {.row}
 
@@ -486,11 +516,11 @@ end
 
 # Chebyshev nodes [@vaes22, p. 37] {.split}
 
-::: corollary
+::: {.corollary title="Chebyshev nodes (examinable)"}
 The function
 $$\omega(x) = (x - x_0) (x - x_1) \dots (x - x_n),$$
 where $\{x_0, x_1, \dots, x_n\} \subset [a, b]$
-is minimized when
+is $\infty$-minimized when
 $$x_i = a + (b - a) \frac {1 + \cos\left(\frac {(2i + 1) \pi} {2n + 2}\right)} 2.$$
 :::
 
