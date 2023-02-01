@@ -454,6 +454,36 @@ Moreover, the bound is achieved for
 $$p_\star(x) = 2^{-n + 1} \underbrace{\cos (n \arccos x)}_{\text{Chebyshev polynomial}}.$$
 :::
 
+# Are Chebyshev polynomials really polynomials [@vaes22, p. 184] {.split}
+
+::: proposition
+$$\cos(n \arccos x) = \sum_{j = 0}^{\lfloor n/2 \rfloor} \binom n {2j} x^{n - 2j} (x - 1)^j$$
+:::
+
+**Hint**. Write $\theta = \arccos x.$
+
+# Chebyshev polynomials {.row}
+
+::::: {.col}
+~~~ {.julia .plot}
+x = -1:0.01:1
+f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
+for n in 1:5
+  plot!(x, f.(x, n), framestyle =:origin)
+end
+~~~
+:::::
+
+::::: {.col}
+~~~ {.julia .plot}
+x = -1:0.01:1
+f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
+for n in 6:10
+  plot!(x, f.(x, n), framestyle =:origin)
+end
+~~~
+:::::
+
 # Chebyshev nodes [@vaes22, p. 37] {.split}
 
 ::: corollary
