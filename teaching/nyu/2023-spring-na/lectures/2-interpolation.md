@@ -217,6 +217,95 @@ $$p(x) = \alpha_0 + x\left(
 \right)
 \right)$$
 
+# Summary {.row}
+
+::::: {.col}
+
+## Lagrange
+
+$$\widehat u(x)
+= \sum_{i = 0}^n u_i
+\underbrace{\frac {\prod_{j \neq i} (x - x_j)} {\prod_{j \neq i} (x_i - x_j)}}_{
+\substack{
+1 \text{ when } x = x_i,\\
+0 \text{ when } x = x_j \neq x_i
+}
+}$$
+
+- Evaluating $\widehat u$ is costly
+- Lagrange polynomials change when adding nodes
+- Numerically unstable because of cancellation between large terms
+
+:::::
+
+::::: {.col}
+
+## Gregory-Newton
+
+$$\widehat u(x) = \sum_{i = 0}^n \frac 1 {i!}
+\underbrace{\Delta^i u(0)}_{\text{depends only on } \left. u \right|_{\N}} x^{\underline i}$$
+
+- Good for incremental interpolation
+- Numerically more stable
+- Efficient evaluation possible via Horner's method
+
+:::::
+
+# Divided differences [@vaes22, p. 30] {.split}
+
+\begin{align}
+[u_i] &= u_i\\
+[u_i, u_j] &= \frac {u_j - u_i} {x_j - x_i}\\
+[u_0, u_1, \dots, u_d] &= \frac {[u_1, \dots, u_d] - [u_0, \dots, u_{d - 1}]} {x_d - x_0}
+\end{align}
+
+::: proposition
+Assume that $\sigma$ is a permutation of $\{0, \dots n\}$.
+We have
+
+$$[u_{\sigma(0)}, u_{\sigma(1)}, \dots, u_{\sigma(n)}]
+= [u_0, u_1, \dots, u_n].$$
+:::
+
+Proof: Exercise $2.4$, [@vaes22, p. 48].
+
+# Rewriting Gregory-Newton with divided differences
+
+$$\widehat u(x) = u(0) + \Delta u(0) x + \frac 1 2 \Delta^2 u(0) x (x - 1) +
+\frac 1 {3!} \Delta^3 u(0) x (x - 1) (x - 2) + \dots$$
+
+::: split
+\begin{align}
+[u_i] &= u_i\\
+[u_i, u_j] &= \frac {u_j - u_i} {x_j - x_i}\\
+[u_0, u_1, \dots, u_d] &= \frac {[u_1, \dots, u_d] - [u_0, \dots, u_{d - 1}]} {x_d - x_0}
+\end{align}
+
+::: {.proposition .fragment}
+$$\frac 1 {n!} \Delta^n u(k) = [u_k, u_{k + 1}, \dots, u_{k + n}]$$
+:::
+:::
+
+# Rewriting Gregory-Newton
+
+\begin{align}
+\widehat u(x)
+&= u(0) + \Delta u(0) x + \frac 1 2 \Delta^2 u(0) x (x - 1) +
+\frac 1 {3!} \Delta^3 u(0) x (x - 1) (x - 2) + \dots\\
+&= [u_0] + [u_0, u_1] x + [u_0, u_1, u_2] x (x - 1) + [u_0, u_1, u_2, u_3] x (x - 1) (x - 2) + \dots\\
+&= [u_0] + [u_0, u_1] (x - x_0) + [u_0, u_1, u_2] (x - x_0) (x - x_1)
++ [u_0, u_1, u_2, u_3] (x - x_0) (x - x_1) (x - x_2) + \dots\\
+\end{align}
+
+We see that we'll take
+
+$$\varphi_i(x) = \prod_{j = 0}^{i - 1} (x - x_j)
+= (x - x_0) (x - x_1) \dots (x - x_{i - 1})$$
+
+The Gregory-Newton formula becomes
+
+$$\widehat u(x) = \sum_{i = 0}^n [u_0, \dots, u_{i}] \varphi_i(x)$$
+
 # Non-equidistant nodes [@vaes22, p. 30] {.split}
 
 \begin{align}
@@ -281,5 +370,102 @@ we can find $\xi \in [a, b]$ such that
 $$u(x) - \widehat u(x) =
 \frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
 :::
+
+# Interpolation error [@vaes22, p.32] {.split}
+
+::: {.theorem title="Interpolation Error (examinable)"}
+Assume that $u \in C^{n + 1}([a, b])$
+and let $x_0, \dots, x_n$ denote $n + 1$.
+Then for each $x \in [a, b]$,
+we can find $\xi \in [a, b]$ such that
+$$u(x) - \widehat u(x) =
+\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
+:::
+
+::: {.corollary title="Upper bound on the interpolation error (examinable)"}
+Assume that $u$ is smooth on $[a, b]$. Then
+$$\sup_{[a, b]} |u - \widehat u| \leq
+\frac 1 {4(n + 1)} \left(\sup_{[a, b]} |u^{(n + 1)}|\right) h^{n + 1}$$
+:::
+
+# The Runge function {.row}
+
+::::: {.col}
+~~~ {.julia .plot}
+x = -1:0.01:1
+y = @. 1 / (1 + 25 * x^2)
+plot(x, y)
+~~~
+
+::: {.proposition title="Upper bound on the interpolation error"}
+Assume that $u$ is smooth on $[a, b]$. Then
+$$\sup_{[a, b]} |u - \widehat u| \leq
+\frac 1 {4(n + 1)} \left(\sup_{[a, b]} |u^{(n + 1)}|\right) h^{n + 1}$$
+:::
+:::::
+
+::::: {.col}
+$$f(x) = \frac 1 {1 + 25 x^ 2}$$
+
+- Equidistant interpolation fails (especially at the edges of the interval)
+- Shows that higher degree doesn't mean higher accuracy
+- (Later) Succeeds with **Chebyshev nodes**
+:::::
+
+# Equidistant interpolation of the Runge function [@vaes22, p. 35]
+
+![](/static/images/1675249748.png){height=900}
+
+# Chebyshev nodes [@vaes22, p. 34] {.split}
+
+::: {.theorem title="Interpolation Error (examinable)"}
+Assume that $u \in C^{n + 1}([a, b])$
+and let $x_0, \dots, x_n$ denote $n + 1$.
+Then for each $x \in [a, b]$,
+we can find $\xi \in [a, b]$ such that
+$$u(x) - \widehat u(x) =
+\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
+:::
+
+::: {.question .fragment}
+How to find $x_0, x_1, \dots, x_n$ to minimize the interpolation error?
+:::
+
+::: {.question .fragment title="Moving the goalposts"}
+Let $u \in \mathscr P^{n + 1}$.
+Find the interpolation nodes $x_0, x_1, \dots, x_n$
+which minimize the interpolation error
+$$u(x) - \widehat u(x) = C (x - x_0)(x - x_1) \dots (x - x_n)$$
+:::
+
+# Chebyshev polynomials [@vaes22, p. 35] {.split}
+
+Remember, we're trying to minimize
+$$(x - x_0)(x - x_1) \dots (x - x_n),$$
+which means we want to find the roots
+which minimize the above **monic** polynomial.
+
+::: {.theorem}
+If $p$ is a **monic** polynomial of degree $n$,
+then
+$$\sup_{[-1, 1]} |p| \geq \frac 1 {2^{n - 1}}.$$
+
+Moreover, the bound is achieved for
+$$p_\star(x) = 2^{-n + 1} \underbrace{\cos (n \arccos x)}_{\text{Chebyshev polynomial}}.$$
+:::
+
+# Chebyshev nodes [@vaes22, p. 37] {.split}
+
+::: corollary
+The function
+$$\omega(x) = (x - x_0) (x - x_1) \dots (x - x_n),$$
+where $\{x_0, x_1, \dots, x_n\} \subset [a, b]$
+is minimized when
+$$x_i = a + (b - a) \frac {1 + \cos\left(\frac {(2i + 1) \pi} {2n + 2}\right)} 2.$$
+:::
+
+# Interpolation of Runge with Chebyshev nodes [@vaes22, p. 38]
+
+![](/static/images/1675252176.png){height=900}
 
 # Bibliography
