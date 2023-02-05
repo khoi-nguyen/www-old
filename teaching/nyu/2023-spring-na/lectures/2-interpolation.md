@@ -532,13 +532,20 @@ $$p_\star(x) = 2^{-n + 1} \underbrace{\cos (n \arccos x)}_{\text{Chebyshev polyn
 # Are Chebyshev polynomials really polynomials? [@vaes22, p. 184] {.split}
 
 ::: proposition
+Let $T_n(x) = \cos(n \overbrace{\arccos x}^\theta)$.
+We have
+
 \begin{align}
-\cos(n \arccos x)
-= \sum_{j = 0}^{\lfloor n/2 \rfloor} \binom n {2j} x^{n - 2j} (x^2 - 1)^j &= 2^{n - 1} x^n + \dots
+T_n(x)
+&= \sum_{j = 0}^{\lfloor n/2 \rfloor} \binom n {2j} x^{n - 2j} (x^2 - 1)^j\\
+T_{n + 1}(x)
+&= 2 x T_n(x) - T_{n - 1}(x)
 \end{align}
 :::
 
-**Hint**. Write $\theta = \arccos x.$
+::: {.corollary .fragment}
+Let $n \in \N$. The function $p_n(x) = 2^{-n + 1} T_n(x)$ is a monic polynomial.
+:::
 
 # Chebyshev polynomials
 
