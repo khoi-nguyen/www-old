@@ -375,18 +375,82 @@ $$(-1, 10) \quad (0, 4) \quad (2, -2) \quad (4, -40)$$
 
 ::: {.theorem title="Interpolation Error (examinable)"}
 Assume that $u \in C^{n + 1}([a, b])$
-and let $x_0, \dots, x_n$ denote $n + 1$.
+and let $x_0, \dots, x_n$ denote $n + 1$ distinct interpolation nodes.
 Then for each $x \in [a, b]$,
 we can find $\xi \in [a, b]$ such that
 $$u(x) - \widehat u(x) =
 \frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
 :::
 
+# Last time...
+
+\begin{align}
+p(x) = \sum_{i = 0}^n \frac 1 {i!} u^{(i)}(0) x^n
+\quad \Longrightarrow \quad
+p(x) = \sum_{i = 0}^n \frac 1 {i!} \Delta^i u(0)
+\overbrace{\prod_{j = 0}^{i - 1} (x - j)}^{\text{falling}\ \text{powers}}
+\quad \Longrightarrow \quad
+p(x) = \sum_{i = 0}^n \underbrace{\overbrace{[u_0, \dots, u_i]}^{\text{divided}\ \text{differences}}}_{
+\substack{
+[u_0] = u_0\\
+[u_0, \dots, u_n] = \frac {[u_1, \dots, u_n] - [u_0, \dots, u_{n - 1}]} {x_n - x_0}
+}
+}
+\prod_{j = 0}^{i - 1} (x - x_j)
+\end{align}
+
+:::::::::: row
+::::: {.col}
+
+#### Divided differences in Julia
+
+~~~ julia
+function diff(X, Y)
+    if size(Y, 1) == 1
+        return Y[1]
+    end
+    num = diff(X[2:end], Y[2:end]) - diff(X[1:end - 1], Y[1:end - 1])
+    den = X[end] - X[1]
+    return num / den
+end
+~~~
+:::::
+::::: {.col}
+
+#### Gregory-Newton Interpolation in Julia
+
+~~~ julia
+function interp(X, Y, x)
+    result = 0
+    phi = 1
+    for i in eachindex(X)
+        result += diff(X[1:i], Y[1:i]) * phi
+        phi *= x - X[i]
+    end
+    return result
+end
+~~~
+
+:::::
+::::::::::
+
+#### Interpolation error (go over again)
+
+$$\boxed{u(x) - \widehat u(x) =
+\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)}$$
+
+#### Announcements
+
+- Homework on $\sqrt 6$ due tonight
+- **New homework** due on Monday 13 February (Exercise 2.13) (start together during recitation)
+- **French sentence of the day**: "J'étudie à l'université de George Santos et Rudy Giuliani".
+- Printed copies of lecture notes: Mistral Photo, 40 rue Saint-Jacques.
+
 # Interpolation error [@vaes22, p.32] {.split}
 
 ::: {.theorem title="Interpolation Error (examinable)"}
 Assume that $u \in C^{n + 1}([a, b])$
-and let $x_0, \dots, x_n$ denote $n + 1$.
+and let $x_0, \dots, x_n$ denote $n + 1$ distinct interpolation nodes.
 Then for each $x \in [a, b]$,
 we can find $\xi \in [a, b]$ such that
 $$u(x) - \widehat u(x) =
@@ -431,7 +495,7 @@ $$f(x) = \frac 1 {1 + 25 x^ 2}$$
 
 ::: {.theorem title="Interpolation Error (examinable)"}
 Assume that $u \in C^{n + 1}([a, b])$
-and let $x_0, \dots, x_n$ denote $n + 1$.
+and let $x_0, \dots, x_n$ denote $n + 1$ distinct interpolation nodes.
 Then for each $x \in [a, b]$,
 we can find $\xi \in [a, b]$ such that
 $$u(x) - \widehat u(x) =
@@ -493,7 +557,7 @@ T_{10}(x) &= 512x^{10} - 1280x^8 + 1120x^6 - 400x^4 + 50x^2-1 \\
 T_{11}(x) &= 1024x^{11} - 2816x^9 + 2816x^7 - 1232x^5 +220x^3 - 11x
 \end{align}
 
-# Chebyshev polynomials {.row}
+# Monic Chebyshev polynomials {.row}
 
 ::::: {.col}
 ~~~ {.julia .plot}
@@ -528,5 +592,155 @@ $$x_i = a + (b - a) \frac {1 + \cos\left(\frac {(2i + 1) \pi} {2n + 2}\right)} 2
 # Interpolation of Runge with Chebyshev nodes [@vaes22, p. 38]
 
 ![](/static/images/1675252176.png){height=900}
+
+# Approximation [@vaes22, p. 40]
+
+::: row
+
+::::: {.col}
+
+## Least squares approximation of data points
+
+::: problem
+Let $\varphi_0, \dots, \varphi_m \in C([a, b])$.
+Given $n + 1$ distinct interpolation nodes $\{x_0, \dots, x_n\} \subset [a, b]$
+find
+$$\widehat u(x) = \alpha_0 \varphi_0(x) + \dots + \alpha_m \varphi_m(x)$$
+the "best approximation" of $u : \{x_0, \dots, x_n\} \to \R$ in $\span \{\varphi_0, \dots, \varphi_m\}$.
+:::
+
+:::::
+
+::::: {.col}
+
+## Mean square approximation of functions
+
+::: problem
+Let $\varphi_1, \dots, \varphi_m \in C([a, b])$.
+Given a function $u : [a, b] \to \R$,
+$$\widehat u(x) = \alpha_0 \varphi_0(x) + \dots + \alpha_m \varphi_m(x)$$
+the "best approximation" of $u$ in $\span \{\varphi_0, \dots, \varphi_m\}$.
+:::
+
+:::::
+
+:::
+
+::: {.block title="Comments"}
+In both cases:
+
+- We have too many $x$ values and not enough degrees of freedom with the $\alpha_i$ to interpolate.
+- We need to define the notion of **best approximation**.
+- The answer will depend on our notion of best approximation.
+:::
+
+# Least squares approximation of data points [@vaes22, p. 40] {.split}
+
+Remember that interpolation was solving the system.
+
+\begin{align}
+\underbrace{
+\begin{pmatrix}
+\varphi_0(x_0) & \varphi_1(x_0) & \dots & \varphi_m(x_0)\\
+\varphi_0(x_1) & \varphi_1(x_1) & \dots & \varphi_m(x_1)\\
+\varphi_0(x_2) & \varphi_1(x_2) & \dots & \varphi_m(x_2)\\
+\vdots & \vdots & \vdots & \vdots\\
+\varphi_0(x_{n - 1}) & \varphi_1(x_{n - 1}) & \dots & \varphi_m(x_{n - 1})\\
+\varphi_0(x_n) & \varphi_1(x_n) & \dots & \varphi_m(x_n)
+\end{pmatrix}
+}_{A}
+\underbrace{
+\begin{pmatrix}
+\alpha_0 \\ \alpha_1 \\ \alpha_2 \\ \vdots \\ \alpha_m
+\end{pmatrix}
+}_{\boldsymbol \alpha}
+=
+\underbrace{
+\begin{pmatrix}
+u_0 \\ u_1 \\ u_2 \\ \vdots \\ u_{n - 1} \\ u_n
+\end{pmatrix}
+}_{\boldsymbol b}
+\end{align}
+
+As $m < n$, the equation $A \boldsymbol \alpha - \boldsymbol \beta = 0$ will not necessarily have a solution.
+We will try to **minimise** $\| A \boldsymbol \alpha - \boldsymbol b \|_2$ instead.
+
+# Normal equations [@vaes22, p. 41] {.split}
+
+::: theorem
+Assume that $\boldsymbol \alpha_\star$ minimizes
+$\boldsymbol \alpha \mapsto \|A \boldsymbol \alpha - \boldsymbol b \|_2$.
+
+Then $\boldsymbol \alpha_\star$ satisfies
+$$A^T A \boldsymbol \alpha_\star = A^T \boldsymbol b$$
+
+The solution is unique if the columns of $A$ are linearly independent.
+:::
+
+::: remark
+Note that $\boldsymbol \alpha_\star = (A^T A)^{-1} A^T b$.
+The matrix $A^+ = (A^T A)^{-1} A^T$ satisfies $A^+A = I$,
+and is called the Moore-Penrose pseudoinverse of $A$.
+
+In Julia, the backslash operator uses the Moore-Penrose pseudo-inverse,
+so that $\boldsymbol \alpha_\star$ can be found via `α = A \ b`{.julia}
+:::
+
+# From "least square" to "mean square" approximations {.split}
+
+Previously, we sought to minimize
+$$\sum_{i = 0}^n |u_i - \widehat u(x_i)|^2$$
+which is equivalent to minimizing
+$$\frac 1 n \sum_{i = 0}^n |u_i - \widehat u(x_i)|^2.$$
+
+The advantage of the latter is that it may converge as $n \to +\infty$.
+
+::: {.proposition}
+Let $f \in C([a, b])$.
+
+$$\lim_{n \to \infty} \frac 1 n \sum_{i = 0}^{n} \left|f(x_i)\right|^2
+= \frac 1 {b - a} \int_a^b \left|f(x)\right|^2 \dd x$$
+:::
+
+# Mean square approximation of functions {.split}
+
+::: problem
+Let $\varphi_1, \dots, \varphi_m \in C([a, b])$.
+Given a function $u : [a, b] \to \R$,
+find
+$$\widehat u(x) = \alpha_0 \varphi_0(x) + \dots + \alpha_m \varphi_m(x)$$
+such that it minimizes
+$$\int_a^b \left|u(x) - \widehat u(x)\right|^2 \dd x.$$
+:::
+
+# Scalar products
+
+:::::::::: row
+::::: {.col}
+
+### On $\R^n$
+
+$$\langle x, y \rangle = \sum_{i = 1}^n x_i y_i.$$
+$$\|x\|_2 = \sqrt{\langle x, x \rangle}$$
+:::::
+
+::::: {.col}
+
+### On $C([a, b])$, or rather $L^2([a, b])$.
+
+$$\langle f, g \rangle = \int_a^b f(x) g(x) \dd x.$$
+$$\|f\|_2 = \sqrt{\langle f, f \rangle}$$
+:::::
+::::::::::
+
+::: {.block title="Properties"}
+In both cases, the map $\langle \cdot, \cdot \rangle$ is
+
+- symmetric
+- bilinear
+- positive definite.
+
+In other words, it's a **scalar product**.
+:::
 
 # Bibliography

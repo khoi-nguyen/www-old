@@ -159,6 +159,7 @@ envs:
 \newcommand{\dom}{\mathrm{dom}}
 \newcommand{\im}{\mathrm{im}}
 \newcommand{\fl}{\mathrm{fl}}
+\newcommand{\span}{\mathrm{span}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\N}{\mathbb{N}}
