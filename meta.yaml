@@ -123,6 +123,12 @@ envs:
     classes:
       - bg-primary
       - text-white
+  problem:
+    name: Problem
+    icon: fa-solid fa-circle-question
+    classes:
+      - bg-success
+      - text-white
   question:
     name: Question
     icon: fa-solid fa-circle-question
