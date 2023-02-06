@@ -399,10 +399,38 @@ p(x) = \sum_{i = 0}^n \underbrace{\overbrace{[u_0, \dots, u_i]}^{\text{divided}\
 \prod_{j = 0}^{i - 1} (x - x_j)
 \end{align}
 
+::::: {.row}
+::::: {.col}
+
+#### Interpolation in Julia
+
+~~~ julia
+f(x) = 1 / (1 + 25 x^2)
+
+import Polynomials
+X = range(-1, 1, length=20)
+p = Polynomials.fit(X, f.(X))
+
+import Plots
+x = -1:0.01:1
+Plots.plot(x, [f.(x), p.(x)])
+~~~
+:::::
+::::: {.col}
+
 #### Interpolation error (go over proof again)
+
+Whatever algorithm you use (Lagrange, Gregory-Newton, Vandermonde),
+$\widehat u$ would be the same without round-off errors.
 
 $$\boxed{u(x) - \widehat u(x) =
 \frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)}$$
+
+::: question
+Does **more nodes** mean **smaller error**?
+:::
+:::::
+:::::
 
 #### Announcements
 
@@ -467,7 +495,12 @@ $$u(x) - \widehat u(x) =
 ::: {.corollary title="Upper bound on the interpolation error (examinable)"}
 Assume that $u$ is smooth on $[a, b]$. Then
 $$\sup_{[a, b]} |u - \widehat u| \leq
-\frac 1 {4(n + 1)} \left(\sup_{[a, b]} |u^{(n + 1)}|\right) h^{n + 1}$$
+\frac 1 {4(n + 1)} \left(\sup_{[a, b]} |u^{(n + 1)}|\right) h^{n + 1},$$
+where $h$ is the maximum spacing between two successive interpolation nodes.
+:::
+
+::: question
+What happens when $n \to +\infty$?
 :::
 
 # The Runge function {.row}
@@ -482,7 +515,8 @@ plot(x, y)
 ::: {.proposition title="Upper bound on the interpolation error (examinable)"}
 Assume that $u$ is smooth on $[a, b]$. Then
 $$\sup_{[a, b]} |u - \widehat u| \leq
-\frac 1 {4(n + 1)} \left(\sup_{[a, b]} |u^{(n + 1)}|\right) h^{n + 1}$$
+\frac 1 {4(n + 1)} \left(\sup_{[a, b]} |u^{(n + 1)}|\right) h^{n + 1},$$
+where $h$ is the maximum spacing between two successive interpolation nodes.
 :::
 :::::
 
@@ -525,7 +559,7 @@ $$u(x) - \widehat u(x) = C (x - x_0)(x - x_1) \dots (x - x_n)$$
 Remember, we're trying to minimize the **monic** polynomial:
 $$(x - x_0)(x - x_1) \dots (x - x_n).$$
 
-::: {.theorem}
+::: {.theorem title="Monic polynomial with minimum supremum norm (examinable)"}
 If $p$ is a **monic** polynomial of degree $n \geq 1$,
 then
 $$\sup_{[-1, 1]} |p| \geq \frac 1 {2^{n - 1}}.$$
@@ -557,6 +591,18 @@ The function $p_n(x) = 2^{-n + 1} T_n(x)$ is a monic polynomial.
 
 # Chebyshev polynomials
 
+~~~ julia
+function chebyshev(n)
+    if n == 0
+        return [1]
+    elseif n == 1
+        return [0, 1]
+    else
+        return 2 .* vcat([0], chebyshev(n - 1)) - vcat(chebyshev(n - 2), [0, 0])
+    end
+end
+~~~
+
 \begin{align}
 T_0(x) &= 1 \\
 T_1(x) &= x \\
@@ -568,8 +614,7 @@ T_6(x) &= 32x^6 - 48x^4 + 18x^2 - 1 \\
 T_7(x) &= 64x^7 - 112x^5 + 56x^3 - 7x \\
 T_8(x) &= 128x^8 - 256x^6 + 160x^4 - 32x^2 + 1 \\
 T_9(x) &= 256x^9 - 576x^7 + 432x^5 - 120x^3 + 9x \\
-T_{10}(x) &= 512x^{10} - 1280x^8 + 1120x^6 - 400x^4 + 50x^2-1 \\
-T_{11}(x) &= 1024x^{11} - 2816x^9 + 2816x^7 - 1232x^5 +220x^3 - 11x
+T_{10}(x) &= 512x^{10} - 1280x^8 + 1120x^6 - 400x^4 + 50x^2-1
 \end{align}
 
 # Monic Chebyshev polynomials {.row}
@@ -681,6 +726,29 @@ u_0 \\ u_1 \\ u_2 \\ \vdots \\ u_{n - 1} \\ u_n
 
 As $m < n$, the equation $A \boldsymbol \alpha - \boldsymbol \beta = 0$ will not necessarily have a solution.
 We will try to **minimise** $\| A \boldsymbol \alpha - \boldsymbol b \|_2$ instead.
+
+# Multi-variable calculus refresher {.split}
+
+Remember that
+$\langle \nabla f(x), v \rangle = \frac {\dd} {\dd t} \left. f(x + tv) \right|_{t = 0}.$
+
+::: proposition
+Let $b \in \R^n$ and let $C \in \R^{n \times n}$ be a **symmetric** matrix.
+Consider the functions
+$$f(x) = \langle b, x \rangle,
+\quad g(x) = x^T C x.$$
+
+We have:
+
+- $\nabla f(x) = b$
+- $\nabla g(x) = 2 C x$
+:::
+
+::: proposition
+Let $f$ be a differentiable function defined on an open set $U$.
+If $f$ reaches a local minimum/maximum at $a$,
+then $\nabla f(a) = 0$.
+:::
 
 # Normal equations [@vaes22, p. 41] {.split}
 
