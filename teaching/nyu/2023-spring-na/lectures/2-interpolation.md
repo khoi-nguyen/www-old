@@ -521,30 +521,27 @@ which means we want to find the roots
 which minimize the above **monic** polynomial.
 
 ::: {.theorem}
-If $p$ is a **monic** polynomial of degree $n$,
+If $p$ is a **monic** polynomial of degree $n \geq 1$,
 then
 $$\sup_{[-1, 1]} |p| \geq \frac 1 {2^{n - 1}}.$$
 
 Moreover, the bound is achieved for
-$$p_\star(x) = 2^{-n + 1} \underbrace{\cos (n \arccos x)}_{\text{Chebyshev polynomial}}.$$
+$$p_\star(x) = 2^{-n + 1} \underbrace{\cos (n \arccos x)}_{\text{Chebyshev polynomial } T_n}.$$
 :::
 
 # Are Chebyshev polynomials really polynomials? [@vaes22, p. 184] {.split}
 
 ::: proposition
-Let $T_n(x) = \cos(n \overbrace{\arccos x}^\theta)$.
-We have
-
+Write $T_n(x) = \cos(n \overbrace{\arccos x}^\theta)$ for $n \in \N$.
 \begin{align}
-T_n(x)
-&= \sum_{j = 0}^{\lfloor n/2 \rfloor} \binom n {2j} x^{n - 2j} (x^2 - 1)^j\\
 T_{n + 1}(x)
 &= 2 x T_n(x) - T_{n - 1}(x)
 \end{align}
 :::
 
 ::: {.corollary .fragment}
-Let $n \in \N$. The function $p_n(x) = 2^{-n + 1} T_n(x)$ is a monic polynomial.
+Let $n \in \N$ be such that $n \geq 1$.
+The function $p_n(x) = 2^{-n + 1} T_n(x)$ is a monic polynomial.
 :::
 
 # Chebyshev polynomials
@@ -674,7 +671,7 @@ We will try to **minimise** $\| A \boldsymbol \alpha - \boldsymbol b \|_2$ inste
 
 # Normal equations [@vaes22, p. 41] {.split}
 
-::: theorem
+::: {.theorem title="Derivation of normal equations (examinable)"}
 Assume that $\boldsymbol \alpha_\star$ minimizes
 $\boldsymbol \alpha \mapsto \|A \boldsymbol \alpha - \boldsymbol b \|_2$.
 
