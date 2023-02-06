@@ -522,10 +522,8 @@ $$u(x) - \widehat u(x) = C (x - x_0)(x - x_1) \dots (x - x_n)$$
 
 # Chebyshev polynomials [@vaes22, p. 35] {.split}
 
-Remember, we're trying to minimize
-$$(x - x_0)(x - x_1) \dots (x - x_n),$$
-which means we want to find the roots
-which minimize the above **monic** polynomial.
+Remember, we're trying to minimize the **monic** polynomial:
+$$(x - x_0)(x - x_1) \dots (x - x_n).$$
 
 ::: {.theorem}
 If $p$ is a **monic** polynomial of degree $n \geq 1$,
@@ -535,6 +533,12 @@ $$\sup_{[-1, 1]} |p| \geq \frac 1 {2^{n - 1}}.$$
 Moreover, the bound is achieved for
 $$p_\star(x) = 2^{-n + 1} \underbrace{\cos (n \arccos x)}_{\text{Chebyshev polynomial } T_n}.$$
 :::
+
+~~~ {.julia .plot}
+x = -1:0.01:1
+f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
+plot(x, f.(x, 5), label=L"2^{-4} T_5(x)", framestyle =:origin)
+~~~
 
 # Are Chebyshev polynomials really polynomials? [@vaes22, p. 184] {.split}
 
@@ -575,7 +579,8 @@ T_{11}(x) &= 1024x^{11} - 2816x^9 + 2816x^7 - 1232x^5 +220x^3 - 11x
 x = -1:0.01:1
 f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
 for n in 1:5
-  plot!(x, f.(x, n), framestyle =:origin)
+  label = latexstring("2^{" * string(-n + 1) * "} T_{" * string(n) * "}")
+  plot!(x, f.(x, n), label=label, framestyle =:origin)
 end
 ~~~
 :::::
@@ -585,7 +590,8 @@ end
 x = -1:0.01:1
 f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
 for n in 6:10
-  plot!(x, f.(x, n), framestyle =:origin)
+  label = latexstring("2^{" * string(-n + 1) * "} T_{" * string(n) * "}")
+  plot!(x, f.(x, n), label=label, framestyle =:origin)
 end
 ~~~
 :::::
