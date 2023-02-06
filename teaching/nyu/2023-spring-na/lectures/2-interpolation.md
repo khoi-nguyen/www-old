@@ -575,7 +575,7 @@ T_{11}(x) &= 1024x^{11} - 2816x^9 + 2816x^7 - 1232x^5 +220x^3 - 11x
 # Monic Chebyshev polynomials {.row}
 
 ::::: {.col}
-~~~ {.julia .plot}
+~~~ {.julia .plot width=100%}
 x = -1:0.01:1
 f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
 for n in 1:5
@@ -586,7 +586,7 @@ end
 :::::
 
 ::::: {.col}
-~~~ {.julia .plot}
+~~~ {.julia .plot width=100%}
 x = -1:0.01:1
 f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
 for n in 6:10
