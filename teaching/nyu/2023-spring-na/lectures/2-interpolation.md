@@ -399,6 +399,20 @@ p(x) = \sum_{i = 0}^n \underbrace{\overbrace{[u_0, \dots, u_i]}^{\text{divided}\
 \prod_{j = 0}^{i - 1} (x - x_j)
 \end{align}
 
+#### Interpolation error (go over proof again)
+
+$$\boxed{u(x) - \widehat u(x) =
+\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)}$$
+
+#### Announcements
+
+- Homework on $\sqrt 6$ due tonight
+- **New homework** due on Monday 13 February (Exercise 2.13) (start together during recitation)
+- **French sentence of the day**: "J'étudie à l'université de George Santos et Rudy Giuliani".
+- Printed copies of lecture notes: Mistral Photo, 40 rue Saint-Jacques.
+
+# In Julia
+
 :::::::::: row
 ::::: {.col}
 
@@ -431,20 +445,13 @@ function interp(X, Y, x)
 end
 ~~~
 
+##### Suggested improvements
+
+- Use of `BigFloat`{.julia} to reduce round-off errors
+- Use Horner's algorithm to be more efficient
+
 :::::
 ::::::::::
-
-#### Interpolation error (go over again)
-
-$$\boxed{u(x) - \widehat u(x) =
-\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)}$$
-
-#### Announcements
-
-- Homework on $\sqrt 6$ due tonight
-- **New homework** due on Monday 13 February (Exercise 2.13) (start together during recitation)
-- **French sentence of the day**: "J'étudie à l'université de George Santos et Rudy Giuliani".
-- Printed copies of lecture notes: Mistral Photo, 40 rue Saint-Jacques.
 
 # Interpolation error [@vaes22, p.32] {.split}
 
