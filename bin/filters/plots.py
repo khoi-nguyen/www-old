@@ -79,7 +79,7 @@ def plot(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
             file.write(env["code"] % (element.text, tmp))
         subprocess.run(env["cmd"] + [tmp + env["ext"]], stdout=subprocess.DEVNULL)
 
-    img = pf.Para(pf.Image(url=src))
+    img = pf.Para(pf.Image(url=src, attributes=element.attributes))
     return pf.Div(img, classes=["text-center"] + element.classes)
 
 
