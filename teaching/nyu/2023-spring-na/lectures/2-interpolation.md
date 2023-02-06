@@ -592,16 +592,23 @@ The function $p_n(x) = 2^{-n + 1} T_n(x)$ is a monic polynomial.
 # Chebyshev polynomials
 
 ~~~ julia
+import Polynomials
+
 function chebyshev(n)
+    x = Polynomials.Polynomial([0, 1])
     if n == 0
-        return [1]
+        return x^0
     elseif n == 1
-        return [0, 1]
+        return x
     else
-        return 2 .* vcat([0], chebyshev(n - 1)) - vcat(chebyshev(n - 2), [0, 0])
+        return 2 * x * chebyshev(n - 1) - chebyshev(n - 2)
     end
 end
 ~~~
+
+Otherwise, use the
+[ChebyshevT](https://juliamath.github.io/Polynomials.jl/stable/polynomials/chebyshev/)
+function.
 
 \begin{align}
 T_0(x) &= 1 \\
