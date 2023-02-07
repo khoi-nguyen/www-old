@@ -648,6 +648,29 @@ end
 ~~~
 :::::
 
+# Summary {.split}
+
+$$\underbrace{d(f, g)}_{\text{distance}} = \sup_{[a, b]} | f - g |$$
+
+$$u(x) - \widehat u(x) =
+\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
+
+::: question
+$$ \overbrace{\sup_{[a, b]} |u - \widehat u|}^{d(u, \widehat u)} \leq C \sup_{[a, b]} \left|u^{(n + 1)}\right|
+\sup_{x \in [a, b]} \underbrace{\left|(x - x_0) \dots (x - x_n)\right|}_{\text{monic}\ {\text{polynomial}\ p}}$$
+
+Can we choose our **interpolating nodes** so that our **monic polynomial** is
+as small as possible?
+:::
+
+::: {.exampleblock title="Answer"}
+The monic polynomial of degree $n$ such that
+$$\sup_{[-1, 1]} |p|$$
+is minimal is $p(x) = 2^{-n + 1} \cos(n \arccos x)$.
+Equivalently, 
+$$x_i = \cos \left(\frac {(2i + 1) \pi} {2n}\right)$$
+:::
+
 # Chebyshev nodes [@vaes22, p. 37] {.split}
 
 ::: {.corollary title="Chebyshev nodes (examinable)"}
