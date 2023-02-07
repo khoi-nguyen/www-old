@@ -451,3 +451,23 @@ $$\int \frac {3} {x^3 - 1} \dd x$$
 # Intégration de fractions rationnelles {.split}
 
 ![](/static/images/1675110560.png){width=100%}
+
+# Primitives de fonctions trigonométriques {.split}
+
+![](/static/images/1675772010.png){width=100%}
+
+# Un peu de tout {.split}
+
+![](/static/images/1675772228.png){width=100%}
+
+# Série 2 {.split}
+
+![](/static/images/1675772256.png){width=100%}
+
+# Série 3 {.split}
+
+![](/static/images/1675772280.png){width=100%}
+
+# Série 4 {.split}
+
+![](/static/images/1675772327.png){width=100%}
