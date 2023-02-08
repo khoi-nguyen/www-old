@@ -4,7 +4,8 @@ output: revealjs
 notes: |
   - 30/01: Lagrange and equidistant Gregory-Newton interpolation (slides 1-14)
   - 01/02: Non equidistant Gregory-Newton, interpolation error (15-22)
-  - 06/02: Runge and Chebyshev polynomials 22-32
+  - 06/02: Runge phenomenon and Chebyshev polynomials 22-32
+  - 08/02: Chebyshev nodes and derivation of normal equations.
 ...
 
 # Chapter 1 summary {.row}
