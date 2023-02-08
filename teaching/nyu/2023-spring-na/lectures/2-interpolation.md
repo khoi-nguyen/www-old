@@ -4,6 +4,7 @@ output: revealjs
 notes: |
   - 30/01: Lagrange and equidistant Gregory-Newton interpolation (slides 1-14)
   - 01/02: Non equidistant Gregory-Newton, interpolation error (15-22)
+  - 06/02: Runge and Chebyshev polynomials 22-32
 ...
 
 # Chapter 1 summary {.row}
@@ -648,7 +649,9 @@ end
 ~~~
 :::::
 
-# Summary {.split}
+# Summary {.row}
+
+::::: col
 
 $$\underbrace{d(f, g)}_{\text{distance}} = \sup_{[a, b]} | f - g |$$
 
@@ -663,13 +666,31 @@ Can we choose our **interpolating nodes** so that our **monic polynomial** is
 as small as possible?
 :::
 
-::: {.exampleblock title="Answer"}
-The monic polynomial of degree $n$ such that
-$$\sup_{[-1, 1]} |p|$$
-is minimal is $p(x) = 2^{-n + 1} \cos(n \arccos x)$.
-Equivalently, 
+::: {.exampleblock title="Answer on [0, 1]"}
+The monic polynomial of degree $n$ with
+minimal supremum on $[0, 1]$ is $p(x) = 2^{-n + 1} \cos(n \arccos x)$.
+Equivalently,
 $$x_i = \cos \left(\frac {(2i + 1) \pi} {2n}\right)$$
 :::
+
+:::::
+
+::::: {.col}
+~~~ {.julia .plot width=100%}
+x = -1:0.01:1
+f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
+for n in 1:5
+  label = latexstring("2^{" * string(-n + 1) * "} T_{" * string(n) * "}")
+  plot!(x, f.(x, n), label=label, framestyle =:origin)
+end
+~~~
+
+### Announcements
+
+- Homework due next Monday
+- Office hours: Thursday, online, just send me an email with your availabilities
+- French sentence of the day "l'ordinateur portable de Hunter Biden"
+:::::
 
 # Chebyshev nodes [@vaes22, p. 37] {.split}
 
@@ -680,6 +701,13 @@ where $\{x_0, x_1, \dots, x_n\} \subset [a, b]$
 is $\infty$-minimized when
 $$x_i = a + (b - a) \frac {1 + \cos\left(\frac {(2i + 1) \pi} {2n + 2}\right)} 2.$$
 :::
+
+~~~ julia
+a, b = 0, 4
+n = 10
+roots = [cos( (2 i + 1) * π / (2n + 2) ) for i in 0:n]
+nodes = @. a + (b - a) * (1 + roots) / 2
+~~~
 
 # Interpolation of Runge with Chebyshev nodes [@vaes22, p. 38]
 
@@ -763,15 +791,15 @@ Remember that
 $\langle \nabla f(x), v \rangle = \frac {\dd} {\dd t} \left. f(x + tv) \right|_{t = 0}.$
 
 ::: proposition
-Let $b \in \R^n$ and let $C \in \R^{n \times n}$ be a **symmetric** matrix.
+Let $y \in \R^n$ and let $A \in \R^{n \times n}$ be a **symmetric** matrix.
 Consider the functions
-$$f(x) = \langle b, x \rangle,
-\quad g(x) = x^T C x.$$
+$$f(x) = \langle y, x \rangle,
+\quad g(x) = x^T A x.$$
 
 We have:
 
-- $\nabla f(x) = b$
-- $\nabla g(x) = 2 C x$
+- $\nabla f(x) = y$
+- $\nabla g(x) = 2 A x$
 :::
 
 ::: proposition
@@ -788,9 +816,11 @@ $\boldsymbol \alpha \mapsto \|A \boldsymbol \alpha - \boldsymbol b \|_2$.
 
 Then $\boldsymbol \alpha_\star$ satisfies
 $$A^T A \boldsymbol \alpha_\star = A^T \boldsymbol b$$
-
-The solution is unique if the columns of $A$ are linearly independent.
 :::
+
+$$(A^T A)_{mn} = \sum_{i = 0}^n \varphi_m(x_i) \varphi_n(x_i).$$
+
+# Normal equations in Julia, Moore-Penrose [@vaes22, p. 41] {.split}
 
 ::: remark
 Note that $\boldsymbol \alpha_\star = (A^T A)^{-1} A^T b$.
@@ -800,6 +830,15 @@ and is called the Moore-Penrose pseudoinverse of $A$.
 In Julia, the backslash operator uses the Moore-Penrose pseudo-inverse,
 so that $\boldsymbol \alpha_\star$ can be found via `α = A \ b`{.julia}
 :::
+
+~~~ julia
+import Polynomials
+base = Polynomials.Polynomial([0, 1]).^(0:5) # phi_i functions
+nodes = LinRange(-1, 1, 10)
+b = [1, 0, 1, 0, 1, 0, 2, 1, 3, 2] # Interpolation values
+A = [phi(x) for x in nodes, phi in base]
+α = A \ b
+~~~
 
 # From "least square" to "mean square" approximations {.split}
 
@@ -827,6 +866,16 @@ $$\widehat u(x) = \alpha_0 \varphi_0(x) + \dots + \alpha_m \varphi_m(x)$$
 such that it minimizes
 $$\int_a^b \left|u(x) - \widehat u(x)\right|^2 \dd x.$$
 :::
+
+Note that this means that:
+
+$$\frac {\dd} {\dd \alpha_i}
+\int_a^b \left|u(x) - \widehat u(x)\right|^2 \dd x = 0.$$
+
+Note that this rarely works with the supremum norm
+
+$$\frac {\dd} {\dd \alpha_i}
+\sup_{[a, b]} \left|u(x) - \widehat u(x)\right| = 0.$$
 
 # Scalar products
 
@@ -857,5 +906,229 @@ In both cases, the map $\langle \cdot, \cdot \rangle$ is
 
 In other words, it's a **scalar product**.
 :::
+
+# Normal equations [@vaes22, p. 42] {.split}
+
+::: proposition
+Let $\varphi_0, \dots, \varphi_m \in C([a, b])$
+and $u \in C([a, b])$.
+If the function
+$$\widehat u(x) = \alpha_0 \varphi_0(x) + \dots + \alpha_m \varphi_m(x)$$
+minimizes
+$$\int_a^b \left|u(x) - \widehat u(x)\right|^2 \dd x,$$
+then it satisfies
+
+$$\underbrace{\begin{pmatrix}
+\langle \varphi_0, \varphi_0 \rangle &
+\langle \varphi_0, \varphi_1 \rangle &
+\dots &
+\langle \varphi_0, \varphi_m \rangle \\
+\langle \varphi_1, \varphi_0 \rangle &
+\langle \varphi_1, \varphi_1 \rangle &
+\dots &
+\langle \varphi_1, \varphi_m \rangle \\
+\vdots & \vdots & & \vdots \\
+\langle \varphi_m, \varphi_0 \rangle &
+\langle \varphi_m, \varphi_1 \rangle &
+\dots &
+\langle \varphi_m, \varphi_m \rangle
+\end{pmatrix}}_{\text{Gram matrix}}
+\begin{pmatrix}
+\alpha_0 \\ \alpha_1 \\ \vdots \\ \alpha_m
+\end{pmatrix}
+= \begin{pmatrix}
+\langle u, \varphi_0 \rangle \\
+\langle u, \varphi_1 \rangle \\
+\vdots \\
+\langle u, \varphi_m \rangle
+\end{pmatrix}$$
+:::
+
+# Orthogonal polynomials [@vaes22, p. 42] {.split}
+
+The system
+$$\underbrace{\begin{pmatrix}
+\langle \varphi_0, \varphi_0 \rangle &
+\langle \varphi_0, \varphi_1 \rangle &
+\dots &
+\langle \varphi_0, \varphi_m \rangle \\
+\langle \varphi_1, \varphi_0 \rangle &
+\langle \varphi_1, \varphi_1 \rangle &
+\dots &
+\langle \varphi_1, \varphi_m \rangle \\
+\vdots & \vdots & & \vdots \\
+\langle \varphi_m, \varphi_0 \rangle &
+\langle \varphi_m, \varphi_1 \rangle &
+\dots &
+\langle \varphi_m, \varphi_m \rangle
+\end{pmatrix}}_{\text{Gram matrix}}
+\begin{pmatrix}
+\alpha_0 \\ \alpha_1 \\ \vdots \\ \alpha_m
+\end{pmatrix}
+= \begin{pmatrix}
+\langle u, \varphi_0 \rangle \\
+\langle u, \varphi_1 \rangle \\
+\vdots \\
+\langle u, \varphi_m \rangle
+\end{pmatrix}$$
+is easier to solve when the Gram matrix is the identity matrix, i.e.
+
+$$\langle \varphi_i, \varphi_j \rangle
+= \begin{cases}
+1 & \text{if } i = j\\
+0 & \text{if } i \neq j
+\end{cases}$$
+
+Such polynomials are called **orthonormal**.
+Orthogonal polynomials can always be obtained via the **Gram-Schmidt** procedure.
+
+# Summary {.row}
+
+::::: {.col}
+
+### Vandermonde
+
+\begin{align}
+\underbrace{
+\begin{pmatrix}
+  1 & x_0 & \dots & x_0^n\\
+  1 & x_1 & \dots & x_1^n\\
+  \vdots & \vdots & & \vdots\\
+  1 & x_n & \dots & x_n^n\\
+\end{pmatrix}
+}_{\text{Vandermonde matrix}}
+\begin{pmatrix}
+\alpha_0 \\ \alpha_1 \\ \vdots \\ \alpha_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+u_0 \\ u_1 \\ \vdots \\ u_n
+\end{pmatrix}
+\end{align}
+
+### Lagrange
+
+$$\widehat u(x)
+= \sum_{i = 0}^n u_i
+\overbrace{
+\underbrace{\frac {\prod_{j \neq i} (x - x_j)} {\prod_{j \neq i} (x_i - x_j)}}_{
+\substack{
+1 \text{ when } x = x_i,\\
+0 \text{ when } x = x_j \neq x_i
+}
+}
+}^{\text{Lagrange polynomial}}$$
+
+:::::
+
+::::: {.col}
+
+### Gregory-Newton
+
+$$p(x) = \sum_{i = 0}^n \underbrace{\overbrace{[u_0, \dots, u_i]}^{\text{divided}\ \text{differences}}}_{
+\substack{
+[u_0] = u_0\\
+[u_0, \dots, u_n] = \frac {[u_1, \dots, u_n] - [u_0, \dots, u_{n - 1}]} {x_n - x_0}
+}
+}
+\prod_{j = 0}^{i - 1} (x - x_j)
+$$
+
+#### In Julia
+
+~~~ julia
+import Polynomials
+n = 10
+u(x) = sin(x)
+nodes = LinRange(-1, 1, n + 1)
+# Vandermonde
+x = Polynomials.Polynomial([0, 1])
+base = [^j for j in 0:n] # Vandermonde
+base = [prod(x - nodes[i] for 1:j - 1) for j in 0:n] # Gregory-Newton
+A = [phi(x) for x in nodes, phi in base]
+coefficients = A^-1 * u.(nodes)
+dot(coefficients, base)
+~~~
+
+#### Comparison
+
+- Theoretically, they should give the same result
+- Least susceptible to round-off errors: Gregory-Newton
+- Gregory-Newton is efficient for **incremental interpolation**.
+
+:::::
+
+# Summary: choice of nodes {.row}
+
+::::: col
+
+$$u(x) - \widehat u(x) =
+\frac {u^{(n + 1)}(\xi)}{(n + 1)!} (x - x_0) \dots (x - x_n)$$
+
+::: question
+$$ \overbrace{\sup_{[a, b]} |u - \widehat u|}^{d(u, \widehat u)} \leq C \sup_{[a, b]} \left|u^{(n + 1)}\right|
+\sup_{x \in [a, b]} \underbrace{\left|(x - x_0) \dots (x - x_n)\right|}_{\text{monic}\ {\text{polynomial}\ p}}$$
+
+Can we choose our **interpolating nodes** so that our **monic polynomial** is
+as small as possible?
+:::
+
+::: {.exampleblock title="Answer"}
+The Chebyshev interpolation nodes are given by
+$$\boxed{x_i = a + (b - a) \frac {1 + \cos \left(\frac {(2i + 1) \pi} {2n}\right)} 2}$$
+:::
+
+:::::
+
+::::: {.col}
+~~~ {.julia .plot width=100%}
+x = -1:0.01:1
+f(x, n) = 2.0^(-n + 1) * cos(n * acos(x))
+for n in 1:5
+  label = latexstring("2^{" * string(-n + 1) * "} T_{" * string(n) * "}")
+  plot!(x, f.(x, n), label=label, framestyle =:origin)
+end
+~~~
+:::::
+
+# Summary: approximation {.split}
+
+::: proposition
+Let $\varphi_0, \dots, \varphi_m \in C([a, b])$
+and $u \in C([a, b])$.
+The best approximation
+$$\widehat u(x) = \alpha_0 \varphi_0(x) + \dots + \alpha_m \varphi_m(x)$$
+satisfies
+$$\underbrace{\begin{pmatrix}
+\langle \varphi_0, \varphi_0 \rangle &
+\langle \varphi_0, \varphi_1 \rangle &
+\dots &
+\langle \varphi_0, \varphi_m \rangle \\
+\langle \varphi_1, \varphi_0 \rangle &
+\langle \varphi_1, \varphi_1 \rangle &
+\dots &
+\langle \varphi_1, \varphi_m \rangle \\
+\vdots & \vdots & & \vdots \\
+\langle \varphi_m, \varphi_0 \rangle &
+\langle \varphi_m, \varphi_1 \rangle &
+\dots &
+\langle \varphi_m, \varphi_m \rangle
+\end{pmatrix}}_{\text{Gram matrix}}
+\begin{pmatrix}
+\alpha_0 \\ \alpha_1 \\ \vdots \\ \alpha_m
+\end{pmatrix}
+= \begin{pmatrix}
+\langle u, \varphi_0 \rangle \\
+\langle u, \varphi_1 \rangle \\
+\vdots \\
+\langle u, \varphi_m \rangle
+\end{pmatrix}$$
+:::
+
+Discrete case with interpolation nodes $x_0, \dots, x_n$:
+: $\langle f, g \rangle = \sum_{i = 0}^n f(x_i) g(x_i)$
+
+Continuous case
+: $\langle f, g \rangle = \int_a^b f(x) g(x) \dd x$
 
 # Bibliography
