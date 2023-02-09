@@ -8,8 +8,11 @@ output: revealjs
 $$\int_a^b f(x) \dd x$$
 
 ::: theorem
+L'intégrale indéfinie est une primitive:
 $$\left(\int_c^x f(t) \dd t\right)' = f(x)$$
-$$\int_a^b f'(x) \dd x = f(b) - f(a)$$
+
+Les intégrales
+$$\int_a^b f'(x) \dd x = \left[\int_a^b f(x) \dd x\right]_a^b$$
 :::
 
 # Énergie potentielle et mécanique {.split}
@@ -38,10 +41,6 @@ entre $-\frac \pi 2$ et $\frac {3 \pi} 2$.
 ![](/static/images/1675934794.png){width=100%}
 :::
 
-# Exercices {.split}
-
-![](/static/images/1675935156.png){width=100%}
-
 # Aire entre deux fonctions {.split}
 
 ![](/static/images/1675935044.png){width=100%}
@@ -58,8 +57,9 @@ plot(x, f.(x), aspect_ratio = :equal, framestyle = :origin, label=L"\sqrt{1 - x^
 $$A = 4 \int_0^r \sqrt{r^2 - x^2} \dd x$$
 :::
 
-# Un petit peu de musique {.split}
+# Un petit peu de musique {.row}
 
+::::: {.col}
 Supposons qu'on presse $3$ notes sur un clavier
 
 $$f(t) = c_1 \sin(f_1 t) + c_2 \sin(f_2 t) + c_3 \sin(f_3 t),$$
@@ -75,9 +75,18 @@ plot(x, f.(x), label=L"f(t)", framestyle=:origin)
 Quelles sont les notes et à quel volume sont-elles jouées?
 
 ::: {.theorem title="Orthogonalité"}
-$$\int_0^{2 \pi} \sin(mx) \sin(nx) \dd x =
+$$\int_{-\pi}^{\pi} \sin(mx) \sin(nx) \dd x =
 \begin{cases}
 0 & \text{if } m \neq n\\
-C & \text{if } m = n.
+\pi & \text{if } m = n.
 \end{cases}$$
 :::
+:::::
+
+::::: {.col}
+$$\sin a \sin b = \frac {\cos (a - b) - \cos ( a + b)} 2$$
+:::::
+
+# Exercices {.split}
+
+![](/static/images/1675935156.png){width=100%}
