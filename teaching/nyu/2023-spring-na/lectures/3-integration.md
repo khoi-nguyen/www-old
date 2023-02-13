@@ -2,7 +2,7 @@
 title: "Chapter 3: Numerical Integration"
 output: revealjs
 notes: |
-  - 13/02: Start Newton-Cotes method
+  - 13/02: Newton-Cotes method, composite trapezium rule
 ...
 
 # International Day of Women and Girls in Science (11/02) {.row}
