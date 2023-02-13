@@ -90,3 +90,25 @@ $$\sin a \sin b = \frac {\cos (a - b) - \cos ( a + b)} 2$$
 # Exercices {.split}
 
 ![](/static/images/1675935156.png){width=100%}
+
+# Exercices avec paramètres {.split}
+
+![](/static/images/1676277671.png){width=100%}
+
+# Exercices d'aire {.split}
+
+![](/static/images/1676277863.png){width=100%}
+
+# Exercices d'aire {.split}
+
+![](/static/images/1676277935.png)
+
+# Volumes de revolution {.split}
+
+![](/static/images/1676278281.png){width=100%}
+
+![](/static/images/1676278472.png)
+
+# Exercices sur les volumes de révolution {.split}
+
+![](/static/images/1676279000.png){width=100%}
