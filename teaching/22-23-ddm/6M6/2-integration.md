@@ -112,3 +112,47 @@ $$\sin a \sin b = \frac {\cos (a - b) - \cos ( a + b)} 2$$
 # Exercices sur les volumes de révolution {.split}
 
 ![](/static/images/1676279000.png){width=100%}
+
+# Exercices sur les volumes de révolution {.split}
+
+![](/static/images/1676318711.png){width=100%}
+
+# MRU, MRUA
+
+::: question
+Calculer
+
+$$v(t) = v_0 + \int_{t_0}^t a \dd x.$$
+$$x(t) = x_0 + \int_{t_0}^t v(x) \dd x.$$
+:::
+
+# Exercices: longueur d'arc de courbe {.split}
+
+![](/static/images/1676318762.png){width=100%}
+
+# Transférer 1 {.split}
+
+![](/static/images/1676318845.png){width=80%}
+![](/static/images/1676318866.png){width=80%}
+
+# Transférer 2 {.split}
+
+![](/static/images/1676318973.png){width=80%}
+
+# Transférer 3 {.split}
+
+![](/static/images/1676319095.png){width=80%}
+
+# Transférer 4 {.split}
+
+![](/static/images/1676319171.png){width=100%}
+
+# Transférer 5 {.split}
+
+![](/static/images/1676319195.png){width=80%}
+![](/static/images/1676319206.png){width=80%}
+
+# Transférer 6 {.split}
+
+![](/static/images/1676319227.png){width=80%}
+
