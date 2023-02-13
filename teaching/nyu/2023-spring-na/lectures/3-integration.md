@@ -1,0 +1,287 @@
+---
+title: "Chapter 3: Numerical Integration"
+output: revealjs
+notes: |
+  - 13/02: Start Newton-Cotes method
+...
+
+# International Day of Women and Girls in Science (11/02) {.row}
+
+::::: {.col}
+![](/static/images/1676240183.png){height=100%}
+:::::
+
+::::: {.col}
+<iframe src="https://en.wikipedia.org/wiki/Timeline_of_women%27s_education" height=800 width="100%">
+</iframe>
+:::::
+
+# Numerical integration {.row}
+
+::::: {.col}
+- We will assume without loss of generality that we're working on $[-1, 1]$.
+  $$\int_a^b u(x) \dd x = \frac {b - a} 2 \int_{-1}^1 u\left(\frac {b - a} 2 + t \frac {b - a} 2\right) \dd t$$
+- A few facts from last chapter to keep in mind:
+
+  Lagrange polynomials
+  : $$\widehat u(x) = \sum_{i = 0}^n u_i \varphi(x), \quad
+  \varphi_i(x) = \prod_{j \neq i} \frac {x - x_j} {x_i - x_j}$$
+
+  Interpolation error
+  :  $$\widehat u(x) - u(x) = \frac{u^{(n + 1)}(\xi)} {(n + 1)!} (x - x_0) \dots (x - x_n)$$
+:::::
+
+::::: {.col}
+
+### Annoucements
+
+- Office hours: just send me an email
+- Homework on interpolation: due tonight
+- Next homework: Exercise 3.6, due next monday
+- French sentence of the day: "Je fais grève aujourd'hui" (I'm on strike today).
+  Can be used when you don't want to answer your lecturer's questions.
+:::::
+
+# Closed Newton-Cotes method [@vaes22, p. 55] {.split}
+
+Let $-1 = x_0 < x_1 < \dots < x_{n - 1} < x_n = 1$ be equidistant points
+and let us try to estimate the integral of 
+$$u : \{x_0, \dots, x_n\} \to \R.$$
+
+::: {.exampleblock title="Newton-Cotes method"}
+Step 1
+: Construct the interpolating polynomial $\widehat u$
+  going through $(x_i, u(x_i))$, with $i = 0, \dots, n$.
+
+Step 2
+: Calculate $$\int_{-1}^1 \widehat u(x) \dd x.$$
+:::
+
+# Closed Newton-Cotes [@vaes22, p. 55] {.row}
+
+::::: {.col}
+~~~ {.julia .plot}
+using Polynomials
+x = LinRange(-1, 1, 1000)
+X = LinRange(-1, 1, 2)
+f(x) = x^3 + 2
+p = Polynomials.fit(X, f.(X))
+plot(x, f.(x), label=L"x^3 + 2", framestyle=:origin)
+plot!(x, p.(x), label=L"\widehat u(x)")
+~~~
+:::::
+
+::::: {.col}
+~~~ {.julia .plot}
+using Polynomials
+x = LinRange(-1, 1, 1000)
+X = LinRange(-1, 1, 3)
+f(x) = sin(x)
+p = Polynomials.fit(X, f.(X))
+plot(x, f.(x), label=L"\sin x", framestyle=:origin)
+plot!(x, p.(x), label=L"\widehat u(x)")
+~~~
+:::::
+
+# Closed Newton-Cotes: weights [@vaes22, p. 55] {.split}
+
+::: proposition
+The Newton-Cotes approximation of the integral is given by
+$$\sum_{i = 0}^n u(x_i) \underbrace{\int_{-1}^1 \varphi_i(x) \dd x}_{w_i},$$
+where $\varphi_0, \dots, \varphi_n$ are the Lagrange polynomials associated with $x_0, \dots x_n$.
+Moreover, it is **exact** for polynomials of degree less than or equal to $n$.
+:::
+
+# Finding the weights [@vaes22, p. 55] {.row}
+
+::::: {.col}
+$$\boxed{w_i = \int_{-1}^1 \varphi_i(x) \dd x}$$
+
+~~~ julia
+using SymPy
+@vars x
+n = 2
+nodes = [-1 + Rational(2 * i, n) for i in 0:n]
+
+function lagrange(nodes, xi)
+    num = prod(x - n for n in nodes if n != xi)
+    den = prod(xi - n for n in nodes if n != xi)
+    return num / den
+end
+
+[integrate(lagrange(nodes, xi), (x, -1, 1)) for xi in nodes]
+~~~
+:::::
+
+::::: {.col}
+
+$n$      Name                          Formula
+-----    ------                        --------
+$1$      Trapezoidal rule              $$u(-1) + u(1)$$
+$2$      Simpson's rule                $$\frac 1 3 u(-1) + \frac 4 3 u(0) + \frac 1 3 u(1)$$
+$3$      Simpson's $\frac 3 8$ rule    $$\frac 1 4 u(-1) + \frac 3 4 u(-1/3) + \frac 3 4 u(1/3) + \frac 1 4 u(1)$$
+$4$      Bode's rule                   $$\frac 7 {45} u(-1) + \frac {32} {45} u\left(-\frac 1 2\right) + \frac {12} {45} u(0)\\ + \dots$$
+
+:::::
+
+# Finding the weights II [@vaes22, p. 55] {.split}
+
+Another way to find the weights is to solve the system
+
+$$\sum_{i = 0} w_i x_i^p = \int_{-1}^1 x^p \dd x$$
+
+\begin{align}
+\underbrace{
+\begin{pmatrix}
+1 & 1 & \dots & 1 & 1\\
+x_0 & x_1 & \dots & x_{n - 1} & x_n\\
+\vdots & \vdots & & \vdots & \vdots\\
+x_0^{n - 1} & x_1^{n - 1} & \dots & x_{n - 1}^{n - 1} & x_n^{n - 1}\\
+x_0^n & x_1^n & \dots & x_{n - 1}^n & x_n^n
+\end{pmatrix}
+}_A
+\underbrace{
+\begin{pmatrix}
+w_0 \\ w_1 \\ \vdots \\ w_{n - 1} \\ w_n
+\end{pmatrix}
+}_w
+=
+\underbrace{
+\begin{pmatrix}
+\int_{-1}^1 1 \dd x \\
+\int_{-1}^1 x \dd x \\
+\vdots \\
+\int_{-1}^1 x^{n - 1} \dd x \\
+\int_{-1}^1 x^n \dd x
+\end{pmatrix}
+}_b
+\end{align}
+
+~~~ julia
+using SymPy
+@vars x
+n = 2
+nodes = [-1 + Rational(2*i, n) for i in 0:n]
+b = [integrate(x^p, (x, -1, 1)) for p in 0:n]
+A = [x^p for p in 0:n, x in nodes]
+A^-1 * b
+~~~
+
+# Degree of precision [@vaes22, p. 57] {.split}
+
+::: definition
+The degree of precision of an integration method
+is the largest integer $d$ such that
+all polynomials of degree less than or equal to $d$ are integrated exactly via this method.
+:::
+
+::::: {.col}
+
+$n$      Name                          Formula
+-----    ------                        --------
+$1$      Trapezoidal rule              $$u(-1) + u(1)$$
+$2$      Simpson's rule                $$\frac 1 3 u(-1) + \frac 4 3 u(0) + \frac 1 3 u(1)$$
+$3$      Simpson's $\frac 3 8$ rule    $$\frac 1 4 u(-1) + \frac 3 4 u(-1/3) + \frac 3 4 u(1/3) + \frac 1 4 u(1)$$
+$4$      Bode's rule                   $$\frac 7 {45} u(-1) + \frac {32} {45} u\left(-\frac 1 2\right) + \frac {12} {45} u(0)\\ + \dots$$
+
+:::::
+
+# Interpolation is not enough [@vaes22, p. 56]
+
+Remember that the Newton-Cotes method would not integrate the Runge function correctly,
+as the interpolating polynomial does not converge uniformly towards it.
+
+![](/static/images/1675249748.png){height=800}
+
+# Composite methods [@vaes22, p. 57] {.split}
+
+We'll use **piecewise interpolation** [@vaes22, p.39] to ensure uniform convergence
+towards the function as the number of nodes goes to infinity.
+
+::: {.exampleblock title="Composite methods"}
+#. We start with equidistant nodes $a = x_0 < x_1 < \dots < x_{n - 1} < x_n = b$
+#. We apply the Newton-Cotes method to the intervals $[x_0, x_k]$, $[x_k, x_{2k}]$, $[x_{2 k}, x_{3 k}]$, $\dots$
+#. Sum the results
+$$\widehat I_a^b = \widehat I_{x_0}^{x_k} + \widehat I_{x_k}^{x_{2k}} + \dots + \widehat I_{x_{n - k}}^{x^k}$$
+:::
+
+# Composite trapezoidal rule [@vaes22, p. 58] {.split}
+
+::: {.exampleblock title="Composite Trapezium rule"}
+Let $a = x_0 < x_1 < \dots < x_{n - 1} < x_n = b$ be a collection
+of equally distant nodes with $h = x_{i + 1} - x_i$.
+
+Given $u: \{x_0, \dots, x_n\} \to \R$, the composite trapezium rule
+is given by
+$$\widehat I_h = \frac h 2 (u(x_0) + 2 u(x_1) + 2 u(x_2) + \dots + 2 u(x_{n - 1}) + u(x_n))$$
+:::
+
+~~~ julia
+function composite_trapezium(u, a, b, n)
+    x = LinRange(a, b, n + 1)
+    y = u.(x)
+    h = x[2] - x[1]
+    return h/2 * sum([y[1]; 2 * y[2:end - 1]; y[end])
+end
+~~~
+
+# Integration error for the composite trapezoidal rule [@vaes22, p. 58] {.split}
+
+::: theorem
+Let $a = x_0 < x_1 < \dots < x_{n - 1} < x_n = b$ be a collection
+of equally distant nodes with $h = x_{i + 1} - x_i$.
+The quantity
+$$\widehat I_h = \frac h 2 (u(x_0) + 2 u(x_1) + 2 u(x_2) + \dots + 2 u(x_{n - 1}) + u(x_n))$$
+satisfies
+$$\left|\int_a^b u(x) \dd x - \widehat I_h\right| \leq
+\frac {b - a} {12} \left(\sup_{[a, b]} |u''|\right) h^2$$
+:::
+
+# Composite Simpson rule [@vaes22, p. 59] {.split}
+
+$$\widehat I_h = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + 4 u(x_3) + 2 u(x_4) + \dots 4 u(x_{n - 1}) + u(x_n)\right)$$
+
+~~~ julia
+function composite_simpson(u, a, b, n)
+    x = LinRange(a, b, n + 1)
+    y = u.(x)
+    h = x[2] - x[1]
+    return h/2 * sum([y[1]; y[end]; 4 y[2:2:end-1]; 2 y[3:2:end-2])
+end
+~~~
+
+# Integration error for the composite Simpson rule [@vaes22, p. 59] {.split}
+
+::: theorem
+Let $a = x_0 < x_1 < \dots < x_{n - 1} < x_n = b$ be a collection
+of equally distant nodes with $h = x_{i + 1} - x_i$.
+The quantity
+$$\widehat I_h = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + 4 u(x_3) + 2 u(x_4) + \dots 4 u(x_{n - 1}) + u(x_n)\right)$$
+satisfies
+$$\left|\int_a^b u(x) \dd x - \widehat I_h\right| \leq
+\frac {b - a} {180} \left( \sup_{[a,b]} \left|u^{(4)}\right| \right) h^4$$
+:::
+
+# A posteriori estimation of the error [@vaes22, p. 60] {.split}
+
+Without explicitely knowing the value $I$ of the integral,
+we can estimate the error via
+
+$$|I - \widehat I_h| \approx \frac 1 {15} |\widehat I_h - \widehat I_{2h}|$$
+
+![](/static/images/1676285317.png){width=100%}
+
+# Richardson extrapolation [@vaes22, p. 62] {.split}
+
+Using a Taylor expansion,
+
+\begin{align}
+J(h) &= J(0) + J'(0) h + O(h^2)\\
+J\left(\frac h 2\right) &= J(0) + J'(0) \frac h 2 O(h^2).
+\end{align}
+
+Let us consider $J_1(h/2) = \alpha J(h) + \beta J(h/2)$.
+
+# Elimination of the quadratic error term [@vaes22, p. 62]
+
+# Bibliography
