@@ -40,6 +40,7 @@ notes: |
 - Next homework: Exercise 3.6, due next monday
 - French sentence of the day: "Je fais grève aujourd'hui" (I'm on strike today).
   Can be used when you don't want to answer your lecturer's questions.
+- Homework 1 and 2 will be marked before Monday the 20th (sorry!)s
 :::::
 
 # Closed Newton-Cotes method [@vaes22, p. 55] {.split}
@@ -190,6 +191,8 @@ $4$      Bode's rule                   $$\frac 7 {45} u(-1) + \frac {32} {45} u\
 
 Remember that the Newton-Cotes method would not integrate the Runge function correctly,
 as the interpolating polynomial does not converge uniformly towards it.
+
+Moreover, for larger values of $n$, the weights become negative (round-off errors).
 
 ![](/static/images/1675249748.png){height=800}
 
