@@ -240,9 +240,67 @@ $$\left|\int_a^b u(x) \dd x - \widehat I_h\right| \leq
 \frac {b - a} {12} \left(\sup_{[a, b]} |u''|\right) h^2$$
 :::
 
+# 15 February (or February 15) {.row}
+
+::::: {.col}
+
+### Composite Newton-Cotes
+
+- Start with an equidistant division $$a = x_0 < x_1 < \dots < x_{n - 1} < x_n = b.$$
+  We'll write $h = x_{i + 1} - x_i$.
+- Piecewise interpolation of $u$ with a polynomial of degree $k$
+  on $[x_0, x_k]$, $[x_k, x_{2k}]$, $\dots$, $[x_{n - k}, x_n]$
+  to get $\widehat u$
+- Integrate $\widehat u$:
+  $$\int_a^b u(x) \dd x \approx \overbrace{\int_a^b \widehat u(x) \dd x}^{\widehat I_h}.$$
+
+### Trapezoidal rule with Julia
+
+~~~ julia
+function composite_trapezium(u, a, b, n)
+    x = LinRange(a, b, n + 1)
+    y = u.(x)
+    h = x[2] - x[1]
+    return h/2 * sum([y[1]; 2 * y[2:end - 1]; y[end])
+end
+~~~
+
+:::::
+
+::::: {.col}
+
+### Trapezoidal rule $(k = 2)$
+
+- Weights have ratio $1:1$
+- Composite rule gives twice the weight to nodes that belong to two trapezia
+  $$\widehat I_h = \frac h 2 (u(x_0) + 2 u(x_1) + 2 u(x_2) + \dots + 2 u(x_{n - 1}) + u(x_n))$$
+- Error associated with the trapezoidal rule is $O(h^2)$:
+  $$\left|\int_a^b u(x) \dd x - \widehat I_h\right| \leq
+  \frac {b - a} {12} \left(\sup_{[a, b]} |u''|\right) h^2$$
+
+#### French sentence of the day
+
+- "Je souhaite parler à votre manager"
+
+#### Announcements
+
+- Homework on Gauss-Hermite due on Monday
+
+:::::
+
 # Composite Simpson rule [@vaes22, p. 59] {.split}
 
-$$\widehat I_h = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + 4 u(x_3) + 2 u(x_4) + \dots 4 u(x_{n - 1}) + u(x_n)\right)$$
+::: {.block title="Non-composite Simpson rule"}
+$$\int_{-1}^1 u(x) \dd x \approx \frac 1 3 u(-1) + \frac 4 3 u(0) + \frac 1 3 u(1)$$
+:::
+
+::: {.block title="Composite Simpson rule"}
+\begin{align}
+\widehat I_h = \frac h 3 ( u(x_0) + & 4 u(x_1) + 2 u(x_2) \\
++ & 4 u(x_3) + 2 u(x_4) + \dots \\
++ & 4 u(x_{n - 1}) + u(x_n) )
+\end{align}
+:::
 
 ~~~ julia
 function composite_simpson(u, a, b, n)
@@ -259,7 +317,7 @@ end
 Let $a = x_0 < x_1 < \dots < x_{n - 1} < x_n = b$ be a collection
 of equally distant nodes with $h = x_{i + 1} - x_i$.
 The quantity
-$$\widehat I_h = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + 4 u(x_3) + 2 u(x_4) + \dots 4 u(x_{n - 1}) + u(x_n)\right)$$
+$$\widehat I_h = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + \dots + 4 u(x_{n - 1}) + u(x_n)\right)$$
 satisfies
 $$\left|\int_a^b u(x) \dd x - \widehat I_h\right| \leq
 \frac {b - a} {180} \left( \sup_{[a,b]} \left|u^{(4)}\right| \right) h^4$$
@@ -280,11 +338,154 @@ Using a Taylor expansion,
 
 \begin{align}
 J(h) &= J(0) + J'(0) h + O(h^2)\\
-J\left(\frac h 2\right) &= J(0) + J'(0) \frac h 2 O(h^2).
+J\left(\frac h 2\right) &= J(0) + J'(0) \frac h 2 + O(h^2).
 \end{align}
 
 Let us consider $J_1(h/2) = \alpha J(h) + \beta J(h/2)$.
 
-# Elimination of the quadratic error term [@vaes22, p. 62]
+# Elimination of the quadratic error term [@vaes22, p. 62] {.split}
+
+We can reapply the procedure to eliminate the quadratic term.
+
+\begin{align}
+J_1(h / 4) &= J(0) - J^{(2)}(0) \frac {h^2} {16} + O(h^3)\\
+J_1(h / 2) &= J(0) - J^{(2)}(0) \frac {h^2} 4 + O(h^3)\\
+\end{align}
+
+# Generalisation [@vaes22, p. 64] {.split}
+
+![](/static/images/1676465786.png)
+
+$$\boxed{J_i(h/2^i) = \frac {
+2^i J_{i - 1}(h/2^i) - J_{i - 1}(h/2^{i - 1})
+}{2^i - 1}}$$
+
+# When only even powers contribute [@vaes22, p. 64] {.split}
+
+$$J(h) = J(0) + \frac {J''(0)} 2 h^2 + \frac {J^{(4)}} {4!} h^4 + O(h^6)$$
+
+![](/static/images/1676451388.png)
+
+$$\boxed{J_i(h/2^i) = \frac {
+2^{2i} J_{i - 1}(h/2^i) - J_{i - 1}(h/2^{i - 1})
+}{2^{2i} - 1}}$$
+
+# Romberg's method [@vaes22, p. 64] {.split}
+
+::: {.exampleblock title="Romberg's method"}
+Apply Richardson's extrapolation to the trapezium rule
+$$J(h) = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + \dots + 4 u(x_{n - 1}) + u(x_n)\right)$$
+:::
+
+Note: $J$ only has an expansion in even powers.
+
+# With non-equidistant nodes [@vaes22, p. 65] {.split}
+
+$$\sum_{i = 0}^n w_i x_i^d = \int_{-1}^1 x^d \dd x$$
+
+- Previously, the $x_i$ were fixed, so we could only change the $n + 1$ weights.
+  This allowed to integrate $1$, $x$, $\dots$, $x^n$ exactly.
+- If the $x_i$ are unknowns, this adds $n + 1$ additional degrees of freedom,
+  allowing exact integration of $1$, $x$, $\dots$, $x^{2n + 1}$.
+
+::: {.block title="Gauss-Legendre quadrature"}
+Find $w_0$, $\dots$, $w_n$, $x_0$, $\dots$, $x_n$ such that
+$$\sum_{i = 0}^n w_i x_i^d = \int_{-1}^1 x^d \dd x$$
+for $d = 0, 1, \dots, 2n + 1$.
+:::
+
+# Example: Gauss-Legendre when two nodes ($n = 1$) [@vaes22, p. 66] {.split}
+
+::: {.block title="Gauss-Legendre quadrature"}
+Find $w_0$, $w_1$, $x_0$, $x_1$ such that
+$$\sum_{i = 0}^n w_i x_i^d = \int_{-1}^1 x^d \dd x$$
+for $d = 0, 1, \dots, 3$.
+:::
+
+# Orthogonality property with Gauss-Legendre {.split}
+
+::: question
+How can we find the nodes in Gauss-Legendre integration?
+:::
+
+It turns out $(x - x_0) \dots (x - x_n)$ satisfies an interesting property...
+
+::: proposition
+Let $w_0$, $\dots$, $w_n$, $x_0$, $\dots$, $x_n$ be such that
+$$\sum_{i = 0}^n w_i x_i^d = \int_{-1}^1 x^d \dd x, \quad d = 0, 1, \dots, 2n + 1.$$
+
+The polynomial $q(x) = (x - x_0) (x - x_1) \dots (x - x_n)$
+is the unique polynomial of degree $n + 1$ (up to a multiplicative constant) such that
+
+$$\int_{-1}^1 q(x) x^d = 0, \quad d = 0, 1, \dots, n.$$
+:::
+
+
+# Scalar product and Gram-Schmidt {.split}
+
+$$\langle f, g \rangle = \int_{-1}^{1} f(x) g(x) \dd x$$
+
+- Two functions $f, g$ are **orthogonal** if $\langle f, g \rangle = 0.$
+- $||f|| = \sqrt {\int_{-1}^1 f^2(x) \dd x}$
+- A family of orthogonal vectors is **orthonormal** if every element has norm $1$.
+
+::: {.block title="Gram-Schmidt orthonormalisation"}
+
+- Normalize the first vector $$e_1 = \frac {u_1} {||u_1||}$$
+- To find the second vector
+  $$e_2 = \frac {u_2 - \langle u_2, e_1 \rangle e_1} {||u_2 - \langle u_2, e_1 \rangle e_1||}$$
+- To find the third
+  $$e_3 = \frac {u_3 - \langle u_3, e_1 \rangle e_1 - \langle u_3, e_2 \rangle e_2} {||u_3 - \langle u_3, e_1 \rangle e_1 - \langle u_3, e_2 \rangle e_2||}$$
+
+:::
+
+
+# Legendre polynomials {.split}
+
+::: definition
+The family Legendre polynomials is the orthonormal sequence $(P_n)_n$ of polynomials
+such that $P_n$ is of degree $n$ for each $n \in \N$.
+:::
+
+In the classical definition, Legendre polynomials are normalized differently.
+As we'll only focus on their roots, this will not matter.
+
+~~~ julia
+using SymPy
+@vars x
+n = 3
+base = []
+for d in 0:n
+  v = x^d
+
+  # Make v orthogonal to the elements of 'base'
+  for e in base
+    v -= integrate(v * e, (x, -1, 1)) * e
+  end
+  # Normalize
+  v = v / √(integrate(v * v, (x, -1, 1)))
+
+  # Add it to 'base'
+  push!(base, simplify(v))
+end
+base
+~~~
+
+# Gauss-Legendre quadrature [@vaes22, pp. 66-67] {.split}
+
+::: theorem
+The following equations hold
+$$\sum_{i = 0}^n w_i x_i^d = \int_{-1}^1 x^d \dd x,
+\quad d = 0, 1, \dots, 2n + 1$$
+if and only if the following conditions hold:
+
+- $x_0, \dots, x_n$ are the roots of $L_{n + 1}$.
+- the weights are given by
+  $$w_i = \int_{-1}^1 \prod_{j \neq i} \frac {x - x_j} {x_i - x_j} \dd x.$$
+
+In addition, all the weights are positive.
+:::
+
+# The curse of dimensionality
 
 # Bibliography
