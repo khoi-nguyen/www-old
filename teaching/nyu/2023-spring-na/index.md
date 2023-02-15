@@ -51,8 +51,8 @@ directory: teaching/nyu/2023-spring-na/lectures
 Recitations
 -----------
 
-~~~ {.yaml .widget name="explorer"}
-directory: teaching/nyu/2023-spring-na/recitations
-~~~
+- Monday 13 February: Exercises 3.4, 3.5
+- Wednesday 15 February: Exercises 3.7, 3.9
+
 :::::
 :::

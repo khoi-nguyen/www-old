@@ -2,7 +2,8 @@
 title: "Chapter 3: Numerical Integration"
 output: revealjs
 notes: |
-  - 13/02: Newton-Cotes method, composite trapezium rule
+  - 13/02: Newton-Cotes method, composite trapezium rule (1-13)
+  - 15/02: Composite Simpson rule, Romberg (14-22)
 ...
 
 # International Day of Women and Girls in Science (11/02) {.row}
