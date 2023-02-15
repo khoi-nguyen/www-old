@@ -280,7 +280,7 @@ end
 
 #### French sentence of the day
 
-- "Je souhaite parler à votre manager"
+- "Je veux parler à votre supérieur" (I want to speak to your manager)
 
 #### Announcements
 
