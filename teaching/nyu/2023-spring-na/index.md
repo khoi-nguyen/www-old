@@ -38,7 +38,7 @@ Calendar
 <iframe src="https://calendar.google.com/calendar/embed?src=c_196f6bc4e9f68f2393573d13ca5f0ec563cfd9a6279b8e3fb524dc8adf26fd20%40group.calendar.google.com&ctz=Europe%2FBrussels" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 ::: row
-::::: col-lg
+::::: col-lg-7
 Lectures
 --------
 
@@ -47,7 +47,7 @@ directory: teaching/nyu/2023-spring-na/lectures
 ~~~
 :::::
 
-::::: col-lg
+::::: col-lg-5
 Recitations
 -----------
 
