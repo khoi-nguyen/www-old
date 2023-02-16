@@ -126,6 +126,10 @@ $$v(t) = v_0 + \int_{t_0}^t a \dd x.$$
 $$x(t) = x_0 + \int_{t_0}^t v(x) \dd x.$$
 :::
 
+# Longueur d'arc de cercle {.split}
+
+![](/static/images/1676560803.png)
+
 # Exercices: longueur d'arc de courbe {.split}
 
 ![](/static/images/1676318762.png){width=100%}
