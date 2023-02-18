@@ -380,6 +380,66 @@ $$J(h) = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + \dots + 4 u(x_{n - 1}) 
 
 Note: $J$ only has an expansion in even powers.
 
+# Summary (20/02) {.row}
+
+::::: col
+
+### Closed Newton-Cotes
+
+$$\int_{-1}^1 u(x) \dd x \approx \sum_{i = 0}^n
+\underbrace{\left(\int_{-1}^1 \overbrace{\prod_{\substack{j = 0\\ j \neq i}}^n \frac {x - x_j} {x_i - x_j}}^{\text{Lagrange}} \dd x\right)}_{w_i} u(x_i)$$
+
+- Interpolation on equidistant nodes
+- When $n$ is large, weights are negative
+- Runge phenomenon: no uniform convergence!
+- Weight ratios: trapezium $1:1$, Simpson $1:4:1$
+
+### Composite Newton-Cotes
+
+$$
+\int_{-1}^1 u(x) \dd x \approx \sum_{j = 0}^{\frac n k}
+\underbrace{\sum_{i = j k}^{(j + 1) k} w_{i} u(x_i)}_{\text{Newton-Cotes} \text{ on } [x_{jk}, x_{(j + 1)k}]}
+$$
+
+- Piecewise interpolation, uniform convergence!
+- Trapezium ($k = 1$), Simpson $(k = 2)$
+
+:::::
+
+::::: col
+
+### Error analysis
+
+\begin{align}
+\int_{-1}^1 u(x) \dd x
+&= \underbrace{\frac h 2 \left( u(x_0) + 2 u(x_1) + \dots 2 u(x_{n - 1}) + u(x_n) \right)}_{\text{Composite trapezium rule}}
++ \mathcal O(h^2)\\
+&= \underbrace{\frac h 3 \left( u(x_0) + 4 u(x_1) + \dots 4 u(x_{n - 1}) + u(x_n) \right)}_{\text{Composite Simpson rule}\, 1-4-2-4-2-\dots}
++ \mathcal O(h^4).
+\end{align}
+
+### Richardson extrapolation aka Romberg
+
+Accelerates the convergence by considering
+$$\alpha I(h) + \beta I(h / 2)$$
+to eliminate an extra
+
+$$
+\substack{\text{Trapezium}\\ \mathcal O(h^2)}
+\xrightarrow{\text{Richardson}}
+\substack{\text{Simpson}\\ \mathcal O(h^4)}
+\xrightarrow{\text{Richardson}}
+\mathcal O(h^6)
+\xrightarrow{\text{Richardson}}
+\dots
+$$
+
+### Announcements
+
+- Homework due tonight
+
+:::::
+
 # With non-equidistant nodes [@vaes22, p. 65] {.split}
 
 $$\sum_{i = 0}^n w_i x_i^d = \int_{-1}^1 x^d \dd x$$
