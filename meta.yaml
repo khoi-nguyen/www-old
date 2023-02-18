@@ -161,7 +161,10 @@ envs:
 \newcommand{\fl}{\mathrm{fl}}
 \newcommand{\span}{\mathrm{span}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\V}{\mathbb{V}}
 \newcommand{\Z}{\mathbb{Z}}
