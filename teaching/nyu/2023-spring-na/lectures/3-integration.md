@@ -422,7 +422,7 @@ $$
 
 Accelerates the convergence by considering
 $$\alpha I(h) + \beta I(h / 2)$$
-to eliminate an extra
+to eliminate an extra term in the Taylor expansion.
 
 $$
 \substack{\text{Trapezium}\\ \mathcal O(h^2)}
@@ -437,6 +437,7 @@ $$
 ### Announcements
 
 - Homework due tonight
+- French sentence of the day: Je voudrais un menu McBaguette extra large avec un seau de frites
 
 :::::
 
@@ -552,7 +553,7 @@ In addition, all the weights are positive.
 Assume that we have a Gauss-Legendre rule with precision $k$, i.e.
 
 $$
-\int_{-1}^1 u(x) \dd x - \sum_{i = 0}^n w_i u(x_i) = O(h^k)
+\int_{-1}^1 u(x) \dd x = \sum_{i = 0}^n w_i u(x_i) + O(h^k)
 $$
 
 Gauss-Legendre integration can easily be generalized in higher dimension,
@@ -561,15 +562,15 @@ For example, in dimension $2$, we have
 
 $$
 \int_{-1}^1 \int_{-1}^1 u(x, y) \dd y \dd x
-- \sum_{i = 0}^n \sum_{j = 0}^n w_i w_j u(x_i, y_i) = O(h^k).
+= \sum_{i = 0}^n \sum_{j = 0}^n w_i w_j u(x_i, y_i) + O(h^k).
 $$
 
 # Curse of dimensionality [@vaes22, p. 68] {.split}
 
 \begin{align}
 \int_{-1}^1 \dots \int_{-1}^1 &u(x_1, \dots, x_d) \dd x_d \dots \dd x_1\\
-&- \sum_{i_1 = 1}^{n} \dots \sum_{i_d = 1}^n w_{i_1} \dots w_{i_d}
-u(x_{i_1}, \dots, x_{i_d}) = O(h^k)
+&= \sum_{i_1 = 0}^{n} \dots \sum_{i_d = 0}^n w_{i_1} \dots w_{i_d}
+u(x_{i_1}, \dots, x_{i_d}) + O(h^k)
 \end{align}
 
 This estimate could be misleading
