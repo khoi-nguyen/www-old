@@ -487,6 +487,95 @@ if and only if the following conditions hold:
 In addition, all the weights are positive.
 :::
 
-# The curse of dimensionality
+# Generalization to higher dimension [@vaes22, p. 68] {.split}
+
+Assume that we have a Gauss-Legendre rule with precision $k$, i.e.
+
+$$
+\int_{-1}^1 u(x) \dd x - \sum_{i = 0}^n w_i u(x_i) = O(h^k)
+$$
+
+Gauss-Legendre integration can easily be generalized in higher dimension,
+with the same precision.
+For example, in dimension $2$, we have
+
+$$
+\int_{-1}^1 \int_{-1}^1 u(x, y) \dd y \dd x
+- \sum_{i = 0}^n \sum_{j = 0}^n w_i w_j u(x_i, y_i) = O(h^k).
+$$
+
+# Curse of dimensionality [@vaes22, p. 68] {.split}
+
+\begin{align}
+\int_{-1}^1 \dots \int_{-1}^1 &u(x_1, \dots, x_d) \dd x_d \dots \dd x_1\\
+&- \sum_{i_1 = 1}^{n} \dots \sum_{i_d = 1}^n w_{i_1} \dots w_{i_d}
+u(x_{i_1}, \dots, x_{i_d}) = O(h^k)
+\end{align}
+
+This estimate could be misleading
+and leave the impression that higher dimensional is just
+as good as its one-dimensional counterpart.
+If $N$ is the number of $d$-dimensional nodes,
+
+$$h = \frac 2 n = \frac 2 {\sqrt[d] N} = 2 N^{- \frac 1 d}$$
+
+so that $O(h^k)$ is actually $O(N^{- \frac k d})$.
+
+As $d$ grows, the convergence gets slower and slower.
+Integration in dimension $d \gg 1$ is an active research area.
+
+# Probabilistic methods [@vaes22, p. 68] {.split}
+
+::: text-center
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Pi_30K.gif/220px-Pi_30K.gif){width=40%}
+:::
+
+::: proposition
+Let $X_n \sim \mathcal U(0, 1)$ be a sequence of independent uniformly distributed random variables.
+If $u$ is integrable over $[0, 1]$, then
+$$\frac 1 N \sum_{n = 1}^N u(X_n) \xrightarrow{\text{a.s.}} \int_0^1 u(x) \dd x$$
+:::
+
+~~~ julia
+montecarlo(u, N) = 1 / N * sum(u.(rand(N)))
+~~~
+
+# Variance of the Monte-Carlo estimator [@vaes22, p. 69] {.split}
+
+::: proposition
+Let $X_n \sim \mathcal U(0, 1)$ be a sequence of independent uniformly distributed random variables.
+If $u$ is square integrable over $[0, 1]$, then
+the estimator
+$$\widehat I_N = \frac 1 N \sum_{n = 1}^N u(X_n) \quad \text{of} \quad I = \int_0^1 u(x) \dd x$$
+satisfies
+$$\V(\widehat I_N) = \frac {1} N \int_0^1 |u(x) - I|^2 \dd x.$$
+:::
+
+::: remark
+The standard deviation behaves like $O(N^{-\frac 1 2})$,
+which is worse than the $1$-dimensional trapezium rule ($O(N^{-2})$).
+However, Monte-Carlo does not suffer the curse of dimensionality
+as the convergence is still $O(N^{-\frac 1 2})$ in higher dimensions.
+:::
+
+# Confidence interval {.split}
+
+::: {.proposition title="Chebyshev's inequality"}
+Let $X$ be an integrable random variable with finite variance $\sigma^2$
+and with mean $\mu$.
+Then for every $k > 0$, we have
+
+$$\P(|X - \mu| \geq k \sigma) \leq \frac 1 {k^2}.$$
+:::
+
+::: proposition
+Let $X_n \sim \mathcal U(0, 1)$ be a sequence of independent uniformly distributed random variables.
+If $u$ is square integrable over $[0, 1]$, then
+the estimator
+$$\widehat I_N = \frac 1 N \sum_{n = 1}^N u(X_n) \quad \text{of} \quad I = \int_0^1 u(x) \dd x$$
+satisfies
+$$\P\left(\left|\widehat I_N - I\right| \leq \sqrt {\frac {\sigma^2} {N \alpha}}\right) \geq 1 - \alpha$$
+:::
+
 
 # Bibliography
