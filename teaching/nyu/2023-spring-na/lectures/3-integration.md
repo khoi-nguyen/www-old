@@ -495,6 +495,31 @@ scatter!(X, f.(X), label="Interpolation nodes")
 ~~~
 :::::
 
+# Convergence speeds
+
+~~~ {.julia .plot height=900}
+function composite_trapezium(u, a, b, n)
+  x = LinRange(a, b, n + 1)
+  y = u.(x)
+  h = x[2] - x[1]
+  return h/2 * sum([y[1]; 2 * y[2:end - 1]; y[end]])
+end
+
+function composite_simpson(u, a, b, n)
+  x = LinRange(a, b, n + 1)
+  y = u.(x)
+  h = x[2] - x[1]
+  return h/3 * sum([y[1]; y[end]; 4 * y[2:2:end-1]; 2 * y[3:2:end-2]])
+end
+
+f(x) = x^2
+n = 6:2:50
+g(n) = composite_trapezium(f, 0, 1, n)
+plot(n, g.(n), label="Trapezium")
+h(n) = composite_simpson(f, 0, 1, n)
+plot!(n, h.(n), label="Simpson")
+~~~
+
 # With non-equidistant nodes [@vaes22, p. 65] {.split}
 
 $$\sum_{i = 0}^n w_i x_i^d = \int_{-1}^1 x^d \dd x$$
