@@ -53,6 +53,12 @@ Recitations
 
 - Monday 13 February: Exercises 3.4, 3.5
 - Wednesday 15 February: Exercises 3.7, 3.9
+- Monday 20 February: calculate Legendre polynomials using Gram-Schmidt, applying integration algorithms by hand
+
+Documents
+---------
+
+- [Fall 2022 midterm with solutions](/static/documents/midterm-fall-2022.pdf)
 
 :::::
 :::
