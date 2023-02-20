@@ -380,13 +380,6 @@ $$J(h) = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + \dots + 4 u(x_{n - 1}) 
 
 Note: $J$ only has an expansion in even powers.
 
-# Numerical integration
-
-~~~ {.yaml .widget name="geogebra"}
-url: https://www.geogebra.org/m/umythyvv
-width: 1400
-~~~
-
 # Summary (20/02) {.row}
 
 ::::: col
@@ -446,6 +439,60 @@ $$
 - Homework due tonight
 - French sentence of the day: Je voudrais un menu McBaguette extra large avec un seau de frites
 
+:::::
+
+# Recalls: Numerical integration
+
+~~~ {.yaml .widget name="geogebra"}
+url: https://www.geogebra.org/m/umythyvv
+width: 1400
+~~~
+
+# Recalls: Runge phenomenon {.row}
+
+::::: col
+
+### Newton-cotes
+
+~~~ {.julia .plot width=100%}
+import Polynomials
+x = -1:0.01:1
+n = 12
+X = LinRange(-1, 1, n)
+f(x) = 1 / (1 + 25 * x^2)
+p = Polynomials.fit(X, f.(X))
+plot(x, f.(x), label="Runge function")
+label = "Newton-cotes with " * string(n) * " nodes"
+plot!(x, p.(x), fillrange = 0 .* x, fillalpha = 0.35, label=label)
+scatter!(X, f.(X), label="Interpolation nodes")
+~~~
+:::::
+::::: col
+
+### Composite Simpson rule
+
+~~~ {.julia .plot width=100%}
+import Polynomials
+using Plots
+x = -1:0.01:1
+n = 13
+k = 2
+X = LinRange(-1, 1, n)
+f(x) = 1 / (1 + 25 * x^2)
+function p(x)
+  if x in X
+    return f(x)
+  else
+    i = maximum(i for i in 1:k:n if X[i] < x)
+    p = Polynomials.fit(X[i:i+k], f.(X[i:i+k]))
+    return p(x)
+  end
+end
+plot(x, f.(x), label="Runge function")
+label = "Composite rule with " * string(n) * " nodes"
+plot!(x, p.(x), fillrange = 0 .* x, fillalpha = 0.35, label=label)
+scatter!(X, f.(X), label="Interpolation nodes")
+~~~
 :::::
 
 # With non-equidistant nodes [@vaes22, p. 65] {.split}
