@@ -308,7 +308,7 @@ function composite_simpson(u, a, b, n)
     x = LinRange(a, b, n + 1)
     y = u.(x)
     h = x[2] - x[1]
-    return h/2 * sum([y[1]; y[end]; 4 y[2:2:end-1]; 2 y[3:2:end-2])
+    return h/3 * sum([y[1]; y[end]; 4 y[2:2:end-1]; 2 y[3:2:end-2]])
 end
 ~~~
 
