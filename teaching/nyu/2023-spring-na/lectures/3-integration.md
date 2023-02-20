@@ -380,6 +380,13 @@ $$J(h) = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + \dots + 4 u(x_{n - 1}) 
 
 Note: $J$ only has an expansion in even powers.
 
+# Numerical integration
+
+~~~ {.yaml .widget name="geogebra"}
+url: https://www.geogebra.org/m/umythyvv
+width: 1400
+~~~
+
 # Summary (20/02) {.row}
 
 ::::: col
