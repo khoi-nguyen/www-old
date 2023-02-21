@@ -642,7 +642,7 @@ For example, in dimension $2$, we have
 
 $$
 \int_{-1}^1 \int_{-1}^1 u(x, y) \dd y \dd x
-= \sum_{i = 0}^n \sum_{j = 0}^n w_i w_j u(x_i, y_i) + O(h^k).
+= \sum_{i = 0}^n \sum_{j = 0}^n w_i w_j u(x_i, y_j) + O(h^k).
 $$
 
 # Curse of dimensionality [@vaes22, p. 68] {.split}
