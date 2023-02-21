@@ -513,8 +513,8 @@ function composite_simpson(u, a, b, n)
   return h/3 * sum([y[1]; y[end]; 4 * y[2:2:end-1]; 2 * y[3:2:end-2]])
 end
 
-f(x) = x^2
-n = 6:2:50
+f(x) = x^4
+n = 4:2:50
 g(n) = composite_trapezium(f, 0, 1, n)
 plot(n, g.(n), label="Trapezium")
 h(n) = composite_simpson(f, 0, 1, n)
