@@ -54,6 +54,8 @@ Recitations
 - Monday 13 February: Exercises 3.4, 3.5
 - Wednesday 15 February: Exercises 3.7, 3.9
 - Monday 20 February: calculate Legendre polynomials using Gram-Schmidt, applying integration algorithms by hand
+- Wednesday 22 February: [LU decomposition](/teaching/nyu/2023-spring-na/lectures/4-linear-systems#/exercise-solving-a-system-after-a-lu-decomposition),
+  [backward substitution](/teaching/nyu/2023-spring-na/lectures/4-linear-systems#/forward-and-backward-substitution)
 
 Documents
 ---------
