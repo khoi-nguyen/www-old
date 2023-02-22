@@ -733,18 +733,6 @@ $$\int_{[0, 1]^d} u(x) \dd x \approx \frac 1 N \sum_{n = 1}^N u(X_i),
 
 :::::
 
-# Monte-Carlo [@vaes22, p. 68] {.split}
-
-::: proposition
-Let $X_n \sim \mathcal U(0, 1)$ be a sequence of independent uniformly distributed random variables.
-If $u$ is integrable over $[0, 1]$, then
-$$\frac 1 N \sum_{n = 1}^N u(X_n) \xrightarrow{\text{a.s.}} \int_0^1 u(x) \dd x$$
-:::
-
-~~~ julia
-montecarlo(u, N) = 1 / N * sum(u.(rand(N)))
-~~~
-
 # Probability: recap {.split}
 
 Remember that if $X$ is a random variable.
@@ -768,6 +756,18 @@ $$\frac {\overline X_N - \mu} {\sigma \sqrt n} \xrightarrow[\mathcal D]{N \to +\
 As we integrate over $[0, 1]$,
 we shall be particularly interested in the case where $X \sim \mathcal U([0, 1])$,
 in which case $f_X(x) = \chi_{[0, 1]}.$
+
+# Monte-Carlo [@vaes22, p. 68] {.split}
+
+::: proposition
+Let $X_n \sim \mathcal U(0, 1)$ be a sequence of independent uniformly distributed random variables.
+If $u$ is integrable over $[0, 1]$, then
+$$\frac 1 N \sum_{n = 1}^N u(X_n) \xrightarrow{\text{a.s.}} \int_0^1 u(x) \dd x$$
+:::
+
+~~~ julia
+montecarlo(u, N) = 1 / N * sum(u.(rand(N)))
+~~~
 
 # Variance of the Monte-Carlo estimator [@vaes22, p. 69] {.split}
 
