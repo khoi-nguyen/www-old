@@ -696,6 +696,9 @@ $$\int_a^b u(x) \dd x \approx \int_a^b \widehat u(x) \dd x,
 
 - Sentence of the day: Savez-vous à qui vous vous adressez?
 - Monte-Carlo homework: part $1$ due next Monday
+- [Fall 2022 midterm with solutions](/static/documents/midterm-fall-2022.pdf)
+- Midterm: 6 March (chapters 1-2-3 + LU decomposition), more precise document to follow
+  (15% of final grade).
 
 :::::
 
