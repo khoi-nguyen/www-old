@@ -310,6 +310,19 @@ x \\ y \\ z
 \end{align}
 :::
 
+# Exercise: solving a system after a LU decomposition {.split}
+
+::: {.exercise}
+Use a LU decomposition to solve the following system:
+\begin{align}
+\begin{cases}
+2x_1 - x_2 + 3x_3 &= 4\\
+4x_1 + 2x_2 + x_3 &= 7\\
+-6x_1 - x_2 + 2 x_3 &= -5
+\end{cases}
+\end{align}
+:::
+
 # LU decomposition in Julia [@vaes22, p. 85] {.split}
 
 ::: {.algorithm title="LU decomposition"}
