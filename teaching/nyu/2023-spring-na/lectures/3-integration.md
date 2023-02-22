@@ -5,6 +5,7 @@ notes: |
   - 13/02: Newton-Cotes method, composite trapezium rule (1-13)
   - 15/02: Composite Simpson rule, Romberg (14-22)
   - 20/02: Gauss-Legendre, curse of dimensionality, intro Monte-Carlo (23-35)
+  - 22/02: probabilities, Monte-Carlo, variance calculation (36-end)
 ...
 
 # International Day of Women and Girls in Science (11/02) {.row}
