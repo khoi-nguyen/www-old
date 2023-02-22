@@ -699,7 +699,7 @@ However, Monte-Carlo does not suffer the curse of dimensionality
 as the convergence is still $O(N^{-\frac 1 2})$ in higher dimensions.
 :::
 
-# Confidence interval {.split}
+# Confidence interval [@vaes22, p. 70] {.split}
 
 ::: {.proposition title="Chebyshev's inequality"}
 Let $X$ be an integrable random variable with finite variance $\sigma^2$
@@ -718,5 +718,19 @@ satisfies
 $$\P\left(\left|\widehat I_N - I\right| \leq \sqrt {\frac {\sigma^2} {N \alpha}}\right) \geq 1 - \alpha$$
 :::
 
+# Confidence interval with the CLT {.split}
+
+$$\widehat I_N = \frac 1 N \sum_{n = 1}^N u(X_n)$$
+
+Chebyshev gives a conservative confidence interval,
+as it is true for **any distribution**.
+However, we actually "know" the distribution of $\widehat I_N$.
+
+By the **Central Limit Theorem**,
+$$\frac {\widehat I_N - I} {\sigma / {\sqrt N}} \xrightarrow d\ \mathcal N(0,1).$$
+
+In particular,
+$$\lim_{N \to +\infty} \P\left(|\widehat I_N - I| \leq \frac {\sigma \epsilon} {\sqrt N}\right)
+= \frac 1 {\sqrt {2 \pi}} \int_{-\epsilon}^\epsilon e^{-\frac {x^2} 2} \dd x$$
 
 # Bibliography
