@@ -671,6 +671,67 @@ Integration in dimension $d \gg 1$ is an active research area.
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Pi_30K.gif/220px-Pi_30K.gif){width=40%}
 :::
 
+# Recalls 22/02 {.row}
+
+::::: {.col}
+
+### Quadrature
+
+$$\int_a^b u(x) \dd x \approx \sum_{i = 0}^n w_i u(x_i).$$
+
+- $x_i$: either fixed or roots of orthogonal polynomials
+- $w_i$: linked to $\int_a^b l_i(x) \dd x$, potentially doubled in composite rules
+
+### Newton-Cotes (interpolation)
+
+$$\int_a^b u(x) \dd x \approx \int_a^b \widehat u(x) \dd x,
+\qquad \widehat u(x_i) = u(x_i)$$
+
+- Quadrature with equidistant nodes
+- Weights become negative ($n > 7$), which leads to round-off errors
+- degree of precision: $n$ or $n + 1$
+- Subject to Runge phenomenon
+
+#### Announcements
+
+- Sentence of the day: Savez-vous à qui vous vous adressez?
+- Monte-Carlo homework: part $1$ due next Monday
+
+:::::
+
+::::: {.col}
+
+#### Composite Newton-Cotes
+
+- Piecwise interpolate on $[x_0, x_k]$, $[x_k, x_{2k}]$, ..., $[x_{n - k}, x_n]$.
+- Weight always positive if $k \leq 7$
+- Uniform convergence, no Runge phenomenon
+
+$$\int_a^b u(x) \dd x \approx
+\sum_{j = 1}^{\frac n k} \int_{x_{(j - 1)k}}^{x_{jk}} \widehat u_{[x_{(j - 1)k}, x_{jk}]}(x) \dd x.$$
+
+#### Gauss-Legendre
+
+- Weights are **always positive** (I forgot to prove this)
+- Degree of precision $2n + 1$ with $n + 1$ evaluations.
+
+#### Curse of dimensionality
+
+\begin{align}
+\int_{-1}^1 \dots \int_{-1}^1 &u(x_1, \dots, x_d) \dd x_d \dots \dd x_1\\
+&= \sum_{i_1 = 0}^{n} \dots \sum_{i_d = 0}^n w_{i_1} \dots w_{i_d}
+u(x_{i_1}, \dots, x_{i_d}) + O(N^{-\frac k d})
+\end{align}
+
+For large $d$, convergence is very slow. We'll use
+
+$$\int_{[0, 1]^d} u(x) \dd x \approx \frac 1 N \sum_{n = 1}^N u(X_i),
+\qquad X_i \sim \mathcal U([0, 1]^d)$$
+
+:::::
+
+# Monte-Carlo [@vaes22, p. 68] {.split}
+
 ::: proposition
 Let $X_n \sim \mathcal U(0, 1)$ be a sequence of independent uniformly distributed random variables.
 If $u$ is integrable over $[0, 1]$, then
@@ -680,6 +741,30 @@ $$\frac 1 N \sum_{n = 1}^N u(X_n) \xrightarrow{\text{a.s.}} \int_0^1 u(x) \dd x$
 ~~~ julia
 montecarlo(u, N) = 1 / N * sum(u.(rand(N)))
 ~~~
+
+# Probability: recap {.split}
+
+Remember that if $X$ is a random variable.
+
+\begin{align}
+\E(X) &= \overbrace{\int_\R x f_X(x) \dd x}^{\mu}\\
+\V(X) &= \int_\R (x - \mu)^2 f_X(x) \dd x = \int_\R x^2 f_X(x) \dd x - \mu^2
+\end{align}
+
+If $X$ and $Y$ are independent,
+
+- $\E(XY) = \E(X) \E(Y)$
+- $\V(X + Y) = \V(X) + \V(Y)$
+
+When studying the mean $\overline X_N = \frac 1 N \sum_{n = 1}^N X_n$ of an iid sample,
+these notions measure the central tendency and the spread,
+with the remarkable property that
+
+$$\frac {\overline X_N - \mu} {\sigma \sqrt n} \xrightarrow[\mathcal D]{N \to +\infty} \mathcal N(0, 1).$$
+
+As we integrate over $[0, 1]$,
+we shall be particularly interested in the case where $X \sim \mathcal U([0, 1])$,
+in which case $f_X(x) = \chi_{[0, 1]}.$
 
 # Variance of the Monte-Carlo estimator [@vaes22, p. 69] {.split}
 
