@@ -153,13 +153,20 @@ envs:
       - bg-primary
       - text-white
 ...
+\DeclareMathOperator{\spectrum}{Sp}
+\newcommand{\d}{\,\mathrm{d}}
 \newcommand{\dd}{\,\mathrm{d}}
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand{\defeq}{:=}
 \newcommand{\dom}{\mathrm{dom}}
+\newcommand{\bigo}{\mathcal O}
+\renewcommand{\i}{\mathrm{i}}
+\newcommand{\iff}{\Longleftrightarrow}
 \newcommand{\im}{\mathrm{im}}
 \newcommand{\fl}{\mathrm{fl}}
+\newcommand{\mat}{\mathsf}
 \newcommand{\span}{\mathrm{span}}
+\renewcommand{\vec}[1]{\mathbf{\boldsymbol{#1}}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\F}{\mathbb{F}}
