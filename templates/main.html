@@ -19,6 +19,16 @@
   {% endfor %}
 </head>
 <body>
+<div style="display:none;">
+\[
+\require{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\]
+</div>
 {% block content %}
 {% endblock %}
 </body>
