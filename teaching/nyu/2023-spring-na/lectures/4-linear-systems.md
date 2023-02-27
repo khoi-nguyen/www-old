@@ -210,7 +210,8 @@ LU Decomposition
 
 ## Announcements
 
-- Office hour(s) in person this week
+- Office hour(s) in person this week on Thursday
+- Monte-Carlo homework due on Friday
 - French sentence of the day: "Vous êtes sûr(s) que vous parlez français?"
 
 :::::
