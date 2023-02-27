@@ -26,7 +26,7 @@ Exercises: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 1.25
   (equidistant and non-equidistant)
 - Understand the strengths and weaknesses of each interpolation method
 - Know, use and understand the consequences of the interpolation error
-- Prove that piecewise interpolation converges uniformly to a smooth function
+- Prove that piecewise interpolation converges uniformly for a smooth function
 - Understand the role of Chebyshev polynomials, and be able to prove basic properties
 - Understand why Chebyshev nodes may be more suited to interpolation
 - Derive the normal equations for least square and mean square approximation
