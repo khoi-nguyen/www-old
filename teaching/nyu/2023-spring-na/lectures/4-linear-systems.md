@@ -258,9 +258,16 @@ The complexity of the back/forward substitution algorithm is $n^2$.
 # Cholesky decomposition [@vaes22, p. 89] {.split}
 
 ::: {.proposition title="Cholesky factorisation"}
-If $A$ is symmetric and positive definite,
-then there exists a lower-triangular matrix $C \in \R^{n \times n}$ such that
-$$A = C C^T.$$
+If $\mat A$ is symmetric and positive definite,
+then there exists a lower-triangular matrix $\mat C \in \R^{n \times n}$ such that
+$$\mat A = \mat C \mat C^T.$$
+:::
+
+::: {.remark title="Link between Cholesky and LU"}
+\begin{align}
+\mat C = \mat L \sqrt {\mat D},
+\end{align}
+where $\mat D$ is a diagonal matrix whose entries are the same as $\mat A$.
 :::
 
 # Example {.split}
