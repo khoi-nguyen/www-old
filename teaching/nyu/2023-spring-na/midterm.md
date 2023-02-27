@@ -53,6 +53,7 @@ Exercises: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 3.10
 
 ## Chapter 4: Linear systems
 
-- Perform a LU decomposition and understand why/how it works
-- Perform forward and backward substitution
-- Know or be able to calculate the complexity of these two algorithms
+- Find the LU decomposition and understand why/how it works
+- Forward and backward substitution
+- Find the Cholesky decomposition of a symmetric matrix
+- Know or be able to calculate the complexity of these algorithms
