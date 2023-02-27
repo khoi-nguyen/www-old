@@ -117,6 +117,12 @@ envs:
     classes:
       - bg-primary
       - text-white
+  notation:
+    name: Notation
+    icon: fa-solid fa-circle-info
+    classes:
+      - bg-success
+      - text-white
   proposition:
     name: Proposition
     icon: fa-solid fa-book
