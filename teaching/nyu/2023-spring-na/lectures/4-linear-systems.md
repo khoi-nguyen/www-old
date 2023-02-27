@@ -26,7 +26,7 @@ x \\ y \\ z
 
 # Gregory-Newton {.split}
 
-Remember that interpolating equations take a triangular form when using the Gregory-Newton basis.
+Remember that the interpolating equations take a triangular form when using the Gregory-Newton basis.
 
 ::: example
 Find the polynomial of degree $2$ going
