@@ -267,8 +267,10 @@ $$\mat A = \mat C \mat C^T.$$
 \begin{align}
 \mat C = \mat L \sqrt {\mat D},
 \end{align}
-where $\mat D$ is a diagonal matrix whose entries are the same as $\mat A$.
+where $\mat D$ is a diagonal matrix whose entries are the same as $\mat A = \mat L \mat U$.
 :::
+
+In Julia, you can use `cholesky` from `LinearAlgebra`.
 
 # Example {.split}
 
