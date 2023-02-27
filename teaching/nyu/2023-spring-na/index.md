@@ -61,6 +61,7 @@ Documents
 ---------
 
 - [Fall 2022 midterm with solutions](/static/documents/midterm-fall-2022.pdf)
+- [Spring 2023 midterm info](/teaching/nyu/2023-spring-na/midterm)
 
 :::::
 :::
