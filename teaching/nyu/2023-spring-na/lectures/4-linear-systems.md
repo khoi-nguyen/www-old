@@ -3,6 +3,7 @@ title: Solution of linear systems of equations
 output: revealjs
 notes: |
   - 22/02: LU decomposition, and forward/backward substitution
+  - 27/02: complexity for LU, Cholesky, norms and spectrum (9-19)
 ...
 
 # Systems associated with triangular matrices {.split}
