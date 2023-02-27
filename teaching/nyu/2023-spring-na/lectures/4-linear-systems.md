@@ -388,7 +388,7 @@ There is an orthogonal matrix $\mat Q \in \R^{n \times n}$ and a diagonal matrix
 
 # Spectral radius {.split}
 
-Calculating $\mat A^k$ is much easier for diagonalizable matrix,
+Calculating $\mat A^k$ is much easier for a diagonalizable matrix,
 as
 \begin{align}
 \mat A^k = (\mat P^{-1} \mat D \mat P) (\mat P^{-1} \mat D \mat P) \dots (\mat P^{-1} \mat D \mat P)
