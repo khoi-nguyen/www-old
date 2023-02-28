@@ -45,9 +45,12 @@ else:
 
     # Add additional options
     cmd += ["--citeproc", "--csl", "templates/apa.csl"]
-    cmd += ["--mathjax", "--email-obfuscation=javascript"]
+    cmd += ["--email-obfuscation=javascript"]
     for pandocfilter in glob.glob("bin/filters/*.py"):
         cmd += ["--filter", pandocfilter]
+
+    if output in ["html", "revealjs"]:
+        cmd += ["--filter", "node_modules/.bin/mathjax-pandoc-filter"]
 
 output: str = subprocess.run(cmd, capture_output=True, text=True).stdout
 if args.output_file:
