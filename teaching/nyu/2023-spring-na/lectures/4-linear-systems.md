@@ -497,98 +497,54 @@ $$
 where $0 < \epsilon \ll 0.01$.
 :::
 
-# Iterative methods: splitting [@vaes22, p. 92] {.split}
+# Interlude: discretizing PDES {.split}
 
-When we're dealing with very large systems $\mat A \vec x = \vec b$,
-we may be ready to get an approximate solution
-if this means a lower complexity.
-
-To this end, we'll split the matrix
 \begin{align}
-\mat A = \mat M - \mat N.
-\end{align}
-so that our unknown can appear **twice**.
-\begin{align}
-\mat A \vec x = \vec b
-\iff \mat M x = \mat N x + \vec b
+\frac {\d^2 u} {\d x^2}(x_i)
+&\approx \frac 1 h \left(\frac {u(x_{i + 1}) - u(x_{i})} h - \frac {u(x_{i}) - u(x_{i - 1})} h\right)\\
+&\approx \frac {u(x_{i + 1}) + u(x_{i - 1}) - 2 u(x_i)} {h^2}
 \end{align}
 
-This naturally defines an iteration
+It follows that in dimension $2$,
+$\nabla^2 u(x_i, y_j)$ can be approximated by
 \begin{align}
-\boxed{\mat M \vec x_{k + 1} = \mat N \vec x_k + \vec b}.
+\frac 1 {h^2} \left(
+u(x_{i + 1}, y_j) + u(x_{i - 1}, y_j)
++ u(x_i, y_{j + 1}) + u(x_i, y_{j - 1}) - 4 u(x_i, y_j)
+\right)
 \end{align}
 
-These iterations will generally be $\bigo(n^2)$ in the worst case,
-as $\mat M$ will be chosen to make sure the above system can be solved efficiently.
+Let's attempt to write $(\nabla^2 u)_{ij} = g_{ij}$ as a linear system.
 
-# Iteration and fixed point problem [@vaes22, p. 92] {.split}
-
-::: proposition
-Assume that $$\mat A = \mat M - \mat N,$$
-where both $\mat A$ and $\mat M$ are invertible square matrices.
-
-The following are equivalent:
-
-#. $\vec x$ is a solution of $\mat A \vec x = \vec b$
-#. $\vec x$ is a **fixed point** of $\vec f(\vec x) = \mat M^{-1}(\mat N \vec x + \vec b)$.
-:::
-
-# Banach fixed point theorem {.split}
-
-::: theorem
-Assume that $\vec f$ satisfies
-\begin{align}
-\norm {\vec f^k(\vec x) - \vec f^k(\vec y)}
-\leq L_k \norm {\vec x - \vec y},
-\quad \sum_{k = 0}^{+\infty} L_k < +\infty.
-\end{align}
-Then the iteration
-\begin{align}
-\vec x_{k} = \vec f^{k}(\vec x_0),
-\quad k > 0
-\end{align}
-converges towards the unique fixed point $\vec x_\star$
-for any initial input $\vec x_0$.
-:::
-
-# Convergence of the splitting method [@vaes22, p. 93] {.split}
-
-::: proposition
-Assume that $$\mat A = \mat M - \mat N,$$
-where both $\mat A$ and $\mat M$ are invertible square matrices.
-
-The iteration $$\vec x_{k + 1} = \mat M^{-1} (\mat N \vec x_k + \vec b)$$ converges
-to the unique solution of $\mat A \vec x = \vec b$ for every choice of $\vec x_0$
-if and only if $\rho(\mat M^{-1} \mat N) < 1$.
-:::
-
-# Richardson's method [@vaes22, p. 94] {.split}
-
+# A first iterative method: Richardson's method [@vaes22, p. 94] {.split}
 
 ::: {.algorithm title="Richardson's method"}
-Splitting
-:   $$A = \underbrace{\frac 1 \omega \mat I}_{\mat M}
-    - \underbrace{\left(\frac 1 \omega \mat I - \mat A\right)}_{\mat N}$$
+\begin{align}
+\vec x^{(k + 1)} = \vec x^{(k)} + \omega (\vec b - \mat A \vec x^{(k)})
+\end{align}
+:::
 
-Iteration
-:   $$\vec x_{k + 1} = \vec x_k + \omega ( \vec b - \mat A \vec x_k )$$
+::: proposition
+Assume $\omega \neq 0$.
+If $(\vec x^{(k)})_k$ converges in the iteration above,
+then it converges towards the solution of
+\begin{align}
+\mat A \vec x = \vec b.
+\end{align}
+:::
 
-Spectral radius
-:   $$\rho(\mat M^{-1} N) = \max_{\lambda \in \spectrum A} \abs {1 - \omega \lambda}$$
-
-Convergence
-:   $$0 < \omega < \frac 2 {\lambda_\max}$$
-
-Choice of $\omega$ for symmetric and positive definite $\mat A$
-:   $$\omega = \frac 2 {\lambda_\max + \lambda_\min}
-    \quad \rho = \frac {\kappa(A) - 1} {\kappa(A) + 1}$$
+::: question
+- What value of $\omega$ should we choose?
+- What is a good stopping criterion?
 :::
 
 # Richardson iteration: example {.split}
 
+::: {.algorithm title="Richardson's method"}
 \begin{align}
-\vec x_{k + 1} = \vec x_k + \omega (\vec b - \mat A \vec x_k)
+\vec x^{(k + 1)} = \vec x^{(k)} + \omega (\vec b - \mat A \vec x^{(k)})
 \end{align}
+:::
 
 ::: example
 Suppose we want to solve the following system.
@@ -609,14 +565,33 @@ x_1 \\ x_2 \\ x_3
 \end{align}
 :::
 
-~~~ julia
+~~~ {.julia .jupyter}
+using LinearAlgebra
 x = [0, 0, 0]
 b = [2, 1, 4]
 A = [2 1 0; 0 2 1; 1 0 3]
-for i in 1:100
-    x = x + 0.2 * (b - A * x)
+count = 0
+while norm(A * x - b) > 0.01
+    x = x + 0.3 * (b - A * x)
+    count += 1
 end
+x, count
 ~~~
+
+# Richardson iteration: convergence {.split}
+
+::: {.algorithm title="Richardson's method"}
+\begin{align}
+\vec x^{(k + 1)} = \vec x^{(k)} + \omega (\vec b - \mat A \vec x^{(k)})
+\end{align}
+:::
+
+::: proposition
+The Richardson iteration converges to the real solution for every choice of $\vec x^{(0)}$ if and only if
+\begin{align}
+\max_{\lambda \in \spectrum A} \abs {1 - \omega \lambda} < 1
+\end{align}
+:::
 
 # Link to optimisation [@vaes22, p. 95] {.split}
 
@@ -629,10 +604,99 @@ as $\nabla f = \mat A \vec x - \vec b$.
 
 The Richardson update can be written
 \begin{align}
-\vec x_{k + 1} = \vec x - \omega \nabla f(\vec x_k)
+\vec x^{(k + 1)} = \vec x^{(k)} - \omega \nabla f(\vec x^{(k)})
 \end{align}
 
 We are moving in the direction where $f$ decreases the most.
 We shall encounter this idea again later.
+
+# Iterative methods: splitting [@vaes22, p. 92] {.split}
+
+When we're dealing with very large systems $\mat A \vec x = \vec b$,
+we may be ready to get an approximate solution
+if this means a lower complexity.
+
+To this end, we'll split the matrix
+\begin{align}
+\mat A = \mat M - \mat N.
+\end{align}
+so that our unknown can appear **twice**.
+\begin{align}
+\mat A \vec x = \vec b
+\iff \mat M x = \mat N x + \vec b
+\end{align}
+
+This naturally defines an iteration
+\begin{align}
+\boxed{\mat M \vec x^{(k + 1)} = \mat N \vec x^{(k)} + \vec b}.
+\end{align}
+
+These iterations will generally be $\bigo(n^2)$ in the worst case,
+as $\mat M$ will be chosen to make sure the above system can be solved efficiently.
+
+# Convergence of the splitting method [@vaes22, p. 93] {.split}
+
+::: proposition
+Assume that $$\mat A = \mat M - \mat N,$$
+where both $\mat A$ and $\mat M$ are invertible square matrices.
+
+The iteration $$\vec x^{(k + 1)} = \mat M^{-1} (\mat N \vec x^{(k)} + \vec b)$$ converges
+to the unique solution of $\mat A \vec x = \vec b$ for every choice of $\vec x^{(0)}$
+if and only if $\rho(\mat M^{-1} \mat N) < 1$.
+:::
+
+# Richardson's method [@vaes22, p. 94] {.split}
+
+::: {.algorithm title="Richardson's method"}
+Splitting
+:   $$A = \underbrace{\frac 1 \omega \mat I}_{\mat M}
+    - \underbrace{\left(\frac 1 \omega \mat I - \mat A\right)}_{\mat N}$$
+
+Iteration
+:   $$\vec x^{(k + 1)} = \vec x^{(k)} + \omega ( \vec b - \mat A \vec x^{(k)} )$$
+
+Spectral radius
+:   $$\rho(\mat M^{-1} N) = \max_{\lambda \in \spectrum A} \abs {1 - \omega \lambda}$$
+
+Convergence
+:   $$0 < \omega < \frac 2 {\lambda_\max}$$
+
+Choice of $\omega$ for symmetric and positive definite $\mat A$
+:   $$\omega = \frac 2 {\lambda_\max + \lambda_\min}
+    \quad \rho = \frac {\kappa(A) - 1} {\kappa(A) + 1}$$
+:::
+
+# Jacobi's method [@vaes22, p. 95] {.split}
+
+First, let's write $\mat A = \mat D - \mat N$,
+where $\mat D$ is a diagonal matrix whose entries are that of $\mat A$.
+
+\begin{align}
+\mat D \vec x_{k + 1} = \mat N \vec x_k + \vec b.
+\end{align}
+
+This leads to the equations:
+\begin{align}
+x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(\sum_{\substack{j = 1\\ j \neq i}}^n N_{ij} x^{(k)}_j + b_i\right)
+\end{align}
+
+The components of $\vec x^{(k + 1)}$ can be calculated independently!
+
+# Convergence for diagonally dominant matrices [@vaes22, p. 96] {.split}
+
+::: definition
+A matrix $\mat A$ is row or column diagonally dominant if its entries satisfy
+\begin{align}
+\abs {a_{ii}} \geq \sum_{\substack{j = 1\\ j \neq i}}^n \abs {a_{ij}}
+\qquad \text{or} \qquad
+\abs {a_{jj}} \geq \sum_{\substack{i = 1\\ i \neq j}}^n \abs {a_{ij}}
+\end{align}
+for $i = 1, \dots, n$.
+:::
+
+::: proposition
+If $\mat A$ is strictly row or column diagonally dominant,
+then the Jacobi iteration converges for all choices of $\vec x^{(0)}$.
+:::
 
 # Bibliography
