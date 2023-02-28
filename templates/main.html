@@ -17,6 +17,20 @@
   {% for src in js %}
   <script src="{{ src }}"></script>
   {% endfor %}
+  {% if user.is_authenticated %}
+  <script type="text/x-thebe-config">
+  {
+    bootstrap: true,
+    kernelOptions: {
+      name: "julia-1.8",
+      serverSettings: {
+        "baseUrl": "http://127.0.0.1:8888",
+      }
+    },
+    mountStatusWidget: true,
+  }
+  </script>
+  {% endif %}
 </head>
 <body>
 <div style="display:none;">
