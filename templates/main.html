@@ -19,7 +19,6 @@
   {% endfor %}
   <script type="text/x-thebe-config">
   {
-    bootstrap: true,
     {% if user.is_authenticated %}
     kernelOptions: {
       name: "julia-1.8",
@@ -49,5 +48,10 @@
 </div>
 {% block content %}
 {% endblock %}
+<script>
+window.addEventListener('load', function () {
+  thebelab.bootstrap();
+})
+</script>
 </body>
 </html>
