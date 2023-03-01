@@ -477,7 +477,7 @@ Proof: [@vaes22, p. 174]
   $$\sigma \approx \sqrt {\frac {p (1 - p)} N}$$
   where $N$ is the sample size and $p$ is an estimation of the probability of being in the hyperball.
 - Alternatively, you can use `std` from `Statistics` to calculate the standard deviation
-  of $\frac 1 N \chi(X_i)$
+  of $\chi(X_i)$
 - Use the `ribbon` option of the `plot` function to plot the confidence interval.
 
 :::::
@@ -627,7 +627,7 @@ x = [0, 0, 0]
 b = [2, 1, 4]
 A = [2 1 0; 0 2 1; 1 0 3]
 count = 0
-while norm(A * x - b) > 0.01
+while norm(A * x - b) / norm(b) > 0.01
     x = x + 0.3 * (b - A * x)
     count += 1
 end
@@ -722,7 +722,7 @@ Iteration
 Spectral radius
 :   $$\rho(\mat M^{-1} N) = \max_{\lambda \in \spectrum A} \abs {1 - \omega \lambda}$$
 
-Convergence
+Convergence (positive definite)
 :   $$0 < \omega < \frac 2 {\lambda_\max}$$
 
 Choice of $\omega$ for symmetric and positive definite $\mat A$
@@ -766,10 +766,11 @@ then the Jacobi iteration converges for all choices of $\vec x^{(0)}$.
 # Jacobi's method with Julia {.split}
 
 ~~~ {.julia .jupyter}
-function jacobi(A, b, x, stop)
+using LinearAlgebra
+function jacobi(A, b, x, ϵ)
     n = length(x)
     N = [(i == j) ? 0 : -A[i, j] for i in 1:n, j in 1:n]
-    while !stop(A, b, x)
+    while norm(A * x - b) / norm(b) > ϵ
         for i in 1:n
             x[i] = (N[i,:] .* x + b[i]) / A[i, i]
         end
