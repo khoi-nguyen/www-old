@@ -427,6 +427,61 @@ For any matrix norm,
 
 Proof: [@vaes22, p. 174]
 
+# Recalls 01/03 {.row}
+
+::::: {.col}
+
+### Linear systems
+
+- LU decomposition $\frac 2 3 n^3 + \bigo(n^2)$
+- Cholesky decomposition $\frac 1 3 n^3 + \bigo(n^2)$
+- Forward/backward substitution: $n^2$
+
+### Powers of matrices
+
+\begin{align}
+\mat A \sim
+\begin{pmatrix}
+\lambda_1 & \star & 0 & 0 & \dots & 0 & 0 & 0\\
+0 & \lambda_2 & \star & 0 & \dots & 0 & 0 & 0\\
+0 & 0 & \lambda_3 & \star & \dots & 0 & 0 & 0\\
+\vdots & \vdots & \vdots & \vdots & & \vdots & \vdots & \vdots\\
+0 & 0 & 0 & 0 & \dots & 0 & \lambda_{n - 2} & \star & 0\\
+0 & 0 & 0 & 0 & \dots & 0 & 0 & \lambda_{n - 1} & \star\\
+0 & 0 & 0 & 0 & \dots & 0 & 0 & 0 & \lambda_n\\
+\end{pmatrix}
+\end{align}
+
+- $\norm {A^k} \to 0 \iff \rho(A) < 1$
+- $\rho(A) \leq \norm {A}_p$
+- In particular, $\norm {A}_p < 1 \implies \norm {A^k} \to 0$
+:::::
+
+::::: {.col}
+
+### Midterm
+
+- Next Monday (6/3 or 3/6 or / 3 6)
+- Chapter 1, 2, 3 + LU
+
+### Announcements
+
+- French sentence of the day: je refuse de répondre conformément aux droits qui me sont conférés par le cinquième amendement.
+- Office hours
+- Monte-Carlo homework due on Friday
+
+### Monte-Carlo hints
+
+- Don't forget you need to multiply your volume by $2^d$
+- Easiest way to calculate the standard deviation
+  $$\sigma \approx \sqrt {\frac {p (1 - p)} N}$$
+  where $N$ is the sample size and $p$ is an estimation of the probability of being in the hyperball.
+- Alternatively, you can use `std` from `Statistics` to calculate the standard deviation
+  of $\frac 1 N \chi(X_i)$
+- Use the `ribbon` option of the `plot` function to plot the confidence interval.
+
+:::::
+
 # Motivations {.split}
 
 When we want to solve $A x = b$,
@@ -488,8 +543,9 @@ $$
 ::: example
 Consider the system with the perturbed matrix
 $$
-(A + \Delta A) \begin{pmatrix}x_1 \\ x_2\end{pmatrix},
-\qquad
+(A + \Delta A) \begin{pmatrix}x_1 \\ x_2\end{pmatrix}
+= \begin{pmatrix}0 \\ 0.01\end{pmatrix},
+\quad
 A = \begin{pmatrix}1 & 0 \\ 0 & 0.01\end{pmatrix},
 \quad
 \Delta A = \begin{pmatrix}0 & 0\\ 0 & \epsilon\end{pmatrix},
@@ -643,6 +699,14 @@ where both $\mat A$ and $\mat M$ are invertible square matrices.
 The iteration $$\vec x^{(k + 1)} = \mat M^{-1} (\mat N \vec x^{(k)} + \vec b)$$ converges
 to the unique solution of $\mat A \vec x = \vec b$ for every choice of $\vec x^{(0)}$
 if and only if $\rho(\mat M^{-1} \mat N) < 1$.
+
+Moreover, for each $\epsilon > 0$, there exists $K > 0$ such that
+\begin{align}
+\norm {\vec x^{(k)} - \vec x}
+\leq \left(\rho(\mat M^{-1} \mat N) + \epsilon\right)^k
+\norm {\vec x^{(0)} - \vec x}
+\end{align}
+for every $k \geq K$.
 :::
 
 # Richardson's method [@vaes22, p. 94] {.split}
@@ -698,5 +762,20 @@ for $i = 1, \dots, n$.
 If $\mat A$ is strictly row or column diagonally dominant,
 then the Jacobi iteration converges for all choices of $\vec x^{(0)}$.
 :::
+
+# Jacobi's method with Julia {.split}
+
+~~~ {.julia .jupyter}
+function jacobi(A, b, x, stop)
+    n = length(x)
+    N = [(i == j) ? 0 : -A[i, j] for i in 1:n, j in 1:n]
+    while !stop(A, b, x)
+        for i in 1:n
+            x[i] = (N[i,:] .* x + b[i]) / A[i, i]
+        end
+    end
+    return x
+end
+~~~
 
 # Bibliography
