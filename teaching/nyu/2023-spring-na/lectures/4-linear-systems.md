@@ -899,6 +899,115 @@ is particularly interesting for two reasons:
 
 :::::
 
+# Gauss-Seidel [@vaes22, p. 96] {.split}
+
+\begin{align}
+\mat A = \mat L + \mat D + \mat U,
+\end{align}
+
+where
+
+- $\mat L$ is the **lower triangular** part of $\mat A$,
+  with the diagonal excluded.
+- $\mat D$ is the **diagonal** matrix such that its diagonal entries are exactly that of $\mat A$.
+- $\mat U$ is the **upper triangular** part of $\mat A$,
+  with the diagonal excluded.
+
+
+::: {.algorithm title="Gauss-Seidel"}
+We consider the split
+\begin{align}
+\mat A = \underbrace{\mat L + \mat D}_{\mat M} - \underbrace{(-\mat U)}_{\mat N}
+\end{align}
+:::
+
+
+# Gauss-Seidel iteration [@vaes22, p. 96] {.split}
+
+The iteration takes the following form:
+\begin{align}
+(\mat L + \mat D) \vec x^{(k + 1)} = -\mat U \vec x^{(k)} + \vec b,
+\end{align}
+which could equivalently be written
+\begin{align}
+\left\{
+\begin{aligned}
+& a_{11} x^{(\textcolor{red}{k+1})}_1 + a_{12} x^{(k)}_2 + a_{13} x^{(k)}_3 + \dotsb + a_{1n} x^{(k)}_n = b_1 \\
+& a_{21} x^{(\textcolor{red}{k+1})}_1 + a_{22} x^{(\textcolor{red}{k+1})}_2 + a_{23} x^{(k)}_3 + \dotsb + a_{2n} x^{(k)}_n = b_2 \\
+& a_{32} x^{(\textcolor{red}{k+1})}_1 + a_{32} x^{(\textcolor{red}{k+1})}_2 + a_{33} x^{(\textcolor{red}{k+1})}_3 + \dotsb + a_{3n} x^{(k)}_n = b_3 \\
+& \vdots \\
+& a_{n1} x^{(\textcolor{red}{k+1})}_1 + a_{n2} x^{(\textcolor{red}{k+1})}_2 + a_{n3} x^{(\textcolor{red}{k+1})}_3 + \dotsb + a_{nn} x^{(\textcolor{red}{k+1})}_n = b_n.
+\end{aligned}
+\right .
+\end{align}
+
+# Gauss-Seidel implementation [@vaes22, p. 96] {.row}
+
+::::: {.col}
+
+~~~ {.julia .jupyter}
+using LinearAlgebra
+function jacobi(A, b, x, ϵ)
+    n = length(x)
+    N = [(i == j) ? 0 : -A[i, j] for i in 1:n, j in 1:n]
+    while norm(A * x - b) / norm(b) > ϵ
+        x_old = copy(x)
+        for i in 1:n
+            x[i] = (N[i,:]' * x_old + b[i]) / A[i, i]
+        end
+    end
+    return x
+end
+
+A = [10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8]
+b = [6, 25, -11, 15]
+x = [0., 0., 0., 0.]
+jacobi(A, b, x, 0.01)
+~~~
+
+:::::
+
+::::: {.col}
+
+~~~ {.julia .jupyter}
+using LinearAlgebra
+function gauss_seidel(A, b, x, ϵ)
+    n = length(x)
+    N = [(i == j) ? 0 : -A[i, j] for i in 1:n, j in 1:n]
+    while norm(A * x - b) / norm(b) > ϵ
+        for i in 1:n
+            x[i] = (N[i,:]' * x + b[i]) / A[i, i]
+        end
+    end
+    return x
+end
+
+A = [10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8]
+b = [6, 25, -11, 15]
+x = [0., 0., 0., 0.]
+gauss_seidel(A, b, x, 0.01)
+~~~
+
+:::::
+
+# Convergence for Gauss-Seidel [@vaes22, p. 96] {.split}
+
+::: {.exampleblock title="Gauss-Seidel iteration"}
+\begin{align}
+(\mat L + \mat D) \vec x^{(k + 1)} = -\mat U \vec x^{(k)} + \vec b,
+\end{align}
+:::
+
+::: proposition
+If $\mat A$ is strictly diagonally dominant or symmetric positive definite,
+then the Gauss-Seidel iteration converges.
+:::
+
+::: proof
+- Imitate the Jacobi case for diagonally dominant matrices
+- Adapt [@vaes22, Corollary 4.13 p. 98] when $A$ is symmetric
+:::
+
 # Splittings methods {.split}
 
 \begin{align}
