@@ -667,6 +667,88 @@ The Richardson update can be written
 We are moving in the direction where $f$ decreases the most.
 We shall encounter this idea again later.
 
+# 3 March 2023 {.row}
+
+::::: {.col}
+
+## Richardson's method
+
+\begin{align}
+\underbrace{\vec x^{(k + 1)}}_{\to \vec x}
+= \underbrace{\vec x^{(k)}}_{\to \vec x}
++ \omega (\underbrace{\vec b - \mat A \vec x^{(k)}}_{\to \vec 0})
+\end{align}
+
+- System is equivalent to minimizing
+  $f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x$:
+\begin{align}
+\vec x^{(k + 1)} = \vec x^{(k)} - \omega \nabla f
+\end{align}
+  It follows that the update goes in the direction where the descent is steepest.
+
+- The error satisfies
+\begin{align}
+\vec x^{(k)} - \vec x = (\mat I - \omega A)^k (\vec x^{(0)} - \vec x),
+\end{align}
+  which means converges when $\rho(\mat I - \omega A) < 1$.
+
+- Speed of convergence is associated with the spectral radius.
+
+- Cost of one iteration: $\bigo(n^2)$ ($\mat A \vec x$)
+
+:::::
+
+::::: {.col}
+
+## Announcements
+
+- French sentence of the day: *L'exercice est trivial et est laissé au correcteur en exercice de routine*
+  (useful for the midterm). Also, *la solution de cet exercice se trouve sur l'ordinateur portable de Hunter Biden* (at least I'll know I've taught you something).
+
+:::::
+
+# Richardson: symmetric positive definite case {.split}
+
+The spectral radius associated with the Richardson iteration is
+
+\begin{align}
+\rho(I - \omega A) = \max_{\lambda \in \spectrum \mat A} \abs{1 - \omega \lambda}
+\end{align}
+
+The smaller $\rho$ is, the faster the convergence.
+
+::: proposition
+Let $\mat A$ be a symmetric positive matrix.
+The Richardson iteration converges for every choice of $\vec x^{(0)}$
+if $0 < \omega < \frac 2 {\lambda_\max}$.
+Moreover, the spectral radius is minimized if
+\begin{align}
+\omega = \frac 2 {\lambda_{\max} + \lambda_{\min}},
+\qquad
+\rho(\mat I - \omega A) = \frac {\kappa(A) - 1} {\kappa(A) + 1}.
+\end{align}
+:::
+
+~~~ {.tex .tikz .fragment scale=1.5}
+\draw (-0.5, 0) -- (5.0, 0);
+\draw[very thick,green,double=black,double distance=1pt] (1.5, 0) -- (4, 0);
+\fill (0, 0) circle (0.05) node[above] {$0$};
+\fill (1.5, 0) circle (0.05) node[above] {$\lambda_\min$};
+\fill (2.75, 0) circle (0.05) node[above] {$\frac {\lambda_{\min} + \lambda_\max} 2$};
+\fill (4, 0) circle (0.05) node[above] {$\lambda_\max$};
+
+\draw (-0.5, -2) -- (5.0, -2);
+\draw[very thick,green,double=black,double distance=1pt] (1, -2) -- (2, -2);
+\fill (0, -2) circle (0.05) node[below] {$0$};
+\fill (1, -2) circle (0.05) node[below] {$\omega \lambda_\min$};
+\fill (1.5, -2) circle (0.05) node[above] {$1$};
+\fill (2, -2) circle (0.05) node[below] {$\omega \lambda_\max$};
+
+\draw [->, dashed] (4, 0) -- node[right]{$\times \omega$} (2, -2);
+\draw [->, dashed] (1.5, 0) -- node[left]{$\times \omega$} (1, -2);
+\draw [->, dashed] (2.75, 0) -- node[left]{$\times \omega$} (1.5, -2);
+~~~
+
 # Iterative methods: splitting [@vaes22, p. 92] {.split}
 
 When we're dealing with very large systems $\mat A \vec x = \vec b$,
@@ -779,5 +861,18 @@ function jacobi(A, b, x, ϵ)
     return x
 end
 ~~~
+
+# Splittings methods {.split}
+
+\begin{align}
+\mat A = \mat L + \mat D + \mat U
+\end{align}
+
+Method                 $\mat M$                           $\mat N$                                      Convergence
+-------                ---------                          ---------                                     ------------
+Richardson             $\frac 1 \omega \mat I$            $\frac 1 \omega \mat I - \mat A$              Symmetric positive definite
+Jacobi                 $\mat D$                           $-\mat L - \mat U$                            Diagonally dominant
+Gauss-Seidel           $\mat L + \mat D$                  $-\mat U$                                     Diagonally dominant
+Relaxation             $\frac {\mat D} \omega + \mat L$   $\frac {1 - \omega} \omega \mat D - \mat U$
 
 # Bibliography
