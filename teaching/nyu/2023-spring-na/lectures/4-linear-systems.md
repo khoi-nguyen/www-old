@@ -857,7 +857,9 @@ If $\mat A$ is strictly row or column diagonally dominant,
 then the Jacobi iteration converges for all choices of $\vec x^{(0)}$.
 :::
 
-# Jacobi's method with Julia {.split}
+# Jacobi's method with Julia {.row}
+
+::::: {.col}
 
 ~~~ {.julia .jupyter}
 using LinearAlgebra
@@ -878,6 +880,24 @@ b = [6, 25, -11, 15]
 x = [0., 0., 0., 0.]
 jacobi(A, b, x, 0.01)
 ~~~
+
+:::::
+
+::::: {.col}
+
+The line
+
+~~~ julia
+x[i] = (N[i,:]' * x_old + b[i]) / A[i, i]
+~~~
+
+is particularly interesting for two reasons:
+
+- As the calculation for `x[1]`{.julia} and `x[2]`{.julia} don't depend on each other,
+  they can be calculated in **parallel**.
+- We could not have done `x[i] = (N[i,:]' * x + b[i]) / A[i, i]`{.julia}. Why?
+
+:::::
 
 # Splittings methods {.split}
 
