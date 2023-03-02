@@ -694,11 +694,22 @@ We shall encounter this idea again later.
 
 - Speed of convergence is associated with the spectral radius.
 
-- Cost of one iteration: $\bigo(n^2)$ ($\mat A \vec x$)
+- Cost of one iteration: $\bigo(n^2)$ (mostly because of $\mat A \vec x$)
 
 :::::
 
 ::::: {.col}
+
+## Condition number
+
+\begin{align}
+\kappa(\mat A) = \norm {\mat A} \norm {\mat A^{-1}}
+\end{align}
+
+Note that if $\mat A = \mat Q^{-1} \mat D \mat Q$ is symmetric and positive definite, then
+\begin{align}
+\kappa(\mat A) = \kappa(\mat D) = \frac {\lambda_{\max}} {\lambda_{\min}}.
+\end{align}
 
 ## Announcements
 
