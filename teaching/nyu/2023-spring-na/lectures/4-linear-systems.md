@@ -865,12 +865,18 @@ function jacobi(A, b, x, ϵ)
     n = length(x)
     N = [(i == j) ? 0 : -A[i, j] for i in 1:n, j in 1:n]
     while norm(A * x - b) / norm(b) > ϵ
+        x_old = copy(x)
         for i in 1:n
-            x[i] = (N[i,:] .* x + b[i]) / A[i, i]
+            x[i] = (N[i,:]' * x_old + b[i]) / A[i, i]
         end
     end
     return x
 end
+
+A = [10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8]
+b = [6, 25, -11, 15]
+x = [0., 0., 0., 0.]
+jacobi(A, b, x, 0.01)
 ~~~
 
 # Splittings methods {.split}
