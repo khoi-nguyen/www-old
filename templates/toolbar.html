@@ -90,6 +90,7 @@ function changeMode(mode, board=undefined) {
   }
 }
 Reveal.on("slidechanged", (event) => {
+  window.dispatchEvent(new Event('resize')); // Thebe
   if (RevealWhiteboard.boards) {
     const board = RevealWhiteboard.boards[event.indexh][event.indexv];
     changeMode(board.mode, board);
