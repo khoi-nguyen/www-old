@@ -624,7 +624,7 @@ x_1 \\ x_2 \\ x_3
 
 ~~~ {.julia .jupyter}
 using LinearAlgebra
-x = [0, 0, 0]
+x = zeros(3)
 b = [2, 1, 4]
 A = [2 1 0; 0 2 1; 1 0 3]
 count = 0
@@ -760,6 +760,32 @@ Moreover, the spectral radius is minimized if
 \draw [->, dashed] (2.75, 0) -- node[left]{$\times \omega$} (1.5, -2);
 ~~~
 
+# Monitoring the convergence [@vaes22, p. 100] {.split}
+
+::: proposition
+\begin{align}
+\frac {\norm{\vec x^{(k)} - \vec x}} {\norm {\vec x}}
+\leq \kappa(\mat A)
+\frac {\norm{\mat A \vec x^{(k)} - \vec {b}}} {\norm {\vec b}}
+\end{align}
+:::
+
+# Stopping criterion [@vaes22, p. 101] {.split}
+
+::: question
+When should we stop iterating?
+:::
+
+#. Stop when $\norm {\mat A \vec x^{(k)} - \vec b} \leq \epsilon$
+#. Stop when
+\begin{align}
+\frac {\norm {\mat A \vec x^{(k)} - \vec b}} {\norm {\mat A \vec x^{(0)} - \vec b}} \leq \epsilon
+\end{align}
+#. Stop when
+\begin{align}
+\frac {\norm {\mat A \vec x^{(k)} - \vec b}} {\norm {\vec b}} \leq \epsilon
+\end{align}
+
 # Iterative methods: splitting [@vaes22, p. 92] {.split}
 
 When we're dealing with very large systems $\mat A \vec x = \vec b$,
@@ -835,7 +861,7 @@ where $\mat D$ is a diagonal matrix whose entries are that of $\mat A$.
 
 This leads to the equations:
 \begin{align}
-x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(\sum_{\substack{j = 1\\ j \neq i}}^n N_{ij} x^{(k)}_j + b_i\right)
+x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(-\sum_{\substack{j = 1\\ j \neq i}}^n A_{ij} x^{(k)}_j + b_i\right)
 \end{align}
 
 The components of $\vec x^{(k + 1)}$ can be calculated independently!
@@ -877,7 +903,7 @@ end
 
 A = [10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8]
 b = [6, 25, -11, 15]
-x = [0., 0., 0., 0.]
+x = zeros(4)
 jacobi(A, b, x, 0.01)
 ~~~
 
@@ -961,7 +987,7 @@ end
 
 A = [10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8]
 b = [6, 25, -11, 15]
-x = [0., 0., 0., 0.]
+x = zeros(4)
 jacobi(A, b, x, 0.01)
 ~~~
 
@@ -984,7 +1010,7 @@ end
 
 A = [10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8]
 b = [6, 25, -11, 15]
-x = [0., 0., 0., 0.]
+x = zeros(4)
 gauss_seidel(A, b, x, 0.01)
 ~~~
 
@@ -1018,7 +1044,7 @@ Method                 $\mat M$                           $\mat N$              
 -------                ---------                          ---------                                     ------------
 Richardson             $\frac 1 \omega \mat I$            $\frac 1 \omega \mat I - \mat A$              Symmetric positive definite
 Jacobi                 $\mat D$                           $-\mat L - \mat U$                            Diagonally dominant
-Gauss-Seidel           $\mat L + \mat D$                  $-\mat U$                                     Diagonally dominant
-Relaxation             $\frac {\mat D} \omega + \mat L$   $\frac {1 - \omega} \omega \mat D - \mat U$
+Gauss-Seidel           $\mat L + \mat D$                  $-\mat U$                                     Diagonally dominant, symmetric positive definite
+Relaxation             $\frac {\mat D} \omega + \mat L$   $\frac {1 - \omega} \omega \mat D - \mat U$   Diagonally dominant, symmetric positive definite
 
 # Bibliography
