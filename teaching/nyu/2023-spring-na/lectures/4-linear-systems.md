@@ -861,7 +861,7 @@ where $\mat D$ is a diagonal matrix whose entries are that of $\mat A$.
 
 This leads to the equations:
 \begin{align}
-x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(-\sum_{\substack{j = 1\\ j \neq i}}^n A_{ij} x^{(k)}_j + b_i\right)
+x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(-\sum_{\substack{j = 1\\ j \neq i}}^n a_{ij} x^{(k)}_j + b_i\right)
 \end{align}
 
 The components of $\vec x^{(k + 1)}$ can be calculated independently!
