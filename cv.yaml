@@ -21,7 +21,7 @@ sections:
   skills_es: Competencia
 
 experience:
-  - title: Lecturer in Mathematics
+  - title: Part-time Lecturer in Mathematics
     title_fr: Professeur en mathématiques
     title_es: Profesor de matemáticas
     date: Since Jan 2023
@@ -41,6 +41,16 @@ experience:
     description_es: |
       - Clase impartida: análisis numérico
       - Utilización de Python y Julia
+  - title: Teacher of Mathematics
+    title_fr: Enseignant en mathématiques
+    title_es: Profesor de matemáticas
+    date: Since Jan 2023
+    employer:
+      name: Fédération Wallonie-Bruxelles
+      website: https://www.federation-wallonie-bruxelles.be/
+      location: Belgium
+      location_fr: Belgique
+      location_es: Bélgica
   - title: Teacher of Mathematics and Computer Science
     title_fr: Enseignant en mathématiques et informatique
     title_es: Profesor de matemáticas e informática
