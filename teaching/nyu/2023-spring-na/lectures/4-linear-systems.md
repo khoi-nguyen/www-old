@@ -5,6 +5,7 @@ notes: |
   - 22/02: LU decomposition, and forward/backward substitution
   - 27/02: complexity for LU, Cholesky, norms and spectrum (9-19)
   - 01/03: condition number, Richardson, convergence (20-30)
+  - 03/03: stopping criterion, splitting, jacobi (31-38)
 ...
 
 # Systems associated with triangular matrices {.split}
