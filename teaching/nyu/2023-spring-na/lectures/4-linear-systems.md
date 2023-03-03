@@ -893,9 +893,9 @@ function jacobi(A, b, x, ϵ)
     n = length(x)
     N = [(i == j) ? 0 : -A[i, j] for i in 1:n, j in 1:n]
     while norm(A * x - b) / norm(b) > ϵ
-        x_old = copy(x)
+        x_prev = copy(x)
         for i in 1:n
-            x[i] = (N[i,:]' * x_old + b[i]) / A[i, i]
+            x[i] = (N[i,:]' * x_prev + b[i]) / A[i, i]
         end
     end
     return x
@@ -914,7 +914,7 @@ jacobi(A, b, x, 0.01)
 The line
 
 ~~~ julia
-x[i] = (N[i,:]' * x_old + b[i]) / A[i, i]
+x[i] = (N[i,:]' * x_prev + b[i]) / A[i, i]
 ~~~
 
 is particularly interesting for two reasons:
@@ -977,9 +977,9 @@ function jacobi(A, b, x, ϵ)
     n = length(x)
     N = [(i == j) ? 0 : -A[i, j] for i in 1:n, j in 1:n]
     while norm(A * x - b) / norm(b) > ϵ
-        x_old = copy(x)
+        x_prev = copy(x)
         for i in 1:n
-            x[i] = (N[i,:]' * x_old + b[i]) / A[i, i]
+            x[i] = (N[i,:]' * x_prev + b[i]) / A[i, i]
         end
     end
     return x
