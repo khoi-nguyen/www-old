@@ -1,6 +1,7 @@
 ---
 title: Solution of nonlinear systems
 output: revealjs
+private: true
 ...
 
 # Motivations
