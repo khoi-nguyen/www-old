@@ -14,14 +14,9 @@ Use the **bisection method** to approximate $\sqrt 2$ and $\pi$.
 
 ~~~ {.julia .jupyter}
 function bisection(f, a, b, ϵ = 10^-7)
-    a, b = BigFloat.([a, b])
     while b - a ≥ ϵ
         x = (a + b) / 2
-        if f(a) * f(x) ≤ 0
-            b = x
-        else
-            a = x
-        end
+        a, b = f(a) * f(x) ≤ 0 ? [a, x] : [x, b]
     end
     return (a + b) / 2
 end
