@@ -6,13 +6,13 @@ css:
   - https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css
   - https://unpkg.com/%40fortawesome/fontawesome-free@6.2.1/css/all.min.css
   - https://jsxgraph.org/distrib/jsxgraph.css
+  - https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css
   - /static/highlight.css
   - /static/style.less
 icon: /static/favicon.ico
 js:
   - https://unpkg.com/thebe@latest/lib/index.js
   - https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js
   - https://cdn.jsdelivr.net/npm/less
   - https://jsxgraph.org/distrib/jsxgraphcore.js
@@ -178,3 +178,8 @@ envs:
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\V}{\mathbb{V}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\ip}[1]{\langle#1\rangle}
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+\newcommand{\ceil}[1]{\lceil#1\rceil}

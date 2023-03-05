@@ -45,7 +45,7 @@ else:
 
     # Add additional options
     cmd += ["--citeproc", "--csl", "templates/apa.csl"]
-    cmd += ["--mathjax", "--email-obfuscation=javascript"]
+    cmd += ["--katex", "--email-obfuscation=javascript"]
     for pandocfilter in glob.glob("bin/filters/*.py"):
         cmd += ["--filter", pandocfilter]
 
