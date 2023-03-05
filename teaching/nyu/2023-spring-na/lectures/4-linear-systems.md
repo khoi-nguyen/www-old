@@ -844,10 +844,10 @@ Spectral radius
 :   $$\rho(\mat M^{-1} N) = \max_{\lambda \in \spectrum A} \abs {1 - \omega \lambda}$$
 
 Convergence (positive definite)
-:   $$0 < \omega < \frac 2 {\lambda_\max}$$
+:   $$0 < \omega < \frac 2 {\lambda_{\max}}$$
 
 Choice of $\omega$ for symmetric and positive definite $\mat A$
-:   $$\omega = \frac 2 {\lambda_\max + \lambda_\min}
+:   $$\omega = \frac 2 {\lambda_{\max} + \lambda_{\min}}
     \quad \rho = \frac {\kappa(A) - 1} {\kappa(A) + 1}$$
 :::
 
