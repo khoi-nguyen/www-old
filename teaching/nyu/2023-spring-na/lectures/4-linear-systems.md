@@ -1048,4 +1048,64 @@ Jacobi                 $\mat D$                           $-\mat L - \mat U$    
 Gauss-Seidel           $\mat L + \mat D$                  $-\mat U$                                     Diagonally dominant, symmetric positive definite
 Relaxation             $\frac {\mat D} \omega + \mat L$   $\frac {1 - \omega} \omega \mat D - \mat U$   Diagonally dominant, symmetric positive definite
 
+# Back to Richardson's method {.split}
+
+From now on, $\mat A$ is **symmetric** and **positive definite**,
+and let
+\begin{align}
+f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x
+\quad \text{so that} \quad
+\nabla f(\vec x) = \mat A \vec x - \vec b.
+\end{align}
+
+::: remark
+\begin{align}
+\mat A \vec x_\star = \vec b
+\iff \vec x_\star \text{ minimizes } f
+\end{align}
+:::
+
+::: {.algorithm title="Richardson's iteration"}
+\begin{align}
+\vec x^{(k + 1)}
+= \vec x^{(k)} - \omega \nabla f (\vec x^{(k)}),
+\quad \omega = \frac 2 {\lambda_{\max} + \lambda_{\min}}
+\end{align}
+:::
+
+::: question
+- How do we calculate $\lambda_{\max}$, $\lambda_{\min}$?
+- Could we improve the method by considering a variable $\omega$ at each iteration?
+:::
+
+# Steepest descent method [@vaes22, p. 102] {.split}
+
+::: {.algorithm title="Steepest descend method"}
+\begin{align}
+\vec x^{(k + 1)}
+= \vec x^{(k)} - \omega_k \nabla f (\vec x^{(k)}),
+\end{align}
+where $\omega_k$ minimizes the function
+\begin{align}
+g(\omega) = f(\vec x^{(k)} - \omega \nabla f (\vec x^{(k)}))
+\end{align}
+:::
+
+::: proposition
+\begin{align}
+\omega_k = \frac {} {}
+\end{align}
+:::
+
+# Steepest descend method: code [@vaes22, p. 104] {.split}
+
+~~~ julia
+using LinearAlgebra
+function steepest_descent(A, x, b, ϵ)
+    while norm(A * x - b) ≥ ϵ * norm(b)
+        ω =
+    end
+end
+~~~
+
 # Bibliography
