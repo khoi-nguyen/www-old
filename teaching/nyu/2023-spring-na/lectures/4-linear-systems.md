@@ -732,7 +732,7 @@ The smaller $\rho$ is, the faster the convergence.
 ::: proposition
 Let $\mat A$ be a symmetric positive matrix.
 The Richardson iteration converges for every choice of $\vec x^{(0)}$
-if $0 < \omega < \frac 2 {\lambda_\max}$.
+if $0 < \omega < \frac 2 {\lambda_{\max}}$.
 Moreover, the spectral radius is minimized if
 \begin{align}
 \omega = \frac 2 {\lambda_{\max} + \lambda_{\min}},
