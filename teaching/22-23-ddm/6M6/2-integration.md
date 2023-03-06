@@ -179,3 +179,34 @@ $$x(t) = x_0 + \int_{t_0}^t v(x) \dd x.$$
 
 ![](/static/images/1676319227.png){width=80%}
 
+# Exercice 39 {.split}
+
+![](/static/images/1678142479.png)
+![](/static/images/1678142591.png)
+
+# Exercice 40 {.split}
+
+![](/static/images/1678142618.png){width=80%}
+
+# Exercice 41 {.split}
+
+![](/static/images/1678142650.png){width=100%}
+
+# Exercice 42 {.split}
+
+![](/static/images/1678142678.png){width=100%}
+
+# Exercice 43 {.split}
+
+![](/static/images/1678142693.png){width=100%}
+
+# Exercices supplémentaires {.row}
+
+::::: {.col}
+<iframe src="https://www.bibmath.net/ressources/index.php?action=affiche&quoi=bde/analyse/integration/integration-calcul&type=fexo" width="100%" height=900></iframe>
+:::::
+
+::::: {.col}
+À pouvoir faire: 1, 2, 3, 4, 5, 6, 7, 9, 10(1), 12, 17, 18, 19, 22,
+25, 26, 27, 28, 29, 33, 34, 37, 38
+:::::
