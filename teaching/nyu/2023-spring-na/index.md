@@ -58,12 +58,14 @@ Recitations
   [backward substitution](/teaching/nyu/2023-spring-na/lectures/4-linear-systems#/forward-and-backward-substitution)
 - Monday 27 February: Exercises 4.15, 4.16
 - Wednesday 1 March: revision
+- Friday 3 March: revision
 
 Documents
 ---------
 
 - [Fall 2022 midterm with solutions](/static/documents/midterm-fall-2022.pdf)
 - [Spring 2023 midterm info](/teaching/nyu/2023-spring-na/midterm)
+- [Spring 2023 midterm with markscheme](/static/documents/midterm.pdf)
 
 :::::
 :::
