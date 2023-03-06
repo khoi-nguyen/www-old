@@ -134,6 +134,25 @@ $$x(t) = x_0 + \int_{t_0}^t v(x) \dd x.$$
 
 ![](/static/images/1676318762.png){width=100%}
 
+# Rappels {.split}
+
+\begin{align}
+\int_a^b f(x) \dd x
+= \left[\int f(x) \dd x\right]_a^b
+\end{align}
+
+\begin{align}
+\text{Aire} = \int_a^b \text{haut}(x) - \text{bas}(x) \dd x.
+\end{align}
+
+\begin{align}
+\text{Volume} = \pi \int_a^b \underbrace{f^2(x)}_{r^2} \underbrace{\dd x}_h
+\end{align}
+
+\begin{align}
+\text{Longueur d'arc} = \int_a^b \sqrt { 1 + (f'(x))^2 } \dd x
+\end{align}
+
 # Transférer 1 {.split}
 
 ![](/static/images/1676318845.png){width=80%}
