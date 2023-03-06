@@ -138,6 +138,13 @@ envs:
     classes:
       - bg-primary
       - text-white
+  quote:
+    name: Quote
+    name_fr: Citation
+    icon: fa-solid fa-quote-left
+    classes:
+      - bg-success
+      - text-white
   remark:
     name: Remark
     classes:
