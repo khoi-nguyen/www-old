@@ -58,6 +58,28 @@ On a
 - Étudier le lien avec la **croissance**
 - Étudier le comportement avec les **opérations de fonctions**
 
+# Einstein à propos de la dérivée {.split}
+
+::::: text-center
+![](https://upload.wikimedia.org/wikipedia/commons/3/3b/Portrait_of_Sir_Isaac_Newton%2C_1689.jpg){height=300}
+:::::
+
+::: {.quote title="Albert Einstein"}
+In order to put his system into mathematical form at all,
+Newton had to devise the concept of differential quotients and
+propound the laws of motion in the form of total differential 
+equations—perhaps the **greatest advance in thought** that a
+single individual was ever privileged to make.
+:::
+
+1666: Durant un confinement dû à la peste noire à Cambridge,
+Newton, âgé de 23 ans, découvre la dérivée, le théorème fondamental de l'analyse,
+écrit les lois du mouvement, et énonce la loi de la gravitation universelle.
+Il fait également des découvertes importantes en optique.
+
+De mon côté, pendant le confinement,
+j'ai essayé d'apprendre à un perroquet madrilène un chant indépendentiste catalan.
+
 # Comment définir la pente en un point? {.row}
 
 ::::: {.col}
