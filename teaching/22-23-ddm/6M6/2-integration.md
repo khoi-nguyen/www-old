@@ -196,9 +196,86 @@ $$x(t) = x_0 + \int_{t_0}^t v(x) \dd x.$$
 
 ![](/static/images/1678142678.png){width=100%}
 
+# 8 mars {.row}
+
+::::: {.col}
+
+### Aujourd'hui
+
+- Note à moi-même: terminer la correction de l'exercice $42$.
+- Interrogation le $21$ mars sur les intégrales
+
+### Applications des intégrales
+
+\begin{align*}
+\int_a^b f(x) \dd x
+= \left[\int f(x) \dd x\right]_a^b
+\end{align*}
+
+\begin{align*}
+\text{Aire} = \int_a^b \text{haut}(x) - \text{bas}(x) \dd x.
+\end{align*}
+
+\begin{align*}
+\text{Volume} = \pi \int_a^b \underbrace{f^2(x)}_{r^2} \underbrace{\dd x}_h
+\end{align*}
+
+\begin{align*}
+\text{Longueur d'arc} = \int_a^b \sqrt { 1 + (f'(x))^2 } \dd x
+\end{align*}
+
+\begin{align*}
+\text{Moyenne} = \frac 1 {b - a} \int_a^b f(x) \dd x.
+\end{align*}
+
+:::::
+
+::::: {.col}
+
+### Journée internationale des femmes
+
+Ada Lovelace
+:   A écrit le premier programme informatique
+
+Emmy Noether (physique mathématique)
+:   Conservation de l'énergie provient de l'invariance du temps sous les translations.
+
+Maryam Mirzakhani (topologie et géométrie)
+:   Première femme à recevoir la médaille Fields (2014)
+:::::
+
+# Questions d'examen d'entrée {.split}
+
+::: {.question title="ULB, Juillet 1999"}
+#. Calculer l'aire entre les courbes
+\begin{align}
+y = 1 + x^2, \qquad y = 9 - x^2
+\end{align}
+#. Calculer le volume du solide engendré par la rotation de cette surface autour de l'axe $Ox$.
+:::
+
+Si vous avez fini...
+
+::: {.question title="Examen d'entrée d'Oxford, 2018"}
+La trompette de Torricelli est obtenue
+par la rotation de $$y = \frac 1 x$$ entre $1$ et $+\infty$.
+
+- Montrer que la trompette de Torricelli a un volume **fini**.
+  (Indication: calculer entre $1$ et $a$, où $a$ est "grand").
+- (Difficile) Montrer que la surface extérieure est infinie.
+:::
+
+# Exercice 40 {.split}
+
+![](/static/images/1678142618.png){width=80%}
+
 # Exercice 43 {.split}
 
 ![](/static/images/1678142693.png){width=100%}
+
+::: {.exampleblock title="Question supplémentaire de réflexion"}
+Utiliser le calcul intégral pour calculer le volume d'une pyramide.
+:::
 
 # Exercices supplémentaires {.row}
 

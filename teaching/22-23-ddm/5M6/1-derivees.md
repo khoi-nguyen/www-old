@@ -186,7 +186,7 @@ Calculer la dérivée et étudier la croissance de
 
 - $f(x) = x^2 - 2x + 3$ (ensemble)
 - $g(x) = -x^2 + 3x + 5$ (à faire soi-même)
-- $f(x) = ax^2 + bx + c$ (ensemble)
+- $h(x) = ax^2 + bx + c$ (ensemble)
 :::
 
 ~~~ {.julia .plot .fragment}
@@ -252,14 +252,29 @@ Si $f(x) = \frac 1 x$, alors $f'(a) = -\frac 1 {a^2}$
 # Dérivée de $x^n$ {.split}
 
 One rule to rule them all.
+Nous admettons la proposition suivante sans preuve
+(je peux vous guider si vous êtes intéressés).
 
 ::: proposition
-Si $f(x) = x^n$, alors $f'(a) = n x^{n - 1}.$
+Si $f(x) = x^n$, alors $f'(x) = n x^{n - 1}.$
+:::
+
+::: example
+Calculer la dérivée de
+
+- $f(x) = x^5$
+- $g(x) = \sqrt[3] x$
+- $h(x) = \frac 1 {\sqrt x}$
+- $i(x) = \frac 1 {x^3}$
 :::
 
 La dérivée d'une puissance est une puissance.
 
 # Application: MRUA {.split}
+
+Puisque la vitesse est une pente,
+nous l'avons également généralisée aux mouvements qui ne sont pas des droites
+(appelés MRU).
 
 Remarquons que la vitesse est
 \begin{align}
@@ -271,9 +286,15 @@ c'est-à-dire la dérivée de la position.
 Dériver deux fois $x(t) = \frac 1 2 a t^2 + v t + x_0$ par rapport au temps.
 :::
 
+::: question
+Comprenez-vous pourquoi il y a un $\frac 1 2$ maintenant?
+:::
+
+
 # Une limite en radians importante {.split}
 
 ::: proposition
+En **radians**:
 \begin{align}
 \lim_{x \to 0} \frac {\sin x} x = 1
 \end{align}
@@ -291,11 +312,151 @@ L'équation est-elle vraie en degrés?
 # Dérivée de $\sin x$ {.split}
 
 ::: proposition
-Si $f(x) = \sin x$, alors $f'(x) = \cos x$.
+En **radians** (ne fonctionne pas en degrés):
+\begin{align}
+\sin'(x) = \cos(x)
+\end{align}
 :::
 
 ::: remark
 \begin{align}
 \sin x - \sin a = 2 \cos \left(\frac {x + a} 2\right) \sin \left(\frac {x - a} 2\right)
+\end{align}
+:::
+
+# Dérivée de $\cos x$ {.split}
+
+::: proposition
+En **radians** (ne fonctionne pas en degrés):
+\begin{align}
+\cos'(x) = -\sin x
+\end{align}
+:::
+
+::: remark
+\begin{align}
+\cos x - \cos a = -2 \sin \left(\frac {x + a} 2\right) \sin \left(\frac {x - a} 2\right)
+\end{align}
+:::
+
+# Application: $\sin x$ pour $0 \leq x \ll 1$ {.split}
+
+::: question
+L'ordinateur ne connaît que les opérations mathématiques de base.
+Comment calcule-t-elle $\sin x$?
+:::
+
+::: idea
+\begin{align}
+\sin x \approx \underbrace{a + b x + c x^2}_{f(x)}
+\end{align}
+
+On essayera d'avoir: $f(0) = \sin 0$, $f'(0) = \sin'(0)$, etc.
+:::
+
+~~~ {.julia .plot}
+x = -1.5:0.01:1.5
+plot(x, sin, label=L"\sin x", framestyle=:origin)
+plot!(x, x -> x, label=L"x")
+plot!(x, x -> x - x^3/6, label=L"x - \frac{x^3}{6}")
+~~~
+
+# Dérivée de $\tan x$ {.split}
+
+::: question
+Quelle est la dérivée de $\tan$?
+:::
+
+Nous répondrons à cette question plus tard.
+
+Nous déduirons la dérivée de $\tan$ à partir de celle de $\sin$ et $\cos$,
+puisque
+\begin{align}
+\tan x = \frac {\sin x} {\cos x}
+\end{align}
+
+Le fait que la pente de $\tan$ peut se déduire de la pente de $\sin$ et de celle de $\cos$
+est remarquable.
+
+# Comportement avec les opérations de fonction {.split}
+
+Souvenons-nous que pour les droites:
+
+\begin{align}
+(f \pm g)' &= f' \pm g'\\
+(f \circ g)' &= f' \cdot g'\\
+\end{align}
+
+::: remark
+Remarquons qu'on ne pouvait pas parler de pente pour $fg$ ou $\frac f g$.
+Avec les dérivées, on peut!
+:::
+
+On va montrer:
+
+\begin{align}
+(fg)' &= f'g + fg'\\
+\left(\frac {f}{g}\right)' &= \frac {f'g - fg'} {g'}
+\end{align}
+
+# Comportement avec la somme {.split}
+
+::: proposition
+\begin{align}
+(f + g)'(a) = f'(a) + g'(a)
+\end{align}
+:::
+
+::: {.info title="Rappel"}
+\begin{align}
+f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
+\end{align}
+:::
+
+::: exercise
+Prouver la règle pour $f - g$.
+:::
+
+# Comportement avec le produit {.split}
+
+::: proposition
+\begin{align}
+(f g)'(a) = f'(a) g(a) + f(a) g'(a).
+\end{align}
+:::
+
+::: {.info title="Rappel"}
+\begin{align}
+f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
+\end{align}
+:::
+
+# Exemples
+
+# Comportement avec la composition {.split}
+
+::: proposition
+\begin{align}
+(f \circ g)'(a) = f'(g(a)) g'(a)
+\end{align}
+:::
+
+::: {.info title="Rappel"}
+\begin{align}
+f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
+\end{align}
+:::
+
+# Comportement avec le quotient {.split}
+
+::: proposition
+\begin{align}
+\left(\frac f g\right)'(a) = \frac {f'(a) g(a) - f(a) g'(a)} {g^2(a)}
+\end{align}
+:::
+
+::: {.info title="Rappel"}
+\begin{align}
+f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
 \end{align}
 :::
