@@ -867,6 +867,58 @@ x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(-\sum_{\substack{j = 1\\ j \neq i}}^n a_{
 
 The components of $\vec x^{(k + 1)}$ can be calculated independently!
 
+# 8 March 2023 {.row}
+
+::: col
+
+### Splittings
+
+Write $\mat A = \mat M - \mat N$.
+\begin{align*}
+\mat A \vec x = \vec b
+\iff \mat M \vec x = \mat N \vec x + \vec b
+\end{align*}
+
+An iteration can be defined via
+\begin{align}
+\mat M \vec x^{(k + 1)} = \mat N \vec x^{(k)} + \vec b
+\end{align}
+and the error satisfies
+\begin{align}
+\vec x^{(k)} - \vec x_\star = (\mat M^{-1} \mat N)^k (\vec x^{(0)} - \vec x_\star).
+\end{align}
+
+::: {.info title="What is a good splitting?"}
+- Solving for $\vec x^{(k + 1)}$ is easy
+- $\rho(\mat M^{-1} N) < 1$.
+:::
+:::
+
+::: col
+
+### Jacobi's splitting
+
+\begin{align}
+\mat A = \mat D - (\mat D - \mat A),
+\qquad
+\mat D = \begin{pmatrix}
+a_{11} & 0 & 0 & \dots & 0\\
+0 & a_{22} & 0 & \dots & 0\\
+\vdots & \vdots & \vdots & \vdots & \vdots\\
+0 & 0 & 0 & \dots & a_{nn}
+\end{pmatrix}
+\end{align}
+
+### Announcements
+
+- Midterms were marked **out of 40**.
+- Grades available on Brightspace.
+  Congratulations on your work so far, everyone has A/A-.
+- We'll go through question $3$ today.
+- Today is **International Women's day**.
+- French sentence of the day: les cuisines sont fermées aujourd'hui
+:::
+
 # Convergence for diagonally dominant matrices [@vaes22, p. 96] {.split}
 
 ::: definition
@@ -1015,6 +1067,12 @@ x = zeros(4)
 gauss_seidel(A, b, x, 0.01)
 ~~~
 
+::: check
+- Do you understand the difference between Gauss-Seidel and Jacobi?
+- Which one is better for parallelism? Why?
+- Which one is easier to implement? Why?
+:::
+
 :::::
 
 # Convergence for Gauss-Seidel [@vaes22, p. 96] {.split}
@@ -1077,6 +1135,57 @@ f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x
 - How do we calculate $\lambda_{\max}$, $\lambda_{\min}$?
 - Could we improve the method by considering a variable $\omega$ at each iteration?
 :::
+
+# Reading contour plots {.row}
+
+::::: {.col}
+~~~ {.julia .plot width=100%}
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
+contour(-1:0.01:5, -1:0.01:7, f, levels=20, color=:turbo, fill=true)
+~~~
+:::::
+
+::::: {.col}
+- Gradient is **perpendicular** to the contour lines
+- Its magnitude is larger when the lines are close together
+
+::: check
+- Estimate where the minimum of the function is
+- Could you estimate the gradient at every point?
+:::
+:::::
+
+# Richardson visualized {.split}
+
+::: example
+Suppose we want to solve the following system.
+
+\begin{align}
+\begin{pmatrix}
+2 & 1\\
+1 & 2
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\ x_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+7 \\ 8
+\end{pmatrix}
+\end{align}
+:::
+
+~~~ {.julia .plot}
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
+contour(-1:0.01:5, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true)
+scatter!([2, 3], label="Solution")
+~~~
 
 # Steepest descent method [@vaes22, p. 102] {.split}
 

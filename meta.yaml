@@ -74,6 +74,12 @@ envs:
     classes:
       - bg-primary
       - text-white
+  check:
+    name: Check your understanding
+    icon: fa-solid fa-list-check
+    classes:
+      - bg-success
+      - text-white
   corollary:
     name: Corollary
     icon: fa-solid fa-book
