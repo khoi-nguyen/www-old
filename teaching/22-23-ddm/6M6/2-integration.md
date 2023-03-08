@@ -204,6 +204,7 @@ $$x(t) = x_0 + \int_{t_0}^t v(x) \dd x.$$
 
 - Note à moi-même: terminer la correction de l'exercice $42$.
 - Interrogation le $21$ mars sur les intégrales
+- Demain: probabilités
 
 ### Applications des intégrales
 
@@ -276,6 +277,14 @@ par la rotation de $$y = \frac 1 x$$ entre $1$ et $+\infty$.
 ::: {.exampleblock title="Question supplémentaire de réflexion"}
 Utiliser le calcul intégral pour calculer le volume d'une pyramide.
 :::
+
+# Du baccalauréat britannique
+
+![](/static/images/1678258484.png)
+
+# Du baccalauréat britannique
+
+![](/static/images/1678259040.png)
 
 # Exercices supplémentaires {.row}
 
