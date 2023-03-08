@@ -249,6 +249,16 @@ scatter!([1], [1], label=L"(a, f(a))")
 Si $f(x) = \frac 1 x$, alors $f'(a) = -\frac 1 {a^2}$
 :::
 
+~~~ {.julia .plot}
+x = 0.5:0.01:2
+plot(x, x -> 1/x, label=L"\frac 1 x", framestyle=:origin)
+
+x = 0.7:0.01:1.5
+y = @. -1 * (x - 1) + 1
+plot!(x, y, label="tangente")
+scatter!([1], [1], label=L"(a, f(a))")
+~~~
+
 # Dérivée de $x^n$ {.split}
 
 One rule to rule them all.
