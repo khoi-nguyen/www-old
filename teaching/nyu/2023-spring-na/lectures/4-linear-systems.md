@@ -6,6 +6,7 @@ notes: |
   - 27/02: complexity for LU, Cholesky, norms and spectrum (9-19)
   - 01/03: condition number, Richardson, convergence (20-30)
   - 03/03: stopping criterion, splitting, jacobi (31-38)
+  - 08/03: midterm, gauss-seidel, relaxation method (until 46)
 ...
 
 # Systems associated with triangular matrices {.split}
