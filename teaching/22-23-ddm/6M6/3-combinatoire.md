@@ -3,18 +3,11 @@ title: Probabilités et combinatoire
 output: revealjs
 ...
 
-# Journée internationale des femmes
+# Qu'est-ce qu'une probabilité? {.split}
 
-Ada Lovelace
-:   A écrit le premier programme informatique
-
-Emmy Noether (physique mathématique)
-:   Conservation de l'énergie provient de l'invariance du temps sous les translations.
-
-Maryam Mirzakhani (topologie et géométrie)
-:   Première femme à recevoir la médaille Fields (2014)
-
-# Qu'est-ce qu'une probabilité?
+::: question
+Qu'est-ce qu'une probabilité?
+:::
 
 ~~~ {.julia .jupyter}
 using Plots, Statistics
@@ -61,17 +54,69 @@ The larger the mob, the greater the apparent anarchy, the more perfect is its sw
 It is the supreme law of unreason.
 :::
 
-# Monty-Hall
+# Combinatoire: motivations {.split}
 
-~~~ {.julia}
-switch = false
+::: info
+\begin{align}
+\text{probabilité} = \frac {\text{nombre de cas favorables}} {\text{nombre de cas possibles}}
+\end{align}
+:::
 
-function play(switch=false)
-    choices = [0, 1, 2]
-    correct, choice = rand(0:2), 0
-    if switch
-        return
-    end
-    return
+::: example
+- Quelle est la probabilité de gagner au lotto?
+- Quelle est la probabilité d'avoir une quinte flush?
+:::
+
+Il faut apprendre à **dénombrer**.
+
+# Exploration {.split}
+
+![](/static/images/1678370739.png)
+
+# Anagrammes {.split}
+
+![](/static/images/1678370770.png)
+
+# Planche de Galton {.split}
+
+![](/static/images/1678370800.png)
+![](/static/images/1678370815.png)
+
+# La factorielle {.split}
+
+::: question
+Combien y a-t-il de manière d'ordonner $n$ objets distincts?
+:::
+
+~~~ {.julia .jupyter}
+function factorielle(n)
+  if n == 1
+    return 1
+  end
+  return n * factorielle(n - 1)
 end
+factorielle(4)
+~~~
+
+# Exercices sur la factorielle {.split}
+
+![](/static/images/1678371142.png){width=100%}
+
+# Explosion factorielle {.split}
+
+::: info
+La croissance de la factorielle est au coeur de nombreux problèmes ouverts en maths.
+:::
+
+::: question
+Je voudrais délivrer des pizzas à 20 élèves mais souhaite commencer
+seulement lorsque j'aurai trouvé le chemin le plus court.
+En essayant $1$ possibilité par seconde, combien de temps cela prendrait?
+:::
+
+~~~ {.python .jupyter}
+n = factorial(20)
+nombre_de_jours = n / (24 * 3600)
+nombre_d_annees = nombre_de_jours / 365
+nombre_de_millenaires = nombre_d_annees / 1000
 ~~~
