@@ -8,7 +8,7 @@ def jupyter(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
     if not isinstance(element, pf.CodeBlock) or "jupyter" not in element.classes:
         return None
     code: str = element.text
-    lang: str = "julia"
+    lang: str = element.classes[0]
     raw: str = f"""<pre data-executable="true" data-language="{lang}">{code}</pre>"""
     return pf.RawBlock(raw, format="html")
 

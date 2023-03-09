@@ -21,7 +21,7 @@
   {
     {% if user.is_authenticated %}
     kernelOptions: {
-      name: "julia-1.8",
+      name: "{{ kernel }}",
       serverSettings: {
         "baseUrl": "http://127.0.0.1:8888",
       }
