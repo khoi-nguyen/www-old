@@ -77,6 +77,10 @@ Il faut apprendre à **dénombrer**.
 
 ![](/static/images/1678370770.png)
 
+# Bonjour
+
+![](/static/images/1678433789.png)
+
 # Planche de Galton {.split}
 
 ![](/static/images/1678370800.png)
