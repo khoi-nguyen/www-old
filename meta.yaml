@@ -184,7 +184,6 @@ envs:
 \newcommand{\bigo}{\mathcal O}
 \newcommand{\ceil}[1]{\lceil#1\rceil}
 \newcommand{\dd}{\,\mathrm{d}}
-\newcommand{\defeq}{:=}
 \newcommand{\defeq}{\stackrel{\text{def}}{=}}
 \newcommand{\dom}{\mathrm{dom}}
 \newcommand{\d}{\,\mathrm{d}}
