@@ -102,6 +102,10 @@ factorielle(4)
 
 ![](/static/images/1678371142.png){width=100%}
 
+# Former des "mots" et équipes {.split}
+
+![](/static/images/1678399819.png){width=100%}
+
 # Explosion factorielle {.split}
 
 ::: info
@@ -111,12 +115,33 @@ La croissance de la factorielle est au coeur de nombreux problèmes ouverts en m
 ::: question
 Je voudrais délivrer des pizzas à 20 élèves mais souhaite commencer
 seulement lorsque j'aurai trouvé le chemin le plus court.
-En essayant $1$ possibilité par seconde, combien de temps cela prendrait?
+En essayant $1000$ possibilité par seconde, combien de temps cela prendrait?
 :::
 
 ~~~ {.python .jupyter}
 n = factorial(20)
-nombre_de_jours = n / (24 * 3600)
-nombre_d_annees = nombre_de_jours / 365
-nombre_de_millenaires = nombre_d_annees / 1000
+
+# Combien de secondes cela prendra
+secondes = n / 1000
 ~~~
+
+# Combinaisons {.split}
+
+\begin{align}
+\binom n k = \frac {n!} {k! (n - k)!}
+\qquad k \text{ parmi } n
+\end{align}
+
+![](/static/images/1678400990.png){width=100%}
+
+# Dénombrer {.split}
+
+![](/static/images/1678430160.png){width=100%}
+
+# Dénombrer 2 {.split}
+
+![](/static/images/1678430213.png){width=100%}
+
+# Dénombrer 3 {.split}
+
+![](/static/images/1678430295.png)
