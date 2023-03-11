@@ -12,7 +12,7 @@ notes: |
 # Systems associated with triangular matrices {.split}
 
 ::: example
-\begin{align}
+\begin{align*}
 \begin{pmatrix}
 1 & 2 & 3\\
 0 & 4 & 5\\
@@ -25,7 +25,7 @@ x \\ y \\ z
 \begin{pmatrix}
 14 \\ 23 \\ 18
 \end{pmatrix}
-\end{align}
+\end{align*}
 :::
 
 # Gregory-Newton {.split}
@@ -39,7 +39,7 @@ through $(0, 1)$, $(1, 5)$, $(2, 11)$.
 
 $$\widehat u(x) = \alpha_0 + \alpha_1 x + \alpha_2 x (x - 1)$$
 
-\begin{align}
+\begin{align*}
 \begin{pmatrix}
 1 & 0 & 0\\
 1 & 1 & 0\\
@@ -52,13 +52,13 @@ $$\widehat u(x) = \alpha_0 + \alpha_1 x + \alpha_2 x (x - 1)$$
 \begin{pmatrix}
 1 \\ 5 \\ 11
 \end{pmatrix}
-\end{align}
+\end{align*}
 
 # Forward and backward substitution {.row}
 
 ::::: col
 
-\begin{align}
+\begin{align*}
 \underbrace{
 \begin{pmatrix}
 l_{1,1} & 0 & 0 & \dots & 0\\
@@ -75,13 +75,13 @@ x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_n
 \begin{pmatrix}
 b_1 \\ b_2 \\ b_3 \\ \vdots \\ b_n
 \end{pmatrix}
-\end{align}
+\end{align*}
 
-\begin{align}
+\begin{align*}
 x_1 &= \frac {b_1} {l_{1, 1}}\\
 x_2 &= \frac {b_2 - l_{2, 1} x_1} {l_{2, 2}}\\
 x_i &= \frac {b_i - \sum_{j = 1}^{i - 1} l_{i, j} x_j} {l_{i, i}}
-\end{align}
+\end{align*}
 
 ~~~ julia
 function forward_substitution(L, b)
@@ -113,7 +113,7 @@ and multiply it on the left.
 
 ::: example
 Calculate and interpret
-\begin{align}
+\begin{align*}
 \begin{pmatrix}
 1 & 0 & 0\\
 -4 & 1 & 0\\
@@ -124,31 +124,31 @@ Calculate and interpret
 4 & 5 & 6\\
 7 & 8 & 9\\
 \end{pmatrix}
-\end{align}
+\end{align*}
 :::
 
 ::: question
 What is the inverse of
-\begin{align}
+\begin{align*}
 \begin{pmatrix}
 1 & 0 & 0\\
 -4 & 1 & 0\\
 0 & 0 & 1\\
 \end{pmatrix}?
-\end{align}
+\end{align*}
 :::
 
 # LU decomposition: Gaussian algorithm [@vaes22, p. 82] {.split}
 
 ::: example
 Write
-\begin{align}
+\begin{align*}
 A = \begin{pmatrix}
 1 & 1 & 1\\
 1 & -2 & 3\\
 2 & 3 & 1
 \end{pmatrix}
-\end{align}
+\end{align*}
 as a product of a lower triangular matrix $L$
 with an upper triangular matrix $U$.
 :::
@@ -156,7 +156,7 @@ with an upper triangular matrix $U$.
 # Example: solving a system after a LU decomposition {.split}
 
 ::: example
-\begin{align}
+\begin{align*}
 \begin{pmatrix}
 1 & 1 & 1\\
 1 & -2 & 3\\
@@ -169,20 +169,20 @@ x \\ y \\ z
 \begin{pmatrix}
 4 \\ -6 \\ 7
 \end{pmatrix}
-\end{align}
+\end{align*}
 :::
 
 # Exercise: solving a system after a LU decomposition {.split}
 
 ::: {.exercise}
 Use a LU decomposition to solve the following system:
-\begin{align}
+\begin{align*}
 \begin{cases}
 2x_1 - x_2 + 3x_3 &= 4\\
 4x_1 + 2x_2 + x_3 &= 7\\
 -6x_1 - x_2 + 2 x_3 &= -5
 \end{cases}
-\end{align}
+\end{align*}
 :::
 
 # Recalls 25/02 {.row}
@@ -268,9 +268,9 @@ $$\mat A = \mat C \mat C^T.$$
 :::
 
 ::: {.remark title="Link between Cholesky and LU"}
-\begin{align}
+\begin{align*}
 \mat C = \mat L \sqrt {\mat D},
-\end{align}
+\end{align*}
 where $\mat D$ is a diagonal matrix whose entries are the same as $\mat A = \mat L \mat U$.
 :::
 
@@ -329,15 +329,15 @@ $$x_n \xrightarrow{n \to +\infty} x \Longleftrightarrow \lim_{n \to +\infty} \|x
 
 # Vector norms [@vaes22, p. 168] {.split}
 
-\begin{align}
+\begin{align*}
 \|x\|_p &= \sqrt[p] {\sum_{i = 1}^n |x_i|^p}\\
 \|x\|_{\infty} &= \max \{ |x_1|, \dots, |x_n| \}
-\end{align}
+\end{align*}
 
 The default norm will be the Euclidean $(p = 2)$ one, i.e.
-\begin{align}
+\begin{align*}
 \|x\| = \|x\|_2.
-\end{align}
+\end{align*}
 
 In Julia, the **vector** norm of a vector can be calculated via
 `norm(A, p::Real=2)`{.julia} from `LinearAlgebra`.
@@ -349,16 +349,16 @@ In Julia, the **vector** norm of a vector can be calculated via
 ::: {.definition title="Operator norm"}
 Let $A \in \R^{m \times n}$.
 We define
-\begin{align}
+\begin{align*}
 \|A\|_{\alpha, \beta} = \sup_{\|x\|_\beta \leq 1} \|A x\|_\alpha
-\end{align}
+\end{align*}
 :::
 
 ::: {.definition title="p-norm"}
 Let $A \in \R^{m \times n}$ and $p \in [1, +\infty]$.
-\begin{align}
+\begin{align*}
 \|A\|_{p} = \sup_{\|x\|_p \leq 1} \|A x\|_p.
-\end{align}
+\end{align*}
 
 As usual, we shall write $\|A\| = \|A\|_2.$.
 :::
@@ -377,9 +377,9 @@ We shall require all our norms to be consistent from this point on.
 
 Let $\mat A \in \R^{n \times n}$.
 Let's recall that if $\vec x \neq 0$ and $\lambda \in \C$ is such that
-\begin{align}
+\begin{align*}
 \mat A \vec x = \lambda \vec x,
-\end{align}
+\end{align*}
 we say that
 
 - $\lambda$ is an **eigenvalue** of $A$
@@ -395,24 +395,24 @@ $$\spectrum \mat A = \{\lambda \in \C : \chi_{\mat A}(\lambda) = 0\}$$
 ::: theorem
 Let $\mat A \in \R^{n \times n}$ be a **symmetric** matrix.
 There is an orthogonal matrix $\mat Q \in \R^{n \times n}$ and a diagonal matrix $\mat D \in \R^{n \times n}$ such that
-\begin{align}
+\begin{align*}
 \mat A = \mat Q^T \mat D \mat Q
-\end{align}
+\end{align*}
 :::
 
 # Spectral radius {.split}
 
 Calculating $\mat A^k$ is much easier for a diagonalizable matrix,
 as
-\begin{align}
+\begin{align*}
 \mat A^k = (\mat P^{-1} \mat D \mat P) (\mat P^{-1} \mat D \mat P) \dots (\mat P^{-1} \mat D \mat P)
 = \mat P^{-1} \mat D^k \mat P.
-\end{align}
+\end{align*}
 
 ::: {.definition title="Spectral radius"}
-\begin{align}
+\begin{align*}
 \rho(\mat A) = \max_{\lambda \in \spectrum \mat A} \abs \lambda
-\end{align}
+\end{align*}
 :::
 
 ::: {.proposition title="Oldenburger's theorem"}
@@ -423,9 +423,9 @@ as
 ::: {.theorem title="Gelfand's formula"}
 Let $\mat A \in \R^{n \times n}$.
 For any matrix norm,
-\begin{align}
+\begin{align*}
 \lim_{k \to +\infty} \norm {\mat A^k}^{\frac 1 k} = \rho(\mat A).
-\end{align}
+\end{align*}
 :::
 
 Proof: [@vaes22, p. 174]
@@ -442,7 +442,7 @@ Proof: [@vaes22, p. 174]
 
 ### Powers of matrices
 
-\begin{align}
+\begin{align*}
 \mat A \sim
 \begin{pmatrix}
 \lambda_1 & \star & 0 & 0 & \dots & 0 & 0 & 0\\
@@ -453,7 +453,7 @@ Proof: [@vaes22, p. 174]
 0 & 0 & 0 & 0 & \dots & 0 & 0 & \lambda_{n - 1} & \star\\
 0 & 0 & 0 & 0 & \dots & 0 & 0 & 0 & \lambda_n\\
 \end{pmatrix}
-\end{align}
+\end{align*}
 
 - $\norm {A^k} \to 0 \iff \rho(A) < 1$
 - $\rho(A) \leq \norm {A}_p$
@@ -558,38 +558,38 @@ where $0 < \epsilon \ll 0.01$.
 
 # Interlude: discretizing PDES {.split}
 
-\begin{align}
+\begin{align*}
 \frac {\d^2 u} {\d x^2}(x_i)
 &\approx \frac 1 h \left(\frac {u(x_{i + 1}) - u(x_{i})} h - \frac {u(x_{i}) - u(x_{i - 1})} h\right)\\
 &\approx \frac {u(x_{i + 1}) + u(x_{i - 1}) - 2 u(x_i)} {h^2}
-\end{align}
+\end{align*}
 
 It follows that in dimension $2$,
 $\nabla^2 u(x_i, y_j)$ can be approximated by
-\begin{align}
+\begin{align*}
 \frac 1 {h^2} \left(
 u(x_{i + 1}, y_j) + u(x_{i - 1}, y_j)
 + u(x_i, y_{j + 1}) + u(x_i, y_{j - 1}) - 4 u(x_i, y_j)
 \right)
-\end{align}
+\end{align*}
 
 Let's attempt to write $(\nabla^2 u)_{ij} = g_{ij}$ as a linear system.
 
 # A first iterative method: Richardson's method [@vaes22, p. 94] {.split}
 
 ::: {.algorithm title="Richardson's method"}
-\begin{align}
+\begin{align*}
 \vec x^{(k + 1)} = \vec x^{(k)} + \omega (\vec b - \mat A \vec x^{(k)})
-\end{align}
+\end{align*}
 :::
 
 ::: proposition
 Assume $\omega \neq 0$.
 If $(\vec x^{(k)})_k$ converges in the iteration above,
 then it converges towards the solution of
-\begin{align}
+\begin{align*}
 \mat A \vec x = \vec b.
-\end{align}
+\end{align*}
 :::
 
 ::: question
@@ -600,15 +600,15 @@ then it converges towards the solution of
 # Richardson iteration: example {.split}
 
 ::: {.algorithm title="Richardson's method"}
-\begin{align}
+\begin{align*}
 \vec x^{(k + 1)} = \vec x^{(k)} + \omega (\vec b - \mat A \vec x^{(k)})
-\end{align}
+\end{align*}
 :::
 
 ::: example
 Suppose we want to solve the following system.
 
-\begin{align}
+\begin{align*}
 \begin{pmatrix}
 2 & 1 & 0\\
 0 & 2 & 1\\
@@ -621,7 +621,7 @@ x_1 \\ x_2 \\ x_3
 \begin{pmatrix}
 2 \\ 1 \\ 4
 \end{pmatrix}
-\end{align}
+\end{align*}
 :::
 
 ~~~ {.julia .jupyter}
@@ -640,31 +640,31 @@ x, count
 # Richardson iteration: convergence {.split}
 
 ::: {.algorithm title="Richardson's method"}
-\begin{align}
+\begin{align*}
 \vec x^{(k + 1)} = \vec x^{(k)} + \omega (\vec b - \mat A \vec x^{(k)})
-\end{align}
+\end{align*}
 :::
 
 ::: proposition
 The Richardson iteration converges to the real solution for every choice of $\vec x^{(0)}$ if and only if
-\begin{align}
+\begin{align*}
 \max_{\lambda \in \spectrum A} \abs {1 - \omega \lambda} < 1
-\end{align}
+\end{align*}
 :::
 
 # Link to optimisation [@vaes22, p. 95] {.split}
 
 When $\mat A$ is symmetric and positive definite,
 solving $\mat A \vec x = \vec b$ is equivalent to minimizing
-\begin{align}
+\begin{align*}
 f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x
-\end{align}
+\end{align*}
 as $\nabla f = \mat A \vec x - \vec b$.
 
 The Richardson update can be written
-\begin{align}
+\begin{align*}
 \vec x^{(k + 1)} = \vec x^{(k)} - \omega \nabla f(\vec x^{(k)})
-\end{align}
+\end{align*}
 
 We are moving in the direction where $f$ decreases the most.
 We shall encounter this idea again later.
@@ -675,23 +675,23 @@ We shall encounter this idea again later.
 
 ## Richardson's method
 
-\begin{align}
+\begin{align*}
 \underbrace{\vec x^{(k + 1)}}_{\to \vec x}
 = \underbrace{\vec x^{(k)}}_{\to \vec x}
 + \omega (\underbrace{\vec b - \mat A \vec x^{(k)}}_{\to \vec 0})
-\end{align}
+\end{align*}
 
 - System is equivalent to minimizing
   $f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x$:
-\begin{align}
+\begin{align*}
 \vec x^{(k + 1)} = \vec x^{(k)} - \omega \nabla f
-\end{align}
+\end{align*}
   It follows that the update goes in the direction where the descent is steepest.
 
 - The error satisfies
-\begin{align}
+\begin{align*}
 \vec x^{(k)} - \vec x = (\mat I - \omega A)^k (\vec x^{(0)} - \vec x),
-\end{align}
+\end{align*}
   which means converges when $\rho(\mat I - \omega A) < 1$.
 
 - Speed of convergence is associated with the spectral radius.
@@ -704,14 +704,14 @@ We shall encounter this idea again later.
 
 ## Condition number
 
-\begin{align}
+\begin{align*}
 \kappa(\mat A) = \norm {\mat A} \norm {\mat A^{-1}}
-\end{align}
+\end{align*}
 
 Note that if $\mat A = \mat Q^{-1} \mat D \mat Q$ is symmetric and positive definite, then
-\begin{align}
+\begin{align*}
 \kappa(\mat A) = \kappa(\mat D) = \frac {\lambda_{\max}} {\lambda_{\min}}.
-\end{align}
+\end{align*}
 
 ## Announcements
 
@@ -724,9 +724,9 @@ Note that if $\mat A = \mat Q^{-1} \mat D \mat Q$ is symmetric and positive defi
 
 The spectral radius associated with the Richardson iteration is
 
-\begin{align}
+\begin{align*}
 \rho(I - \omega A) = \max_{\lambda \in \spectrum \mat A} \abs{1 - \omega \lambda}
-\end{align}
+\end{align*}
 
 The smaller $\rho$ is, the faster the convergence.
 
@@ -735,11 +735,11 @@ Let $\mat A$ be a symmetric positive matrix.
 The Richardson iteration converges for every choice of $\vec x^{(0)}$
 if $0 < \omega < \frac 2 {\lambda_{\max}}$.
 Moreover, the spectral radius is minimized if
-\begin{align}
+\begin{align*}
 \omega = \frac 2 {\lambda_{\max} + \lambda_{\min}},
 \qquad
 \rho(\mat I - \omega A) = \frac {\kappa(A) - 1} {\kappa(A) + 1}.
-\end{align}
+\end{align*}
 :::
 
 ~~~ {.tex .tikz .fragment scale=1.5}
@@ -765,11 +765,11 @@ Moreover, the spectral radius is minimized if
 # Monitoring the convergence [@vaes22, p. 100] {.split}
 
 ::: proposition
-\begin{align}
+\begin{align*}
 \frac {\norm{\vec x^{(k)} - \vec x}} {\norm {\vec x}}
 \leq \kappa(\mat A)
 \frac {\norm{\mat A \vec x^{(k)} - \vec {b}}} {\norm {\vec b}}
-\end{align}
+\end{align*}
 :::
 
 # Stopping criterion [@vaes22, p. 101] {.split}
@@ -780,13 +780,13 @@ When should we stop iterating?
 
 #. Stop when $\norm {\mat A \vec x^{(k)} - \vec b} \leq \epsilon$
 #. Stop when
-\begin{align}
+\begin{align*}
 \frac {\norm {\mat A \vec x^{(k)} - \vec b}} {\norm {\mat A \vec x^{(0)} - \vec b}} \leq \epsilon
-\end{align}
+\end{align*}
 #. Stop when
-\begin{align}
+\begin{align*}
 \frac {\norm {\mat A \vec x^{(k)} - \vec b}} {\norm {\vec b}} \leq \epsilon
-\end{align}
+\end{align*}
 
 # Iterative methods: splitting [@vaes22, p. 92] {.split}
 
@@ -795,19 +795,19 @@ we may be ready to get an approximate solution
 if this means a lower complexity.
 
 To this end, we'll split the matrix
-\begin{align}
+\begin{align*}
 \mat A = \mat M - \mat N.
-\end{align}
+\end{align*}
 so that our unknown can appear **twice**.
-\begin{align}
+\begin{align*}
 \mat A \vec x = \vec b
 \iff \mat M x = \mat N x + \vec b
-\end{align}
+\end{align*}
 
 This naturally defines an iteration
-\begin{align}
+\begin{align*}
 \boxed{\mat M \vec x^{(k + 1)} = \mat N \vec x^{(k)} + \vec b}.
-\end{align}
+\end{align*}
 
 These iterations will generally be $\bigo(n^2)$ in the worst case,
 as $\mat M$ will be chosen to make sure the above system can be solved efficiently.
@@ -823,11 +823,11 @@ to the unique solution of $\mat A \vec x = \vec b$ for every choice of $\vec x^{
 if and only if $\rho(\mat M^{-1} \mat N) < 1$.
 
 Moreover, for each $\epsilon > 0$, there exists $K > 0$ such that
-\begin{align}
+\begin{align*}
 \norm {\vec x^{(k)} - \vec x}
 \leq \left(\rho(\mat M^{-1} \mat N) + \epsilon\right)^k
 \norm {\vec x^{(0)} - \vec x}
-\end{align}
+\end{align*}
 for every $k \geq K$.
 :::
 
@@ -857,14 +857,14 @@ Choice of $\omega$ for symmetric and positive definite $\mat A$
 First, let's write $\mat A = \mat D - \mat N$,
 where $\mat D$ is a diagonal matrix whose entries are that of $\mat A$.
 
-\begin{align}
+\begin{align*}
 \mat D \vec x_{k + 1} = \mat N \vec x_k + \vec b.
-\end{align}
+\end{align*}
 
 This leads to the equations:
-\begin{align}
+\begin{align*}
 x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(-\sum_{\substack{j = 1\\ j \neq i}}^n a_{ij} x^{(k)}_j + b_i\right)
-\end{align}
+\end{align*}
 
 The components of $\vec x^{(k + 1)}$ can be calculated independently!
 
@@ -881,13 +881,13 @@ Write $\mat A = \mat M - \mat N$.
 \end{align*}
 
 An iteration can be defined via
-\begin{align}
+\begin{align*}
 \mat M \vec x^{(k + 1)} = \mat N \vec x^{(k)} + \vec b
-\end{align}
+\end{align*}
 and the error satisfies
-\begin{align}
+\begin{align*}
 \vec x^{(k)} - \vec x_\star = (\mat M^{-1} \mat N)^k (\vec x^{(0)} - \vec x_\star).
-\end{align}
+\end{align*}
 
 ::: {.info title="What is a good splitting?"}
 - Solving for $\vec x^{(k + 1)}$ is easy
@@ -899,7 +899,7 @@ and the error satisfies
 
 ### Jacobi's splitting
 
-\begin{align}
+\begin{align*}
 \mat A = \mat D - (\mat D - \mat A),
 \qquad
 \mat D = \begin{pmatrix}
@@ -908,7 +908,7 @@ a_{11} & 0 & 0 & \dots & 0\\
 \vdots & \vdots & \vdots & \vdots & \vdots\\
 0 & 0 & 0 & \dots & a_{nn}
 \end{pmatrix}
-\end{align}
+\end{align*}
 
 ### Announcements
 
@@ -924,11 +924,11 @@ a_{11} & 0 & 0 & \dots & 0\\
 
 ::: definition
 A matrix $\mat A$ is row or column diagonally dominant if its entries satisfy
-\begin{align}
+\begin{align*}
 \abs {a_{ii}} \geq \sum_{\substack{j = 1\\ j \neq i}}^n \abs {a_{ij}}
 \qquad \text{or} \qquad
 \abs {a_{jj}} \geq \sum_{\substack{i = 1\\ i \neq j}}^n \abs {a_{ij}}
-\end{align}
+\end{align*}
 for $i = 1, \dots, n$.
 :::
 
@@ -981,9 +981,9 @@ is particularly interesting for two reasons:
 
 # Gauss-Seidel [@vaes22, p. 96] {.split}
 
-\begin{align}
+\begin{align*}
 \mat A = \mat L + \mat D + \mat U,
-\end{align}
+\end{align*}
 
 where
 
@@ -996,20 +996,20 @@ where
 
 ::: {.algorithm title="Gauss-Seidel"}
 We consider the split
-\begin{align}
+\begin{align*}
 \mat A = \underbrace{\mat L + \mat D}_{\mat M} - \underbrace{(-\mat U)}_{\mat N}
-\end{align}
+\end{align*}
 :::
 
 
 # Gauss-Seidel iteration [@vaes22, p. 96] {.split}
 
 The iteration takes the following form:
-\begin{align}
+\begin{align*}
 (\mat L + \mat D) \vec x^{(k + 1)} = -\mat U \vec x^{(k)} + \vec b,
-\end{align}
+\end{align*}
 which could equivalently be written
-\begin{align}
+\begin{align*}
 \left\{
 \begin{aligned}
 & a_{11} x^{(\textcolor{red}{k+1})}_1 + a_{12} x^{(k)}_2 + a_{13} x^{(k)}_3 + \dotsb + a_{1n} x^{(k)}_n = b_1 \\
@@ -1019,7 +1019,7 @@ which could equivalently be written
 & a_{n1} x^{(\textcolor{red}{k+1})}_1 + a_{n2} x^{(\textcolor{red}{k+1})}_2 + a_{n3} x^{(\textcolor{red}{k+1})}_3 + \dotsb + a_{nn} x^{(\textcolor{red}{k+1})}_n = b_n.
 \end{aligned}
 \right .
-\end{align}
+\end{align*}
 
 # Gauss-Seidel implementation [@vaes22, p. 96] {.row}
 
@@ -1079,9 +1079,9 @@ gauss_seidel(A, b, x, 0.01)
 # Convergence for Gauss-Seidel [@vaes22, p. 96] {.split}
 
 ::: {.exampleblock title="Gauss-Seidel iteration"}
-\begin{align}
+\begin{align*}
 (\mat L + \mat D) \vec x^{(k + 1)} = -\mat U \vec x^{(k)} + \vec b,
-\end{align}
+\end{align*}
 :::
 
 ::: proposition
@@ -1096,9 +1096,9 @@ then the Gauss-Seidel iteration converges.
 
 # Splittings methods {.split}
 
-\begin{align}
+\begin{align*}
 \mat A = \mat L + \mat D + \mat U
-\end{align}
+\end{align*}
 
 Method                 $\mat M$                           $\mat N$                                      Convergence
 -------                ---------                          ---------                                     ------------
@@ -1107,29 +1107,89 @@ Jacobi                 $\mat D$                           $-\mat L - \mat U$    
 Gauss-Seidel           $\mat L + \mat D$                  $-\mat U$                                     Diagonally dominant, symmetric positive definite
 Relaxation             $\frac {\mat D} \omega + \mat L$   $\frac {1 - \omega} \omega \mat D - \mat U$   Diagonally dominant, symmetric positive definite
 
+# 20 March 2023 {.row}
+
+::::: {.col}
+
+### Iterative methods
+
+::: idea
+- PDEs lead to very large systems but sparse matrices
+- LU, Cholesky, etc. are not suitable because they are $O(n^3)$
+- We want a computationaly cheap way to improve an approximate solution
+:::
+
+\begin{align*}
+\mat A \vec x = \vec b
+\iff \mat M \vec x = \mat N \vec x + \vec b,
+\qquad \mat A = \mat M - \mat N
+\end{align*}
+
+\begin{align*}
+&\text{iteration}:\quad
+&\boxed{\mat M \vec x^{(k + 1)} = \mat N \vec x^{(k)} + \vec b}\\
+&\text{error}:\quad
+&\boxed{\vec x^{(k)} - \vec x_\star = (\mat M^{-1} \mat N)^k (\vec x^{(0)} - \vec x_\star)}
+\end{align*}
+
+An iteration is good if
+
+- The system $\mat M \vec x = \vec y$ is **easy to solve**
+- $(\mat M^{-1} \mat N)^k \xrightarrow {k \to +\infty} 0$,
+  which is equivalent to $\rho(\mat M^{-1} \mat N) < 1$.
+:::::
+
+::::: {.col}
+
+### Classical splittings
+
+\begin{align*}
+\mat A = \mat L + \mat D + \mat U,
+\end{align*}
+
+- $\mat L$ is the strictly **lower triangular** part of $A$
+- $\mat D$ is the **diagonal** part of $A$
+- $\mat U$ is the strictly **upper triangular** part of $A$.
+
+Method                 $\mat M$                             Convergence
+-------                ---------                            -------------
+Richardson             $\frac 1 \omega \mat I$              Symmetric + positive definite
+Jacobi                 $\mat D$                             Strictly diagonally dominant
+Gauss-Seidel           $\mat L + \mat D$                    In both the above
+Relaxation             $\mat L + \frac {\mat D} \omega$     Generalizes G-S for speed
+
+### Announcements
+
+- Last week on Chapter $4$
+- Homework: Exercise 4.25 due
+- *French sentence of the day*: L'enseignant d'analyse numérique fait du bon travail.
+- Today: Steepest descend method, conjugate gradients
+
+:::::
+
 # Back to Richardson's method {.split}
 
 From now on, $\mat A$ is **symmetric** and **positive definite**,
 and let
-\begin{align}
+\begin{align*}
 f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x
 \quad \text{so that} \quad
 \nabla f(\vec x) = \mat A \vec x - \vec b.
-\end{align}
+\end{align*}
 
 ::: remark
-\begin{align}
+\begin{align*}
 \mat A \vec x_\star = \vec b
 \iff \vec x_\star \text{ minimizes } f
-\end{align}
+\end{align*}
 :::
 
 ::: {.algorithm title="Richardson's iteration"}
-\begin{align}
+\begin{align*}
 \vec x^{(k + 1)}
 = \vec x^{(k)} - \omega \nabla f (\vec x^{(k)}),
 \quad \omega = \frac 2 {\lambda_{\max} + \lambda_{\min}}
-\end{align}
+\end{align*}
 :::
 
 ::: question
@@ -1145,7 +1205,7 @@ A = [2.0 1.0; 1.0 2.0]
 sol = [2.0; 3.0]
 b = A * sol
 f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
-contour(-1:0.01:5, -1:0.01:7, f, levels=20, color=:turbo, fill=true)
+contour(-1:0.01:5, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true)
 ~~~
 :::::
 
@@ -1159,63 +1219,220 @@ contour(-1:0.01:5, -1:0.01:7, f, levels=20, color=:turbo, fill=true)
 :::
 :::::
 
-# Richardson visualized {.split}
+# Richardson visualized {.row}
 
-::: example
-Suppose we want to solve the following system.
+::::: {.col}
 
-\begin{align}
-\begin{pmatrix}
-2 & 1\\
-1 & 2
-\end{pmatrix}
-\begin{pmatrix}
-x_1 \\ x_2
-\end{pmatrix}
-=
-\begin{pmatrix}
-7 \\ 8
-\end{pmatrix}
-\end{align}
-:::
-
-~~~ {.julia .plot}
+~~~ {.julia .plot width=75%}
 A = [2.0 1.0; 1.0 2.0]
 sol = [2.0; 3.0]
 b = A * sol
 f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
-contour(-1:0.01:5, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true)
-scatter!([2, 3], label="Solution")
+N = 7
+data = zeros(N, 2)
+for i in 2:N
+  data[i, :] = data[i - 1,:] - 0.5 * (A * data[i - 1,:] - b)
+end
+contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
+plot!(data[:, 1], data[:, 2], label="")
+scatter!(data[:, 1], data[:, 2], label="Richardson's iteration")
+scatter!([2], [3], label="Solution")
+title!(L"Richardson's method with $\omega = 0.5$")
+~~~
+~~~ {.julia .plot width=75%}
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
+N = 7
+data = zeros(N, 2)
+for i in 2:N
+  data[i, :] = data[i - 1,:] - 0.2 * (A * data[i - 1,:] - b)
+end
+contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
+plot!(data[:, 1], data[:, 2], label="")
+scatter!(data[:, 1], data[:, 2], label="Richardson's iteration")
+scatter!([2], [3], label="Solution")
+title!(L"Richardson's method with $\omega = 0.2$")
 ~~~
 
-# Steepest descent method [@vaes22, p. 102] {.split}
+:::::
 
-::: {.algorithm title="Steepest descend method"}
-\begin{align}
+::::: {.col}
+
+::: {.algorithm title="Richardson's iteration"}
+\begin{align*}
 \vec x^{(k + 1)}
-= \vec x^{(k)} - \omega_k \nabla f (\vec x^{(k)}),
-\end{align}
-where $\omega_k$ minimizes the function
-\begin{align}
-g(\omega) = f(\vec x^{(k)} - \omega \nabla f (\vec x^{(k)}))
-\end{align}
+= \vec x^{(k)} - \omega \nabla f (\vec x^{(k)}).
+\end{align*}
 :::
 
+- Step size is proportional to gradient magnitude
+- Convergence gets slower as we get closer to the minimum
+- The optimal $\omega$ requires knowledge of the spectrum
+
+::: info
+$\lambda_{\max}$ can be estimated relatively efficiently, but not $\lambda_{\min}$.
+More on that in Chapter 6.
+:::
+
+::: question
+How could you improve Richardson's method?
+:::
+
+:::::
+
+# Improvement over Richardson's iteration: steepest descent {.row}
+
+::::: {.col}
+
+~~~ {.julia .plot width=100%}
+using LinearAlgebra
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
+N = 7
+data = zeros(N, 2)
+for i in 2:N
+  x = data[i - 1, :]
+  omega = norm(A * x - b)^2 / (transpose(A * x - b) * A * (A * x - b))
+  data[i, :] = x - omega * (A * x - b)
+end
+contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
+plot!(data[:, 1], data[:, 2], label="")
+scatter!(data[:, 1], data[:, 2], label="Steepest descent")
+scatter!([2], [3], label="Solution")
+~~~
+
+:::::
+
+::::: {.col}
+::: idea
+What if, every time we chose a direction,
+we find the point in this direction which **minimizes** $f$?
+:::
+
+Mathematically, we choose $\vec x^{(k + 1)}$ so that
+\begin{align*}
+f(\vec x^{(k + 1)}) = \min_{\omega \in \R} f(\vec x^{(k)} - \omega \nabla f(\vec x^{(k)}))
+\end{align*}
+
+In other words, we choose $\omega$ [@vaes22, p. 102] by solving
+\begin{align*}
+\boxed{
+  \frac {\dd} {\dd \omega} f(\vec x^{(k)} - \omega \nabla f(\vec x^{(k)})) = 0.
+}
+\end{align*}
+:::::
+
+# Scalar product associated with SPD matrices {.split}
+
+Given a symmetric positive definite matrix $\mat M$,
+we define
+\begin{align*}
+\ip{\vec x, \vec y}_{\mat M}
+\defeq \vec x^T \mat M \vec y
+\end{align*}
+
+Note that $\ip{\placeholder, \placeholder} = \ip{\placeholder, \placeholder}_{\mat I}$.
+
+::: {.proposition title="Orthogonal projection"}
+The vector on $\{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ which is closest to $\vec x_\star$
+in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
+\begin{align*}
+\vec x^{(k + 1)} \defeq \vec x^{(k)} +
+\frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d}_{\mat M}} {\norm {\vec d}^2_{\mat M}}
+\vec d.
+\end{align*}
+:::
+
+# Back to the steepest descent {.split}
+
+\begin{align*}
+\vec x^{(k + 1)} \defeq \vec x^{(k)} +
+\frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d}_{\mat M}} {\norm {\vec d}^2_{\mat M}}
+\vec d.
+\end{align*}
+
 ::: proposition
-\begin{align}
-\omega_k = \frac {} {}
-\end{align}
+The function $f(\vec x) \defeq \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x$
+attains its minimum value on $\{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ at
+\begin{align*}
+\vec x^{(k + 1)} \defeq
+\vec x^{(k)} +
+\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d}} {\norm {\vec d}^2_{\mat A}}
+\vec d.
+\end{align*}
+:::
+
+::: {.algorithm .fragment title="Steepest descent"}
+\begin{align*}
+\vec x^{(k + 1)} \defeq
+\vec x^{(k)}
+- \underbrace{\frac {\norm {\mat A \vec x^{(k)} - \vec b}^2} {\norm {\mat A \vec x^{(k)} - \vec b}^2_{\mat A}}}_\omega
+(\mat A \vec x^{(k)} - \vec b)
+\end{align*}
 :::
 
 # Steepest descend method: code [@vaes22, p. 104] {.split}
 
-~~~ julia
+::: {.algorithm .fragment title="Steepest descent"}
+\begin{align*}
+\vec x^{(k + 1)} \defeq
+\vec x^{(k)}
+- \underbrace{\frac {\norm {\vec r^{(k)}}^2} {\norm {\vec r^{(k)}}^2_{\mat A}}}_\omega
+\vec r^{(k)},
+\qquad
+\vec r^{(k)} = \mat A \vec x^{(k)} - \vec b
+\end{align*}
+:::
+
+~~~ {.julia .jupyter}
 using LinearAlgebra
 function steepest_descent(A, x, b, ϵ)
-    while norm(A * x - b) ≥ ϵ * norm(b)
-        ω =
+    r(x) = A * x - b
+    while norm(r(x)) ≥ ϵ * norm(b)
+        x = x - (r(x)' r(x)) / (r(x)' * A * r(x)) * r(x)
     end
+    return x
 end
 ~~~
+
+# Steepest descent: convergence [@vaes22, p. 103] {.split}
+
+::: theorem
+\begin{align*}
+\norm {\mat A \vec x^{(k)} - \vec b}_{\mat A}
+\leq
+\left(\frac {\kappa(\mat A) - 1} {\kappa(\mat A) + 1}\right)^k
+\norm {\mat A \vec x^{(0)} - \vec b}_{\mat A}
+\end{align*}
+:::
+
+For the proof, see [@vaes22, p. 104].
+
+# Conjugate gradients [@vaes22, p. 108] {.split}
+
+To avoid multiple movements in the same direction,
+observe that if the directions $\{\vec d_i : i = 1, \dots, n\}$ are $\mat A$-orthogonal,
+\begin{align*}
+\vec x_\star
+= \vec x^{(0)}
++ \sum_{i = 0}^{n - 1}
+\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}_{\mat A}} \vec d_i
+\end{align*}
+
+::: proposition
+The iteration
+\begin{align*}
+\vec x^{(k + 1)} \defeq \vec x^{(k)} +
+\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}_{\mat A}} \vec d_k
+\end{align*}
+converges to $x_\star$ in $n$ steps (in exact arithmetic).
+:::
+
+::: {.idea .fragment}
+:::
 
 # Bibliography
