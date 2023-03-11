@@ -38,7 +38,9 @@ CONFIG: dict[str, PlotEnv] = {
             ENV["GKSwstype"] = "nul"
             using Plots
             using LaTeXStrings
-            default(linewidth=2)
+            default(titlefont = ("computer modern"),
+              legendfont = ("computer modern"),
+              linewidth = 2)
             %s
             savefig("%s.svg")
         """
