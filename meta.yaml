@@ -115,7 +115,7 @@ envs:
     name: Idea
     icon: fa-solid fa-lightbulb
     classes:
-      - bg-primary
+      - bg-orange
       - text-white
   info:
     name: Information
@@ -145,7 +145,7 @@ envs:
     name: Question
     icon: fa-solid fa-circle-question
     classes:
-      - bg-primary
+      - bg-question
       - text-white
   quote:
     name: Quote
@@ -156,6 +156,7 @@ envs:
       - text-white
   remark:
     name: Remark
+    icon: fa-solid fa-circle-exclamation
     classes:
       - bg-danger
       - text-white
