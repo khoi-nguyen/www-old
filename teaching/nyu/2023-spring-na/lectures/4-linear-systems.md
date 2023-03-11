@@ -1,5 +1,5 @@
 ---
-title: Solution of linear systems of equations
+title: Chapter 4: Solution of linear systems of equations
 output: revealjs
 notes: |
   - 22/02: LU decomposition, and forward/backward substitution
