@@ -1387,7 +1387,7 @@ attains its minimum value on $\{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ 
 
 # Steepest descend method: code [@vaes22, p. 104] {.split}
 
-::: {.algorithm .fragment title="Steepest descent"}
+::: {.algorithm title="Steepest descent"}
 \begin{align*}
 \vec x^{(k + 1)} \defeq
 \vec x^{(k)}
@@ -1399,14 +1399,19 @@ attains its minimum value on $\{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ 
 :::
 
 ~~~ {.julia .jupyter}
-using LinearAlgebra
 function steepest_descent(A, x, b, ϵ)
     r(x) = A * x - b
-    while norm(r(x)) ≥ ϵ * norm(b)
-        x = x - (r(x)' r(x)) / (r(x)' * A * r(x)) * r(x)
+    while r(x)'r(x) ≥ ϵ * b'b
+        ω = r(x)'r(x) / (r(x)'A*r(x))
+        x = x - ω * r(x)
     end
     return x
 end
+
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+steepest_descent(A, [0, 0], b, 10^-3)
 ~~~
 
 # Steepest descent: convergence [@vaes22, p. 103] {.split}
@@ -1425,24 +1430,110 @@ For the proof, see [@vaes22, p. 104].
 # Conjugate gradients [@vaes22, p. 108] {.split}
 
 To avoid multiple movements in the same direction,
-observe that if the directions $\{\vec d_i : i = 1, \dots, n\}$ are $\mat A$-orthogonal,
+observe that if the directions $\{\vec d_i : i = 1, \dots, n\}$ are $\mat A$-orthogonal (or **conjugate**),
 \begin{align*}
 \vec x_\star
 = \vec x^{(0)}
 + \sum_{i = 0}^{n - 1}
-\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}_{\mat A}} \vec d_i
+\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i
 \end{align*}
 
 ::: proposition
 The iteration
 \begin{align*}
 \vec x^{(k + 1)} \defeq \vec x^{(k)} +
-\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}_{\mat A}} \vec d_k
+\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k
 \end{align*}
 converges to $x_\star$ in $n$ steps (in exact arithmetic).
 :::
 
 ::: {.idea .fragment}
+Simultaneously create an $\mat A$-orthogonal sequence $\vec d_k$.
+:::
+
+# Steepest descent: spiralling {.row}
+
+::::: {.col}
+
+~~~ {.julia .plot width=100%}
+using LinearAlgebra
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
+N = 7
+data = zeros(N, 2)
+data[1, :] = [3, 0]
+for i in 2:N
+  x = data[i - 1, :]
+  omega = norm(A * x - b)^2 / (transpose(A * x - b) * A * (A * x - b))
+  data[i, :] = x - omega * (A * x - b)
+end
+contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
+plot!(data[:, 1], data[:, 2], label="")
+scatter!(data[:, 1], data[:, 2], label="Steepest descent")
+scatter!([2], [3], label="Solution")
+title!("Steepest descent")
+~~~
+
+:::::
+
+::::: {.col}
+
+~~~ {.julia .plot width=100%}
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+f(x, y) = 1/2 * [x, y]'*A*[x, y] - b'*[x, y]
+N = 3
+data = zeros(N, 2)
+x = [3, 0]
+data[1, :] = x
+r(x) = A * x - b
+d = r(x)
+for i in 2:N
+  x = x - d'*(r(x)) / (d'A*d) * d
+  data[i, :] = x
+  d = r(x) - d'*A*r(x) / (d'A*d) * d
+end
+contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
+plot!(data[:, 1], data[:, 2], label="")
+scatter!(data[:, 1], data[:, 2], label="Conjugate gradients")
+scatter!([2], [3], label="Solution")
+title!("Conjugate gradients")
+~~~
+
+:::::
+
+# Conjugate gradients [@vaes22, p. 108] {.split}
+
+::: {.algorithm title="Conjugate gradients (provisional)"}
+\begin{align*}
+\vec x^{(k + 1)}
+&\defeq \vec x^{(k)} +
+\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k\\
+\vec d^{(k)}
+&\defeq \vec r^{(k)} - \sum_{i = 0}^{k - 1}
+\frac {\ip{\vec r^{(k)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i\\
+\end{align*}
+:::
+
+::: proposition
+\begin{align}
+\ip{\vec r^{(k)}, \vec d_i}_{\mat A} = 0,
+\qquad i = 0, \dots, k - 2.
+\end{align}
+:::
+
+::: {.algorithm .fragment title="Conjugate gradients"}
+\begin{align*}
+\vec x^{(k + 1)}
+&\defeq \vec x^{(k)} +
+\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k\\
+\vec d^{(k)}
+&\defeq \vec r^{(k)} -
+\frac {\ip{\vec r^{(k)}, \vec d_{k - 1}}_{\mat A}} {\norm {\vec d_{k - 1}}^2_{\mat A}} \vec d_{k - 1}\\
+\end{align*}
 :::
 
 # Bibliography
