@@ -1347,6 +1347,16 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 \end{align*}
 :::
 
+~~~ {.tex .tikz}
+\draw (-3.5, 0) -- (3.5, 0);
+\fill (-2, 0) circle (0.05) node[below] {$\boldsymbol{x}^{(k)}$};
+\fill (2, 2) circle (0.05) node[above] {$\boldsymbol{x}_\star$};
+\fill (2, 0) circle (0.05) node[below] {$\boldsymbol{x}^{(k + 1)}$};
+\node at ( 3.75, 0) {$\boldsymbol d$};
+\draw[blue,very thick,->] (-2, 0) -- node[midway,above,sloped] {$\boldsymbol x_\star - \boldsymbol x$} (2, 2);
+\draw[red,very thick,->] (-2, 0) -- node[midway,below] {$\frac {\langle\boldsymbol x_\star - \boldsymbol x, \boldsymbol d \rangle_{\boldsymbol A}} {\|\boldsymbol d\|^2_{\boldsymbol A}} \boldsymbol d$} (2, 0);
+~~~
+
 # Back to the steepest descent {.split}
 
 \begin{align*}
