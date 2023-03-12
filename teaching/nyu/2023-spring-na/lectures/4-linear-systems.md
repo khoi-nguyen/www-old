@@ -1441,6 +1441,21 @@ For the proof, see [@vaes22, p. 104].
 - How does it compare to *Richardson's method*?
 :::
 
+# Steepest descent: exercise [@vaes22, p. 115] {.row}
+
+::::: {.col}
+![](/static/images/1678653892.png){width=100%}
+:::::
+
+::::: {.col}
+~~~ {.julia .jupyter}
+using Plots
+A = [3 1; 1 3]
+b = [1, 1]
+f(x, y) = 1/2 * [x, y]'*A*[x, y] - b'*[x, y]
+~~~
+:::::
+
 # Issue with steepest descent {.row}
 
 ::::: {.col}
