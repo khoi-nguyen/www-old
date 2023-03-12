@@ -62,6 +62,7 @@ static/numerical_analysis: .venv/bin/activate
 %.pdf: %.tex
 	@echo "Building $@"
 	-latexmk -lualatex -cd -f -quiet $<
+	-latexmk -lualatex -cd -f -quiet $<
 	@test -f $@ && touch $@ || exit 1
 
 clean:
