@@ -1564,11 +1564,11 @@ We apply Gram-Schmidt to the gradients $\vec r^{(k)} = \mat A \vec x^{(k)} - \ve
 function conjugate_gradients(A, x, b, ϵ)
     r(x) = A * x - b
     let d = r(x)
-      while r(x)'r(x) ≥ ϵ * b'b
-          ω = d'r(x) / (d'A*d)
-          x = x - ω * d
-          d = r(x) - d'A*r(x) / (d'A*d) * d
-      end
+        while r(x)'r(x) ≥ ϵ * b'b
+            ω = d'r(x) / (d'A*d)
+            x = x - ω * d
+            d = r(x) - d'A*r(x) / (d'A*d) * d
+        end
     end
     return x
 end
