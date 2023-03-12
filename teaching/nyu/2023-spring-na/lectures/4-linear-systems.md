@@ -1205,7 +1205,7 @@ A = [2.0 1.0; 1.0 2.0]
 sol = [2.0; 3.0]
 b = A * sol
 f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
-contour(-1:0.01:5, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true)
+contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
 ~~~
 :::::
 
