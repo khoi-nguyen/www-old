@@ -1427,10 +1427,10 @@ What's changed compared to *Richardson's method*?
 
 ::: theorem
 \begin{align*}
-\norm {\mat A \vec x^{(k)} - \vec b}_{\mat A}
+\norm {\vec x^{(k)} - \vec x_\star}_{\mat A}
 \leq
 \left(\frac {\kappa(\mat A) - 1} {\kappa(\mat A) + 1}\right)^k
-\norm {\mat A \vec x^{(0)} - \vec b}_{\mat A}
+\norm {\vec x^{(0)} - \vec x_\star}_{\mat A}
 \end{align*}
 :::
 
