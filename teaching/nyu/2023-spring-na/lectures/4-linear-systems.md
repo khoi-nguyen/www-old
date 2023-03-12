@@ -1209,7 +1209,7 @@ contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspec
 ~~~
 :::::
 
-::::: {.col}
+::::: {.col .fragment}
 - Gradient is **perpendicular** to the contour lines
 - Its magnitude is larger when the lines are close together
 
@@ -1287,17 +1287,17 @@ How could you improve Richardson's method?
 ::::: {.col}
 
 ~~~ {.julia .plot width=100%}
-using LinearAlgebra
 A = [2.0 1.0; 1.0 2.0]
 sol = [2.0; 3.0]
 b = A * sol
 f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
+r(x) = A * x - b
 N = 7
 data = zeros(N, 2)
 for i in 2:N
   x = data[i - 1, :]
-  omega = norm(A * x - b)^2 / (transpose(A * x - b) * A * (A * x - b))
-  data[i, :] = x - omega * (A * x - b)
+  omega = r(x)'r(x) / (r(x)'A*r(x))
+  data[i, :] = x - omega * r(x)
 end
 contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
 plot!(data[:, 1], data[:, 2], label="")
@@ -1335,15 +1335,19 @@ we define
 \defeq \vec x^T \mat M \vec y
 \end{align*}
 
-Note that $\ip{\placeholder, \placeholder} = \ip{\placeholder, \placeholder}_{\mat I}$.
+Note that $\ip{\placeholder, \placeholder} = \ip{\placeholder, \placeholder}_{\mat I}$
+and $\ip{\vec x, \vec y}_{\mat M} = \ip{\mat M \vec x, \vec y} = \ip{\vec x, \mat M \vec y}$.
 
 ::: {.proposition title="Orthogonal projection"}
-The vector on $\{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ which is closest to $\vec x_\star$
+The vector on $L \defeq \{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ which is closest to $\vec x_\star$
 in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 \begin{align*}
-\vec x^{(k + 1)} \defeq \vec x^{(k)} +
+\vec x^{(k + 1)} \defeq
+\underbrace{
+\vec x^{(k)} +
 \frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d}_{\mat M}} {\norm {\vec d}^2_{\mat M}}
 \vec d.
+}_{\text{minimizes}\ \norm{\placeholder - \vec x_\star}_{\mat M} \text{ on } L}
 \end{align*}
 :::
 
@@ -1357,32 +1361,34 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 \draw[red,very thick,->] (-2, 0) -- node[midway,below] {$\frac {\langle\boldsymbol x_\star - \boldsymbol x, \boldsymbol d \rangle_{\boldsymbol A}} {\|\boldsymbol d\|^2_{\boldsymbol A}} \boldsymbol d$} (2, 0);
 ~~~
 
-# Back to the steepest descent {.split}
+# Choice of $\mat M$ and $\vec d$ {.split}
 
 \begin{align*}
+\underbrace{
 \vec x^{(k + 1)} \defeq \vec x^{(k)} +
 \frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d}_{\mat M}} {\norm {\vec d}^2_{\mat M}}
 \vec d.
+}_{\text{minimizes}\ \norm{\placeholder - \vec x_\star}_{\mat M} \text{ on } \{x^{(k)} + \omega \vec d: \omega \in \R\}}
 \end{align*}
 
-::: proposition
-The function $f(\vec x) \defeq \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x$
-attains its minimum value on $\{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ at
+::: {.info title="Choice of matrix and direction"}
+- $\mat A \vec x_\star = \vec b$, so we need not know $\vec x_\star$
 \begin{align*}
-\vec x^{(k + 1)} \defeq
-\vec x^{(k)} +
+\vec x^{(k + 1)} \defeq \vec x^{(k)} +
 \frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d}} {\norm {\vec d}^2_{\mat A}}
 \vec d.
 \end{align*}
-:::
-
-::: {.algorithm .fragment title="Steepest descent"}
-\begin{align*}
-\vec x^{(k + 1)} \defeq
-\vec x^{(k)}
-- \underbrace{\frac {\norm {\mat A \vec x^{(k)} - \vec b}^2} {\norm {\mat A \vec x^{(k)} - \vec b}^2_{\mat A}}}_\omega
-(\mat A \vec x^{(k)} - \vec b)
-\end{align*}
+- Moreover we have
+\begin{align}
+\frac 1 2 \left(\norm{\vec x - \vec x_\star}^2_{\mat A} - \norm {\vec x_\star}^2_{\mat A}\right)
+= \underbrace{
+\frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x
+}_{\text{Richardson's}\ f(\vec x)}
+\end{align}
+- Like before, we choose the direction where $f$ locally decreases the most
+\begin{align}
+\vec d = \nabla f(\vec x^{(k)}) = \mat A \vec x^{(k)} - \vec b
+\end{align}
 :::
 
 # Steepest descend method: code [@vaes22, p. 104] {.split}
@@ -1427,31 +1433,7 @@ steepest_descent(A, [0, 0], b, 10^-3)
 
 For the proof, see [@vaes22, p. 104].
 
-# Conjugate gradients [@vaes22, p. 108] {.split}
-
-To avoid multiple movements in the same direction,
-observe that if the directions $\{\vec d_i : i = 1, \dots, n\}$ are $\mat A$-orthogonal (or **conjugate**),
-\begin{align*}
-\vec x_\star
-= \vec x^{(0)}
-+ \sum_{i = 0}^{n - 1}
-\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i
-\end{align*}
-
-::: proposition
-The iteration
-\begin{align*}
-\vec x^{(k + 1)} \defeq \vec x^{(k)} +
-\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k
-\end{align*}
-converges to $x_\star$ in $n$ steps (in exact arithmetic).
-:::
-
-::: {.idea .fragment}
-Simultaneously create an $\mat A$-orthogonal sequence $\vec d_k$.
-:::
-
-# Steepest descent: spiralling {.row}
+# Issue with steepest descent {.row}
 
 ::::: {.col}
 
@@ -1478,7 +1460,7 @@ title!("Steepest descent")
 
 :::::
 
-::::: {.col}
+::::: {.col .fragment}
 
 ~~~ {.julia .plot width=100%}
 A = [2.0 1.0; 1.0 2.0]
@@ -1509,16 +1491,42 @@ title!("Conjugate gradients")
 
 # Conjugate gradients [@vaes22, p. 108] {.split}
 
-::: {.algorithm title="Conjugate gradients (provisional)"}
+To avoid multiple movements in the same direction,
+observe that if the directions $\{\vec d_i : i = 0, \dots, n - 1\}$ are $\mat A$-orthogonal (or **conjugate**),
 \begin{align*}
-\vec x^{(k + 1)}
-&\defeq \vec x^{(k)} +
-\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k\\
-\vec d^{(k)}
-&\defeq \vec r^{(k)} - \sum_{i = 0}^{k - 1}
-\frac {\ip{\vec r^{(k)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i\\
+\vec x_\star
+= \vec x^{(0)}
++ \sum_{i = 0}^{n - 1}
+\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i
 \end{align*}
+
+::: proposition
+The iteration
+\begin{align*}
+\vec x^{(k + 1)} \defeq \vec x^{(k)} +
+\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k
+\end{align*}
+converges to $x_\star$ in $n$ steps (in exact arithmetic).
 :::
+
+::: {.idea .fragment}
+Simultaneously create an $\mat A$-orthogonal sequence $\vec d_k$.
+:::
+
+# Conjugate gradients [@vaes22, p. 108] {.split}
+
+We apply Gram-Schmidt to the gradients $\vec r^{(k)} = \mat A \vec x^{(k)} - \vec b$
+(hence the name *conjugate gradients*).
+\begin{align*}
+\begin{cases}
+\vec x^{(k + 1)}
+\defeq \vec x^{(k)} -
+\frac {\ip{\vec r^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k\\
+\vec d^{(k)}
+\defeq \vec r^{(k)} - \sum_{i = 0}^{k - 1}
+\frac {\ip{\vec r^{(k)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i\\
+\end{cases}
+\end{align*}
 
 ::: proposition
 \begin{align}
@@ -1537,5 +1545,26 @@ title!("Conjugate gradients")
 \frac {\ip{\vec r^{(k)}, \vec d_{k - 1}}_{\mat A}} {\norm {\vec d_{k - 1}}^2_{\mat A}} \vec d_{k - 1}\\
 \end{align*}
 :::
+
+# Conjugate gradients: code [@vaes22, p. 110] {.split}
+
+~~~ {.julia .jupyter}
+function conjugate_gradients(A, x, b, ϵ)
+    r(x) = A * x - b
+    let d = r(x)
+      while r(x)'r(x) ≥ ϵ * b'b
+          ω = d'r(x) / (d'A*d)
+          x = x - ω * d
+          d = r(x) - d'A*r(x) / (d'A*d) * d
+      end
+    end
+    return x
+end
+
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+conjugate_gradients(A, [0, 0], b, 10^-3)
+~~~
 
 # Bibliography
