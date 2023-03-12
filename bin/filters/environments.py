@@ -18,6 +18,9 @@ def environments(element: pf.Element, doc: pf.Doc):
     name = list(set(envs.keys()) & set(element.classes))
     if name:
         env = envs[name[0]]
+        name_key = "name_" + getattr(doc, "get_metadata")("lang", "en")
+        if name_key in env:
+            env["name"] = env[name_key]
         env.update(element.attributes)
         header = environment.from_string(
             """

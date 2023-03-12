@@ -65,6 +65,7 @@ whiteboard:
 envs:
   algorithm:
     name: Algorithm
+    name_fr: Algorithme
     icon: fa-solid fa-code
     classes:
       - bg-success
@@ -79,12 +80,14 @@ envs:
       - text-white
   check:
     name: Check your understanding
+    name_fr: Vérifie ta compréhension
     icon: fa-solid fa-list-check
     classes:
       - bg-success
       - text-white
   corollary:
     name: Corollary
+    name_fr: Corollaire
     icon: fa-solid fa-book
     classes:
       - bg-primary
@@ -95,24 +98,28 @@ envs:
       - text-white
   definition:
     name: Definition
+    name_fr: Définition
     icon: fa-solid fa-book
     classes:
       - bg-primary
       - text-white
   example:
     name: Example
+    name_fr: Exemple
     icon: fa-solid fa-pen-to-square
     classes:
       - bg-success
       - text-white
   exercise:
     name: Exercise
+    name_fr: Exercice
     icon: fa-solid fa-pencil
     classes:
       - bg-success
       - text-white
   idea:
     name: Idea
+    name_fr: Idée
     icon: fa-solid fa-lightbulb
     classes:
       - bg-orange
@@ -137,6 +144,7 @@ envs:
       - text-white
   problem:
     name: Problem
+    name_fr: Problème
     icon: fa-solid fa-circle-question
     classes:
       - bg-success
@@ -156,18 +164,21 @@ envs:
       - text-white
   remark:
     name: Remark
+    name_fr: Remarque
     icon: fa-solid fa-circle-exclamation
     classes:
       - bg-danger
       - text-white
   task:
     name: Task
+    name_fr: Tâche
     icon: fa-solid fa-laptop
     classes:
       - bg-success
       - text-white
   theorem:
     name: Theorem
+    name_fr: Théorème
     icon: fa-solid fa-book
     classes:
       - bg-primary
