@@ -1485,22 +1485,24 @@ A = [2.0 1.0; 1.0 2.0]
 sol = [2.0; 3.0]
 b = A * sol
 f(x, y) = 1/2 * [x, y]'*A*[x, y] - b'*[x, y]
+r(x) = A * x - b
 N = 3
 data = zeros(N, 2)
-x = [3, 0]
-data[1, :] = x
-r(x) = A * x - b
-d = r(x)
-for i in 2:N
-  x = x - d'*(r(x)) / (d'A*d) * d
-  data[i, :] = x
-  d = r(x) - d'*A*r(x) / (d'A*d) * d
+let x = [3, 0]
+    data[1, :] = x
+    d = r(x)
+    for i in 2:N
+        x = x - (d'r(x) / (d'A*d)) * d
+        data[i, :] = x
+        d = r(x) - (d'A*r(x) / (d'A*d)) * d
+    end
 end
 contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
 plot!(data[:, 1], data[:, 2], label="")
 scatter!(data[:, 1], data[:, 2], label="Conjugate gradients")
 scatter!([2], [3], label="Solution")
 title!("Conjugate gradients")
+
 ~~~
 
 :::::
