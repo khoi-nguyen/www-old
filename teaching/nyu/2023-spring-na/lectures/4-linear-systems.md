@@ -917,7 +917,6 @@ a_{11} & 0 & 0 & \dots & 0\\
   Congratulations on your work so far, everyone has A/A-.
 - We'll go through question $3$ today.
 - Today is **International Women's day**.
-- French sentence of the day: les cuisines sont fermées aujourd'hui
 :::
 
 # Convergence for diagonally dominant matrices [@vaes22, p. 96] {.split}
