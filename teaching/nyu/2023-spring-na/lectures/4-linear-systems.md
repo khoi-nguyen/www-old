@@ -1453,6 +1453,7 @@ using Plots
 A = [3 1; 1 3]
 b = [1, 1]
 f(x, y) = 1/2 * [x, y]'*A*[x, y] - b'*[x, y]
+# contour(x_range, y_range, function)
 ~~~
 :::::
 
