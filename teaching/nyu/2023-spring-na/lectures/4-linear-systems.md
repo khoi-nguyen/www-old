@@ -1583,4 +1583,31 @@ conjugate_gradients(A, [0, 0], b, 10^-3)
 What's changed in the code compared to the **steepest descent**?
 :::
 
+# Conjugate gradients: convergence [@vaes22, p. 111] {.split}
+
+::: {.info title="Convergence for the steepest descent"}
+\begin{align*}
+\norm {\vec x^{(k)} - \vec x_\star}_{\mat A}
+\leq
+\left(\frac {\kappa(\mat A) - 1} {\kappa(\mat A) + 1}\right)^k
+\norm {\vec x^{(0)} - \vec x_\star}_{\mat A}
+\end{align*}
+:::
+
+::: theorem
+\begin{align*}
+\norm {\vec x^{(k)} - \vec x_\star}_{\mat A}
+\leq
+2
+\left(\frac {\sqrt{\kappa(\mat A)} - 1} {\sqrt{\kappa(\mat A)} + 1}\right)^{k + 1}
+\norm {\vec x^{(0)} - \vec x_\star}_{\mat A}
+\end{align*}
+:::
+
+For the proof, see [@vaes22, pp. 110-112].
+
+::: check
+- Which is better?
+:::
+
 # Bibliography
