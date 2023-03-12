@@ -1390,7 +1390,7 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 \end{align}
 :::
 
-# Steepest descend method: code [@vaes22, p. 104] {.split}
+# Steepest descent method: code [@vaes22, p. 104] {.split}
 
 ::: {.algorithm title="Steepest descent"}
 \begin{align*}
@@ -1419,6 +1419,10 @@ b = A * sol
 steepest_descent(A, [0, 0], b, 10^-3)
 ~~~
 
+::: check
+What's changed compared to *Richardson's method*?
+:::
+
 # Steepest descent: convergence [@vaes22, p. 103] {.split}
 
 ::: theorem
@@ -1431,6 +1435,11 @@ steepest_descent(A, [0, 0], b, 10^-3)
 :::
 
 For the proof, see [@vaes22, p. 104].
+
+::: check
+- When is convergence *slow*? When is convergence *fast*?
+- How does it compare to *Richardson's method*?
+:::
 
 # Issue with steepest descent {.row}
 
@@ -1456,6 +1465,10 @@ scatter!(data[:, 1], data[:, 2], label="Steepest descent")
 scatter!([2], [3], label="Solution")
 title!("Steepest descent")
 ~~~
+
+::: question
+- What do you notice about the direction of the different steps?
+:::
 
 :::::
 
@@ -1565,5 +1578,9 @@ sol = [2.0; 3.0]
 b = A * sol
 conjugate_gradients(A, [0, 0], b, 10^-3)
 ~~~
+
+::: check
+What's changed in the code compared to the **steepest descent**?
+:::
 
 # Bibliography
