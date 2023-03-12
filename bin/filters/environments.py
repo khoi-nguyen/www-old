@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
+import jinja2
 import panflute as pf
 
 proofcount: int = 0
+environment = jinja2.Environment()
 
 
 def environments(element: pf.Element, doc: pf.Doc):
@@ -16,21 +18,24 @@ def environments(element: pf.Element, doc: pf.Doc):
     name = list(set(envs.keys()) & set(element.classes))
     if name:
         env = envs[name[0]]
-        icon = ""
-        if "icon" in env:
-            icon = env["icon"]
-        if "icon" in element.attributes:
-            icon = element.attributes["icon"]
-        icon = f"""<i class="{icon}"></i>""" if "icon" in env else ""
-        header = f"""
-        <h5 class="card-header {' '.join(env["classes"])}">
-          {icon}
-          <strong>{env.get("name", "")}</strong>
-          {'(' if "title" in element.attributes and env.get("name") else ""}
-          {element.attributes.get("title", "")}
-          {')' if "title" in element.attributes and env.get("name") else ""}
+        env.update(element.attributes)
+        header = environment.from_string(
+            """
+        <h5 class="card-header {{' '.join(env['classes'])}}">
+          {% if env['icon'] %}
+            <i class="{{env['icon']}}"></i>
+          {% endif %}
+          {% if env['name'] %}
+            <strong>{{env['name']}}</strong>
+            {% if env['title'] %}
+            ({{env['title']}})
+            {% endif %}
+          {% else %}
+            <strong>{{env['title']}}</strong>
+          {% endif %}
         </h5>
       """
+        ).render(env=env)
         header = pf.RawBlock(header, format="html")
         element.classes.append("card-body")
         container_classes = ["card"]
