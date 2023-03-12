@@ -1168,27 +1168,27 @@ Relaxation             $\mat L + \frac {\mat D} \omega$     Generalizes G-S for 
 
 # Back to Richardson's method {.split}
 
-From now on, $\mat A$ is **symmetric** and **positive definite**,
-and let
-\begin{align*}
-f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x
-\quad \text{so that} \quad
-\nabla f(\vec x) = \mat A \vec x - \vec b.
-\end{align*}
-
-::: remark
-\begin{align*}
-\mat A \vec x_\star = \vec b
-\iff \vec x_\star \text{ minimizes } f
-\end{align*}
-:::
-
 ::: {.algorithm title="Richardson's iteration"}
 \begin{align*}
 \vec x^{(k + 1)}
-= \vec x^{(k)} - \omega \nabla f (\vec x^{(k)}),
-\quad \omega = \frac 2 {\lambda_{\max} + \lambda_{\min}}
+= \vec x^{(k)} - \omega (\mat A \vec x^{(k)} - \vec b),
 \end{align*}
+\begin{align*}
+\omega = \frac 2 {\lambda_{\max} + \lambda_{\min}}
+\implies
+\rho = \frac {\kappa(\mat A) - 1} {\kappa(\mat A) + 1}
+\end{align*}
+:::
+
+::: {.info title="Interpretation of Richardson's method"}
+If $\mat A$ is **symmetric** and **positive definite**,
+\begin{align*}
+\mat A \vec x_\star = \vec b
+\iff \vec x_\star \text{ minimizes }
+f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x,
+\end{align*}
+and the iteration goes in the direction of **steepest descent**
+since $\nabla f(\vec x) = \mat A \vec x - \vec b.$
 :::
 
 ::: question
