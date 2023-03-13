@@ -148,4 +148,9 @@ secondes = n / 1000
 
 # Dénombrer 3 {.split}
 
-![](/static/images/1678430295.png)
+![](/static/images/1678430295.png){width=100%}
+
+# Exercices supplémentaires {.split}
+
+![](/static/images/1678697050.png){width=100%}
+
