@@ -1325,6 +1325,14 @@ In other words, we choose $\omega$ [@vaes22, p. 102] by solving
 \end{align*}
 :::::
 
+# Steepest descent: animation
+
+~~~ {.yaml .widget name="geogebra"}
+url: https://www.geogebra.org/m/TYBdQDeB
+height: 900
+width: 1400
+~~~
+
 # Scalar product associated with SPD matrices {.split}
 
 Given a symmetric positive definite matrix $\mat M$,
