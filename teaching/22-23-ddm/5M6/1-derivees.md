@@ -358,7 +358,7 @@ Comment calcule-t-elle $\sin x$?
 
 ::: idea
 \begin{align}
-\sin x \approx \underbrace{a + b x + c x^2}_{f(x)}
+\sin x \approx \underbrace{a + b x + c x^2 + d x^3}_{f(x)}
 \end{align}
 
 On essayera d'avoir: $f(0) = \sin 0$, $f'(0) = \sin'(0)$, etc.
