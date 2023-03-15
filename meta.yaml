@@ -162,6 +162,13 @@ envs:
     classes:
       - bg-success
       - text-white
+  recall:
+    name: Recall
+    name_fr: Rappel
+    icon: fa-solid fa-clock-rotate-left
+    classes:
+      - bg-orange
+      - text-white
   remark:
     name: Remark
     name_fr: Remarque
