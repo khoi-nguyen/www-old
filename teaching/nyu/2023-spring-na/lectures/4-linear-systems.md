@@ -1523,6 +1523,10 @@ title!("Conjugate gradients")
 
 ~~~
 
+::: check
+What's changed? What's the same?
+:::
+
 :::::
 
 # Conjugate gradients [@vaes22, p. 108] {.split}
@@ -1589,7 +1593,9 @@ We apply Gram-Schmidt to the gradients $\vec r^{(k)} = \mat A \vec x^{(k)} - \ve
 \end{align*}
 :::
 
-# Conjugate gradients: code [@vaes22, p. 110] {.split}
+# Conjugate gradients: code [@vaes22, p. 110]
+
+::::: {.col}
 
 ~~~ {.julia .jupyter}
 function conjugate_gradients(A, x, b, ϵ)
@@ -1610,9 +1616,29 @@ b = A * sol
 conjugate_gradients(A, [0, 0], b, 10^-3)
 ~~~
 
-::: check
-What's changed in the code compared to the **steepest descent**?
+:::::
+
+::::: {.col}
+
+::: {.recall title="Steepest Descent (code)"}
+~~~ julia
+function steepest_descent(A, x, b, ϵ)
+    r(x) = A * x - b
+    while r(x)'r(x) ≥ ϵ * b'b
+        ω = r(x)'r(x) / (r(x)'A*r(x))
+        x = x - ω * r(x)
+    end
+    return x
+end
+~~~
 :::
+
+::: check
+- What's changed in the code compared to the **steepest descent**?
+- What's the same?
+:::
+
+:::::
 
 # Conjugate gradients: convergence [@vaes22, p. 111] {.split}
 
