@@ -53,7 +53,7 @@ def slides(element: pf.Element, doc: pf.Doc) -> None | list[pf.Element]:
     classes: list[str] = ["slide-contents"]
     if "row" in element.classes:
         element.classes.remove("row")
-    classes.append("row")
+        classes.append("row")
 
     # Open a new div
     post = pf.RawBlock(f"""<div class="{' '.join(classes)}">""", format="html")
