@@ -1593,7 +1593,7 @@ We apply Gram-Schmidt to the gradients $\vec r^{(k)} = \mat A \vec x^{(k)} - \ve
 \end{align*}
 :::
 
-# Conjugate gradients: code [@vaes22, p. 110]
+# Conjugate gradients: code [@vaes22, p. 110] {.row}
 
 ::::: {.col}
 
