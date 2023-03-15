@@ -1545,8 +1545,15 @@ The iteration
 converges to $x_\star$ in $n$ steps (in exact arithmetic).
 :::
 
+::: remark
+If $\vec d_0 \defeq \mat A \vec x^{(0)} - \vec b$,
+then the iteration gives the **same first step**
+as the steepest descent.
+:::
+
 ::: {.idea .fragment}
-Simultaneously create an $\mat A$-orthogonal sequence $\vec d_k$.
+Simultaneously create an $\mat A$-orthogonal sequence $\vec d_k$
+from the gradients at $x^{(k)}$.
 :::
 
 # Conjugate gradients [@vaes22, p. 108] {.split}
@@ -1618,7 +1625,7 @@ What's changed in the code compared to the **steepest descent**?
 \end{align*}
 :::
 
-::: theorem
+::: {.theorem title="Convergence of the conjugate gradients algorithm"}
 \begin{align*}
 \norm {\vec x^{(k)} - \vec x_\star}_{\mat A}
 \leq
@@ -1631,6 +1638,7 @@ What's changed in the code compared to the **steepest descent**?
 For the proof, see [@vaes22, pp. 110-112].
 
 ::: check
+- What's the smallest value for $\kappa(A)$?
 - Which is better?
 :::
 
