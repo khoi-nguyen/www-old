@@ -21,6 +21,9 @@ navbar:
   - text: NYU
     icon: fa-solid fa-building-columns
     href: /teaching/nyu/2023-spring-na/
+  - text: CEA
+    icon: fa-solid fa-building-columns
+    href: /teaching/cea/2023-summer-de/
   - dropdown: DDM
     icon: fa-solid fa-chalkboard-user
     links:
