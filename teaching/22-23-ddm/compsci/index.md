@@ -131,6 +131,18 @@ print("Cette instruction n'est pas répétée car non indentée")
 
 ::::: {.col}
 ::: exercise
+Afficher $1000$ termes de la suite $1, 3, 6, 10, 15, \dots$ (nombres triangulaires)
+:::
+
+::: exercise
+Afficher $1000$ termes de la *suite de Fibonnaci*
+\begin{align*}
+1, 1, 2, 3, 5, 8, \dots
+\end{align*}
+En déduire une approximation du *nombre d'or*.
+:::
+
+::: exercise
 Afficher les nombres de $1$ à $100$.
 
 - Si le nombre est divisible par $3$, écrire "fizz" à la place
