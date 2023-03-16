@@ -127,13 +127,23 @@ print("Cette instruction n'est pas répétée car non indentée")
 ~~~
 :::::
 
-# Fizzbuzz {.row}
+# Nombres triangulaires {.row}
 
 ::::: {.col}
 ::: exercise
 Afficher $1000$ termes de la suite $1, 3, 6, 10, 15, \dots$ (nombres triangulaires)
 :::
+:::::
 
+::::: {.col}
+~~~ {.python .jupyter}
+7 % 3
+~~~
+:::::
+
+# Fibonnaci {.row}
+
+::::: {.col}
 ::: exercise
 Afficher $1000$ termes de la *suite de Fibonnaci*
 \begin{align*}
@@ -141,7 +151,17 @@ Afficher $1000$ termes de la *suite de Fibonnaci*
 \end{align*}
 En déduire une approximation du *nombre d'or*.
 :::
+:::::
 
+::::: {.col}
+~~~ {.python .jupyter}
+7 % 3
+~~~
+:::::
+
+# Fizzbuzz {.row}
+
+::::: {.col}
 ::: exercise
 Afficher les nombres de $1$ à $100$.
 
