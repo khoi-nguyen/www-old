@@ -1161,7 +1161,7 @@ Relaxation             $\mat L + \frac {\mat D} \omega$     Generalizes G-S for 
 
 - Last week on Chapter $4$
 - Homework: Exercise 4.25 due
-- *French sentence of the day*: L'enseignant d'analyse numérique fait du bon travail.
+- *French sentence of the day*: L'instructeur fait du bon travail.
 - Today: Steepest descent method, conjugate gradients
 
 :::::
@@ -1325,6 +1325,20 @@ In other words, we choose $\omega$ [@vaes22, p. 102] by solving
 \end{align*}
 :::::
 
+# Exercise (recitation) {.split}
+
+::: exercise
+Find $\omega \in \R$ such that
+\begin{align*}
+\frac {\dd} {\dd \omega} f(\vec x^{(k)} - \omega \nabla f(\vec x^{(k)})) = 0.
+\end{align*}
+
+Deduce that if $\vec x^{(k + 1)} = \vec x^{(k)} - \omega \nabla f(\vec x^{(k)})$, then
+\begin{align*}
+\ip {\nabla f(\vec x^{(k + 1)}), \nabla f(\vec x^{(k)})} = 0.
+\end{align*}
+:::
+
 # Steepest descent: animation
 
 ~~~ {.yaml .widget name="geogebra"}
@@ -1364,8 +1378,8 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 \fill (2, 2) circle (0.05) node[above] {$\boldsymbol{x}_\star$};
 \fill (2, 0) circle (0.05) node[below] {$\boldsymbol{x}^{(k + 1)}$};
 \node at ( 3.75, 0) {$\boldsymbol d$};
-\draw[blue,very thick,->] (-2, 0) -- node[midway,above,sloped] {$\boldsymbol x_\star - \boldsymbol x$} (2, 2);
-\draw[red,very thick,->] (-2, 0) -- node[midway,below] {$\frac {\langle\boldsymbol x_\star - \boldsymbol x, \boldsymbol d \rangle_{\boldsymbol A}} {\|\boldsymbol d\|^2_{\boldsymbol A}} \boldsymbol d$} (2, 0);
+\draw[blue,very thick,->] (-2, 0) -- node[midway,above,sloped] {$\boldsymbol x_\star - \boldsymbol x^{(k)}$} (2, 2);
+\draw[red,very thick,->] (-2, 0) -- node[midway,below] {$\frac {\langle\boldsymbol x_\star - \boldsymbol x^{(k)}, \boldsymbol d \rangle_{\boldsymbol A}} {\|\boldsymbol d\|^2_{\boldsymbol A}} \boldsymbol d$} (2, 0);
 ~~~
 
 # Choice of $\mat M$ and $\vec d$ {.split}
@@ -1462,6 +1476,7 @@ A = [3 1; 1 3]
 b = [1, 1]
 f(x, y) = 1/2 * [x, y]'*A*[x, y] - b'*[x, y]
 # contour(x_range, y_range, function)
+contour(-3:0.01:3, -3:0.01:3, f, color=:turbo, fill=true)
 ~~~
 :::::
 
