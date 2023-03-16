@@ -141,11 +141,11 @@ Afficher $1000$ termes de la suite $1, 3, 6, 10, 15, \dots$ (nombres triangulair
 ~~~
 :::::
 
-# Fibonnaci {.row}
+# Fibonacci {.row}
 
 ::::: {.col}
 ::: exercise
-Afficher $1000$ termes de la *suite de Fibonnaci*
+Afficher $1000$ termes de la *suite de Fibonacci*
 \begin{align*}
 1, 1, 2, 3, 5, 8, \dots
 \end{align*}
