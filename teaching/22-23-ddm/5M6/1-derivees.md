@@ -441,20 +441,55 @@ f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
 \end{align}
 :::
 
-# Exemples
+# Exemples {.split}
+
+\begin{align*}
+\boxed{
+(f g)'(x) = f'(x) g(x) + f(x) g'(x).
+}
+\end{align*}
+
+::: exercise
+Calculer les dérivées des expressions suivantes:
+
+- $\sin x \cos x$
+- $(x^2 + 3x + 1) \sin x$
+- $\sin^2 x$
+- $\frac {\sin x} x$
+:::
 
 # Comportement avec la composition {.split}
 
 ::: proposition
-\begin{align}
+\begin{align*}
 (f \circ g)'(a) = f'(g(a)) g'(a)
-\end{align}
+\end{align*}
 :::
 
 ::: {.info title="Rappel"}
-\begin{align}
-f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
-\end{align}
+\begin{align*}
+f'(a) &\defeq \lim_{x \to a} \frac {f(x) - f(a)} {x - a}\\
+(f \circ g)(x) &\defeq f(g(x))
+\end{align*}
+:::
+
+# Exemples: règle de composition {.split}
+
+\begin{align*}
+(f \circ g)'(x) = f'(g(x)) g'(x)
+\end{align*}
+
+::: example
+Calculer les dérivées des expressions suivantes:
+
+- $(2 x + 1)^3$
+- $\sqrt {\sin x}$
+- $\sin(x^2)$
+- $\frac 1 {\cos x}$
+- $\sqrt {1 - x^2}$
+:::
+
+::: exercice
 :::
 
 # Comportement avec le quotient {.split}
@@ -467,6 +502,7 @@ f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
 
 ::: {.info title="Rappel"}
 \begin{align}
-f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}
+(fg)'(x) &= f'(x) g(x) + f(x) g'(x)\\
+(f \circ g)'(x) &= f'(g(x)) g'(x)
 \end{align}
 :::
