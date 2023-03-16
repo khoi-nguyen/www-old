@@ -38,6 +38,7 @@ CONFIG: dict[str, PlotEnv] = {
             ENV["GKSwstype"] = "nul"
             using Plots
             using LaTeXStrings
+            using LinearAlgebra
             default(titlefont = ("computer modern"),
               legendfont = ("computer modern"),
               linewidth = 2)
