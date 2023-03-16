@@ -92,6 +92,8 @@ def forward_socket(url, json):
 @flask_login.login_required
 def save_board(url: str = "") -> werkzeug.Response:
     boards: BoardList = flask.request.get_json() or []
+    if url.endswith("/"):
+        url += "index"
     with open(url + ".json", "w") as file:
         file.write(json.dumps(clean(boards), separators=(",", ":")))
     return flask.jsonify({"success": True})
