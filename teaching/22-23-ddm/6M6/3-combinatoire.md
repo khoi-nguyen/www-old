@@ -154,3 +154,75 @@ secondes = n / 1000
 
 ![](/static/images/1678697050.png){width=100%}
 
+# La factorielle de $0$ {.split}
+
+::: question
+Sans utiliser vos calculatrices,
+quelle serait la valeur de $0!$?
+:::
+
+# Propriétés des coefficients binomiaux {.split}
+
+::: proposition
+- $\binom n 0 = \binom n n = 1$
+- $\binom n 1 = \binom n {n - 1} = n$
+- $\binom n p = \binom n {n - p}$
+- $\binom {n + 1} {p + 1} = \binom n p + \binom n {p + 1}$
+:::
+
+::: remark
+La dernière propriété s'appelle la **propriété de Pascal**.
+:::
+
+# Le triangle de Pascal {.split}
+
+![](/static/images/1678960386.png)
+
+# La formule du binôme {.split}
+
+La formule du binôme consiste à donner une formule pour
+\begin{align*}
+(a + b)^n.
+\end{align*}
+Vous connaissez les cas $n = 2$ et $n = 3$.
+
+::: {.quote title="Sherlock Holmes à propos du Professeur Moriarti"}
+He is a man of good birth and excellent education,
+endowed by nature with a phenomenal mathematical faculty.
+At the age of twenty-one he wrote a treatise upon the **Binomial Theorem**,
+which has had a European vogue.
+On the strength of it he won the Mathematical Chair at one of our smaller universities,
+and had, to all appearances, a most brilliant career before him.
+:::
+
+::: remark
+Le résultat est souvent attribué à Newton de manière erronnée,
+par des gens dont le niveau de mathématiques et/ou d'anglais est très douteux.
+:::
+
+# Théorème du binôme {.split}
+
+\begin{align*}
+(a + b)^n = \underbrace{(a + b) (a + b) \dots (a + b)}_{n\ \text{fois}}
+\end{align*}
+
+::: {.theorem title="Théorème du binôme"}
+Si $n$ est un nombre naturel, alors
+\begin{align*}
+(a + b)^n = \sum_{k = 0}^n \binom n k a^k b^{n - k}
+\end{align*}
+:::
+
+::: {.theorem title="Théorème du binôme généralisé, Newton"}
+Si $\abs a > \abs b$, alors
+\begin{align*}
+(a + b)^r = \sum_{k = 0}^{+\infty} \binom r k a^k b^{r - k},
+\qquad \binom r k = \prod_{l = 0}^{k - 1} \frac {n - l} {k - l}
+\end{align*}
+pour tout $r \in \C$.
+:::
+
+# Exercices sur le théorème du binôme {.split}
+
+![](/static/images/1678960943.png){width=60%}
+
