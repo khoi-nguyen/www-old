@@ -1349,6 +1349,7 @@ width: 1400
 
 # Scalar product associated with SPD matrices {.split}
 
+::: {.definition title="Scalar product associated with a matrix"}
 Given a symmetric positive definite matrix $\mat M$,
 we define
 \begin{align*}
@@ -1356,8 +1357,25 @@ we define
 \defeq \vec x^T \mat M \vec y
 \end{align*}
 
-Note that $\ip{\placeholder, \placeholder} = \ip{\placeholder, \placeholder}_{\mat I}$
-and $\ip{\vec x, \vec y}_{\mat M} = \ip{\mat M \vec x, \vec y} = \ip{\vec x, \mat M \vec y}$.
+We also let $\norm {\vec x}_{\mat M} = \sqrt {\ip{\vec x, \vec x}_{\mat M}}$.
+:::
+
+::: proposition
+#. $\ip{\placeholder, \placeholder} = \ip{\placeholder, \placeholder}_{\mat I}$
+#. $\ip{\vec x, \vec y}_{\mat M} = \ip{\mat M \vec x, \vec y} = \ip{\vec x, \mat M \vec y}$.
+#. if $\vec e_1, \dots, \vec e_n$ is an orthonormal basis of eigenvectors
+   associated with the eigenvalues $\lambda_1, \dots, \lambda_n$, then
+\begin{align*}
+\begin{cases}
+\vec x = \sum_{i = 1}^n x_i \vec e_i\\
+\vec y = \sum_{i = 1}^n y_i \vec e_i
+\end{cases}
+\implies
+\ip{\vec x, \vec y}_{\mat M} = \sum_{i = 1}^n \lambda_i x_i y_i.
+\end{align*}
+:::
+
+# Orthogonal projection {.split}
 
 ::: {.proposition title="Orthogonal projection"}
 The vector on $L \defeq \{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ which is closest to $\vec x_\star$
