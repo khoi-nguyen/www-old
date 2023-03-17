@@ -1377,6 +1377,16 @@ We also let $\norm {\vec x}_{\mat M} = \sqrt {\ip{\vec x, \vec x}_{\mat M}}$.
 
 # Orthogonal projection {.split}
 
+~~~ {.tex .tikz scale="1.7"}
+\draw (-3.5, 0) -- (3.5, 0);
+\fill (-2, 0) circle (0.05) node[below] {$\boldsymbol{x}^{(k)}$};
+\fill (2, 2) circle (0.05) node[above] {$\boldsymbol{x}_\star$};
+\fill (2, 0) circle (0.05) node[below] {$\boldsymbol{x}^{(k + 1)}$};
+\node at ( 3.75, 0) {$\boldsymbol d$};
+\draw[blue,very thick,->] (-2, 0) -- node[midway,above,sloped] {$\boldsymbol x_\star - \boldsymbol x^{(k)}$} (2, 2);
+\draw[red,very thick,->] (-2, 0) -- node[midway,below] {$\frac {\langle\boldsymbol x_\star - \boldsymbol x^{(k)}, \boldsymbol d \rangle_{\boldsymbol A}} {\|\boldsymbol d\|^2_{\boldsymbol A}} \boldsymbol d$} (2, 0);
+~~~
+
 ::: {.proposition title="Orthogonal projection"}
 The vector on $L \defeq \{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ which is closest to $\vec x_\star$
 in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
@@ -1389,16 +1399,6 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 }_{\text{minimizes}\ \norm{\placeholder - \vec x_\star}_{\mat M} \text{ on } L}
 \end{align*}
 :::
-
-~~~ {.tex .tikz}
-\draw (-3.5, 0) -- (3.5, 0);
-\fill (-2, 0) circle (0.05) node[below] {$\boldsymbol{x}^{(k)}$};
-\fill (2, 2) circle (0.05) node[above] {$\boldsymbol{x}_\star$};
-\fill (2, 0) circle (0.05) node[below] {$\boldsymbol{x}^{(k + 1)}$};
-\node at ( 3.75, 0) {$\boldsymbol d$};
-\draw[blue,very thick,->] (-2, 0) -- node[midway,above,sloped] {$\boldsymbol x_\star - \boldsymbol x^{(k)}$} (2, 2);
-\draw[red,very thick,->] (-2, 0) -- node[midway,below] {$\frac {\langle\boldsymbol x_\star - \boldsymbol x^{(k)}, \boldsymbol d \rangle_{\boldsymbol A}} {\|\boldsymbol d\|^2_{\boldsymbol A}} \boldsymbol d$} (2, 0);
-~~~
 
 # Choice of $\mat M$ and $\vec d$ {.split}
 
