@@ -2,4 +2,14 @@
 dir: /teaching/cea/
 institute: CEA Study Abroad
 author: NGUYỄN Khôi <<nguyen.khoi@nyu.edu>>
+references:
+  - id: zill
+    title: "Differential Equations with Boundary-Value Problems"
+    author:
+      family: Zill
+      given: [Denis, G.]
+    issued:
+      year: 2018
+    language: en-US
+    type: book
 ...
