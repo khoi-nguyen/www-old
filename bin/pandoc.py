@@ -29,6 +29,7 @@ sources.reverse()
 
 # Calling pandoc
 cmd: list[str] = ["pandoc", "--quiet"] + sources
+cmd += ["--reference-location=block"]
 if args.meta_only:
     cmd.append("--template=templates/json.html")
 else:
