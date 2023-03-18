@@ -1516,7 +1516,18 @@ What's changed compared to *Richardson's method*?
 
 # Steepest descent: convergence [@vaes22, p. 103] {.split}
 
-::: theorem
+::: {.recall title="Convergence of Richardson's method"}
+If $\omega = \left(\frac {\lambda_{\max} + \lambda_{\min}} 2\right)^{-1}$, then
+\begin{align*}
+\norm {\vec x^{(k)} - \vec x_\star}
+\leq
+C
+\left(\frac {\kappa(\mat A) - 1} {\kappa(\mat A) + 1}\right)^k
+\norm {\vec x^{(0)} - \vec x_\star}
+\end{align*}
+:::
+
+::: {.theorem title="Convergence of the steepest descent"}
 \begin{align*}
 \norm {\vec x^{(k)} - \vec x_\star}_{\mat A}
 \leq
