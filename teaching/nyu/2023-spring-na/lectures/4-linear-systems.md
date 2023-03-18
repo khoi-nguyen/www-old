@@ -1490,7 +1490,7 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 - \underbrace{\frac {\norm {\vec r^{(k)}}^2} {\norm {\vec r^{(k)}}^2_{\mat A}}}_\omega
 \vec r^{(k)},
 \qquad
-\vec r^{(k)} = \mat A \vec x^{(k)} - \vec b
+\vec r^{(k)} = \underbrace{\mat A \vec x^{(k)} - \vec b}_{\nabla f(\vec x^{(k)})}
 \end{align*}
 :::
 
@@ -1576,6 +1576,7 @@ title!("Steepest descent")
 
 ::: question
 - What do you notice about the direction of the different steps?
+- Can you see why this is problematic?
 :::
 
 :::::
