@@ -1216,13 +1216,13 @@ f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x.
 \end{align*}
 
 ::: {.algorithm title="Richardson's method"}
-
 \begin{align*}
 \vec x^{(k + 1)}
 = \vec x^{(k)} - \omega (\underbrace{\mat A \vec x^{(k)} - \vec b}_{\nabla f(\vec x^{(k)})}),
 \end{align*}
+:::
 
-~~~ {.julia .plot width=100%}
+~~~ {.julia .plot width=90%}
 A = [2.0 1.0; 1.0 2.0]
 sol = [2.0; 3.0]
 b = A * sol
@@ -1235,9 +1235,8 @@ quiver!([x[1]], [x[2]], quiver=r, label=L"\nabla f(x^{(k)})")
 x = x - r
 scatter!([x[1]], [x[2]], label=L"x^{(k + 1)}")
 scatter!([sol[1]], [sol[2]], label="Solution")
+title!("One iteration of Richardson's method")
 ~~~
-
-:::
 
 # Richardson visualized {.row}
 
@@ -1251,13 +1250,13 @@ f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
 N = 7
 data = zeros(N, 2)
 for i in 2:N
-  data[i, :] = data[i - 1,:] - 0.5 * (A * data[i - 1,:] - b)
+  data[i, :] = data[i - 1,:] - 0.65 * (A * data[i - 1,:] - b)
 end
 contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
 plot!(data[:, 1], data[:, 2], label="")
 scatter!(data[:, 1], data[:, 2], label="Richardson's iteration")
 scatter!([2], [3], label="Solution")
-title!(L"Richardson's method with $\omega = 0.5$")
+title!(L"Richardson's method with $\omega = 0.65$")
 ~~~
 ~~~ {.julia .plot width=75%}
 A = [2.0 1.0; 1.0 2.0]
@@ -1267,13 +1266,13 @@ f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
 N = 7
 data = zeros(N, 2)
 for i in 2:N
-  data[i, :] = data[i - 1,:] - 0.2 * (A * data[i - 1,:] - b)
+  data[i, :] = data[i - 1,:] - 0.1 * (A * data[i - 1,:] - b)
 end
 contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspect_ratio=1)
 plot!(data[:, 1], data[:, 2], label="")
 scatter!(data[:, 1], data[:, 2], label="Richardson's iteration")
 scatter!([2], [3], label="Solution")
-title!(L"Richardson's method with $\omega = 0.2$")
+title!(L"Richardson's method with $\omega = 0.1$")
 ~~~
 
 :::::
@@ -1287,20 +1286,51 @@ title!(L"Richardson's method with $\omega = 0.2$")
 \end{align*}
 :::
 
-- Step size is proportional to gradient magnitude
-- Convergence gets slower as we get closer to the minimum
-- The optimal $\omega$ requires knowledge of the spectrum
-
-::: info
-$\lambda_{\max}$ can be estimated relatively efficiently, but not $\lambda_{\min}$.
-More on that in Chapter 6.
-:::
-
 ::: question
-How could you improve Richardson's method?
+- What do you observe?
+- How could you improve Richardson's method?
 :::
 
 :::::
+
+# Choice of $\omega$ and condition number {.split}
+
+::: {.recall title="Convergence of Richardson's method"}
+\begin{align*}
+\vec x^{(k)} - \vec x_\star = (\mat I - \omega \mat A)^k (\vec x^{(0)} - \vec x_\star)
+\end{align*}
+
+The spectral radius $\rho$ of $\mat I - \omega \mat A$ is minimal when
+\begin{align*}
+\omega = \frac 2 {\lambda_{\max} + \lambda_{\min}},
+\qquad
+\rho(\mat I - \omega A) = \frac {\kappa(A) - 1} {\kappa(A) + 1}.
+\end{align*}
+:::
+
+~~~ {.tex .tikz scale=1.5}
+\draw (-0.5, 0) -- (5.0, 0) node[below] {spect(A)};
+\draw[very thick,green,double=black,double distance=1pt] (1.5, 0) -- (4, 0);
+\fill (0, 0) circle (0.05) node[above] {$0$};
+\fill (1.5, 0) circle (0.05) node[above] {$\lambda_\min$};
+\fill (2.75, 0) circle (0.05) node[above] {$\frac {\lambda_{\min} + \lambda_\max} 2$};
+\fill (4, 0) circle (0.05) node[above] {$\lambda_\max$};
+
+\draw (-0.5, -2) -- (5.0, -2) node[below] {spect(\omega A)};
+\draw[very thick,green,double=black,double distance=1pt] (1, -2) -- (2, -2);
+\fill (0, -2) circle (0.05) node[below] {$0$};
+\fill (1, -2) circle (0.05) node[below] {$\omega \lambda_\min$};
+\fill (1.5, -2) circle (0.05) node[above] {$1$};
+\fill (2, -2) circle (0.05) node[below] {$\omega \lambda_\max$};
+
+\draw [->, dashed] (4, 0) -- node[right]{$\times \omega$} (2, -2);
+\draw [->, dashed] (1.5, 0) -- node[left]{$\times \omega$} (1, -2);
+\draw [->, dashed] (2.75, 0) -- node[left]{$\times \omega$} (1.5, -2);
+~~~
+
+::: question
+How would you calculate $\lambda_{\max}$ and $\lambda_{\min}$ in practice?
+:::
 
 # Improvement over Richardson's iteration: steepest descent {.row}
 
