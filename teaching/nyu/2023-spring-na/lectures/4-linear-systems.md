@@ -1166,34 +1166,25 @@ Relaxation             $\mat L + \frac {\mat D} \omega$     Generalizes G-S for 
 
 :::::
 
-# Back to Richardson's method {.split}
+# Quadratic form associated with a system {.split}
 
-::: {.algorithm title="Richardson's iteration"}
+From now on,
+$\mat A$ will always be **symmetric** and **positive definite**.
+
+::: {.definition title="Quadratic form associated with a system"}
 \begin{align*}
-\vec x^{(k + 1)}
-= \vec x^{(k)} - \omega (\mat A \vec x^{(k)} - \vec b),
-\end{align*}
-\begin{align*}
-\omega = \frac 2 {\lambda_{\max} + \lambda_{\min}}
-\implies
-\rho = \frac {\kappa(\mat A) - 1} {\kappa(\mat A) + 1}
+f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x.
 \end{align*}
 :::
 
-::: {.info title="Interpretation of Richardson's method"}
-If $\mat A$ is **symmetric** and **positive definite**,
+::: proposition
+The gradient of $f$ is given by
 \begin{align*}
-\mat A \vec x_\star = \vec b
-\iff \vec x_\star \text{ minimizes }
-f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x,
+\nabla f(\vec x) = \mat A \vec x - \vec b.
 \end{align*}
-and the iteration goes in the direction of **steepest descent**
-since $\nabla f(\vec x) = \mat A \vec x - \vec b.$
-:::
 
-::: question
-- How do we calculate $\lambda_{\max}$, $\lambda_{\min}$?
-- Could we improve the method by considering a variable $\omega$ at each iteration?
+In particular, $f$ has a unique *critical value* $\vec x_\star$,
+which is a **minimum**.
 :::
 
 # Reading contour plots {.row}
@@ -1217,6 +1208,36 @@ contour(-4:0.01:8, -1:0.01:7, f, levels=20, color=:turbo, lw=1, fill=true, aspec
 - Could you estimate the gradient at every point?
 :::
 :::::
+
+# Back to Richardson's method {.split}
+
+\begin{align*}
+f(\vec x) = \frac 1 2 \vec x^T \mat A \vec x - \vec b^T \vec x.
+\end{align*}
+
+::: {.algorithm title="Richardson's method"}
+
+\begin{align*}
+\vec x^{(k + 1)}
+= \vec x^{(k)} - \omega (\underbrace{\mat A \vec x^{(k)} - \vec b}_{\nabla f(\vec x^{(k)})}),
+\end{align*}
+
+~~~ {.julia .plot width=100%}
+A = [2.0 1.0; 1.0 2.0]
+sol = [2.0; 3.0]
+b = A * sol
+f(x, y) = 1/2 * [x, y]' * A * [x, y] - b' * [x, y]
+contour(-4:0.01:8, -1:0.01:7, f, levels=60, color=:turbo, lw=1, aspect_ratio=1)
+x = [5, 4]
+r = 0.1*(A*x - b)
+scatter!([x[1]], [x[2]], label=L"x^{(k)}")
+quiver!([x[1]], [x[2]], quiver=r, label=L"\nabla f(x^{(k)})")
+x = x - r
+scatter!([x[1]], [x[2]], label=L"x^{(k + 1)}")
+scatter!([sol[1]], [sol[2]], label="Solution")
+~~~
+
+:::
 
 # Richardson visualized {.row}
 
