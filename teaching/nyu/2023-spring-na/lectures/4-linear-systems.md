@@ -1740,14 +1740,22 @@ as $k$ increases.
 
 ::::: {.col}
 
+\begin{align*}
+\vec d_k &\defeq \nabla f(\vec x^{(k)}) -
+\frac {\ip{\nabla f(\vec x^{(k)}), \vec d_{k - 1}}_{\mat A}} {\ip{\vec d_{k - 1}, \vec d_{k - 1}}_{\mat A}}
+\vec d_{k - 1}\\
+\vec x^{(k + 1)} &\defeq \vec x^{(k)} +
+\frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d_k}_{\mat A}} {\ip {\vec d_k, \vec d_k}_{\mat A}}
+\vec d_k
+\end{align*}
+
 ~~~ {.julia .jupyter}
 function conjugate_gradients(A, x, b, ϵ)
-    r(x) = A * x - b
-    let d = r(x)
-        while r(x)'r(x) ≥ ϵ * b'b
-            ω = d'r(x) / (d'A*d)
-            x = x - ω * d
-            d = r(x) - d'A*r(x) / (d'A*d) * d
+    ∇f(x) = A * x - b
+    let d = ∇f(x)
+        while ∇f(x)'∇f(x) ≥ ϵ * b'b
+            x = x - ∇f(x)'d / (d'A*d) * d
+            d = ∇f(x) - ∇f(x)'A*d / (d'A*d) * d
         end
     end
     return x
@@ -1766,10 +1774,9 @@ conjugate_gradients(A, [0, 0], b, 10^-3)
 ::: {.recall title="Steepest Descent (code)"}
 ~~~ julia
 function steepest_descent(A, x, b, ϵ)
-    r(x) = A * x - b
-    while r(x)'r(x) ≥ ϵ * b'b
-        ω = r(x)'r(x) / (r(x)'A*r(x))
-        x = x - ω * r(x)
+    ∇f(x) = A * x - b
+    while ∇f(x)'∇f(x) ≥ ϵ * b'b
+        x = x - ∇f(x)'∇f(x) / (∇f(x)'A*∇f(x)) * ∇f(x)
     end
     return x
 end
