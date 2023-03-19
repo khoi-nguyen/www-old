@@ -492,6 +492,15 @@ Calculer les dérivées des expressions suivantes:
 ::: exercice
 :::
 
+# Exercice: $\sin'$ et $\cos'$ en degrés {.split}
+
+::: proposition
+\begin{align*}
+\sin'(x^\circ) &= \frac \pi {180} \cos(x^\circ)\\
+\cos'(x^\circ) &= -\frac \pi {180} \sin(x^\circ)\\
+\end{align*}
+:::
+
 # Application: conservation de l'énergie {.split}
 
 ::: example
@@ -511,14 +520,58 @@ est constante.
 # Comportement avec le quotient {.split}
 
 ::: proposition
-\begin{align}
+\begin{align*}
 \left(\frac f g\right)'(a) = \frac {f'(a) g(a) - f(a) g'(a)} {g^2(a)}
-\end{align}
+\end{align*}
 :::
 
 ::: {.info title="Rappel"}
-\begin{align}
+\begin{align*}
 (fg)'(x) &= f'(x) g(x) + f(x) g'(x)\\
 (f \circ g)'(x) &= f'(g(x)) g'(x)
-\end{align}
+\end{align*}
+:::
+
+# Dérivée de $\tan$ {.split}
+
+::: proposition
+\begin{align*}
+\tan'(x) = 1 + \tan^2 x.
+\end{align*}
+:::
+
+::: exercise
+Calculer $\cot'(x)$.
+:::
+
+# Minimums et maximums locaux {.split}
+
+La dérivée est un outil extrêmement puissant pour trouver les extremums locaux.
+
+::: theorem
+Soit $f$ est dérivable sur $[a, b]$, et $c \in ]a, b[$.
+Si $f$ atteint un maximum ou un minimum local en $c$, alors $f'(c) = 0$.
+:::
+
+# Théorème des accroissements finis {.split}
+
+::: {.theorem title="Théorème des accroissements finis"}
+Soit $f$ une fonction dérivable sur $[a, b]$.
+
+Il existe $c \in [a, b]$ tel que
+\begin{align*}
+f'(c) = \frac {f(b) - f(a)} {b - a}
+\end{align*}
+:::
+
+# Dérivée et croissance {.split}
+
+Le but des slides suivants est de démontrer le résultat suivant:
+
+::: theorem
+Soit $f$ une fonction dérivable sur $[a, b]$.
+
+- $f$ est **croissante** sur $[a, b]$ si et seulement si $f' \geq 0$ sur $[a, b]$.
+- $f$ est **constante** sur $[a, b]$ si et seulement si $f' = 0$ sur $[a, b]$.
+- $f$ est **décroissante** sur $[a, b]$ si et seulement si $f' \leq 0$ sur $[a, b]$.
 :::
