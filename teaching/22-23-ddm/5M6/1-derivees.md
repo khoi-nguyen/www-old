@@ -492,6 +492,22 @@ Calculer les dérivées des expressions suivantes:
 ::: exercice
 :::
 
+# Application: conservation de l'énergie {.split}
+
+::: example
+Soit un point matériel de masse $m$ en chute libre
+soumis a une force constante $F = -m g$.
+
+Montrer que l'énergie
+\begin{align*}
+E(t) = \underbrace{\frac 1 2 m \left(v(t)\right)^2}_{\text{cinétique}}
++ \underbrace{m g x(t)}_{\text{potentielle}}
+\end{align*}
+est constante.
+
+**Rappel**: $F = m a$, $a(t) = v(t)$, $v(t) = x'(t)$
+:::
+
 # Comportement avec le quotient {.split}
 
 ::: proposition
