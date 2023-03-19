@@ -1414,7 +1414,7 @@ We also let $\norm {\vec x}_{\mat M} = \sqrt {\ip{\vec x, \vec x}_{\mat M}}$.
 ::: proposition
 #. $\ip{\placeholder, \placeholder} = \ip{\placeholder, \placeholder}_{\mat I}$
 #. $\ip{\vec x, \vec y}_{\mat M} = \ip{\mat M \vec x, \vec y} = \ip{\vec x, \mat M \vec y}$.
-#. if $\vec e_1, \dots, \vec e_n$ is an orthonormal basis of eigenvectors
+#. if $\vec e_1, \dots, \vec e_n$ is an orthonormal basis^[with respect to the usual Euclidean scalar product.] of eigenvectors
    associated with the eigenvalues $\lambda_1, \dots, \lambda_n$, then
 \begin{align*}
 \begin{cases}
