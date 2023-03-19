@@ -1487,19 +1487,16 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 \begin{align*}
 \vec x^{(k + 1)} \defeq
 \vec x^{(k)}
-- \underbrace{\frac {\norm {\vec r^{(k)}}^2} {\norm {\vec r^{(k)}}^2_{\mat A}}}_\omega
-\vec r^{(k)},
-\qquad
-\vec r^{(k)} = \underbrace{\mat A \vec x^{(k)} - \vec b}_{\nabla f(\vec x^{(k)})}
+- \frac {\norm {\nabla f(\vec x^{(k)})}^2} {\norm {\nabla f(\vec x^{(k)})}^2_{\mat A}}
+\nabla f(\vec x^{(k)})
 \end{align*}
 :::
 
 ~~~ {.julia .jupyter}
 function steepest_descent(A, x, b, ϵ)
-    r(x) = A * x - b
-    while r(x)'r(x) ≥ ϵ * b'b
-        ω = r(x)'r(x) / (r(x)'A*r(x))
-        x = x - ω * r(x)
+    ∇f(x) = A * x - b
+    while ∇f(x)'∇f(x) ≥ ϵ * b'b
+        x -= ∇f(x)'∇f(x) / (∇f(x)'A*∇f(x)) * ∇f(x)
     end
     return x
 end
@@ -1680,7 +1677,7 @@ we shall also say the vectors are **conjugate**.] basis of
 In particular, $\vec x^{(n)} = \vec x_\star$ (in exact arithmetic).
 :::
 
-::: question
+::: check
 - Can we calculate $\vec x^{(k + 1)}$ without knowing $\vec x_\star$?
 - How do you transform that into an iteration?
 - How would you define the vectors $\vec d_0, \dots, \vec d_k$?
@@ -1754,7 +1751,7 @@ function conjugate_gradients(A, x, b, ϵ)
     ∇f(x) = A * x - b
     let d = ∇f(x)
         while ∇f(x)'∇f(x) ≥ ϵ * b'b
-            x = x - ∇f(x)'d / (d'A*d) * d
+            x -= ∇f(x)'d / (d'A*d) * d
             d = ∇f(x) - ∇f(x)'A*d / (d'A*d) * d
         end
     end
@@ -1776,7 +1773,7 @@ conjugate_gradients(A, [0, 0], b, 10^-3)
 function steepest_descent(A, x, b, ϵ)
     ∇f(x) = A * x - b
     while ∇f(x)'∇f(x) ≥ ϵ * b'b
-        x = x - ∇f(x)'∇f(x) / (∇f(x)'A*∇f(x)) * ∇f(x)
+        x -= ∇f(x)'∇f(x) / (∇f(x)'A*∇f(x)) * ∇f(x)
     end
     return x
 end
