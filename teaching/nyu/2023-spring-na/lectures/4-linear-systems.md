@@ -1625,67 +1625,114 @@ What's changed? What's the same?
 
 :::::
 
-# Conjugate gradients [@vaes22, p. 108] {.split}
+# Towards the conjugate gradients method
 
-To avoid multiple movements in the same direction,
-observe that if the directions $\{\vec d_i : i = 0, \dots, n - 1\}$ are $\mat A$-orthogonal (or **conjugate**),
 \begin{align*}
-\vec x_\star
-= \vec x^{(0)}
-+ \sum_{i = 0}^{n - 1}
-\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i
+\vec x^{(1)}
+&\defeq \argmin_{\vec x^{(0)} + \span\{\nabla f(\vec x^{(0)})\}} f
+&= \argmin_{\vec x^{(0)} + \span\{\nabla f(\vec x^{(0)})\}} \norm{\placeholder - \vec x_\star}_{\mat A}
+\end{align*}
+
+::::: row
+::::: {.col}
+
+#### Steepest descent
+   
+\begin{align*}
+\vec x^{(2)} &\defeq \argmin_{\vec x^{(1)} + \span\{\nabla f(\vec x^{(1)})\}} \norm{\placeholder - \vec x_\star}_{\mat A}\\
+\quad &\vdots\\
+\vec x^{(k + 1)} &\defeq \argmin_{\vec x^{(k)} + \span\{\nabla f(\vec x^{(k)})\}} \norm{\placeholder - \vec x_\star}_{\mat A}
+\end{align*}
+
+:::::
+::::: {.col}
+
+#### Conjugate gradients
+
+\begin{align*}
+\vec x^{(2)} &\defeq \argmin_{\vec x^{(0)} + \span\{\nabla f(\vec x^{(0)}), \nabla f(\vec x^{(1)})\}} \norm{\placeholder - \vec x_\star}_{\mat A}\\
+\quad &\vdots\\
+\vec x^{(k + 1)} &\defeq \argmin_{\vec x^{(0)} + \span\{\nabla f(\vec x^{(0)}), \dots, \nabla f(\vec x^{(k)})\}} \norm{\placeholder - \vec x_\star}_{\mat A}
+\end{align*}
+
+:::::
+:::::
+
+# Orthogonal projection {.split}
+
+\begin{align*}
+\vec x^{(k + 1)} &\defeq \argmin_{\vec x^{(0)} + \span\{\nabla f(\vec x^{(0)}), \dots, \nabla f(\vec x^{(k)})\}} \norm{\placeholder - \vec x_\star}_{\mat A}
 \end{align*}
 
 ::: proposition
-The iteration
+Let $\vec d_0, \dots, \vec d_k$ be an $\mat A$-orthogonal^[To avoid confusion with the usual scalar product,
+we shall also say the vectors are **conjugate**.] basis of 
 \begin{align*}
-\vec x^{(k + 1)} \defeq \vec x^{(k)} +
-\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k
+\span\{\nabla f(\vec x^{(0)}), \dots, \nabla f(\vec x^{(k)})\}.
 \end{align*}
-converges to $x_\star$ in $n$ steps (in exact arithmetic).
+
+\begin{align*}
+\vec x^{(k + 1)} = \vec x^{(0)} + \sum_{i = 0}^{k}
+\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\ip{\vec d_i, \vec d_i}_{\mat A}}
+\vec d_i.
+\end{align*}
+
+In particular, $\vec x^{(n)} = \vec x_\star$ (in exact arithmetic).
 :::
 
-::: remark
-If $\vec d_0 \defeq \mat A \vec x^{(0)} - \vec b$,
-then the iteration gives the **same first step**
-as the steepest descent.
-:::
-
-::: {.idea .fragment}
-Simultaneously create an $\mat A$-orthogonal sequence $\vec d_k$
-from the gradients at $x^{(k)}$.
+::: question
+- Can we calculate $\vec x^{(k + 1)}$ without knowing $\vec x_\star$?
+- How do you transform that into an iteration?
+- How would you define the vectors $\vec d_0, \dots, \vec d_k$?
 :::
 
 # Conjugate gradients [@vaes22, p. 108] {.split}
 
-We apply Gram-Schmidt to the gradients $\vec r^{(k)} = \mat A \vec x^{(k)} - \vec b$
-(hence the name *conjugate gradients*).
 \begin{align*}
-\begin{cases}
-\vec x^{(k + 1)}
-\defeq \vec x^{(k)} -
-\frac {\ip{\vec r^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k\\
-\vec d^{(k)}
-\defeq \vec r^{(k)} - \sum_{i = 0}^{k - 1}
-\frac {\ip{\vec r^{(k)}, \vec d_i}_{\mat A}} {\norm {\vec d_i}^2_{\mat A}} \vec d_i\\
-\end{cases}
+\vec x^{(k + 1)} = \vec x^{(0)} + \sum_{i = 0}^{k}
+\frac {\ip{\vec x_\star - \vec x^{(0)}, \vec d_i}_{\mat A}} {\ip{\vec d_i, \vec d_i}_{\mat A}}
+\vec d_i.
+\end{align*}
+
+::: {.algorithm title="Conjugate gradients, first version"}
+\begin{align*}
+\vec d_k &\defeq \nabla f(\vec x^{(k)}) -
+\sum_{i = 0}^{k - 1} \frac {\ip{\nabla f(\vec x^{(k)}), \vec d_i}_{\mat A}} {\ip{\vec d_i, \vec d_i}_{\mat A}}
+\vec d_i\\
+\vec x^{(k + 1)} &\defeq \vec x^{(k)} +
+\frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d_k}_{\mat A}} {\ip {\vec d_k, \vec d_k}_{\mat A}}
+\vec d_k
+\end{align*}
+:::
+
+::: {.remark title="Cost of calculating the conjugate directions"}
+Calculating $\vec d_k$ seems to involve increasingly more flops
+as $k$ increases.
+:::
+
+# Conjugate gradients, version 2 [@vaes22, p. 108] {.split}
+
+\begin{align*}
+\vec d_k &\defeq \nabla f(\vec x^{(k)}) -
+\sum_{i = 0}^{k - 1} \frac {\ip{\nabla f(\vec x^{(k)}), \vec d_i}_{\mat A}} {\ip{\vec d_i, \vec d_i}_{\mat A}}
+\vec d_i
 \end{align*}
 
 ::: proposition
-\begin{align}
-\ip{\vec r^{(k)}, \vec d_i}_{\mat A} = 0,
+\begin{align*}
+\ip{\nabla f(\vec x^{(k)}), \vec d_i}_{\mat A} = 0,
 \qquad i = 0, \dots, k - 2.
-\end{align}
+\end{align*}
 :::
 
-::: {.algorithm .fragment title="Conjugate gradients"}
+::: {.algorithm title="Conjugate gradients"}
 \begin{align*}
-\vec x^{(k + 1)}
-&\defeq \vec x^{(k)} +
-\frac {\ip{\vec b - \mat A \vec x^{(k)}, \vec d_k}} {\norm {\vec d_k}^2_{\mat A}} \vec d_k\\
-\vec d^{(k)}
-&\defeq \vec r^{(k)} -
-\frac {\ip{\vec r^{(k)}, \vec d_{k - 1}}_{\mat A}} {\norm {\vec d_{k - 1}}^2_{\mat A}} \vec d_{k - 1}\\
+\vec d_k &\defeq \nabla f(\vec x^{(k)}) -
+\frac {\ip{\nabla f(\vec x^{(k)}), \vec d_{k - 1}}_{\mat A}} {\ip{\vec d_{k - 1}, \vec d_{k - 1}}_{\mat A}}
+\vec d_{k - 1}\\
+\vec x^{(k + 1)} &\defeq \vec x^{(k)} +
+\frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d_k}_{\mat A}} {\ip {\vec d_k, \vec d_k}_{\mat A}}
+\vec d_k
 \end{align*}
 :::
 
