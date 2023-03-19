@@ -195,6 +195,7 @@ envs:
       - text-white
 ...
 \DeclareMathOperator{\spectrum}{Sp}
+\DeclareMathOperator{\proj}{proj}
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\E}{\mathbf{E}}
 \newcommand{\F}{\mathbf{F}}
