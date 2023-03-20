@@ -1161,7 +1161,9 @@ Relaxation             $\mat L + \frac {\mat D} \omega$     Generalizes G-S for 
 
 - Last week on Chapter $4$
 - Homework: Exercise 4.25 due **next Monday**
-- *French sentence of the day*: L'instructeur fait du bon travail.
+- *French sentence of the day*: L'instructeur fait du bon travail^[Alternatively,
+  ChatGPT suggests the following joke: "*Quelle est la différence entre une poubelle et un professeur ?*".
+  The punch line is however too inappropriate to be on this slide.]
 - Today: Steepest descent method, conjugate gradients
 
 :::::
