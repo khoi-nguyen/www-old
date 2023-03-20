@@ -18,6 +18,7 @@
   },
   "homepage": "https://nguyen.me.uk/",
   "dependencies": {
+    "@fontsource/fira-sans": "^4.5.10",
     "@vitejs/plugin-vue": "^4.0.0",
     "katex": "^0.16.4",
     "prettier": "^2.8.2",

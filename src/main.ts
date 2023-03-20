@@ -4,6 +4,8 @@ import PdfReader from "./elements/PdfReader.ce.vue";
 import WhiteboardPlugin from "./WhiteboardPlugin";
 import katex from "katex";
 import renderMathInElement from "katex/dist/contrib/auto-render.mjs";
+
+import "@fontsource/fira-sans/300.css";
 import "katex/dist/katex.min.css";
 
 const ClockElement = defineCustomElement(Clock);
