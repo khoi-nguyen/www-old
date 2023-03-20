@@ -2,6 +2,10 @@
 title: Differential Equations
 ...
 
+::: text-center
+![](/static/cea_logo.png){width="200px"}
+:::
+
 ::: {.card .bg-light .card-body}
 
 #### Practical information {.card-title}
