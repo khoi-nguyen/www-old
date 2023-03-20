@@ -23,4 +23,27 @@ equations**—perhaps the **greatest advance in thought** that a
 single individual was ever privileged to make.
 :::
 
-# Fundamental theorem of Calculus
+# What's a differential equation? [@zill, p. 3] {.split}
+
+::: {.definition title="Differential Equation"}
+Equation containing at least one **derivative** (of any order) of an unknown function.
+:::
+
+::: example
+Newton's law of motion
+:
+\begin{align*}
+\vec F = m \frac {\dd^2 \vec x} {\dd t^2}
+\end{align*}
+
+The Laplace Equation
+:
+\begin{align*}
+\frac {\partial^2 V} {\partial x^2}
++ \frac {\partial^2 V} {\partial y^2}
++ \frac {\partial^2 V} {\partial z^2}
+= 0
+\end{align*}
+:::
+
+# Bibliography
