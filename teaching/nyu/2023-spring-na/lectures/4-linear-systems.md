@@ -7,6 +7,7 @@ notes: |
   - 01/03: condition number, Richardson, convergence (20-30)
   - 03/03: stopping criterion, splitting, Jacobi (31-38)
   - 08/03: midterm, Gauss-seidel, relaxation method (until 46)
+  - 20/03: Richardson, steepest descend, conjugate gradients
 ...
 
 # Systems associated with triangular matrices {.split}
