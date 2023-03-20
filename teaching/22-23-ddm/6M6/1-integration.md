@@ -29,14 +29,6 @@ Calculons l'aire sous la fonction $f(x) = x^2$
 entre $0$ et $1$.
 :::
 
-~~~ {.javascript .jsxgraph .fragment}
-const f = x => x ** 2;
-board.boundingbox = [-0.4, 1.2, 1.2, -1.2];
-let n = board.slider([-0.2, 0.6], 0.6, [5, 10, 30]);
-board.riemannSum(f, () => n.Value(), 0, 1, "right");
-board.plot(f)
-~~~
-
 ::: fragment
 Nous aurons besoin de la formule
 

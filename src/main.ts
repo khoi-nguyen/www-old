@@ -2,7 +2,6 @@ import { defineCustomElement } from "vue";
 import Clock from "./elements/Clock.ce.vue";
 import PdfReader from "./elements/PdfReader.ce.vue";
 import WhiteboardPlugin from "./WhiteboardPlugin";
-import JSXBoard from "./jsxgraph";
 import katex from "katex";
 import renderMathInElement from "katex/dist/contrib/auto-render.mjs";
 
