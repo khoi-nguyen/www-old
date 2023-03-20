@@ -1489,7 +1489,8 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is
 \vec x^{(k + 1)} \defeq
 \vec x^{(k)}
 - \frac {\norm {\nabla f(\vec x^{(k)})}^2} {\norm {\nabla f(\vec x^{(k)})}^2_{\mat A}}
-\nabla f(\vec x^{(k)})
+\nabla f(\vec x^{(k)}),
+\quad \nabla f(\vec x) = \mat A \vec x - \vec b.
 \end{align*}
 :::
 
@@ -1812,8 +1813,8 @@ end
 For the proof, see [@vaes22, pp. 110-112].
 
 ::: check
-- What's the smallest value for $\kappa(A)$?
-- Which is better?
+- What's the smallest possible value for $\kappa(A)$?
+- Which algorithm converges faster?
 :::
 
 # Bibliography
