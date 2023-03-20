@@ -1160,7 +1160,7 @@ Relaxation             $\mat L + \frac {\mat D} \omega$     Generalizes G-S for 
 ### Announcements
 
 - Last week on Chapter $4$
-- Homework: Exercise 4.25 due
+- Homework: Exercise 4.25 due **next Monday**
 - *French sentence of the day*: L'instructeur fait du bon travail.
 - Today: Steepest descent method, conjugate gradients
 
