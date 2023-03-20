@@ -1439,15 +1439,15 @@ We also let $\norm {\vec x}_{\mat M} = \sqrt {\ip{\vec x, \vec x}_{\mat M}}$.
 ~~~
 
 ::: {.proposition title="Orthogonal projection"}
-The vector on $L \defeq \{\vec x^{(k)} + \omega \vec d : \omega \in \R\}$ which is closest to $\vec x_\star$
-in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
+The vector on $\vec x^{(k)} + \span \{\vec d\}$ closest to $\vec x_\star$
+in the sense of the $\norm{\placeholder}_{\mat M}$ norm is
 \begin{align*}
-\vec x^{(k + 1)} \defeq
 \underbrace{
+\vec x^{(k + 1)} \defeq
 \vec x^{(k)} +
 \frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d}_{\mat M}} {\norm {\vec d}^2_{\mat M}}
 \vec d.
-}_{\text{minimizes}\ \norm{\placeholder - \vec x_\star}_{\mat M} \text{ on } L}
+}_{\text{minimizes}\ \norm{\placeholder - \vec x_\star}_{\mat M} \text{ on } \vec x^{(k)} + \span\{\vec d\}}
 \end{align*}
 :::
 
@@ -1455,10 +1455,11 @@ in the sense of the $\norm{\placeholder}_{\mat M}$ norm is given by
 
 \begin{align*}
 \underbrace{
-\vec x^{(k + 1)} \defeq \vec x^{(k)} +
+\vec x^{(k + 1)} \defeq
+\vec x^{(k)} +
 \frac {\ip{\vec x_\star - \vec x^{(k)}, \vec d}_{\mat M}} {\norm {\vec d}^2_{\mat M}}
 \vec d.
-}_{\text{minimizes}\ \norm{\placeholder - \vec x_\star}_{\mat M} \text{ on } \{x^{(k)} + \omega \vec d: \omega \in \R\}}
+}_{\text{minimizes}\ \norm{\placeholder - \vec x_\star}_{\mat M} \text{ on } \vec x^{(k)} + \span\{\vec d\}}
 \end{align*}
 
 ::: {.info title="Choice of matrix and direction"}
