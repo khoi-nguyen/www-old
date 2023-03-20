@@ -5,6 +5,7 @@ import WhiteboardPlugin from "./WhiteboardPlugin";
 import katex from "katex";
 import renderMathInElement from "katex/dist/contrib/auto-render.mjs";
 
+import "../static/style.less";
 import "@fontsource/fira-sans/300.css";
 import "katex/dist/katex.min.css";
 
