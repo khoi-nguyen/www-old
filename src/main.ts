@@ -4,6 +4,7 @@ import PdfReader from "./elements/PdfReader.ce.vue";
 import WhiteboardPlugin from "./WhiteboardPlugin";
 import katex from "katex";
 import renderMathInElement from "katex/dist/contrib/auto-render.mjs";
+import "katex/dist/katex.min.css";
 
 const ClockElement = defineCustomElement(Clock);
 customElements.define("ticking-clock", ClockElement);
@@ -12,7 +13,6 @@ const PdfReaderElement = defineCustomElement(PdfReader);
 customElements.define("pdf-reader", PdfReaderElement);
 
 (<any>window).RevealWhiteboard = new WhiteboardPlugin();
-(<any>window).JSXBoard = JSXBoard;
 (<any>window).renderMathInElement = renderMathInElement;
 
 document.addEventListener("DOMContentLoaded", function () {
