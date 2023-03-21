@@ -201,7 +201,7 @@ envs:
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\abs}[1]{\lvert#1\rvert}
 \newcommand{\bigo}{\mathcal O}
-\newcommand{\ceil}[1]{\lceil#1\rceil}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
 \newcommand{\dd}{\,\mathrm{d}}
 \newcommand{\defeq}{\stackrel{\text{def}}{=}}
 \newcommand{\dom}{\mathrm{dom}}
