@@ -206,6 +206,7 @@ envs:
 \newcommand{\defeq}{\stackrel{\text{def}}{=}}
 \newcommand{\dom}{\mathrm{dom}}
 \newcommand{\d}{\,\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
 \newcommand{\floor}[1]{\lfloor#1\rfloor}
 \newcommand{\fl}{\mathrm{fl}}
 \newcommand{\iff}{\Longleftrightarrow}
