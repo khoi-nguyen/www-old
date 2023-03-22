@@ -164,7 +164,7 @@ We shall be interested in the following questions.
 # Convergence speed [@vaes22, pp. 122-123] {.split}
 
 ::: question
-How fast is convergence?
+How fast is the convergence?
 :::
 
 ::: {.definition}
