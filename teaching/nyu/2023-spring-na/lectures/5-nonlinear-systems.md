@@ -253,7 +253,9 @@ if we can find $L < 1$ such that
 - A differentiable function $f: \R \to \R$ with $\sup \abs{f'} < 1$.
 :::
 
-![](https://francetoday.com/wp-content/uploads/2022/03/9639839563806.jpg)
+::: text-center
+![](https://francetoday.com/wp-content/uploads/2022/03/9639839563806.jpg){width=50%}
+:::
 
 # Banach's fixed point theorem [@vaes22, p. 126] {.split}
 
@@ -337,6 +339,57 @@ and satisfy
 
 ::: remark
 The conclusion means that $\vec x_\star$ is a locally **exponentially stable** fixed point.
+:::
+
+# Calculus recap [@vaes22, p. 127] {.split}
+
+Assume that $\vec F$ has partial derivatives at $x$.
+
+
+::: {.definition title="Jacobian matrix"}
+The matrix
+
+\begin{align*}
+\vec J_{\vec F} =
+\begin{pmatrix}
+\partial_1 F_1(\vec x) & \dots & \partial_n F_1(\vec x)\\
+\vdots & \vdots & \vdots \\
+\partial_1 F_n(\vec x) & \dots & \partial_n F_n(\vec x)
+\end{pmatrix}
+\end{align*}
+is called the **Jacobian** matrix of $\vec F$ at $\vec x$.
+:::
+
+::: {.definition title="Differentiability"}
+$\vec F$ is **differentiable** at $x \in \R^n$
+if
+\begin{align*}
+\lim_{\vec h \to 0}
+\frac {\norm {\vec F(\vec x + \vec h) - \vec F(\vec x) - \vec J_\vec F(\vec x) \vec h}}
+{\norm {\vec h}} = 0
+\end{align*}
+:::
+
+::: example
+In dimension $1$, $\vec J_{\vec F}(\vec x) = \vec F'(\vec x)$.
+:::
+
+# A sufficient condition for local exponential stability [@vaes22, p. 127] {.split}
+
+::: theorem
+Assume that $\vec F(\vec x_\star) = \vec x_\star$ and
+that there is $\delta > 0$ and $0 \leq L < 1$ such that
+\begin{align*}
+\norm {\vec x - \vec x_\star} \leq \delta
+\implies
+\norm {\vec J_{\vec F}(\vec x)} \leq L < 1.
+\end{align*}
+
+All the iterates $\vec x_k$, $k \in \N$ satisfy $\norm {\vec x - \vec x_\star} \leq \delta$
+and satisfy
+\begin{align*}
+\norm {\vec x_k - \vec x_\star} &\leq L^k \norm {\vec x_0 - \vec x_\star}.
+\end{align*}
 :::
 
 # Bibliography
