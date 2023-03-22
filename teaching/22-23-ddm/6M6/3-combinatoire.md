@@ -226,3 +226,12 @@ pour tout $r \in \C$.
 
 ![](/static/images/1678960943.png){width=60%}
 
+# Exercices sur les coefficients binomiaux {.split}
+
+![](/static/images/1679447364.png){width=100%}
+
+# Exercices {.split}
+
+![](https://stepdatabase.maths.org/database/db/10/10-S1-Q5.png){width=100%}
+
+![](https://stepdatabase.maths.org/database/db/94/94-S1-Q3.png){width=100%}
