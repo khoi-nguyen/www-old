@@ -113,16 +113,9 @@ export class Whiteboard {
     this.ctx.strokeStyle = stroke.color;
     this.ctx.lineCap = "round";
     this.ctx.lineWidth = stroke.lineWidth;
-    this.ctx.moveTo(...stroke.points[0]);
-    for (let i = 1; i < stroke.points.length - 2; i++) {
-      const point = stroke.points[i];
-      const nextPoint = stroke.points[i + 1];
-      const x = (point[0] + nextPoint[0]) / 2;
-      const y = (point[1] + nextPoint[1]) / 2;
-      this.ctx.quadraticCurveTo(...point, x, y);
+    for (const point of stroke.points) {
+      this.ctx.lineTo(...point);
     }
-    const last = stroke.points[stroke.points.length - 1];
-    this.ctx.lineTo(...last);
     this.ctx.stroke();
     this.ctx.closePath();
   }
