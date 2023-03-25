@@ -1,6 +1,8 @@
 ---
 title: Solution of nonlinear systems
 output: revealjs
+notes: |
+  - 22/03: Bisection, convergence speed, Banach fixed point (1-16)
 ...
 
 # Starter {.row}
