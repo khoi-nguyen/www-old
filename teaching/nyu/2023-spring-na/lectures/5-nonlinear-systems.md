@@ -339,6 +339,12 @@ x_\star
 
 Both sequences converge **linearly** to the solution $x_\star$.
 
+\begin{align*}
+f(x_\star)^2 = \lim_{n \to +\infty} f(a_i) f(b_i) \leq 0
+\implies
+f(x_\star) = 0.
+\end{align*}
+
 ### Fixed point iteration
 
 The simplest iterations take the form
@@ -668,5 +674,31 @@ end
 ~~~
 
 :::::
+
+# Convergence and convergence speed [@vaes22, p. 131] {.split}
+
+Given how we arrived at the Newton-Raphson method from the chord method,
+it should not surprise us that we get superlinear convergence.
+
+::: proposition
+If $x_\star$ is a simple root, then the Newton-Raphson iteration converges superlinearly.
+:::
+
+::: idea
+Simply show that $F'(x_\star) = 0.$
+:::
+
+# Quadratic convergence [@vaes22, p. 132] {.split}
+
+::: theorem
+Assume that $x_\star$ is a root of a function $f \in C^2(\R)$ with $f'(x_\star) \neq 0$.
+There exists $\delta > 0$ such that if $x_0 \in B_\delta(x_\star)$,
+the iteration
+\begin{align*}
+x_{k + 1} \defeq x_k - \frac {f(x_k)}{f'(x_k)}
+\end{align*}
+
+then $(x_k)_{k \in \N}$ converges **quadratically** to $\vec x$.
+:::
 
 # Bibliography
