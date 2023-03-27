@@ -17,7 +17,7 @@ TEMPLATE: str = r"""
 \begin{document}
 \usetikzlibrary{arrows}
 \scalebox{%s}{
-\begin{tikzpicture}
+\begin{tikzpicture}[%s]
 %s
 \end{tikzpicture}
 }
@@ -33,7 +33,8 @@ def tikz(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
 
     # Get code
     scale: str = element.attributes.get("scale", "1")
-    code: str = TEMPLATE % (scale, element.text)
+    opts: str = element.attributes.get("opts", "")
+    code: str = TEMPLATE % (scale, opts, element.text)
 
     # Useful paths
     basename: str = hashlib.sha256(code.encode("utf-8")).hexdigest()
