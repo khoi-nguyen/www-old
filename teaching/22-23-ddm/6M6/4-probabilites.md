@@ -33,7 +33,7 @@ Deux événements $A, B \subset \Omega$ sont
 # Probabilité: définition {.split}
 
 ::: {.definition title="Définition"}
-Soit $\Omega$ une catégorie d'épreuve.
+Soit $\Omega$ une catégorie d'épreuve avec un nombre **fini** d'éléments.
 
 Une probabilité est une fonction
 \begin{align*}
