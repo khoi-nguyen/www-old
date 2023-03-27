@@ -317,23 +317,99 @@ I hope you don't mind that I didn't write it like that.
    we will still have convergence to $\vec x_\star$,
    with an estimate on that convergence.
 
+# 27 March 2023 {.row}
+
+::::: {.col}
+
+### Bisection method
+
+\begin{align*}
+[a_{i + 1}, b_{i + 1}] \defeq 
+\begin{cases}
+[a_i, x_i] & \text{if } f(a_i) f(x_i) < 0\\
+[x_i, b_i] & \text{otherwise},
+\end{cases}
+\end{align*}
+
+\begin{align*}
+x_\star
+\defeq \lim_{n \to +\infty} a_n
+= \lim_{n \to +\infty} b_n
+\end{align*}
+
+Both sequences converge **linearly** to the solution $x_\star$.
+
+### Fixed point iteration
+
+The simplest iterations take the form
+\begin{align*}
+\vec x_{k + 1} = \vec F(\vec x_k).
+\end{align*}
+
+Should $(\vec x_k)_{k \in \N}$ converge, it will be towards a fixed point
+\begin{align*}
+\vec x_\star \defeq \lim_{n \to +\infty} \vec x_k
+\implies
+\vec x_\star = \vec F(\vec x_\star).
+\end{align*}
+
+:::::
+
+::::: {.col}
+
+### Solving a non-linear system $\vec f(\vec x) = \vec 0$
+
+Step 1
+: Rewrite our equation $\vec f(\vec x) = \vec 0$ as a fixed point problem $\vec F(\vec x) = \vec x$.
+
+Step 2
+: Use the iteration $\vec x_{k + 1} = \vec F(\vec x_k)$.
+
+### Banach fixed point theorem
+
+If $\vec F$ is a contraction,
+the iteration
+\begin{align*}
+\vec x_{k + 1} = \vec F(\vec x_k).
+\end{align*}
+converges towards the unique fixed point.
+Moreover, convergence is **linear** and the solution is **exponentially stable**.
+
+### Announcements
+
+- Homework on relaxation method due **today**
+- French sentence of the day:
+
+:::::
+
+# Comments on Banach's fixed point theorem {.split}
+
+- Banach's fixed point theorem proves **existence**, **uniqueness**, a lower bound on **convergence speed** and **stability**.
+- The constraint on $\vec F$ is **global** and **very strict**.
+- In general, we our problems have a solution.
+
+::: question
+Could we turn Banach's fixed point theorem in a local result if we already assume the solution exists?
+:::
+
 # Local stability of a fixed point [@vaes22, p. 127] {.split}
 
-We often already know the solution exists and its approximate location.
-In this case, we are interested in whether the iteration converges
-with a good initial first guess, and how fast.
+::: definition
+\begin{align*}
+B_\delta(\vec x) \defeq \{ \vec y \in \R^n : \norm {\vec y - \vec x} \leq \delta \}
+\end{align*}
+:::
 
-::: theorem
+::: {.theorem title="Local Banach theorem"}
 Assume that $\vec F(\vec x_\star) = \vec x_\star$ and
 that there is $\delta > 0$ and $0 \leq L < 1$ such that
 \begin{align*}
-\norm {\vec x - \vec x_\star} \leq \delta
-\implies
 \norm {\vec F(\vec x) - \vec F(\vec x_\star)} \leq L \norm {\vec x - \vec x_\star}.
 \end{align*}
+for every $\vec x \in B_\delta(\vec x)$.
 
-All the iterates $\vec x_k$, $k \in \N$ satisfy $\norm {\vec x - \vec x_\star} \leq \delta$
-and satisfy
+If $\vec x_0 \in B_\delta(\vec x)$, then
+$\vec x_k \in B_\delta(\vec x)$ for every $k \in \N$ and
 \begin{align*}
 \norm {\vec x_k - \vec x_\star} &\leq L^k \norm {\vec x_0 - \vec x_\star}.
 \end{align*}
@@ -376,22 +452,216 @@ if
 In dimension $1$, $\vec J_{\vec F}(\vec x) = \vec F'(\vec x)$.
 :::
 
+# A sufficient condition to be a local contraction [@vaes, p. 127] {.split}
+
+::: {.proposition}
+Assume that $\vec F$ is a smooth function^[Being of class $C^1$ is enough.] around a fixed point $\vec x_\star$.
+There exists $0 \leq L < 1$ and $\delta > 0$ such that
+\begin{align*}
+\norm {\vec F(\vec x) - \vec F(\vec x_\star)} \leq L \norm {\vec x - \vec x_\star}.
+\end{align*}
+:::
+
 # A sufficient condition for local exponential stability [@vaes22, p. 127] {.split}
 
 ::: theorem
-Assume that $\vec F(\vec x_\star) = \vec x_\star$ and
-that there is $\delta > 0$ and $0 \leq L < 1$ such that
+Assume that $\vec F$ is a smooth function^[Actually, we can assume that $\vec F$ is of class $C^1$.]
+around $\vec x_\star$
+and that $\vec F(\vec x_\star) = \vec x_\star$.
+If in addition
 \begin{align*}
-\norm {\vec x - \vec x_\star} \leq \delta
-\implies
-\norm {\vec J_{\vec F}(\vec x)} \leq L < 1.
+\norm {\vec J_{\vec F}(\vec x_\star)} < 1,
 \end{align*}
-
-All the iterates $\vec x_k$, $k \in \N$ satisfy $\norm {\vec x - \vec x_\star} \leq \delta$
-and satisfy
+there exists $\delta > 0$ such that the following property holds:
+if $\vec x_0 \in B_\delta(\vec x)$, then $\vec x_k \in B_\delta(\vec x_\star)$ for every $k \in \N$ and
 \begin{align*}
 \norm {\vec x_k - \vec x_\star} &\leq L^k \norm {\vec x_0 - \vec x_\star}.
 \end{align*}
 :::
+
+# A sufficient condition for *superlinear* convergence [@vaes22, p. 128] {.split}
+
+::: {.proposition title="Superlinear convergence towards a fixed point"}
+Assume that $\vec x_\star$ is a fixed point of a smooth function $\vec F$.
+If $\vec J_{\vec F}(\vec x_\star) = 0$
+then should an iterative sequence converge to $\vec x_\star$,
+it does so **superlinearly**.
+:::
+
+# Chord method [@vaes22, p. 129] {.split}
+
+Let's write $f(x) = 0$ as a fixed point problem.
+
+::: proposition
+Let $a \neq 0$ and consider
+\begin{align*}
+F(x) \defeq x - \frac {f(x)} {a}.
+\end{align*}
+
+Then $f(x) = 0$ if and only if $F(x) = x$.
+:::
+
+::: proposition
+Let $\mat A$ be invertible and consider
+\begin{align*}
+\vec F(\vec x) \defeq \vec x - \mat A^{-1} \vec f(\vec x).
+\end{align*}
+
+Then $\vec f(\vec x) = \vec 0$ if and only if $\vec F(\vec x) = \vec x$.
+:::
+
+# Interpretation of the chord method [@vaes22, Figure 5.1 p. 130] {.split}
+
+~~~ {.tex .tikz opts="thick, yscale=0.65"}
+\draw[-latex,name path=xaxis] (-1,0) -- (12,0) node[above]{\large $x$};
+\draw[-latex] (0,-2) -- (0,8)node[right]{\large $y$};;
+\draw[ultra thick, blue,name path=function]  plot[smooth,domain=1:9.5] (\x, {0.1*\x^2-1.5}) node[left]{$f(x)$};
+\node[red,right=0.2cm] at (8,4.9) {\large Affine approximation};
+\draw[gray,thin,dotted] (8,0) -- (8,4.9) node[circle,fill,inner sep=2pt]{};
+\draw[dashed, red,name path=Tfunction]  plot[smooth,domain=0:9.5] (\x, {0.7*(\x-8) + 4.9});
+\draw (8,0.1) -- (8,-0.1) node[below] {$x_k$};
+\draw [name intersections={of=Tfunction and xaxis}] ($(intersection-1)+(0,0.1)$) -- ++(0,-0.2) node[below,fill=white] {$x_{k+1}$} ;
+~~~
+
+::: {.info title="Interpretation of the chord method"}
+Given $x_k$, $x_{k + 1}$ is the root of the affine function with gradient $a$ going through $(x_k, f(x_k))$.
+:::
+
+# Convergence of the chord method [@vaes22, p. 129] {.split}
+
+::: proposition
+Assume that
+\begin{align*}
+a f'(x_\star) > 0
+\quad \text{and} \quad
+\abs a \leq \abs {f'(x_\star)} / 2.
+\end{align*}
+Then the iteration
+\begin{align*}
+x_{k + 1} \defeq \underbrace{x_k - \frac {f(x_k)} a}_{F(x_k)}
+\end{align*}
+locally converges to $x_\star$,
+and is a locally exponentially stable fixed point of $F$.
+
+Moreover, if $a = f'(x_\star)$,
+then the convergence of the chord method is superlinear.
+:::
+
+# Chord method in Julia {.split}
+
+\begin{align*}
+x_{k + 1} \defeq \underbrace{x_k - \frac {f(x_k)} a}_{F(x_k)}
+\end{align*}
+
+~~~ {.julia .jupyter}
+f(x) = x^2 - 2
+grad(x) = 2 * x
+ϵ = 10^-7
+
+let x = 1.41
+  a = grad(x)
+  while abs(f(x)) > ϵ
+    x -= f(x) / a
+  end
+  x
+end
+~~~
+
+# Exercise 5.7 [@vaes22, pp. 139] {.split}
+
+::: exercise
+Solve the equation $f(x) = \e^x - 2 = 0$ using a fixed point iteration of the form
+\begin{align*}
+x_{k+1} = F(x_k), \qquad
+F(x) = x - \alpha^{-1} f(x).
+\end{align*}
+Using your knowledge of the exact solution $x_* = \log 2$,
+write a sufficient condition on $\alpha$ to guarantee that $x_*$ is locally exponentially stable.
+Verify your findings numerically and plot,
+using a logarithmic scale for the $y$ axis,
+the error in absolute value as a function of $k$.
+:::
+
+# Towards Newton-Raphson {.split}
+
+::: {.info title="Chord method"}
+\begin{align*}
+x_{k + 1} \defeq x_k - \frac {f(x_k)} a
+\end{align*}
+:::
+
+::: {.remark title="Newton-Raphson iteration"}
+Convergence of the chord method can be accelerated by having $a = f'(x_\star)$.
+
+As $x_\star$ is not known,
+an alternative would be to use the approximation $a \approx f'(x_k)$ and get
+\begin{align*}
+x_{k + 1} \defeq x_k - \frac {f(x_k)} {f'(x_k)}
+\end{align*}
+:::
+
+# Newton-Raphson [@vaes22, p. 130] {.split}
+
+~~~ {.tex .tikz opts="thick, yscale=0.65"}
+\draw[-latex,name path=xaxis] (-1,0) -- (12,0) node[above]{\large $x$};
+\draw[-latex] (0,-2) -- (0,8)node[right]{\large $y$};;
+\draw[ultra thick, blue,name path=function]  plot[smooth,domain=1:9.5] (\x, {0.1*\x^2-1.5}) node[left]{$f(x)$};
+\node[red,right=0.2cm] at (8,4.9) {\large Tangent};
+\draw[gray,thin,dotted] (8,0) -- (8,4.9) node[circle,fill,inner sep=2pt]{};
+\draw[dashed, red,name path=Tfunction]  plot[smooth,domain=4.25:9.5] (\x, {1.6*\x-7.9});
+\draw (8,0.1) -- (8,-0.1) node[below] {$x_k$};
+\draw [name intersections={of=Tfunction and xaxis}] ($(intersection-1)+(0,0.1)$) -- ++(0,-0.2) node[below,fill=white] {$x_{k+1}$} ;
+~~~
+
+# Newton-Raphson: animation
+
+~~~ {.yaml .widget name="geogebra"}
+url: https://www.geogebra.org/m/DGFGBJyU
+~~~
+
+# Newton-Raphson iteration [@vaes22, p. 130] {.split}
+
+::: {.algorithm title="Newton-Raphson"}
+\begin{align*}
+x_{k + 1} \defeq x_k - \frac {f(x_k)} {f'(x_k)}
+\end{align*}
+:::
+
+::: {.algorithm title="Newton-Raphson in higher dimension"}
+\begin{align*}
+\vec x_{k + 1} \defeq \vec x_k - \vec J_f(\vec x_k)^{-1} \vec f(\vec x_k)
+\end{align*}
+:::
+
+
+# Exercises 5.8 and 5.9 [@vaes22, p. 139] {.row}
+
+::::: {.col}
+::: exercise
+Implement the Newton–Raphson method for solving $f(x) = e^x − 2 = 0$, and
+plot the error in absolute value as a function of the iteration index k.
+:::
+
+::: exercise
+Find the point $(x, y)$ on the parabola $y = x^2$ that is closest to the point $(3, 1)$.
+:::
+:::::
+
+::::: {.col}
+
+~~~ {.julia .jupyter}
+f(x) = exp(x) - 2
+grad(x) = exp(x)
+ϵ = 10^-7
+
+let x = 1.41
+  while abs(f(x)) > ϵ
+    x -= f(x) / grad(x)
+  end
+  x
+end
+~~~
+
+:::::
 
 # Bibliography
