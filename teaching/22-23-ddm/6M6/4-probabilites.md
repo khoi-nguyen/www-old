@@ -60,7 +60,7 @@ Soient deux événements $A, B \subset \Omega$.
 \begin{align*}
 \P(A \cup B) = \P(A) + \P(B) - \P(A \cap B)
 \end{align*}
-- En particulier, si $A$ et $B$ son incompatibles, on a
+- En particulier, si $A$ et $B$ sont incompatibles, on a
 \begin{align*}
 \P(A \cup B) = \P(A) + \P(B)
 \end{align*}
@@ -90,3 +90,44 @@ Soient deux événements $A, B \subset \Omega$.
 ![](/static/images/1679903030.png)
 ![](/static/images/1679903069.png)
 
+# Probabilité: définition continue {.row}
+
+::::: {.col}
+::: {.definition title="Probabilité"}
+Soit $\Omega$ une catégorie d'épreuve avec un nombre **fini** d'éléments.
+
+Une **probabilité** est une fonction
+\begin{align*}
+\P : \Omega \to [0, 1]
+\end{align*}
+telle que
+\begin{align*}
+\sum_{\omega \in \Omega} \P(\omega) = 1.
+\end{align*}
+
+Ensuite, pour chaque sous-ensemble $A$, on définit
+\begin{align*}
+\P(A) \defeq \sum_{\omega \in A} P(\omega)
+\end{align*}
+:::
+:::::
+
+::::: {.col}
+::: {.definition}
+Soit $\Omega = \R$.
+
+Une **densité de probabilité** est une fonction
+\begin{align*}
+f: \R \to \R^+
+\end{align*}
+telle que
+\begin{align*}
+\int_{-\infty}^{+\infty} f(x) \dd x = 1.
+\end{align*}
+
+Pour chaque intervalle $A = [a, b]$, on définit
+\begin{align*}
+\P(A) \defeq \int_a^b f(x) \dd x.
+\end{align*}
+:::
+:::::
