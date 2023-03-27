@@ -452,10 +452,15 @@ if
 In dimension $1$, $\vec J_{\vec F}(\vec x) = \vec F'(\vec x)$.
 :::
 
-# A sufficient condition to be a local contraction [@vaes, p. 127] {.split}
+# A sufficient condition to be a local contraction [@vaes22, p. 127] {.split}
 
 ::: {.proposition}
-Assume that $\vec F$ is a smooth function^[Being of class $C^1$ is enough.] around a fixed point $\vec x_\star$.
+Assume that $\vec F$ is a smooth function^[Being of class $C^1$ is enough.] around a fixed point $\vec x_\star$
+and that
+\begin{align*}
+\norm {\vec J_{\vec F}(\vec x_\star)} < 1.
+\end{align*}
+
 There exists $0 \leq L < 1$ and $\delta > 0$ such that
 \begin{align*}
 \norm {\vec F(\vec x) - \vec F(\vec x_\star)} \leq L \norm {\vec x - \vec x_\star}.
@@ -639,7 +644,7 @@ x_{k + 1} \defeq x_k - \frac {f(x_k)} {f'(x_k)}
 ::::: {.col}
 ::: exercise
 Implement the Newton–Raphson method for solving $f(x) = e^x − 2 = 0$, and
-plot the error in absolute value as a function of the iteration index k.
+plot the error in absolute value as a function of the iteration index $k$.
 :::
 
 ::: exercise
