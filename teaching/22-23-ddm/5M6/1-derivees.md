@@ -544,32 +544,149 @@ est constante.
 Calculer $\cot'(x)$.
 :::
 
-# Équation de la tangente
+# Rappels: équation d'une droite passant par un point {.split}
 
+::: proposition
+Si une droite a une pente $m$ et passe par $(a, b)$, son équation peut s'écrire
 \begin{align*}
-\underbrace{y - f(a)}_{\Delta y} = f'(a) \underbrace{(x - a)}_{\Delta x}
+y = m (x - a) + b
 \end{align*}
+:::
 
+::: exercise
+Trouver l'équation des droites suivantes:
+
+- pente $2$ et passant par $(1, 3)$
+- pente $-1$ et passant par $(-3, 4)$
+- pente $3$ et passant par $(-2, -5)$.
+- pente $-2$ et passant par $(-1, 4)$.
+:::
+
+# Équation de la tangente {.split}
+
+~~~ {.julia .plot}
+x = 0:0.01:2
+plot(x, x -> x^2, label=L"x^2")
+plot!(x, x -> 2 * (x - 1) + 1, label="tangente en (1, 1)")
+scatter!([1], [1], label="(1, 1)")
+~~~
+
+::: {.definition title="Tangente en un point"}
+La **tangente** de $f$ en $a$ est la droite qui a comme pente $f(a)$
+et qui passe par $(a, f(a))$, càd la droite d'équation
 \begin{align*}
-\underbrace{-f(a)}_{\Delta y} = f'(a) \underbrace{(x - a)}_{\Delta x}
--f(a) = f'(a) (x - a)
+y = f'(a) (x - a) + f(a)
 \end{align*}
+:::
 
-# Méthode de Newton-Raphson
+# Équation de la tangente: exemple et exercices {.split}
+
+::: {.recall title="Équation de la tangente"}
+\begin{align*}
+y = f'(a) (x - a) + f(a)
+\end{align*}
+:::
+
+::: exercise
+Trouver l'équation de la tangente de
+
+- $f(x) = \sin x$ en $a = 0$
+- $g(x) = x^2$ en $a = -2$
+- $h(x) = \sqrt {2x + 1}$ en $a = 4$
+:::
+
+# Méthode de Newton-Raphson: introduction {.split}
+
+::: question
+Comment la calculatrice trouve-t-elle les racines d'une fonction?^[
+Si vous souhaitez plus de détails à ce sujet,
+allez voir les
+[slides](/teaching/nyu/2023-spring-na/lectures/5-nonlinear-systems#/towards-newton-raphson)
+du cours que je donne à NYU (en anglais, niveau bac 3 mathématiques/informatique)
+]
+:::
+
+::: idea
+On approxime la fonction par la tangente et on trouve la racine de la tangente.
+:::
+
+~~~ {.julia .plot}
+x = 1.3:0.001:1.5
+plot(x, x -> x^2 - 2, label=L"y = x^2 - 2", framestyle=:zerolines)
+# plot!(x, x -> 2 * 1.41 * (x - 1.41) + 1.41^2 - 2, label="tangente")
+plot!(x, x -> 2 * 1.3 * (x - 1.3) + 1.3^2 - 2, label="tangente")
+scatter!([1.3], [1.3^2-2], label="")
+~~~
+
+# Méthode de Newton-Raphson: animation {.split}
+
+~~~ {.yaml .widget name="geogebra"}
+url: https://www.geogebra.org/m/DGFGBJyU
+~~~
+
+# Itération de Newton-Raphson {.split}
+
+::: proposition
+La racine de la tangente de $f$ en $a$ est donnée par
+\begin{align*}
+a - \frac {f(a)} {f'(a)}
+\end{align*}
+:::
+
+::: {.example title="Newton-Raphson"}
+En considérant la fonction $f(x) = x^2 - 2$,
+applique Newton-Raphson pour estimer $\sqrt 2$.
+:::
+
+# Méthode de Newton-Raphson {.row}
+
+::::: {.col}
+
+#### Estimation de $\sqrt 2$
+
+::: idea
+On cherche la racine de $f(x) = x^2 - 2$ proche de $1.4$.
+:::
+
+~~~ {.julia .jupyter}
+f(x) = x^2 - 2
+f´(x) = 2x
+# Valeur initiale estimée
+a = 1.4
+# Tant que l'erreur est plus grande que ...
+while abs(a - √2) > 10^-12
+  # On améliore notre estimation
+  global a = a - f(a) / f´(a)
+  # On affiche l'estimation
+  println(a)
+end
+~~~
+
+:::::
+
+::::: {.col}
+
+::: idea
+On cherche la racine de $f(x) = \sin x$ proche de $3.1$.
+:::
+
+#### Estimation de $\pi$
 
 ~~~ {.julia .jupyter}
 f(x) = sin(x)
 f´(x) = cos(x)
-
 # Valeur initiale estimée
-x = 3.1
-
+a = 3.1
 # Tant que l'erreur est plus grande que ...
-while abs(f(x)) > 10^-12
+while abs(a - π) > 10^-12
   # On améliore notre estimation
-  global x = x - f(x) / f´(x)
+  global a = a - f(a) / f´(a)
+  # On affiche l'estimation
+  println(a)
 end
 ~~~
+
+:::::
 
 # Minimums et maximums locaux {.split}
 
@@ -579,6 +696,17 @@ La dérivée est un outil extrêmement puissant pour trouver les extremums locau
 Soit $f$ est dérivable sur $[a, b]$, et $c \in ]a, b[$.
 Si $f$ atteint un maximum ou un minimum local en $c$, alors $f'(c) = 0$.
 :::
+
+::: remark
+Plus tard, vous verrez un critère avec la dérivée seconde
+permettant souvent de dire si on a un maximum ou un minimum.
+:::
+
+::: exercise
+- Trouver le minimum de $f(x) = x^4 - 4 x$
+- Trouvel le minimum de $f(x) = \sqrt{x^2 + 2x + 5}$
+:::
+
 
 # Théorème des accroissements finis {.split}
 
@@ -592,8 +720,6 @@ f'(c) = \frac {f(b) - f(a)} {b - a}
 :::
 
 # Dérivée et croissance {.split}
-
-Le but des slides suivants est de démontrer le résultat suivant:
 
 ::: theorem
 Soit $f$ une fonction dérivable sur $[a, b]$.
