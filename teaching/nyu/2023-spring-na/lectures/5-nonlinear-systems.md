@@ -540,22 +540,38 @@ Given $x_k$, $x_{k + 1}$ is the root of the affine function with gradient $a$ go
 
 # Convergence of the chord method [@vaes22, p. 129] {.split}
 
-::: proposition
+A good choice of $\mat A$ is $\mat A \approx \vec J_{\vec f}(\vec x_\star)$.
+
+::: {.proposition title="Convergence of the chord method"}
 Assume that
 \begin{align*}
-a f'(x_\star) > 0
-\quad \text{and} \quad
-\abs a \leq \abs {f'(x_\star)} / 2.
+\norm {\mat I - \mat A^{-1} \vec J_{\vec f}(\vec x_\star)} < 1
 \end{align*}
 Then the iteration
 \begin{align*}
-x_{k + 1} \defeq \underbrace{x_k - \frac {f(x_k)} a}_{F(x_k)}
+\vec x_{k + 1} \defeq \vec F(\vec x_k)
+\defeq \vec x_k - \mat A^{-1} \vec f(\vec x_k)
 \end{align*}
-locally converges to $x_\star$,
-and is a locally exponentially stable fixed point of $F$.
+locally converges to $\vec x_\star$,
+and is a locally exponentially stable fixed point of $\vec F$.
 
-Moreover, if $a = f'(x_\star)$,
-then the convergence of the chord method is superlinear.
+Moreover, if $\mat A = \vec J_{\vec f}(\vec x_\star)$,
+then the convergence of the chord method is at least **superlinear**.
+In fact, if $f$ is of class $C^2$ around $\vec x_\star$,
+then the convergence is **quadratic**.
+:::
+
+# Quadratic convergence of the chord method {.split}
+
+::: proposition
+Let $x_\star \in \R$ be a root of a function $f : \R \to \R$.
+If $f$ is of class $C^2$ around $x_\star$ and $f'(x_\star) \neq 0$,
+then the iteration
+\begin{align*}
+x_{k + 1} \defeq x_k - \frac {f(x_k)} {f'(x_\star)}
+\end{align*}
+converges **quadratically**
+provided that $x_0$ is sufficiently close to $x_\star$.
 :::
 
 # Chord method in Julia {.split}
