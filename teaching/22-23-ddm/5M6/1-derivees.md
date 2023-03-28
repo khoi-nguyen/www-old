@@ -544,6 +544,33 @@ est constante.
 Calculer $\cot'(x)$.
 :::
 
+# Équation de la tangente
+
+\begin{align*}
+\underbrace{y - f(a)}_{\Delta y} = f'(a) \underbrace{(x - a)}_{\Delta x}
+\end{align*}
+
+\begin{align*}
+\underbrace{-f(a)}_{\Delta y} = f'(a) \underbrace{(x - a)}_{\Delta x}
+-f(a) = f'(a) (x - a)
+\end{align*}
+
+# Méthode de Newton-Raphson
+
+~~~ {.julia .jupyter}
+f(x) = sin(x)
+f´(x) = cos(x)
+
+# Valeur initiale estimée
+x = 3.1
+
+# Tant que l'erreur est plus grande que ...
+while abs(f(x)) > 10^-12
+  # On améliore notre estimation
+  global x = x - f(x) / f´(x)
+end
+~~~
+
 # Minimums et maximums locaux {.split}
 
 La dérivée est un outil extrêmement puissant pour trouver les extremums locaux.
