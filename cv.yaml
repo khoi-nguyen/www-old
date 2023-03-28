@@ -21,10 +21,21 @@ sections:
   skills_es: Competencia
 
 experience:
+  - title: Developer in Python and Javascript
+    title_fr: Développeur Python et Javascript
+    title_es: Desarollador Python y Javascript
+    date: since April 2023
+    date_fr: depuis avril 2023
+    date_es: desde abril 2023
+    employer:
+      name: Fedasil
+      location: Brussels
+      location_fr: Bruxelles
+      location_es: Bruselas
   - title: Part-time Lecturer in Mathematics
     title_fr: Professeur en mathématiques
     title_es: Profesor de matemáticas
-    date: Since Jan 2023
+    date: since Jan 2023
     date_fr: depuis 01/2023
     date_es: desde 01/2023
     employer:
@@ -41,16 +52,6 @@ experience:
     description_es: |
       - Clase impartida: análisis numérico
       - Utilización de Python y Julia
-  - title: Teacher of Mathematics
-    title_fr: Enseignant en mathématiques
-    title_es: Profesor de matemáticas
-    date: Since Jan 2023
-    employer:
-      name: Fédération Wallonie-Bruxelles
-      website: https://www.federation-wallonie-bruxelles.be/
-      location: Belgium
-      location_fr: Belgique
-      location_es: Bélgica
   - title: Teacher of Mathematics and Computer Science
     title_fr: Enseignant en mathématiques et informatique
     title_es: Profesor de matemáticas e informática
