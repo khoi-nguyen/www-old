@@ -666,11 +666,11 @@ end
 
 ::::: {.col}
 
+#### Estimation de $\pi$
+
 ::: idea
 On cherche la racine de $f(x) = \sin x$ proche de $3.1$.
 :::
-
-#### Estimation de $\pi$
 
 ~~~ {.julia .jupyter}
 f(x) = sin(x)
