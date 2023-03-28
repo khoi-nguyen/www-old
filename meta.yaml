@@ -14,6 +14,9 @@ js:
   - https://cdn.jsdelivr.net/npm/less
   - /main.js
 navbar:
+  - text: CV
+    icon: fa-solid fa-address-card
+    href: /cv
   - text: NYU
     icon: fa-solid fa-building-columns
     href: /teaching/nyu/2023-spring-na/
