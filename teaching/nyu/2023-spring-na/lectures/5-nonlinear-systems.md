@@ -565,18 +565,17 @@ x_{k + 1} \defeq \underbrace{x_k - \frac {f(x_k)} a}_{F(x_k)}
 \end{align*}
 
 ~~~ {.julia .jupyter}
-f(x) = x^2 - 2
-grad(x) = 2 * x
-ϵ = 10^-7
-
-let x = 1.41
-  a = grad(x)
-  while abs(f(x)) > ϵ
-    x -= f(x) / a
-  end
-  x
+function chord_method(f, x, a, ϵ = 10^-12)
+    while abs(f(x)) > ϵ
+        x -= f(x) / a
+    end
+    return x
 end
+
+chord_method(x -> x^2 - 2, 1.41, 2.82)
 ~~~
+
+# Quadratic convergence
 
 # Exercise 5.7 [@vaes22, pp. 139] {.split}
 
@@ -661,16 +660,14 @@ Find the point $(x, y)$ on the parabola $y = x^2$ that is closest to the point $
 ::::: {.col}
 
 ~~~ {.julia .jupyter}
-f(x) = exp(x) - 2
-grad(x) = exp(x)
-ϵ = 10^-7
-
-let x = 1.41
-  while abs(f(x)) > ϵ
-    x -= f(x) / grad(x)
-  end
-  x
+using Zygote # Library for automatic differentiation
+function newton_raphson(f, x, ϵ = 10^-12)
+    while abs(f(x)) > ϵ
+        x -= f(x) / f'(x)
+    end
+    return x
 end
+newton_raphson(x -> exp(x) - 2, 1.41)
 ~~~
 
 :::::
