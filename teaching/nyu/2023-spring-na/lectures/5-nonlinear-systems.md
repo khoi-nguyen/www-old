@@ -480,7 +480,7 @@ around $\vec x_\star$
 and that $\vec F(\vec x_\star) = \vec x_\star$.
 If in addition
 \begin{align*}
-\norm {\vec J_{\vec F}(\vec x_\star)} < 1,
+L \defeq \norm {\vec J_{\vec F}(\vec x_\star)} < 1,
 \end{align*}
 there exists $\delta > 0$ such that the following property holds:
 if $\vec x_0 \in B_\delta(\vec x)$, then $\vec x_k \in B_\delta(\vec x_\star)$ for every $k \in \N$ and
