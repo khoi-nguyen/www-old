@@ -29,13 +29,23 @@ def prepare(doc: pf.Doc) -> None:
         return None
 
     has_columns = False
+    default_split_value = getattr(doc, "get_metadata")("split", False)
+    split = default_split_value
     for element in reversed(doc.content):
         if isinstance(element, pf.Header) and element.level == 1:
             if has_columns and "row" not in element.classes:
                 element.classes.append("row")
+            if (
+                split
+                and "split" not in element.classes
+                and "nosplit" not in element.classes
+            ):
+                element.classes.append("split")
             has_columns = False
+            split = default_split_value
         if isinstance(element, pf.Div) and "col" in element.classes:
             has_columns = True
+            split = False
 
 
 def slides(element: pf.Element, doc: pf.Doc) -> None | list[pf.Element]:
