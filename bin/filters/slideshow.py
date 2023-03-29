@@ -23,7 +23,8 @@ def finalize(doc: pf.Doc):
 def prepare(doc: pf.Doc) -> None:
     """Act on the document before the filter
 
-    Automatically add the "row" class to slides that have columns inside them.
+    - Automatically add the "row" class to slides that have columns inside them.
+    - If 'split' is set to True, automatically split slides unless it has the 'nosplit' class.
     """
     if doc.format != "revealjs":
         return None
