@@ -37,7 +37,7 @@ notes: |
 - Can be purchased at *Mistral Photo*, 40 rue Saint-Jacques.
 :::
 
-# Prerequisites and TOC {.row}
+# Prerequisites and TOC
 
 ::::: {.col}
 
@@ -63,7 +63,7 @@ notes: |
 
 :::::
 
-# Lecture notes {.row}
+# Lecture notes
 
 ::: col
 <pdf-reader src="/static/documents/math-ua_9252.pdf">
@@ -74,7 +74,7 @@ notes: |
 - Exercises at the end of each chapter
 :::
 
-# Motivations {.row}
+# Motivations
 
 ::: col
 ::: question
@@ -286,7 +286,7 @@ Format           Machine $\epsilon$
 
 :::
 
-# Machine $\epsilon$ [@vaes22, p.8] {.row}
+# Machine $\epsilon$ [@vaes22, p.8]
 
 ::: col
 

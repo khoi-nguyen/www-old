@@ -8,7 +8,7 @@ notes: |
   - 22/02: probabilities, Monte-Carlo, variance calculation (36-end)
 ...
 
-# International Day of Women and Girls in Science (11/02) {.row}
+# International Day of Women and Girls in Science (11/02)
 
 ::::: {.col}
 ![](/static/images/1676240183.png){height=100%}
@@ -19,7 +19,7 @@ notes: |
 </iframe>
 :::::
 
-# Numerical integration {.row}
+# Numerical integration
 
 ::::: {.col}
 - We will assume without loss of generality that we're working on $[-1, 1]$.
@@ -61,7 +61,7 @@ Step 2
 : Calculate $$\int_{-1}^1 \widehat u(x) \dd x.$$
 :::
 
-# Closed Newton-Cotes [@vaes22, p. 55] {.row}
+# Closed Newton-Cotes [@vaes22, p. 55]
 
 ::::: {.col}
 ~~~ {.julia .plot}
@@ -96,7 +96,7 @@ where $\varphi_0, \dots, \varphi_n$ are the Lagrange polynomials associated with
 Moreover, it is **exact** for polynomials of degree less than or equal to $n$.
 :::
 
-# Finding the weights [@vaes22, p. 55] {.row}
+# Finding the weights [@vaes22, p. 55]
 
 ::::: {.col}
 $$\boxed{w_i = \int_{-1}^1 \varphi_i(x) \dd x}$$
@@ -243,7 +243,7 @@ $$\left|\int_a^b u(x) \dd x - \widehat I_h\right| \leq
 \frac {b - a} {12} \left(\sup_{[a, b]} |u''|\right) h^2$$
 :::
 
-# 15 February (or February 15) {.row}
+# 15 February (or February 15)
 
 ::::: {.col}
 
@@ -382,7 +382,7 @@ $$J(h) = \frac h 3 \left( u(x_0) + 4 u(x_1) + 2 u(x_2) + \dots + 4 u(x_{n - 1}) 
 
 Note: $J$ only has an expansion in even powers.
 
-# Summary (20/02) {.row}
+# Summary (20/02)
 
 ::::: col
 
@@ -450,7 +450,7 @@ url: https://www.geogebra.org/m/umythyvv
 width: 1400
 ~~~
 
-# Recalls: Runge phenomenon {.row}
+# Recalls: Runge phenomenon
 
 ::::: col
 
@@ -672,7 +672,7 @@ Integration in dimension $d \gg 1$ is an active research area.
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Pi_30K.gif/220px-Pi_30K.gif){width=40%}
 :::
 
-# Recalls 22/02 {.row}
+# Recalls 22/02
 
 ::::: {.col}
 

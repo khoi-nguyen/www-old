@@ -55,7 +55,7 @@ $$\widehat u(x) = \alpha_0 + \alpha_1 x + \alpha_2 x (x - 1)$$
 \end{pmatrix}
 \end{align*}
 
-# Forward and backward substitution {.row}
+# Forward and backward substitution
 
 ::::: col
 
@@ -186,7 +186,7 @@ Use a LU decomposition to solve the following system:
 \end{align*}
 :::
 
-# Recalls 25/02 {.row}
+# Recalls 25/02
 
 ::::: {.col}
 
@@ -431,7 +431,7 @@ For any matrix norm,
 
 Proof: [@vaes22, p. 174]
 
-# Recalls 01/03 {.row}
+# Recalls 01/03
 
 ::::: {.col}
 
@@ -670,7 +670,7 @@ The Richardson update can be written
 We are moving in the direction where $f$ decreases the most.
 We shall encounter this idea again later.
 
-# 3 March 2023 {.row}
+# 3 March 2023
 
 ::::: {.col}
 
@@ -869,7 +869,7 @@ x^{(k + 1)}_i = \frac 1 {a_{ii}} \left(-\sum_{\substack{j = 1\\ j \neq i}}^n a_{
 
 The components of $\vec x^{(k + 1)}$ can be calculated independently!
 
-# 8 March 2023 {.row}
+# 8 March 2023
 
 ::: col
 
@@ -937,7 +937,7 @@ If $\mat A$ is strictly row or column diagonally dominant,
 then the Jacobi iteration converges for all choices of $\vec x^{(0)}$.
 :::
 
-# Jacobi's method with Julia {.row}
+# Jacobi's method with Julia
 
 ::::: {.col}
 
@@ -1021,7 +1021,7 @@ which could equivalently be written
 \right .
 \end{align*}
 
-# Gauss-Seidel implementation [@vaes22, p. 96] {.row}
+# Gauss-Seidel implementation [@vaes22, p. 96]
 
 ::::: {.col}
 
@@ -1107,7 +1107,7 @@ Jacobi                 $\mat D$                           $-\mat L - \mat U$    
 Gauss-Seidel           $\mat L + \mat D$                  $-\mat U$                                     Diagonally dominant, symmetric positive definite
 Relaxation             $\frac {\mat D} \omega + \mat L$   $\frac {1 - \omega} \omega \mat D - \mat U$   Diagonally dominant, symmetric positive definite
 
-# 20 March 2023 {.row}
+# 20 March 2023
 
 ::::: {.col}
 
@@ -1190,7 +1190,7 @@ In particular, $f$ has a unique *critical value* $\vec x_\star$,
 which is a **minimum**.
 :::
 
-# Reading contour plots {.row}
+# Reading contour plots
 
 ::::: {.col}
 ~~~ {.julia .plot width=100%}
@@ -1241,7 +1241,7 @@ scatter!([sol[1]], [sol[2]], label="Solution")
 title!("One iteration of Richardson's method")
 ~~~
 
-# Richardson visualized {.row}
+# Richardson visualized
 
 ::::: {.col}
 
@@ -1335,7 +1335,7 @@ The spectral radius $\rho$ of $\mat I - \omega \mat A$ is minimal when
 How would you calculate $\lambda_{\max}$ and $\lambda_{\min}$ in practice?
 :::
 
-# Improvement over Richardson's iteration: steepest descent {.row}
+# Improvement over Richardson's iteration: steepest descent
 
 ::::: {.col}
 
@@ -1545,7 +1545,7 @@ For the proof, see [@vaes22, p. 104].
 - How does it compare to *Richardson's method*?
 :::
 
-# Steepest descent: exercise [@vaes22, p. 115] {.row}
+# Steepest descent: exercise [@vaes22, p. 115]
 
 ::::: {.col}
 ![](/static/images/1678653892.png){width=100%}
@@ -1562,7 +1562,7 @@ contour(-3:0.01:3, -3:0.01:3, f, color=:turbo, fill=true)
 ~~~
 :::::
 
-# Issue with steepest descent {.row}
+# Issue with steepest descent
 
 ::::: {.col}
 
@@ -1738,7 +1738,7 @@ as $k$ increases.
 \end{align*}
 :::
 
-# Conjugate gradients: code [@vaes22, p. 110] {.row}
+# Conjugate gradients: code [@vaes22, p. 110]
 
 ::::: {.col}
 

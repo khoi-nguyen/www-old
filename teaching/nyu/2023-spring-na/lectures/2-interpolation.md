@@ -8,7 +8,7 @@ notes: |
   - 08/02: Chebyshev nodes and derivation of normal equations.
 ...
 
-# Chapter 1 summary {.row}
+# Chapter 1 summary
 
 ::::: {.col}
 - Floats are stored in binary with **finite precision**
@@ -401,7 +401,7 @@ p(x) = \sum_{i = 0}^n \underbrace{\overbrace{[u_0, \dots, u_i]}^{\text{divided}\
 \prod_{j = 0}^{i - 1} (x - x_j)
 \end{align}
 
-::::: {.row}
+:::::
 ::::: {.col}
 
 #### Interpolation in Julia
@@ -505,7 +505,7 @@ where $h$ is the maximum spacing between two successive interpolation nodes.
 What happens when $n \to +\infty$?
 :::
 
-# The Runge function {.row}
+# The Runge function
 
 ::::: {.col}
 ~~~ {.julia .plot}
@@ -626,7 +626,7 @@ T_9(x) &= 256x^9 - 576x^7 + 432x^5 - 120x^3 + 9x \\
 T_{10}(x) &= 512x^{10} - 1280x^8 + 1120x^6 - 400x^4 + 50x^2-1
 \end{align}
 
-# Monic Chebyshev polynomials {.row}
+# Monic Chebyshev polynomials
 
 ::::: {.col}
 ~~~ {.julia .plot width=100%}
@@ -650,7 +650,7 @@ end
 ~~~
 :::::
 
-# Summary {.row}
+# Summary
 
 ::::: col
 
@@ -983,7 +983,7 @@ $$\langle \varphi_i, \varphi_j \rangle
 Such polynomials are called **orthonormal**.
 Orthogonal polynomials can always be obtained via the **Gram-Schmidt** procedure.
 
-# Summary {.row}
+# Summary
 
 ::::: {.col}
 
@@ -1059,7 +1059,7 @@ dot(coefficients, base)
 
 :::::
 
-# Summary: choice of nodes {.row}
+# Summary: choice of nodes
 
 ::::: col
 
