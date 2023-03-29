@@ -317,7 +317,7 @@ I hope you don't mind that I didn't write it like that.
    we will still have convergence to $\vec x_\star$,
    with an estimate on that convergence.
 
-# 27 March 2023 {.row}
+# 29 March 2023 {.row}
 
 ::::: {.col}
 
@@ -383,8 +383,7 @@ Moreover, convergence is **linear** and the solution is **exponentially stable**
 
 ### Announcements
 
-- Homework on relaxation method due **today**
-- French sentence of the day:
+- Online Lecture on Friday 31 March 2022
 
 :::::
 
@@ -574,6 +573,30 @@ converges **quadratically**
 provided that $x_0$ is sufficiently close to $x_\star$.
 :::
 
+# Meaning of quadratic convergence {.split}
+
+::: {.info title="Quadratic convergence"}
+\begin{align*}
+\lim_{k \to +\infty}
+\frac {
+\norm {\vec x_{k + 1} - \vec x_\star}
+} {
+\norm {\vec x_k - \vec x_\star}^2
+} = C.
+\end{align*}
+:::
+
+Assume that $\abs {x_k - x_\star} = 10^{-p}$.
+It follows that
+
+\begin{align*}
+\abs {x_{k + 1} - x_\star} \leq C \times 10^{-2p}.
+\end{align*}
+
+Intuitively, provided that $C$ isn't too large,
+the number of \emph{correct decimals} double at each iteration
+if we are sufficiently close to the solution.
+
 # Chord method in Julia {.split}
 
 \begin{align*}
@@ -590,8 +613,6 @@ end
 
 chord_method(x -> x^2 - 2, 1.41, 2.82)
 ~~~
-
-# Quadratic convergence
 
 # Exercise 5.7 [@vaes22, pp. 139] {.split}
 
