@@ -6,7 +6,7 @@ notes: |
   - 29/03: Local Banach fixed point, condition on the derivative, chord method (17-30)
 ...
 
-# Starter {.row}
+# Starter
 
 ::::: {.col}
 
@@ -318,7 +318,7 @@ I hope you don't mind that I didn't write it like that.
    we will still have convergence to $\vec x_\star$,
    with an estimate on that convergence.
 
-# 29 March 2023 {.row}
+# 29 March 2023
 
 ::::: {.col}
 
@@ -682,7 +682,7 @@ x_{k + 1} \defeq x_k - \frac {f(x_k)} {f'(x_k)}
 :::
 
 
-# Exercises 5.8 and 5.9 [@vaes22, p. 139] {.row}
+# Exercises 5.8 and 5.9 [@vaes22, p. 139]
 
 ::::: {.col}
 ::: exercise
