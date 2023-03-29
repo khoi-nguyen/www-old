@@ -20,6 +20,24 @@ def finalize(doc: pf.Doc):
         doc.content.append(pf.RawBlock("</div>", format="html"))
 
 
+def prepare(doc: pf.Doc) -> None:
+    """Act on the document before the filter
+
+    Automatically add the "row" class to slides that have columns inside them.
+    """
+    if doc.format != "revealjs":
+        return None
+
+    has_columns = False
+    for element in reversed(doc.content):
+        if isinstance(element, pf.Header) and element.level == 1:
+            if has_columns and "row" not in element.classes:
+                element.classes.append("row")
+            has_columns = False
+        if isinstance(element, pf.Div) and "col" in element.classes:
+            has_columns = True
+
+
 def slides(element: pf.Element, doc: pf.Doc) -> None | list[pf.Element]:
     """Wrap the slide contents in a div and customise the slide title
 
@@ -63,4 +81,4 @@ def slides(element: pf.Element, doc: pf.Doc) -> None | list[pf.Element]:
 
 
 if __name__ == "__main__":
-    pf.run_filter(slides, finalize=finalize)
+    pf.run_filter(slides, prepare=prepare, finalize=finalize)
