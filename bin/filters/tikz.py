@@ -16,6 +16,8 @@ TEMPLATE: str = r"""
 \usepackage{tikz}
 \begin{document}
 \usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{intersections}
 \scalebox{%s}{
 \begin{tikzpicture}[%s]
 %s
