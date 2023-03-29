@@ -7,7 +7,7 @@ output: revealjs
 
 # Lecture notes and resources
 
-# Differential equations {.split}
+# Differential equations
 
 \begin{align*}
 \boxed{
@@ -23,7 +23,7 @@ equations**—perhaps the **greatest advance in thought** that a
 single individual was ever privileged to make.
 :::
 
-# What's a differential equation? [@zill, p. 3] {.split}
+# What's a differential equation? [@zill, p. 3]
 
 ::: {.definition title="Differential Equation"}
 Equation containing at least one **derivative** (of any order) of an unknown function.

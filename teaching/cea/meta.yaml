@@ -3,6 +3,7 @@ dir: /teaching/cea/
 institute: CEA Study Abroad
 author: NGUYỄN Khôi <<nguyen.khoi@nyu.edu>>
 logo: /static/cea_logo.png
+split: True
 references:
   - id: zill
     title: "Differential Equations with Boundary-Value Problems"
