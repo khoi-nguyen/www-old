@@ -90,6 +90,45 @@ Soient deux événements $A, B \subset \Omega$.
 ![](/static/images/1679903030.png)
 ![](/static/images/1679903069.png)
 
+# Probabilité conditionnelle {.split}
+
+::: {.definition title="Probabilité conditionnelle"}
+La probabilité de $A$ *si* $B$ est donnée par
+\begin{align*}
+\P(A | B) \defeq \frac {\P(A \cap B)} {\P(B)}
+\end{align*}
+:::
+
+::: remark
+Il est préférable, si possible, de juste se restreindre
+aux possibilités qui satisfont $B$.
+:::
+
+![](/static/images/1680069286.png)
+![](/static/images/1680069319.png)
+
+# Indépendance {.split}
+
+::: definition
+On dit que $A$ et $B$ sont indépendants si
+\begin{align*}
+\P(A | B) = \P(A)
+\quad \text{et} \quad
+\P(B | A) = \P(B).
+\end{align*}
+:::
+
+En pratique, on utilise le critère suivant.
+
+::: proposition
+$A$ et $B$ sont indépendants si et seulement si
+\begin{align*}
+\P(A \cap B) = \P(A) \P(B).
+\end{align*}
+:::
+
+![](/static/images/1680069612.png)
+
 # Probabilité: définition continue {.row}
 
 ::::: {.col}
