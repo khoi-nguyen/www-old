@@ -57,7 +57,7 @@ plot(x, f.(x), aspect_ratio = :equal, framestyle = :origin, label=L"\sqrt{1 - x^
 $$A = 4 \int_0^r \sqrt{r^2 - x^2} \dd x$$
 :::
 
-# Un petit peu de musique {.row}
+# Un petit peu de musique
 
 ::::: {.col}
 Supposons qu'on presse $3$ notes sur un clavier
@@ -196,7 +196,7 @@ $$x(t) = x_0 + \int_{t_0}^t v(x) \dd x.$$
 
 ![](/static/images/1678142678.png){width=100%}
 
-# 8 mars {.row}
+# 8 mars
 
 ::::: {.col}
 
@@ -286,7 +286,7 @@ Utiliser le calcul intégral pour calculer le volume d'une pyramide.
 
 ![](/static/images/1678259040.png)
 
-# Exercices supplémentaires {.row}
+# Exercices supplémentaires
 
 ::::: {.col}
 <iframe src="https://www.bibmath.net/ressources/index.php?action=affiche&quoi=bde/analyse/integration/integration-calcul&type=fexo" width="100%" height=900></iframe>

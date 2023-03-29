@@ -5,7 +5,7 @@ notes: |
   - 15/01: Introduction à l'intégration
 ...
 
-# Bonjour à tous! {.row}
+# Bonjour à tous!
 
 ::::: {.col}
 ::: info
@@ -43,7 +43,7 @@ Calculons l'aire sous la fonction $f(x) = e^x$
 entre $0$ et $1$.
 :::
 
-# Introduction: calcul de $\pi$ à l'ordinateur {.row}
+# Introduction: calcul de $\pi$ à l'ordinateur
 
 ::::: {.col}
 ~~~ {.julia .plot}
@@ -72,7 +72,7 @@ aire = sum(1/n * f.(x))
 ~~~
 :::::
 
-# La méthode de Monte-Carlo {.row}
+# La méthode de Monte-Carlo
 
 ::::: {.col}
 ![](https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif)
@@ -108,7 +108,7 @@ while True is True:
 ~~~
 :::::
 
-# Un peu d'histoire {.row}
+# Un peu d'histoire
 
 ::::: {.col}
 - Antiquité: essayent de calculer des aires (très long)
@@ -339,7 +339,7 @@ Note à moi-même: introduire la substitution par $\dd u$.
 
 ![](/static/images/1674019422.png){width=100%}
 
-# Rappels {.row}
+# Rappels
 
 ::::: {.col}
 ::: {.block title="Semaine SIDAMOUR"}

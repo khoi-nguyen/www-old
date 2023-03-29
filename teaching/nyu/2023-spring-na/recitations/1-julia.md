@@ -15,7 +15,7 @@ output: revealjs
 <iframe src="https://learnxinyminutes.com/docs/julia/" width="80%" height="800">
 </iframe>
 
-# Help and documentation {.row}
+# Help and documentation
 
 ::: col
 
@@ -47,7 +47,7 @@ plot(cos)
 
 :::
 
-# Exercise {.row}
+# Exercise
 
 ::: col
 ::: task

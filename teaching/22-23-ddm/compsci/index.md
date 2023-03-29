@@ -35,7 +35,7 @@ print("L'aire est", aire)
 - Pourquoi utilisons-nous parfois des guillemets et parfois pas?
 :::
 
-# Conditions {.row}
+# Conditions
 
 ::::: {.col}
 
@@ -96,7 +96,7 @@ if unité == "degrés":
 L = rayon * angle
 ~~~
 
-# Répéter des instructions {.row}
+# Répéter des instructions
 
 ::::: {.col}
 
@@ -127,7 +127,7 @@ print("Cette instruction n'est pas répétée car non indentée")
 ~~~
 :::::
 
-# Nombres triangulaires {.row}
+# Nombres triangulaires
 
 ::::: {.col}
 ::: exercise
@@ -141,7 +141,7 @@ Afficher $1000$ termes de la suite $1, 3, 6, 10, 15, \dots$ (nombres triangulair
 ~~~
 :::::
 
-# Fibonacci {.row}
+# Fibonacci
 
 ::::: {.col}
 ::: exercise
@@ -159,7 +159,7 @@ En déduire une approximation du *nombre d'or*.
 ~~~
 :::::
 
-# Fizzbuzz {.row}
+# Fizzbuzz
 
 ::::: {.col}
 ::: exercise

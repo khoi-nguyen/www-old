@@ -80,7 +80,7 @@ Il fait également des découvertes importantes en optique.
 De mon côté, pendant le confinement,
 j'ai essayé d'apprendre à un perroquet madrilène un chant indépendentiste catalan.
 
-# Comment définir la pente en un point? {.row}
+# Comment définir la pente en un point?
 
 ::::: {.col}
 ::: question
@@ -638,7 +638,7 @@ En considérant la fonction $f(x) = x^2 - 2$,
 applique Newton-Raphson pour estimer $\sqrt 2$.
 :::
 
-# Méthode de Newton-Raphson {.row}
+# Méthode de Newton-Raphson
 
 ::::: {.col}
 

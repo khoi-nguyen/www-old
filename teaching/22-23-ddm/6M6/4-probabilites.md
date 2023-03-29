@@ -129,7 +129,7 @@ $A$ et $B$ sont indépendants si et seulement si
 
 ![](/static/images/1680069612.png)
 
-# Probabilité: définition continue {.row}
+# Probabilité: définition continue
 
 ::::: {.col}
 ::: {.definition title="Probabilité"}
