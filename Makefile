@@ -45,7 +45,7 @@ build/%.html: %.md build/%.json templates/ bin/ bin/filters $(META) .venv/bin/ac
 
 build/%.tex: %.md build/%.json templates/ bin/ bin/filters $(META) .venv/bin/activate
 	@echo "Building $@"
-	@$(PYTHON) ./bin/pandoc.py $< -o $@
+	@$(PYTHON) ./bin/pandoc.py --meta-file=$(word 2, $^) $< -o $@
 
 build/main.js: node_modules src/ src/elements
 	@echo "Building $@"
