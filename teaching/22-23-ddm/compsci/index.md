@@ -2,6 +2,7 @@
 title: Informatique
 output: revealjs
 kernel: python
+split: true
 ...
 
 # Google Colab
@@ -81,7 +82,7 @@ unité = input("'radians' ou 'degrés' ?")
 
 :::::
 
-# Solution de l'exercice {.split}
+# Solution de l'exercice
 
 ~~~ {.python .jupyter}
 from math import pi
@@ -178,3 +179,76 @@ Indice: l'opérateur $\%$ retourne le reste de la division.
 7 % 3
 ~~~
 :::::
+
+# Fonctions
+
+::::: {.col}
+
+- On peut créer de nouvelles commandes.
+- Les instructions doivent être **indentées**
+- La réponse est renvoyée par le mot clé `return`.
+
+~~~ {.python .jupyter}
+def aire_rectangle(l, L):
+    aire = l * L
+    return aire
+
+def circonference(rayon):
+    return 3.14 * rayon ** 2
+~~~
+
+:::::
+
+::::: {.col}
+::: exercise
+Écrire une fonction `factorielle` qui,
+lorsqu'on lui donne un paramètre $n$,
+calcule $1 \cdot 2 \cdot 3 \cdot \dots \cdot n$.
+:::
+
+~~~ {.python .jupyter}
+def factorielle(n)
+   # Votre code ici
+   return resultat
+~~~
+:::::
+
+# Graphes et calcul scientifique
+
+::::: {.col}
+
+~~~ {.python .jupyter}
+# Importe des fonctionnalités mathématiques
+from sympy import *
+
+# Crée une "inconnue" x
+x = Symbol("x")
+
+f = (sin(x), (x, -pi, pi))
+g = (x - x**3/ (3 * 2), (x, -pi, pi))
+plot(f, g)
+~~~
+
+:::::
+::::: {.col}
+
+::: exercise
+Vérifie par graphique que
+\begin{align*}
+\sin x \approx x - \frac {x^3} {3 \cdot 2 \cdot 1} + \frac {x^5} {5 \cdot 4 \cdot \dots \cdot 1}
+- \frac {x^7} {7 \cdot 6 \cdot \dots \cdot 1} + \dots
+\end{align*}
+
+Créer une fonction `approxime_sin(x, n)` qui approxime sinus par un polynôme de degré $n$.
+:::
+
+:::::
+
+# Résoudre des équations
+
+~~~ {.python .jupyter}
+from sympy import *
+x = Symbol("x")
+
+solve(x**2 - 5*x + 6)
+~~~
