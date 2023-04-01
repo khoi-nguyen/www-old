@@ -5,7 +5,6 @@ import typing
 import flask
 import flask_login
 import flask_socketio
-import requests
 import werkzeug
 
 DEBUG = os.environ.get("ENVIRONMENT", "") != "production"
@@ -72,20 +71,9 @@ BoardList = list[list[list[Stroke]]]
 @flask_login.login_required
 def socket(url: str = "") -> werkzeug.Response:
     json = flask.request.get_json() or {}
-    forward_socket(url, json)
     json.update({"url": "/" + url})
     socketio.emit("changeReceived", json, broadcast=True)
     return flask.jsonify({"success": True})
-
-
-def forward_socket(url, json):
-    password = os.environ.get("REMOTE_PASSWORD", False)
-    if not password:
-        return None
-    with requests.Session() as session:
-        root = "https://nguyen.me.uk/"
-        session.post(root + "/login", data={"password": password})
-        session.post(root + "/socketio/" + url, json=json)
 
 
 @app.route("/boards/<path:url>", methods=["POST"])
