@@ -1,5 +1,5 @@
 ---
-title: Solution of nonlinear systems
+title: "Chapter 5: Solution of nonlinear systems"
 output: revealjs
 notes: |
   - 22/03: Bisection method, convergence speed, Banach fixed point (1-16)
