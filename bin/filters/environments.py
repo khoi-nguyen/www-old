@@ -8,7 +8,7 @@ environment = jinja2.Environment()
 
 
 def environments(element: pf.Element, doc: pf.Doc):
-    if not isinstance(element, pf.Div):
+    if not isinstance(element, pf.Div) or doc.format not in ["html", "revealjs"]:
         return element
     envs: dict[str, dict] = getattr(doc, "get_metadata")("envs", {})
     if "solution" in element.classes:
