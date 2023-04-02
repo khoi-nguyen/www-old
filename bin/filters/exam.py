@@ -34,7 +34,7 @@ def exam(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
     if isinstance(element, pf.Header) and element.level == 1:
         tex = ""
         if close_parts:
-            tex = r"\end{parts}"
+            tex = r"\end{parts}" + "\n\n"
             close_parts = False
             first_part = True
         if pf.stringify(element):
