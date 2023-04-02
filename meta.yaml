@@ -190,8 +190,6 @@ envs:
       - bg-primary
       - text-white
 ...
-\DeclareMathOperator{\spectrum}{Sp}
-\DeclareMathOperator{\proj}{proj}
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\E}{\mathbf{E}}
 \newcommand{\F}{\mathbf{F}}
@@ -205,17 +203,19 @@ envs:
 \newcommand{\dd}{\,\mathrm{d}}
 \newcommand{\defeq}{\stackrel{\text{def}}{=}}
 \newcommand{\dom}{\mathrm{dom}}
-\newcommand{\d}{\,\mathrm{d}}
+\renewcommand{\d}{\,\mathrm{d}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\floor}[1]{\lfloor#1\rfloor}
 \newcommand{\fl}{\mathrm{fl}}
-\newcommand{\iff}{\Longleftrightarrow}
+\renewcommand{\iff}{\Longleftrightarrow}
 \newcommand{\im}{\mathrm{im}}
 \newcommand{\ip}[1]{\langle#1\rangle}
 \newcommand{\mat}{\mathsf}
 \newcommand{\norm}[1]{\lVert#1\rVert}
 \newcommand{\placeholder}{\mathord{\color{lightgray}\bullet}}
-\newcommand{\span}{\mathrm{span}}
+\newcommand{\proj}{\mathrm{proj}}
+\renewcommand{\span}{\mathrm{span}}
+\newcommand{\spectrum}{\mathrm{Sp}}
 \renewcommand{\P}{\mathbf{P}}
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\i}{\mathrm{i}}
