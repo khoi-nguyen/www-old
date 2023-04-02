@@ -132,4 +132,53 @@ function railey_quotient(A, x, n)
 end
 ~~~
 
+# Towards subspace iterations
+
+::: proposition
+Assume $\mat A$ is symmetric.
+If $\vec v_1$ and $\vec v_2$ are two eigenvalues associated with two different eigenvalues $\lambda_1$, $\lambda_2$,
+then
+\begin{align*}
+\ip {\vec v_1, \vec v_2} = 0.
+\end{align*}
+:::
+
+::: proposition
+Assume that $x_0$ is orthogonal to the first eigenvector.
+The power iteration
+\begin{align*}
+\vec x_k \xrightarrow{k \to +\infty} \vec v_2.
+\end{align*}
+:::
+
+# Subspace iteration [@vaes22, p. 148]
+
+::::: {.col}
+
+### Power iteration
+
+\begin{align*}
+\vec y_k \defeq \vec A \vec x_k
+\end{align*}
+
+\begin{align*}
+\vec x_{k + 1} \defeq \frac {\vec x_k} {\norm {\vec x_k}}
+\end{align*}
+:::::
+
+::::: {.col}
+
+### Subspace iteration
+
+\begin{align*}
+\mat Y_k \defeq \vec A \mat X_k
+\end{align*}
+
+\begin{align*}
+\mat X_{k + 1} \defeq \text{orthonormalize the columns of} \ \mat Y_k
+\end{align*}
+:::::
+
+# The $\mat Q \mat R$ algorithm
+
 # Bibliography
