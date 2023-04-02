@@ -9,6 +9,7 @@ def finalize(doc: pf.Doc) -> None:
 
     tex = pf.RawBlock(r"\end{parts}", format="latex")
     doc.content.append(tex)
+    doc.content.pop(0)
 
 
 def exam(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
@@ -32,6 +33,8 @@ def exam(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
 
     if isinstance(element, pf.Header) and element.level == 2:
         tex = r"\part"
+        if "marks" in element.attributes:
+            tex += f"[{element.attributes['marks']}]"
         return pf.RawBlock(tex, format="latex")
 
     if isinstance(element, pf.Div) and len(element.classes) == 1:
