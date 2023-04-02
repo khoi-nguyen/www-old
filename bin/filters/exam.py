@@ -3,6 +3,14 @@
 import panflute as pf
 
 
+def finalize(doc: pf.Doc) -> None:
+    if doc.format != "latex":
+        return None
+
+    tex = pf.RawBlock(r"\end{parts}", format="latex")
+    doc.content.append(tex)
+
+
 def exam(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
     """Create an exam class LaTeX document
 
@@ -13,18 +21,18 @@ def exam(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
     if doc.format != "latex":
         return None
 
-    if isinstance(element, pf.Header):
-        cmd: list[str] = ["", "titledquestion", "part"]
-        tex: str = "\\" + cmd[element.level]
-        if element.level == 1:
-            if pf.stringify(element):
-                tex += "{" + pf.stringify(element) + "}"
-            else:
-                tex = tex.replace("titledquestion", "question")
+    if isinstance(element, pf.Header) and element.level == 1:
+        tex = r"\question"
+        if pf.stringify(element):
+            tex = r"\titledquestion{" + pf.stringify(element) + "}"
         if "marks" in element.attributes:
             tex += f"[{element.attributes['marks']}]"
-        question = pf.RawBlock(tex, format="latex")
-        return question
+        tex += r"\begin{parts}"
+        return pf.RawBlock(tex, format="latex")
+
+    if isinstance(element, pf.Header) and element.level == 2:
+        tex = r"\part"
+        return pf.RawBlock(tex, format="latex")
 
     if isinstance(element, pf.Div) and len(element.classes) == 1:
         env: str = element.classes[0]
@@ -35,4 +43,4 @@ def exam(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
 
 
 if __name__ == "__main__":
-    pf.toJSONFilter(exam)
+    pf.run_filter(exam, finalize=finalize)
