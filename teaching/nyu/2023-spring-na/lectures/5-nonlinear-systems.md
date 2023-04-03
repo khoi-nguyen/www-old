@@ -743,7 +743,7 @@ x_{k + 1} \defeq x_k - \frac {f(x_k)} {f'(x_k)}
 \end{align*}
 :::
 
-# Newton-Raphson: implementation
+# Newton-Raphson: implementation {.split}
 
 ~~~ {.julia .jupyter}
 using Zygote # Library for automatic differentiation
