@@ -630,6 +630,66 @@ using a logarithmic scale for the $y$ axis,
 the error in absolute value as a function of $k$.
 :::
 
+# 3 April 2023
+
+::::: {.col}
+
+### Solving $\vec f(\vec x) = \vec 0$
+
+Step 1
+: Rewrite $\vec f(\vec x) = \vec 0$ as a **fixed point** problem $\vec F(\vec x) = \vec x$.
+
+Step 2
+: Use the iteration $\vec x_{k + 1} = \vec F(\vec x_k)$.
+
+### Local convergence
+
+::: theorem
+If $\norm {\vec J_{\vec F}(\vec x_\star)} < 1$,
+the iteration
+\begin{align*}
+\vec x_{k + 1} \defeq \vec F(\vec x_k)
+\end{align*}
+converges to $\vec x_\star$
+provided that $\vec x_0$ is sufficiently close to $\vec x_\star$,
+and that fixed point is locally exponentially stable.
+
+If in addition $\vec J_{\vec F}(\vec x_\star) = \mat 0$,
+then convergence is **superlinear**.
+:::
+
+:::::
+
+::::: {.col}
+
+### Chord method
+
+~~~ {.tex .tikz opts="thick, yscale=0.65"}
+\draw[-latex,name path=xaxis] (-1,0) -- (12,0) node[above]{\large $x$};
+\draw[-latex] (0,-2) -- (0,8)node[right]{\large $y$};;
+\draw[ultra thick, blue,name path=function]  plot[smooth,domain=1:9.5] (\x, {0.1*\x^2-1.5}) node[left]{$f(x)$};
+\node[red,right=0.2cm] at (8,4.9) {\large Affine approximation};
+\draw[gray,thin,dotted] (8,0) -- (8,4.9) node[circle,fill,inner sep=2pt]{};
+\draw[dashed, red,name path=Tfunction]  plot[smooth,domain=0:9.5] (\x, {0.7*(\x-8) + 4.9});
+\draw (8,0.1) -- (8,-0.1) node[below] {$x_k$};
+\draw [name intersections={of=Tfunction and xaxis}] ($(intersection-1)+(0,0.1)$) -- ++(0,-0.2) node[below,fill=white] {$x_{k+1}$} ;
+~~~
+
+\begin{align*}
+\vec f(\vec x) = \vec 0
+\iff \vec F(\vec x) = \vec x - \mat A^{-1} \vec f(\vec x)
+\end{align*}
+
+- $\vec J_{\vec F}(\vec x) = \mat I - \mat A^{-1} \vec J_{\vec f}(\vec x)$
+- $\mat A = \vec J_{\vec f}(\vec x_\star) \implies$ **quadratic** convergence.
+
+### Announcements
+
+- Homework due Wednesday 12 April: Exercise 5.12
+- French sentence of the day:
+
+:::::
+
 # Towards Newton-Raphson {.split}
 
 ::: {.info title="Chord method"}
@@ -681,6 +741,29 @@ x_{k + 1} \defeq x_k - \frac {f(x_k)} {f'(x_k)}
 \end{align*}
 :::
 
+# Newton-Raphson: implementation
+
+~~~ {.julia .jupyter}
+using Zygote # Library for automatic differentiation
+function newton_raphson(f, x, ϵ = 10^-12)
+    while abs(f(x)) > ϵ
+        x -= f(x) / f'(x)
+    end
+    return x
+end
+newton_raphson(x -> x^2 - 2, 1.41)
+~~~
+
+~~~ {.julia .jupyter}
+using LinearAlgebra, Zygote
+function newton_raphson(f, J, x, ϵ = 10^-12)
+    while norm(f(x)) > ϵ
+        x -= J(x) \ f(x)
+    end
+    return x
+end
+~~~
+
 
 # Exercises 5.8 and 5.9 [@vaes22, p. 139]
 
@@ -705,7 +788,7 @@ function newton_raphson(f, x, ϵ = 10^-12)
     end
     return x
 end
-newton_raphson(x -> exp(x) - 2, 1.41)
+newton_raphson(x -> x^2 - 2, 1.41)
 ~~~
 
 :::::
@@ -734,6 +817,102 @@ x_{k + 1} \defeq x_k - \frac {f(x_k)}{f'(x_k)}
 \end{align*}
 
 then $(x_k)_{k \in \N}$ converges **quadratically** to $\vec x$.
+:::
+
+# BigFloat in Julia
+
+The `BigFloat` format has arbitrary precision.
+
+~~~ {.julia}
+# Set precision in bits
+setprecision(50)
+
+# Number of correct digits in base 10
+setprecision(50, base=10)
+
+BigFloat(π)
+~~~
+
+# A Numerical experiment
+
+~~~ {.julia .jupyter}
+function my_sqrt(a, ε = 10^-200)
+  x = 1.41
+  f(x) = x^2 - a
+  while abs(f(x)) > ε
+    x = x - f(x) / (2√a)
+    digits = ceil(Int, -log10(abs(x - sqrt(a))))
+    println("Number of correct digits: $digits")
+  end
+end
+setprecision(400, base=10)
+my_sqrt(BigFloat(2))
+~~~
+
+# The secant method [@vaes22, p. 135] {.split}
+
+::: question
+What if we don't know the derivative,
+but still want superlinear convergence or better?
+:::
+
+::: {.idea title="Secant method"}
+The next iteration $x_{k + 2}$ is given by the root of
+\begin{align*}
+f(x_k) + \frac {f(x_{k + 1}) - f(x_k)} {x_{k + 1} - x_k} (x - x_k)
+\approx f(x)
+\end{align*}
+:::
+
+::: proposition
+\begin{align*}
+x_{k + 2}
+= \frac {f(x_{k + 1}) x_k - f(x_k) x_{k + 1}} {f(x_{k + 1}) - f(x_k)}
+\end{align*}
+:::
+
+# The secant method: implementation [@vaes22, p. 135]
+
+~~~ {.julia .jupyter}
+function secant(f, x, ϵ = 10^-12)
+    while abs(f(x[end])) > ϵ
+        push!(x, (f(x[end]) * x[end-1] - f(x[end-1]) * x[end]) / (f(x[end]) - f(x[end-1])))
+    end
+    return x
+end
+secant(x -> x^2 - 2, [1.4, 1.41])
+~~~
+
+~~~ {.julia .jupyter}
+function secant(f, x, ϵ = 10^-12)
+    while abs(f(x[end])) > ϵ
+        x = [x[2], (f(x[2]) * x[1] - f(x[1]) * x[2]) / (f(x[2]) - f(x[1]))]
+    end
+    return x
+end
+secant(x -> x^2 - 2, [1.4, 1.41])
+~~~
+
+# Convergence of the secant method [@vaes22, p. 135] {.split}
+
+::: theorem
+Assume that $x_\star$ is a root of a function $f C^2(\R)$ with $f'(x_\star) \neq 0$.
+There exists $\delta > 0$ such that if $x_0, x_1 \in B_\delta(x_\star)$,
+the iteration defined by
+\begin{align*}
+x_{k + 2}
+= \frac {f(x_{k + 1}) x_k - f(x_k) x_{k + 1}} {f(x_{k + 1}) - f(x_k)}
+\end{align*}
+satisfies
+\begin{align*}
+\lim_{k \to +\infty}
+\frac {\abs{x_{k + 1} - x_\star}} {\abs{x_k - x_\star}^\varphi} \in \R,
+\qquad \varphi^2 - \varphi - 1 = 0.
+\end{align*}
+:::
+
+::: remark
+$\varphi$ is known as the **golden ratio**.
 :::
 
 # Bibliography
