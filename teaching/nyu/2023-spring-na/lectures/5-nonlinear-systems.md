@@ -4,6 +4,7 @@ output: revealjs
 notes: |
   - 22/03: Bisection method, convergence speed, Banach fixed point (1-16)
   - 29/03: Local Banach fixed point, condition on the derivative, chord method (17-30)
+  - 03/04: Newton-Raphson, secant method (31-end)
 ...
 
 # Starter
