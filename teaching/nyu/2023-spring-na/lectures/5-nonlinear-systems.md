@@ -756,9 +756,10 @@ newton_raphson(x -> x^2 - 2, 1.41)
 
 ~~~ {.julia .jupyter}
 using LinearAlgebra, Zygote
-function newton_raphson(f, J, x, ϵ = 10^-12)
+function newton_raphson(f, x, ϵ = 10^-12)
+    J(x) = jacobian(f, x)[1]
     while norm(f(x)) > ϵ
-        x -= J(x) \ f(x)
+        x -= jacobian(f, x)[1] \ f(x)
     end
     return x
 end
