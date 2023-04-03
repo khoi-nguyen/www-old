@@ -4,11 +4,108 @@ output: revealjs
 split: true
 ...
 
-# Naive method
+# Introduction: random browsing
+
+The web can be modelled with a **graph**.
+
+::: {.info name="Assumptions"}
+- Each page has the same probability to be the start page.
+- There is **at most one** link from one page to any other.
+- On each page, each link has the **same probability** of being clicked.
+:::
+
+::: {.example name="Notation"}
+- The pages will be denoted by $1, \dots, n$
+- $X_k$: position after $k$ random clicks
+:::
+
+::: {.idea title="PageRank algorithm"}
+- For small $k$, $\P(X_k = i)$ depends too much on $X_0$.
+- A good way to measure the popularity of page $i$ would be
+\begin{align*}
+\boxed{
+r_i \defeq \lim_{k \to +\infty} \P(X_k = i)
+}
+\end{align*}
+:::
+
+# Rank and PageRank
+
+::: {.definition title="Rank of order k"}
+\begin{align*}
+\vec r^{(k)} &\defeq \begin{pmatrix}
+\P(X_k = 1)\\
+\P(X_k = 2)\\
+\vdots\\
+\P(X_k = n - 1)\\
+\P(X_k = n)\\
+\end{pmatrix}
+\end{align*}
+:::
+
+::: {.definition title="PageRank vector"}
+If the limit exists,
+we call
+\begin{align*}
+\vec r^\star
+\defeq
+\lim_{k \to +\infty} \vec r^{(k)}
+\end{align*}
+the **PageRank** vector associated with the graph.
+:::
+
+# Transition matrix
+
+::: {.definition title="Transition Matrix"}
+Let $\mat T$ be the matrix defined by
+\begin{align*}
+T_{ij} &\defeq \P(X_{k + 1} = i \if X_k = j)
+\end{align*}
+:::
+
+::: proposition
+\begin{align*}
+\norm {\mat T}_1 = 1.
+\end{align*}
+In particular, $\rho(\mat T) \leq 1$.
+:::
+
+# PageRank and eigenvectors
+
+::: proposition
+\begin{align*}
+\vec r^{(k + 1)} = \mat T \vec r^{(k)}
+\end{align*}
+:::
+
+\begin{align*}
+\underbrace{\P(X_{k + 1} = i)}_{r^{(k + 1)}_i}
+= \sum_{i = 1}^n
+\underbrace{\P(X_{k + 1} = i | X_k = j)}_{T_{ij}}
+\underbrace{\P(X_k = j)}_{r^{(k)}_j}
+\end{align*}
+
+::: corollary
+The PageRank vector $\vec r^\star$
+satisfies
+\begin{align*}
+\vec r^\star = \mat T \vec r^\star.
+\end{align*}
+:::
+
+# Motivations and assumptions
 
 ::: question
 How to calculate the eigenvalues of a matrix?
 :::
+
+::: {.info title="Assumptions"}
+- $\mat A$ is **diagonalizable**
+- $\lambda_1 \geq \dots \geq \lambda_n$ are its eigenvalues (in **decreasing** order).
+- $\vec v_1, \dots, \vec v_n$ are the **eigenvectors** associated with $\lambda_1, \dots, \lambda_n$.
+:::
+
+# Naive method
 
 ::: algorithm
 #. Calculate the coefficients of
@@ -19,6 +116,10 @@ p_{\mat A}(\lambda) \defeq \det(\mat A - \lambda \mat I)
 #. Finding the roots of $p_{\mat A}$.
 :::
 
+::: remark
+Calculating $\det(\mat A)$ is $\bigo(n!)$.
+:::
+
 # Power iteration [@vaes22, p. 145]
 
 \begin{align*}
@@ -26,13 +127,33 @@ p_{\mat A}(\lambda) \defeq \det(\mat A - \lambda \mat I)
 \end{align*}
 
 ::: proposition
+Let $\vec x_0 \in \R^n$.
 \begin{align*}
 \mat A^k \vec x_0
 = \lambda_1^k \alpha_1 \vec v_1 + \dots + \lambda_n^k \alpha_n \vec v_n.
 \end{align*}
 :::
 
+::: remark
+Iterating amplifies the coefficient associated with the dominant eigenvalue.
+\begin{align*}
+\mat A^k \vec x_0
+= \lambda_1^k \left(
+\alpha_1 \vec v_1
++ \alpha_2 \left(\frac {\lambda_2} {\lambda_1}\right)^k \vec v_2
++ \dots
++ \alpha_n \left(\frac {\lambda_n} {\lambda_1}\right)^k \vec v_n
+\right).
+\end{align*}
+:::
+
 # Power iteration: Julia code
+
+::: {.algorithm title="Power iteration"}
+\begin{align*}
+\vec x_{k + 1} \defeq \frac {\mat A \vec x_k} {\norm {\mat A \vec x_k}}
+\end{align*}
+:::
 
 ~~~ {.julia .jupyter}
 function power_iteration(A, x, n)
