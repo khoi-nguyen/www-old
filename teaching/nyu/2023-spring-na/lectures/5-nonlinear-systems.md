@@ -686,7 +686,9 @@ then convergence is **superlinear**.
 ### Announcements
 
 - Homework due Wednesday 12 April: Exercise 5.12
-- French sentence of the day:
+- French sentence of the day: Le certificat de naissance long format^[
+  Unfortunately, I couldn't find a French translation for 'perp walk',
+  so this will have to do.]
 
 :::::
 
@@ -757,7 +759,6 @@ newton_raphson(x -> x^2 - 2, 1.41)
 ~~~ {.julia .jupyter}
 using LinearAlgebra, Zygote
 function newton_raphson(f, x, ϵ = 10^-12)
-    J(x) = jacobian(f, x)[1]
     while norm(f(x)) > ϵ
         x -= jacobian(f, x)[1] \ f(x)
     end
@@ -834,20 +835,36 @@ setprecision(50, base=10)
 BigFloat(π)
 ~~~
 
-# A Numerical experiment
+# A Numerical experiment: $\sqrt 2$ [@vaes22, p. 137]
 
 ~~~ {.julia .jupyter}
-function my_sqrt(a, ε = 10^-200)
-  x = 1.41
-  f(x) = x^2 - a
-  while abs(f(x)) > ε
-    x = x - f(x) / (2√a)
-    digits = ceil(Int, -log10(abs(x - sqrt(a))))
+function sqrt_two(x, ε = 10^-200)
+  f(x) = x^2 - 2
+  error(x) = abs(x - sqrt(BigFloat(2)))
+  while error(x) > ε
+    x -= f(x) / (2√BigFloat(2))
+    digits = ceil(Int, -log10(error(x)))
     println("Number of correct digits: $digits")
   end
 end
 setprecision(400, base=10)
-my_sqrt(BigFloat(2))
+sqrt_two(BigFloat(1.41))
+~~~
+
+# A Numerical experiment: $\pi$ [@vaes22, p. 137]
+
+~~~ {.julia .jupyter}
+function my_pi(x, ε = 10^-200)
+  f(x) = sin(x)
+  error(x) = abs(x - BigFloat(π))
+  while error(x) > ε
+    x -= f(x) / -1
+    digits = ceil(Int, -log10(error(x)))
+    println("Number of correct digits: $digits")
+  end
+end
+setprecision(400, base=10)
+my_pi(BigFloat(3.14))
 ~~~
 
 # The secant method [@vaes22, p. 135] {.split}
