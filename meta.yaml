@@ -207,6 +207,7 @@ envs:
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\floor}[1]{\lfloor#1\rfloor}
 \newcommand{\fl}{\mathrm{fl}}
+\newcommand{\if}{\,|\,}
 \renewcommand{\iff}{\Longleftrightarrow}
 \newcommand{\im}{\mathrm{im}}
 \newcommand{\ip}[1]{\langle#1\rangle}
