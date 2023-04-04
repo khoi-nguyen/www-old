@@ -24,7 +24,7 @@ The web can be modelled with a **graph**.
 - A good way to measure the popularity of page $i$ would be
 \begin{align*}
 \boxed{
-r_i \defeq \lim_{k \to +\infty} \P(X_k = i)
+p_i \defeq \lim_{k \to +\infty} \P(X_k = i)
 }
 \end{align*}
 :::
@@ -33,7 +33,7 @@ r_i \defeq \lim_{k \to +\infty} \P(X_k = i)
 
 ::: {.definition title="Rank of order k"}
 \begin{align*}
-\vec r^{(k)} &\defeq \begin{pmatrix}
+\vec p^{(k)} &\defeq \begin{pmatrix}
 \P(X_k = 1)\\
 \P(X_k = 2)\\
 \vdots\\
@@ -47,9 +47,9 @@ r_i \defeq \lim_{k \to +\infty} \P(X_k = i)
 If the limit exists,
 we call
 \begin{align*}
-\vec r^\star
+\vec p^\star
 \defeq
-\lim_{k \to +\infty} \vec r^{(k)}
+\lim_{k \to +\infty} \vec p^{(k)}
 \end{align*}
 the **PageRank** vector associated with the graph.
 :::
@@ -64,32 +64,37 @@ T_{ij} &\defeq \P(X_{k + 1} = i \if X_k = j)
 :::
 
 ::: proposition
+- For every $j$
+\begin{align*}
+\sum_{i = 1}^n T_{ij} = 1.
+\end{align*}.
+- $1 \in \spectrum \mat T$
 \begin{align*}
 \norm {\mat T}_1 = 1.
 \end{align*}
-In particular, $\rho(\mat T) \leq 1$.
+In particular, $\rho(\mat T) = 1$.
 :::
 
 # PageRank and eigenvectors
 
 ::: proposition
 \begin{align*}
-\vec r^{(k + 1)} = \mat T \vec r^{(k)}
+\vec p^{(k + 1)} = \mat T \vec p^{(k)}
 \end{align*}
 :::
 
 \begin{align*}
-\underbrace{\P(X_{k + 1} = i)}_{r^{(k + 1)}_i}
-= \sum_{i = 1}^n
+\underbrace{\P(X_{k + 1} = i)}_{p^{(k + 1)}_i}
+= \sum_{j = 1}^n.
 \underbrace{\P(X_{k + 1} = i | X_k = j)}_{T_{ij}}
-\underbrace{\P(X_k = j)}_{r^{(k)}_j}
+\underbrace{\P(X_k = j)}_{p^{(k)}_j}
 \end{align*}
 
 ::: corollary
 The PageRank vector $\vec r^\star$
 satisfies
 \begin{align*}
-\vec r^\star = \mat T \vec r^\star.
+\vec p^\star = \mat T \vec p^\star.
 \end{align*}
 :::
 
