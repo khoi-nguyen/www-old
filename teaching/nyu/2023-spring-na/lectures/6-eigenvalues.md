@@ -260,7 +260,8 @@ Iterating amplifies the coefficient associated with the dominant eigenvalue.
 
 ::: {.algorithm title="Power iteration"}
 \begin{align*}
-\vec x_{k + 1} \defeq \frac {\mat A \vec x_k} {\norm {\mat A \vec x_k}}
+\vec x_{k + 1} &\defeq \frac {\mat A \vec x_k} {\norm {\mat A \vec x_k}}\\
+\lambda &\approx \ip {\vec x_k, \mat A \vec x_k}
 \end{align*}
 :::
 
@@ -270,7 +271,7 @@ function power_iteration(A, x, n)
         x = A * x
         x = x / √(x'x)
     end
-    return x, x'A*x / x'x
+    return x, x'A*x
 end
 ~~~
 
@@ -361,7 +362,7 @@ function inverse_iteration(A, x, μ, n)
         x = (A - μ * I) \ x
         x = x / √(x'x)
     end
-    return x, x'A*x / x'x
+    return x, x'A*x
 end
 ~~~
 
