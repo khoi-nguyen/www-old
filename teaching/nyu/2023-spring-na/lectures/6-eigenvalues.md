@@ -2,6 +2,8 @@
 title: "Chapter 6: Numerical computation of eigenvalues"
 output: revealjs
 split: true
+notes: |
+  - 05/04: Random browsing, stochastic matrices, PageRank and eigenvalues (1-11)
 ...
 
 # Introduction: random browsing
