@@ -6,13 +6,18 @@ split: true
 
 # Introduction: random browsing
 
-The web can be modelled with a **graph**.
-
 ::: {.info name="Assumptions"}
 - Each page has the same probability to be the start page.
 - There is **at most one** link from one page to any other.
 - On each page, each link has the **same probability** of being clicked.
+- If there are no links, the next page can be any page with equal probability.
 :::
+
+::: text-center
+![](https://pi.math.cornell.edu/~mec/Winter2009/RalucaRemus/Lecture3/Images/graf1.PNG){width=80%}
+:::
+
+# Ranking webpages
 
 ::: {.example name="Notation"}
 - The pages will be denoted by $1, \dots, n$
@@ -63,16 +68,29 @@ T_{ij} &\defeq \P(X_{k + 1} = i \if X_k = j)
 \end{align*}
 :::
 
+::: text-center
+![](https://pi.math.cornell.edu/~mec/Winter2009/RalucaRemus/Lecture3/Images/graf2.PNG){width=80%}
+:::
+
+# Properties of the transition matrix
+
+\begin{align*}
+T_{ij} &\defeq \P(X_{k + 1} = i \if X_k = j)
+\end{align*}
+
+\begin{align*}
+\norm {\mat T}_1 \defeq \max_{j = 1, \dots, n} \sum_{i = 1}^n \abs {T_{ij}}
+\end{align*}
+
 ::: proposition
-- For every $j$
+- $\mat T$ is **left-stochastic**, i.e.
 \begin{align*}
 \sum_{i = 1}^n T_{ij} = 1.
 \end{align*}.
-- $1 \in \spectrum \mat T$
-\begin{align*}
-\norm {\mat T}_1 = 1.
-\end{align*}
-In particular, $\rho(\mat T) = 1$.
+  for every $j \in \{1, \dots, n\}$.
+- $1$ is an eigenvalue of $\mat T$.
+- $\norm {\mat T}_1 = 1$.
+- $\rho(\mat T) = 1$.
 :::
 
 # PageRank and eigenvectors
@@ -94,9 +112,61 @@ In particular, $\rho(\mat T) = 1$.
 The PageRank vector $\vec r^\star$
 satisfies
 \begin{align*}
+\vec p^\star = \mat T \vec p^\star,
+\end{align*}
+:::
+
+# Weaknesses of "naive" PageRank
+
+![](https://www.cs.cornell.edu/~rafael/networks-html/images/Figure15-1.png){width=100%}
+
+![](https://www.cs.cornell.edu/~rafael/networks-html/images/Figure15-2.png){width=100%}
+
+# Damping
+
+::: {.info title="Additional assumption"}
+- There's a probability $0 < \epsilon < 1$ that
+  the anonymous gets "bored" and decides to go to a completely random page.
+:::
+
+::: question
+What does the matrix $\mat T$ become?
+:::
+
+# Improved PageRank
+
+::: theorem
+If $\mat T$ is a **positive** left-stochastic matrix,
+then there is a unique positive vector $\vec x^\star$ such that
+\begin{align*}
+\norm {\vec p^\star}_1
+\quad \text{and} \quad
 \vec p^\star = \mat T \vec p^\star.
 \end{align*}
 :::
+
+::: corollary
+Using a positive damping factor,
+the PageRank vector is unique.
+:::
+
+# PageRank implementation
+
+~~~ julia
+function transition_matrix(A, ϵ)
+    # To do yourself
+end
+
+function page_rank(A, ϵ, N):
+    T = transition_matrix(A, ϵ)
+    n = size(A)[1]
+    x = ones(n) / n
+    for i in 1:N
+        x = T * x
+    end
+    return x
+end
+~~~
 
 # Motivations and assumptions
 
@@ -107,7 +177,7 @@ How to calculate the eigenvalues of a matrix?
 ::: {.info title="Assumptions"}
 - $\mat A$ is **diagonalizable**
 - $\lambda_1 \geq \dots \geq \lambda_n$ are its eigenvalues (in **decreasing** order).
-- $\vec v_1, \dots, \vec v_n$ are the **eigenvectors** associated with $\lambda_1, \dots, \lambda_n$.
+- $\vec v_1, \dots, \vec v_n$ are the normalized **eigenvectors** associated with $\lambda_1, \dots, \lambda_n$.
 :::
 
 # Naive method
@@ -123,6 +193,40 @@ p_{\mat A}(\lambda) \defeq \det(\mat A - \lambda \mat I)
 
 ::: remark
 Calculating $\det(\mat A)$ is $\bigo(n!)$.
+:::
+
+~~~ {.julia .jupyter}
+import LinearAlgebra
+A = rand(2000, 2000)
+LinearAlgebra.eigen(A)
+~~~
+
+# Iterations
+
+- The PageRank algorithm shows that an **iterative algorithm** might be a successful approach.
+- Remember that iterations will converge to **fixed points**.
+
+Assume $\lambda > 0$.
+
+\begin{align*}
+\mat A \vec x = \lambda \vec x
+\iff
+\vec x = \frac 1 \lambda \mat A \vec x.
+\end{align*}
+
+A simple fixed point iteration would be
+\begin{align*}
+\vec x_{n + 1} = \frac 1 \lambda \mat A \vec x_n,
+\end{align*}
+but it requires us to know $\lambda$.
+Ensuring that each $x_k$ has norm $1$,
+$\lambda \approx \norm {\mat A \vec x_k}$
+we get the following iteration:
+
+::: {.algorithm title="Power iteration"}
+\begin{align*}
+\vec x_{n + 1} \defeq \frac {\mat A \vec x_n} {\norm {\mat A \vec x_n}}.
+\end{align*}
 :::
 
 # Power iteration [@vaes22, p. 145]
@@ -188,8 +292,11 @@ end
 
 # Convergence of the power iteration [@vaes22, p. 145]
 
-::: {.proposition title="Convergence of the power iteration"}
-Suppose that $\mat A$ is diagonalizable and that $\abs {\lambda_1} > \abs{\lambda_2}$.
+::: {.proposition title="Essential convergence of the power iteration"}
+Suppose that $\mat A$ is diagonalizable^[
+In fact, we can just assume that $A$ has a dominant eigenvalue,
+and prove the result using the Jordan decomposition.
+] and that $\abs {\lambda_1} > \abs{\lambda_2}$.
 If
 \begin{align*}
 \vec x_0 = \underbrace{\alpha_1}_{\neq 0} \vec v_1 + \dots + \alpha_n \vec v_n,
@@ -197,6 +304,21 @@ If
 then the sequence $(\vec x_k)_{k \in \N}$ generated by the power iteration satisfies
 \begin{align*}
 \lim_{k \to +\infty} \angle (\vec x_k, \vec v_1) = 0.
+\end{align*}
+:::
+
+::: {.definition title="Essential convergence"}
+We shall say that $(\vec x_k)_{k \in \N}$ converges **essentially** to $\vec v_1$ if
+\begin{align*}
+\lim_{k \to +\infty} \angle (\vec x_k, \vec v_1) = 0.
+\end{align*}
+:::
+
+# Example of the power iteration
+
+::: example
+\begin{align*}
+\mat A \defeq \begin{pmatrix} 1 & 0\\ 0 & -2 \end{pmatrix}
 \end{align*}
 :::
 
