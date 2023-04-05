@@ -197,7 +197,7 @@ envs:
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\V}{\mathbf{V}}
 \newcommand{\Z}{\mathbf{Z}}
-\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\bigo}{\mathcal O}
 \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
 \newcommand{\dd}{\,\mathrm{d}}
