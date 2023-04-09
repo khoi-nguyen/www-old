@@ -430,6 +430,84 @@ The power iteration
 \end{align*}
 :::::
 
-# The $\mat Q \mat R$ algorithm
+# Reduced QR decomposition [@vaes22, p. 149]
+
+::: {.proposition title="QR factorization"}
+A matrix $\mat Y \in \R^{n \times p}$ can be written as a product
+\begin{align*}
+\mat Y = \mat Q \mat R,
+\qquad
+\end{align*}
+where $\mat Q \in \R^{n \times p}$ has **orthonormal columns**
+and $\mat R \in \R^{p \times p}$ is **upper-triangular**.
+Moreover, if we require that the diagonal elements of $\mat R$ be positive,
+this decomposition is unique.
+:::
+
+::: remark
+If we denote by $\vec y_j$ and $\vec q_j$ the $j$-th columns of $\mat Y$ and $\mat Q$,
+we have
+\begin{align*}
+\begin{rcases}
+\vec y_1 &= r_{11} \vec q_1,\\
+\vec y_2 &= r_{12} \vec q_1 + r_{22} \vec q_2\\
+&\vdots
+\end{rcases} \implies
+\vec y_j = \sum_{i = 1}^i r_{ij} \vec q_i
+\end{align*}
+
+In particular,
+\begin{align*}
+\ip {\vec q_i, \vec y_j} = r_{ij}.
+\end{align*}
+:::
+
+# QR decomposition: example
+
+::: example
+Find the $\mat Q \mat R$ decomposition of
+\begin{align*}
+\mat Y \defeq
+\begin{pmatrix}
+3 & 1\\
+6 & 2\\
+0 & 2
+\end{pmatrix}.
+\end{align*}
+:::
+
+::: {.idea title="QR factorization"}
+- We use **Gram-Schmidt** for $\mat Q$.
+- The entries of $\mat R$ are given by:
+\begin{align*}
+r_{ij} \defeq \ip {\vec q_i, \vec y_j}
+\end{align*}
+:::
+
+# QR decomposition with Julia
+
+~~~ {.julia .jupyter}
+using LinearAlgebra
+Y = [3 1; 6 2; 0 2]
+Q, R = qr(A)
+~~~
+
+# Simultaneous iteration: algorithm [@vaes22, p. 150]
+
+\begin{align*}
+\mat Y_k &\defeq \vec A \mat X_k\\
+\mat X_{k + 1} &\defeq \text{orthonormalize the columns of} \ \mat Y_k
+\end{align*}
+
+~~~ {.julia .jupyter}
+using LinearAlgebra
+function subspace_iteration(A, X, n)
+    for i in 1:n
+        Q, R = qr(A * X)
+        X = Q[:, 1 : size(A)[2]]
+    end
+    return X
+end
+~~~
 
 # Bibliography
