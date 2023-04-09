@@ -510,4 +510,38 @@ function subspace_iteration(A, X, n)
 end
 ~~~
 
+# The $\mat Q \mat R$ algorithm [@vaes22, p. 152]
+
+\begin{align*}
+\mat A \defeq \mat Q_0 \mat R_0
+\end{align*}
+
+Assume $\mat X_0 \defeq \mat Q_0$.
+\begin{align*}
+\mat A \mat X_0
+= \mat Q_0 \underbrace{\mat R_0 \mat Q_0}_{\mat Q_1 \mat R_1}
+= \underbrace{\mat Q_0 \mat Q_1}_{\mat X_1} \mat R_1
+\end{align*}
+
+As $\mat X_1 \defeq \mat Q_0 \mat Q_1$, then
+\begin{align*}
+\mat A \mat X_1
+= \mat Q_0 \mat Q_1 \mat R_1 Q_1
+= \mat Q_0 \mat Q_1 \mat Q_2 \mat R_2
+\end{align*}
+
+# The $\mat Q \mat R$ algorithm: Julia implementation
+
+~~~ {.julia .jupyter}
+using LinearAlgebra
+function qr_algorithm(A, n)
+    X = A
+    for i in 1:n
+        Q, R = qr(X)
+        X = R * Q
+    end
+    return X
+end
+~~~
+
 # Bibliography
