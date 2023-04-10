@@ -512,22 +512,33 @@ end
 
 # The $\mat Q \mat R$ algorithm [@vaes22, p. 152]
 
-\begin{align*}
-\mat A \defeq \mat Q_0 \mat R_0
-\end{align*}
+::: {.idea title="QR algorithm}
+To find **all eigenpairs**,
+we could apply the subspace iteration with $\mat X_0 \defeq \mat I$.
+:::
 
-Assume $\mat X_0 \defeq \mat Q_0$.
+Assume $\mat X_0 \defeq \mat I$.
 \begin{align*}
 \mat A \mat X_0
-= \mat Q_0 \underbrace{\mat R_0 \mat Q_0}_{\mat Q_1 \mat R_1}
-= \underbrace{\mat Q_0 \mat Q_1}_{\mat X_1} \mat R_1
+= \underbrace{\mat Q_0}_{\mat X_1} \mat R_0
+\quad \implies \quad
+\mat X_1 \defeq \mat Q_0
 \end{align*}
 
-As $\mat X_1 \defeq \mat Q_0 \mat Q_1$, then
 \begin{align*}
 \mat A \mat X_1
-= \mat Q_0 \mat Q_1 \mat R_1 Q_1
-= \mat Q_0 \mat Q_1 \mat Q_2 \mat R_2
+= \mat X_1 \underbrace{\mat R_0 \mat Q_0}_{\mat Q_1 \mat R_1}
+= \underbrace {\mat X_1 \mat Q_1}_{\mat X_2} \mat R_1
+\quad \implies \quad
+\mat X_2 \defeq X_1 Q_1
+\end{align*}
+
+\begin{align*}
+\mat A \mat X_2
+= \mat X_2 \underbrace{\mat R_1 \mat Q_1}_{\mat Q_2 \mat R_2}
+= \underbrace{\mat X_2 \mat Q_2}_{\mat X_3} \mat R_2
+\quad \implies \quad
+\mat X_3 \defeq X_2 Q_2
 \end{align*}
 
 # The $\mat Q \mat R$ algorithm: Julia implementation
@@ -535,12 +546,13 @@ As $\mat X_1 \defeq \mat Q_0 \mat Q_1$, then
 ~~~ {.julia .jupyter}
 using LinearAlgebra
 function qr_algorithm(A, n)
-    X = A
+    D, X = A, I
     for i in 1:n
-        Q, R = qr(X)
-        X = R * Q
+        Q, R = qr(D)
+        D = R * Q
+        X = X * Q
     end
-    return X
+    return X, D
 end
 ~~~
 
