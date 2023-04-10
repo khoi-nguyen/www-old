@@ -512,7 +512,7 @@ end
 
 # The $\mat Q \mat R$ algorithm [@vaes22, p. 152]
 
-::: {.idea title="QR algorithm}
+::: {.idea title="QR algorithm"}
 To find **all eigenpairs**,
 we could apply the subspace iteration with $\mat X_0 \defeq \mat I$.
 :::
