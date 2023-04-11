@@ -29,6 +29,12 @@ class Resident extends Model {
     get badgeNumber() {
         return this.faNumber.substring(2);
     }
+
+    @computed
+    @title
+    get title() {
+        return `${this.lastName}, ${this.firstName}`
+    }
 }
 ~~~
 :::::
@@ -103,3 +109,29 @@ const Component = () => {
 - `model.fields` contains all information on the field,
   including `onchange` methods to update the payload.
 :::::
+
+# Form and List Views
+
+- Read views are just read-only versions of form views
+- Automatic routing can be done to choose the view type
+
+~~~ typescript
+const FormView = () => {
+    model = useModel(props.Model, props.action, props.query);
+    if (props.children) {
+        return (
+            <>
+                {props.children}
+            </>
+        )
+    }
+    return (
+        <>
+            {model.fields.map((field, i) =>
+                <Field data={field} key={i}/>
+            )}
+        </>
+    )
+}
+~~~
+
