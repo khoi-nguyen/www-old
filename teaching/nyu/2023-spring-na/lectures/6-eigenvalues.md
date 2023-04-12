@@ -239,6 +239,7 @@ as a fixed point iteration.
 
 - Homework grades on Brightspace.
 - Homework: **exercise 6.1** on PageRank due **24 April 2023**
+- [Data set](https://snap.stanford.edu/data/enwiki-2013.html)
 
 :::::
 
