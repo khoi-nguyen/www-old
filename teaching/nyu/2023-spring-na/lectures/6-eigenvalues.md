@@ -392,12 +392,21 @@ end
 \end{align*}
 
 ::: {.definition title="Angle between two vectors"}
+We define the **acute** angle between two vectors via
 \begin{align*}
 \angle (\vec x, \vec y)
 \defeq \arccos\left(
 \frac {\abs {\ip{\vec x, \vec y}}} {\norm {\vec x} \norm {\vec y}}
 \right)
 \end{align*}
+:::
+
+::: proposition
+- $\angle (\vec x, \vec y) \geq 0$
+- $\angle (\vec x, \vec y) = \angle (\vec y, \vec x)$
+- $\angle (\vec x, \vec y) = 0 \iff \vec x = \lambda \vec y$
+- $\angle (\vec x, \vec y) = \frac \pi 2 \iff \ip{x, y} = 0$
+- $\angle (\alpha \vec x, \beta \vec y) = \angle (\vec x, \vec y)$ when $\alpha, \beta \neq 0$.
 :::
 
 # Convergence of the power iteration [@vaes22, p. 145]
@@ -429,6 +438,24 @@ We shall say that $(\vec x_k)_{k \in \N}$ converges **essentially** to $\vec v_1
 ::: example
 \begin{align*}
 \mat A \defeq \begin{pmatrix} 1 & 0\\ 0 & -2 \end{pmatrix}
+\end{align*}
+:::
+
+# Essential convergence: exercise
+
+::: exercise
+Let $(\vec x_k)_k \subset R^n$.
+The following conditions are equivalent:
+
+- $\angle (\vec x_k, \vec x_\star)$ converges to $0$;
+- There exists a sequence $(r_k)_k \subset \R$ such that $r_k \vec x_k$ converges to $\vec x_\star$.
+- The projector $\mat P_{\vec x_k}$ converges to $\mat P_{\vec x_\star}$.
+:::
+
+::: info
+\begin{align*}
+\mat P_{\vec v}(\vec x) = \frac {\ip{x, v}} {\norm {\vec v}^2} \vec v
+= \underbrace{\frac 1 {\norm{\vec v}^2} \vec v \vec v^T}_{\mat P_{\vec v}} \vec x
 \end{align*}
 :::
 
