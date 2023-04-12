@@ -170,6 +170,78 @@ function page_rank(A, ϵ, N):
 end
 ~~~
 
+# 12 April 2023
+
+::::: {.col}
+
+### PageRank
+
+Assume $X_k$ is the position of a random browser after $k$ changes of pages.
+We are interested in
+\begin{align*}
+\vec p^{(k)} \defeq
+\begin{pmatrix}
+\P(X_k = 1)\\
+\vdots\\
+\P(X_k = n)
+\end{pmatrix}
+\end{align*}
+for large $k \in \N$.
+
+\begin{align*}
+\mat T &\defeq
+\begin{pmatrix}
+\P(X_{k + 1} = 1 \if X_k = 1)
+& \dots &
+\P(X_{k + 1} = 1 \if X_k = n)\\
+\vdots & \vdots & \vdots\\
+\P(X_{k + 1} = n \if X_k = 1)
+& \dots &
+\P(X_{k + 1} = n \if X_k = n)\\
+\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+\boxed{
+\vec p^{(k + 1)} = \mat T \vec p^{(k)}.
+}
+\end{align*}
+
+Being interested in $\vec p^{(k)}$ for large $k \in \N$
+means we are interested in the **convergence** of the **iteration** above.
+
+:::::
+::::: {.col}
+
+### Abstract problem behind PageRank
+
+::: {.theorem title="PageRank"}
+Assume $\vec T$ is **positive**.
+The iteration
+\begin{align*}
+\vec p^{(k + 1)} = \mat T \vec p^{(k)}.
+\end{align*}
+converges towards the **eigenpair** $(\vec p^\star, 1)$.
+The vector $\vec p^\star$ is called the **PageRank** vector.
+:::
+
+As $\rho(T) = 1$,
+we have shown that in the above case,
+an iteration can help us find
+the eigenvector associated with the dominant eigenvalue.
+
+::: idea
+Write $\mat A \vec x = \lambda \vec x$
+as a fixed point iteration.
+:::
+
+### Announcements
+
+- Homework grades on Brightspace.
+- Homework: **exercise 6.1** on PageRank due **24 April 2023**
+
+:::::
+
 # Motivations and assumptions
 
 ::: question
@@ -230,6 +302,41 @@ we get the following iteration:
 \vec x_{n + 1} \defeq \frac {\mat A \vec x_n} {\norm {\mat A \vec x_n}}.
 \end{align*}
 :::
+
+# Remark on the Banach fixed point theorem
+
+So far, all our iterations (Jacobi, Gauss-Seidel, relaxation, Newton-Raphson, etc.)
+relied on the **Banach fixed point theorem**.
+
+::: question
+Can we apply it to
+\begin{align*}
+\vec F(\vec x) = \frac 1 \lambda \mat A \vec x?
+\end{align*}
+:::
+
+Unfortunately,
+\begin{align*}
+\norm {\vec J_{\vec F}(\vec x_\star)} = \frac 1 {\abs \lambda} \norm {\vec A} \geq 1.
+\end{align*}
+If $A$ is **diagonalizable**,
+then it is exactly one,
+so the theorem **does not apply**.
+In fact, the iteration
+\begin{align*}
+\vec x_{n + 1} \defeq \frac {\mat A \vec x_n} {\norm {\mat A \vec x_n}}.
+\end{align*}
+does not even always converge
+when we start with the solution:
+\begin{align*}
+\mat A \defeq
+\begin{pmatrix}
+-1 & 0\\
+0 & -1.
+\end{pmatrix},
+\quad
+\vec x_0 = \begin{pmatrix}1 \\ 0\end{pmatrix}
+\end{align*}
 
 # Power iteration [@vaes22, p. 145]
 
@@ -325,27 +432,44 @@ We shall say that $(\vec x_k)_{k \in \N}$ converges **essentially** to $\vec v_1
 \end{align*}
 :::
 
-# Inverse iteration
+# Inverse iteration [@vaes22, p. 147]
 
 ::: proposition
 Let $\mu \notin \spectrum \mat A$.
-\begin{align*}
-\mat A \vec x = \lambda \vec x
-\iff
-(\mat A - \mu \mat I)^{-1} \vec x
-= \frac 1 {\lambda - \mu} \vec x.
-\end{align*}
+The following claims are equivalent:
+
+- $(\vec x, \lambda)$ is an eigenpair of $\mat A$.
+- $(\vec x, \frac 1 {\lambda - \mu})$ is an eigenpair of $\mat B(\mu) \defeq (\mat A - \mu \mat I)^{-1}$
 :::
 
 ::: remark
-Note that if $\mu \approx \lambda$,
-then the *power iteration* applied to $(\mat A - \mu \mat I)^{-1}$
-will provide an estimation of the vector $\vec x$ that satisfies
+If $\mu \approx \lambda$, the power iteration applied to $\mat B(\mu)$
+will yield the $\mat A$-eigenvector associated with $(\lambda)$.
+:::
+
+# Finding an arbitrary eigenpair [@vaes22, p. 147]
+
+Assume we are interested in finding
+
 \begin{align*}
-(\mat A - \mu \mat I)^{-1} \vec x
-= \frac 1 {\lambda - \mu} \vec x,
+\mat A \vec x_\star = \lambda \vec x
 \end{align*}
-which is the eigenvector of $\mat A$ associated with $\lambda$.
+
+::: {.algorithm title="Inverse iteration"}
+#. Choose $\mu$ close but not equal to $\lambda$.
+#. Apply the power iteration to $(\mat A - \mu \mat I)^{-1}$.
+:::
+
+::: remark
+The iteration
+\begin{align*}
+\vec x_{n + 1} \defeq (\mat A - \mu \vec I)^{-1} \vec x_n
+\end{align*}
+is equivalent to solving
+\begin{align*}
+(\mat A - \mu \vec I) \vec x_{n + 1} = \vec x_n
+\end{align*}
+for $\vec x_{n + 1}$.
 :::
 
 # Implementation of inverse iteration [@vaes22, p. 147]
@@ -354,6 +478,10 @@ which is the eigenvector of $\mat A$ associated with $\lambda$.
 Solving the system $\mat A \vec x = \vec b$
 can be done efficiently via `x = A \ b`{.julia}
 instead of `x = A^(-1) * b`{.julia}.
+:::
+
+::: idea
+Apply the power iteration to $(\mat A - \mu \mat I)^{-1}$
 :::
 
 ~~~ {.julia .jupyter}
@@ -370,6 +498,48 @@ end
 
 # Railey quotient iteration [@vaes22, p. 148]
 
+Remember that the convergence speed is determined
+by the ratio of the two most dominant eigevalue.
+
+In particular, the closer $\mu$ is to $\lambda$,
+the faster the inverse iteration converges.
+
+::: idea
+To increase the convergence speed,
+we update $\mu$ by our approximation of the eigenvalue.
+:::
+
+~~~ {.julia .jupyter}
+using LinearAlgebra
+
+function inverse_iteration(A, x, μ, n)
+    for i in 1:n
+        x = (A - μ * I) \ x
+        x = x / √(x'x)
+        # Update the value of μ
+        μ = x'A*x
+    end
+    return x, x'A*x
+end
+~~~
+
+# Railey quotient iteration: implementation [@vaes22, p. 148]
+
+::::: {.col}
+~~~ {.julia .jupyter}
+using LinearAlgebra
+
+function inverse_iteration(A, x, μ, n)
+    for i in 1:n
+        x = (A - μ * I) \ x
+        x = x / √(x'x)
+    end
+    return x, x'A*x
+end
+~~~
+:::::
+
+::::: {.col}
 ~~~ {.julia .jupyter}
 using LinearAlgebra
 
@@ -382,6 +552,27 @@ function railey_quotient(A, x, n)
     return x, μ(x)
 end
 ~~~
+:::::
+
+# Exercise 6.7 [@vaes22, p. 161]
+
+::: exercise
+Consider the matrix
+\begin{align*}
+\mat M \defeq
+\begin{pmatrix}
+    0 & 1 & 2 & 0 \\
+    1 & 0 & 1 & 0 \\
+    2 & 1 & 0 & 2 \\
+    0 & 0 & 2 & 0
+\end{pmatrix}
+\end{align*}
+
+- Find the dominant eigenvalue of $\mat M$ by using the power iteration.
+- Find the eigenvalue of $\mat M$ closest to 1 by using the inverse iteration.
+- Find the other two eigenvalues of $\mat M$ by using a method of your choice.
+:::
+
 
 # Towards subspace iterations
 
@@ -554,6 +745,24 @@ function qr_algorithm(A, n)
     end
     return X, D
 end
+
+D = diagm([4, 3, 2, 1])
+S = rand(4, 4)
+A = S * D * S^-1
+X, D = qr_algorithm(A, 50)
+D
 ~~~
+
+# Moving the goal poasts: Ritz vectors
+
+::: definition
+\begin{align*}
+\mat U^t \mat A \mat U \vec x = \lambda \vec x,
+then
+
+- $\vec x$ is a **Ritz vector** of $A$ relative to $\mat U$
+- $\lambda$ is a **Ritz value** of $A$ relative to $\mat U$.
+\end{align*}
+:::
 
 # Bibliography
