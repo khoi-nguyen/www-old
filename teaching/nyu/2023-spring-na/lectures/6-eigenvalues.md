@@ -460,6 +460,70 @@ The following conditions are equivalent:
 \end{align*}
 :::
 
+# 14 April 2023
+
+::::: {.col}
+
+### Power Iteration
+
+\begin{align*}
+\vec x_{k + 1}
+= \underbrace{\frac {\mat A \vec x_k} {\norm {\mat A \vec x_k}}}_{\vec F(\vec x_k)}
+= \frac {\mat A^{k + 1} \vec x_0} {\norm {\mat A^{k + 1} \vec x_0}}
+\end{align*}
+
+- $\vec F$ is **not** a contraction
+- The best we can hope for is **essential convergence**.
+- Applying $\mat A$ amplifies the dominant eigenvector.
+
+~~~ julia
+function power_iteration(A, x, n)
+    for i in 1:n
+        x = A * x
+        x = x / √(x'x)
+    end
+    return x, x'A*x
+end
+~~~
+
+:::::
+
+::::: {.col}
+
+### PageRank
+
+Find the dominant eigenvector of
+
+\begin{align*}
+\mat T &\defeq
+\begin{pmatrix}
+\P(X_{k + 1} = 1 \if X_k = 1)
+& \dots &
+\P(X_{k + 1} = 1 \if X_k = n)\\
+\vdots & \vdots & \vdots\\
+\P(X_{k + 1} = n \if X_k = 1)
+& \dots &
+\P(X_{k + 1} = n \if X_k = n)\\
+\end{pmatrix}
+\end{align*}
+
+via the **power iteration**.
+
+### Today
+
+::: question
+How can we find other eigenpairs?
+:::
+
+### Announcements
+
+- Homework: **exercise 6.1** on PageRank due **24 April 2023**
+- [PageRank Data set](https://snap.stanford.edu/data/enwiki-2013.html)^[The link
+  doesn't work in the lecture notes.]
+- French word of the day: nycthémère (a 24 hour period)
+
+:::::
+
 # Inverse iteration [@vaes22, p. 147]
 
 ::: proposition
@@ -480,7 +544,7 @@ will yield the $\mat A$-eigenvector associated with $(\lambda)$.
 Assume we are interested in finding
 
 \begin{align*}
-\mat A \vec x_\star = \lambda \vec x
+\mat A \vec x_\star = \lambda \vec x_\star.
 \end{align*}
 
 ::: {.algorithm title="Inverse iteration"}
@@ -523,6 +587,25 @@ function inverse_iteration(A, x, μ, n)
     return x, x'A*x
 end
 ~~~
+
+# Exercise 6.7 [@vaes22, p. 161]
+
+::: exercise
+Consider the matrix
+\begin{align*}
+\mat M \defeq
+\begin{pmatrix}
+    0 & 1 & 2 & 0 \\
+    1 & 0 & 1 & 0 \\
+    2 & 1 & 0 & 2 \\
+    0 & 0 & 2 & 0
+\end{pmatrix}
+\end{align*}
+
+- Find the dominant eigenvalue of $\mat M$ by using the power iteration.
+- Find the eigenvalue of $\mat M$ closest to 1 by using the inverse iteration.
+- Find the other two eigenvalues of $\mat M$ by using a method of your choice.
+:::
 
 # Railey quotient iteration [@vaes22, p. 148]
 
@@ -581,26 +664,6 @@ function railey_quotient(A, x, n)
 end
 ~~~
 :::::
-
-# Exercise 6.7 [@vaes22, p. 161]
-
-::: exercise
-Consider the matrix
-\begin{align*}
-\mat M \defeq
-\begin{pmatrix}
-    0 & 1 & 2 & 0 \\
-    1 & 0 & 1 & 0 \\
-    2 & 1 & 0 & 2 \\
-    0 & 0 & 2 & 0
-\end{pmatrix}
-\end{align*}
-
-- Find the dominant eigenvalue of $\mat M$ by using the power iteration.
-- Find the eigenvalue of $\mat M$ closest to 1 by using the inverse iteration.
-- Find the other two eigenvalues of $\mat M$ by using a method of your choice.
-:::
-
 
 # Towards subspace iterations
 
