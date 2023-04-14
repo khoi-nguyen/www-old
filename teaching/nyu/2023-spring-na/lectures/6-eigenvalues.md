@@ -4,6 +4,7 @@ output: revealjs
 split: true
 notes: |
   - 05/04: Random browsing, stochastic matrices, PageRank and eigenvalues (1-11)
+  - 12/04: Eigenvalues, power iteration and essential convergence (12-22)
 ...
 
 # Introduction: random browsing
