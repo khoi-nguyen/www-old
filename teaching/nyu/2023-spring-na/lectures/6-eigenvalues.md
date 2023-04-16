@@ -5,6 +5,7 @@ split: true
 notes: |
   - 05/04: Random browsing, stochastic matrices, PageRank and eigenvalues (1-11)
   - 12/04: Eigenvalues, power iteration and essential convergence (12-22)
+  - 14/04: Inverse iteration, Rayleigh quotient, QR decomposition (23-33)
 ...
 
 # Introduction: random browsing
@@ -767,15 +768,156 @@ r_{ij} \defeq \ip {\vec q_i, \vec y_j}
 \end{align*}
 :::
 
-# QR decomposition with Julia
+# 17 April 2023
 
-~~~ {.julia .jupyter}
+::::: {.col}
+
+### Power iteration
+
+\begin{align*}
+\vec x_{k + 1} = \frac {\mat A \vec x_k} {\norm {\mat A \vec x_k}}
+\qquad
+\text{convergence:}\,
+\bigo\left(\abs{\frac {\lambda_2}{\lambda_1}}^k\right)
+\end{align*}
+
+~~~ julia
+for i in 1:n
+    x = A * x
+    x = x / √(x'x)
+end
+~~~
+
+We now assume $\mat A$ to be **symmetric**.
+
+With two vectors $\mat X_0 = \begin{bmatrix}\vec x^{(1)}_0 & \vec x^{(2)}_0\end{bmatrix}$,
+it makes sense to consider
+
+\begin{align*}
+\mat X_{n + 1} \defeq
+\text{orthnormalize}\, \mat A \vec X_n.
+\end{align*}
+
+The orthogonalisation can be justified as such:
+
+::: proposition
+The power iteration converges to $\vec v_1$
+if and only if $\ip {\vec x_0, \vec v_1} = 0$.
+:::
+
+:::::
+
+::::: {.col}
+
+### QR decomposition
+
+\begin{align*}
+\underbrace{\mat Y}_{\R^{n \times p}} \defeq
+\underbrace{\begin{bmatrix}
+\vec q_1 & \vec q_2 & \dots & \vec q_p
+\end{bmatrix}}_{\mat Q \in \R^{n \times p} \, \text{(orthonormal)}}
+\underbrace{\begin{pmatrix}
+r_{11} & r_{12} & r_{13} & \dots\\
+0 & r_{22} & r_{23} & \dots\\
+0 & 0 & r_{33} & \dots\\
+\vdots & \vdots & \vdots & \dots
+\end{pmatrix}}_{\mat R \in \R^{p \times p} \, \text{upper}-\Delta}
+\end{align*}
+
+~~~ julia
 using LinearAlgebra
-Y = [3 1; 6 2; 0 2]
 Q, R = qr(A)
 ~~~
 
+### Announcements
+
+- French word of the day: pédoncule (stalk bearing a flower), pédonculé
+
+:::::
+
+# Full vs Reduced $\mat Q \mat R$ Factorization
+
+We have in fact seen the **reduced** $\mat Q \mat R$ factorization,
+with $p < n$.
+
+\begin{align*}
+\underbrace{\mat Y}_{\R^{n \times p}} \defeq
+\underbrace{\begin{bmatrix}
+\vec q_1 & \vec q_2 & \dots & \vec q_p
+\end{bmatrix}}_{\mat Q \in \R^{n \times p} \, \text{(orthonormal)}}
+\underbrace{\begin{pmatrix}
+r_{11} & r_{12} & r_{13} & \dots\\
+0 & r_{22} & r_{23} & \dots\\
+0 & 0 & r_{33} & \dots\\
+\vdots & \vdots & \vdots & \dots
+\end{pmatrix}}_{\mat R \in \R^{p \times p} \, \text{upper}-\Delta}
+\end{align*}
+
+We could carry on the Gram-Schmidt iteration
+to obtain the **full** factorization.
+
+\begin{align*}
+\underbrace{\mat Y}_{\R^{n \times p}} \defeq
+\underbrace{\begin{bmatrix}
+\vec q_1 & \vec q_2 & \dots & \vec q_p & \dots & \vec q_n
+\end{bmatrix}}_{\mat Q' \in \R^{n \times n} \, \text{(orthonormal)}}
+\underbrace{\begin{pmatrix}
+r_{11} & r_{12} & r_{13} & \dots\\
+0 & r_{22} & r_{23} & \dots\\
+0 & 0 & r_{33} & \dots\\
+\vdots & \vdots & \vdots & \dots\\
+0 & 0 & 0 & \dots\\
+\vdots & \vdots & \vdots & \dots\\
+0 & 0 & 0 & \dots
+\end{pmatrix}}_{\mat R' \in \R^{n \times p} \, \text{upper}-\Delta}
+\end{align*}
+
+Full factorisation: $\mat Q'^T \mat Q' = \mat Q' \mat Q'^T = \mat I$.
+
+# $\mat Q \mat R$ to solve equations
+
+The $\mat Q' \mat R'$ decomposition can be used instead of the $\mat L \mat U$ decomposition
+to solve systems.
+\begin{align*}
+\mat Q' \mat R' \vec x = \vec b
+\iff \boxed {\mat R' \vec x = \mat Q'^T \vec b}.
+\end{align*}
+
+::: info
+- $\mat Q' \mat R'$ requires more flops than $\mat L \mat U$.
+- More **numerically stable** for *overdetermined* system
+:::
+
+# $\mat Q \mat R$ for *overdetermined* systems
+
+As $\mat Q$ is a orthogonal, it doesn't affect $\norm {\placeholder}_2$.
+Consequently, we have.
+
+\begin{align*}
+\norm {\mat A \vec x - \vec b}^2
+= \norm {\mat R' \vec x - \mat Q'^T \vec b}^2
+\end{align*}
+
+Writing $\mat Q'^T \vec b = \begin{pmatrix}\vec c_1 \\ \vec c_2\end{pmatrix}$,
+we get
+
+\begin{align*}
+\norm {\mat A \vec x - \vec b}^2
+= \norm {\mat R \vec x - \vec c_1}^2 + \norm {\vec c_2}^2_2,
+\end{align*}
+which means that the approximation is given by the solution of
+\begin{align*}
+\mat R \vec x = \vec c_1.
+\end{align*}
+
+Compare the conditioning with the *normal equations*:
+\begin{align*}
+\mat A^T \mat A \vec x = \mat A^T \vec b
+\end{align*}
+
 # Simultaneous iteration: algorithm [@vaes22, p. 150]
+
+Let's go back to eigenvalues.
 
 \begin{align*}
 \mat Y_k &\defeq \vec A \mat X_k\\
