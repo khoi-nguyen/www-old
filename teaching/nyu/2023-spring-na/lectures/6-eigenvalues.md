@@ -835,6 +835,20 @@ Q, R = qr(A)
 
 :::::
 
+# Why orthonormalize?
+
+My explanation was quite bad last time, so let's try again.
+
+::: proposition
+The power iteration converges to $\vec v_1$
+if and only if $\ip {\vec x_0, \vec v_1} = 0$.
+:::
+
+::: info
+- We normalize to avoid round-off errors;
+- Orthogonolising
+:::
+
 # Full vs Reduced $\mat Q \mat R$ Factorization
 
 We have in fact seen the **reduced** $\mat Q \mat R$ factorization,
@@ -924,6 +938,22 @@ Let's go back to eigenvalues.
 \mat X_{k + 1} &\defeq \text{orthonormalize the columns of} \ \mat Y_k
 \end{align*}
 
+In other words,
+
+\begin{align*}
+\vec A \mat X_k &= \mat Q_k \mat R_k
+\qquad (\mat Q \mat R \,\text{factorization})\\
+\mat X_{k + 1} &\defeq \mat Q_k.
+\end{align*}
+
+::: remark
+We don't even use the matrix $\mat R$.
+Could I not have told you to just use **Gram-Schmidt**?
+Why do I have to make everything so complicated?
+:::
+
+# Simultaneous iteration: Julia implementation
+
 ~~~ {.julia .jupyter}
 using LinearAlgebra
 function subspace_iteration(A, X, n)
@@ -942,28 +972,42 @@ To find **all eigenpairs**,
 we could apply the subspace iteration with $\mat X_0 \defeq \mat I$.
 :::
 
-Assume $\mat X_0 \defeq \mat I$.
+Assume $\mat X_0, \mat Q_0 \defeq \mat I$.
 \begin{align*}
-\mat A \mat X_0
-= \underbrace{\mat Q_0}_{\mat X_1} \mat R_0
-\quad \implies \quad
-\mat X_1 \defeq \mat Q_0
+\mat A \mat Q_0
+&= \mat Q_1 \mat R_1
+\quad &\implies \quad
+\mat X_1 \defeq \mat Q_0 \mat Q_1\\
+\mat A \mat Q_0 \mat Q_1
+&= \mat Q_1 \mat R_1 \mat Q_1
+= \mat Q_1 \mat Q_2 \mat R_2
+\quad &\implies \quad
+\mat X_2 \defeq \mat Q_0 \mat Q_1 \mat Q_2\\
+\mat A \mat Q_0 \mat Q_1 \mat Q_2
+&= \mat Q_1 \mat Q_2 \mat R_2 \mat Q_2
+= \mat Q_1 \mat Q_2 \mat Q_3 \mat R_3
+\quad &\implies \quad
+\mat X_3 \defeq \mat Q_0 \mat Q_1 \mat Q_2 \mat Q_3
 \end{align*}
 
-\begin{align*}
-\mat A \mat X_1
-= \mat X_1 \underbrace{\mat R_0 \mat Q_0}_{\mat Q_1 \mat R_1}
-= \underbrace {\mat X_1 \mat Q_1}_{\mat X_2} \mat R_1
-\quad \implies \quad
-\mat X_2 \defeq X_1 Q_1
-\end{align*}
+# The $\mat Q \mat R$ algorithm: iteration [@vaes22, p. 152]
 
+The iteration
 \begin{align*}
-\mat A \mat X_2
-= \mat X_2 \underbrace{\mat R_1 \mat Q_1}_{\mat Q_2 \mat R_2}
-= \underbrace{\mat X_2 \mat Q_2}_{\mat X_3} \mat R_2
-\quad \implies \quad
-\mat X_3 \defeq X_2 Q_2
+\begin{cases}
+\mat A = \mat Q_1 \mat R_1\\
+\mat R_k \mat Q_k = \mat Q_{k + 1} \mat R_{k + 1}
+\end{cases}
+\end{align*}
+defines a family of matrices $\mat Q_k$, $\mat R_k$.
+
+From there,
+we can
+\begin{align*}
+\begin{cases}
+\mat X_0 &\defeq \mat I\\
+\mat X_k &\defeq \mat Q_1 \dots \mat Q_k
+\end{cases}
 \end{align*}
 
 # The $\mat Q \mat R$ algorithm: Julia implementation
@@ -971,13 +1015,12 @@ Assume $\mat X_0 \defeq \mat I$.
 ~~~ {.julia .jupyter}
 using LinearAlgebra
 function qr_algorithm(A, n)
-    D, X = A, I
+    X, Q, R = I, I, A
     for i in 1:n
-        Q, R = qr(D)
-        D = R * Q
-        X = X * Q
+        Q, R = qr(R * Q)
+        X *= Q
     end
-    return X, D
+    return X, R * Q
 end
 
 D = diagm([4, 3, 2, 1])
