@@ -1030,16 +1030,55 @@ X, D = qr_algorithm(A, 50)
 D
 ~~~
 
-# Moving the goal poasts: Ritz vectors
+# Ritz vectors
+
+::: idea
+Let $\mathcal U \subset \R^n$.
+We'll try to find an **approximate** eigenvector $\vec v \in \mathcal U$,
+\begin{align*}
+\mat A \vec v \approx \lambda \vec v
+\end{align*}
+
+We call $\vec v$ a **Ritz vector** of $\mat A$ relative to $\mat U$.
+:::
 
 ::: definition
+The vector $\vec v$ is a **Ritz vector** of $\mat A$ relative to $\mathcal U$
+associated with $\lambda$
+if
 \begin{align*}
-\mat U^t \mat A \mat U \vec x = \lambda \vec x,
-then
-
-- $\vec x$ is a **Ritz vector** of $A$ relative to $\mat U$
-- $\lambda$ is a **Ritz value** of $A$ relative to $\mat U$.
+\proj_{\mathcal U} (\mat A \vec v) = \lambda \vec v,
+\qquad \vec v \in \mathcal U.
 \end{align*}
+:::
+
+::: proposition
+If $\mat A \mathcal U \subset \mathcal U$, then
+Ritz vectors are eigenvectors.
+:::
+
+# Projection
+
+Let $\vec u_1, \dots, \vec u_p$ be an orthonormal basis of $\mathcal U$.
+
+\begin{align*}
+\mat U : \R^p \to \mathcal U,
+\qquad
+\mat U
+\defeq
+\begin{pmatrix}
+\vec u_1 & \dots & \vec u_n
+\end{pmatrix}
+\end{align*}
+
+::: proposition
+- $\mat U \mat U^t = \proj_{\mathcal U}$
+- $\mat U^t \mat U = \mat I$
+:::
+
+::: proposition
+The vector $\mathcal v \in \mathcal U$ is a Ritz vector relative to $\mathcal U$
+if and only if $x \defeq U^t v$ is an eigenvector of $\mat U^t \mat A \mat U$.
 :::
 
 # Bibliography
