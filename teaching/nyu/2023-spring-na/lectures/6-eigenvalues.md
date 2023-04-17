@@ -1072,13 +1072,53 @@ Let $\vec u_1, \dots, \vec u_p$ be an orthonormal basis of $\mathcal U$.
 \end{align*}
 
 ::: proposition
+- $\mat U^t$ is the left-inverse of $\mat U$.
+- The projection onto $\mat U$ is given by the matrix $\mat U \mat U^t$
+:::
+
+# Characterisation of Ritz vectors
+
+Let $\vec u_1, \dots, \vec u_p$ be an orthonormal basis of $\mathcal U$.
+
+\begin{align*}
+\mat U : \R^p \to \mathcal U,
+\qquad
+\mat U
+\defeq
+\begin{pmatrix}
+\vec u_1 & \dots & \vec u_n
+\end{pmatrix}
+\end{align*}
+
+::: proposition
 - $\mat U \mat U^t = \proj_{\mathcal U}$
 - $\mat U^t \mat U = \mat I$
 :::
 
 ::: proposition
-The vector $\mathcal v \in \mathcal U$ is a Ritz vector relative to $\mathcal U$
-if and only if $x \defeq U^t v$ is an eigenvector of $\mat U^t \mat A \mat U$.
+The following conditions are equivalent:
+
+- $\mathcal v \in \mathcal U$ is a Ritz vector relative to $\mathcal U$.
+- $\mathcal x \defeq \mat U^t \vec v$ is an eigenvector of $\mat U^t \mat A \mat U$.
+:::
+
+::: remark
+In practice, $p \ll n$ so $\mat U^t \mat A \mat U$ is a small symmetric matrix.
+:::
+
+# Estimation of the Ritz values
+
+We'll use $\widehat \lambda$ for Ritz values.
+
+::: theorem
+Let $\mat A$ be a full rank symmetric matrix
+and $\mat U \subset R^n$ a $p$-dimensional subspace.
+
+There is a subset $\lambda_1, \dots, \lambda_p \in \spectrum \mat A$ which satisfies
+\begin{align*}
+\max_{j \in \{1, \dots, p\}} \abs{\lambda_j - \widehat{\lambda}_j}
+\leq \norm{ (\mat I - \mat P_{\mathcal U} ) \mat A \mat P_{\mathcal U} }_2
+\end{align*}
 :::
 
 # Bibliography
