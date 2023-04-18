@@ -2,136 +2,117 @@
 title: ORM + React Hook + Form/List view
 output: revealjs
 institute: Fedasil
+split: true
 ...
 
-# ORM
+# Motivations
 
-::::: {.col}
-~~~ typescript
-class Resident extends Model {
+- Gros problèmes de qualité de code et maintenabilité
 
-    _table: string = "Residents";
+- Tout est afficher/éditer/supprimer un record dans la base de données
 
-    @primary
-    id: number;
+- Manque de coordination
 
-    @field({ label: "First Name", required: true })
-    firstName: string;
+- Separation des préoccupations (design >< base de données)
 
-    @field({ label: "FA Number" })
-    faNumber: string;
+- Éviter la répétition
 
-    @date({ label: "Date of birth" })
-    dob: string;
+- Exploiter la puissance du stack choisi
 
-    @computed
-    @field({ label: "Badge number" })
-    get badgeNumber() {
-        return this.faNumber.substring(2);
-    }
-
-    @computed
-    @title
-    get title() {
-        return `${this.lastName}, ${this.firstName}`
-    }
-}
-~~~
-:::::
-
-::::: {.col}
-
-::: {.question name="Motivation"}
-Everything should in theory be generated from the model,
-and we should avoid code repetition.
-:::
-
-::: {.info name="Features"}
-- Automatic generation of CRUD GraphQL queries
-- Automatic validation (`@date`, `required`, etc.)
-- Computed fields (e.g. `badgeNumber`)
-- Error handling and notifications
-:::
-
-:::::
-
-# CRUD
-
-::::: {.col}
-~~~ typescript
-resident = new Resident();
-
-// Read
-resident.load({ faNumber: "FA11111" });
-
-// Create + Update
-resident.firstName = "Khoi";
-resident.update({ dob: "24/01/1991", lastName: "Nguyen" });
-resident.save();
-
-// Delete
-resident.delete();
-~~~
-:::::
-
-::::: {.col}
-- All models **inherit** CRUD operations.
-- No need to write queries
+<hr />
 
 ::: question
-How are we going to connect our models to react components?
+- Est-ce que je pourrais avoir de l'aide?
 :::
-:::::
 
-# React Hook
-
-::::: {.col}
-~~~ typescript
-const Component = () => {
-    // Gives you access to load, delete, save, etc.
-    const model = useModel(Resident, "read", {id: 1});
-
-    // Change current record
-    model.load({id: 2});
-
-    // Access the state of the current record
-    model.payload
-
-    // Delete current record
-    model.delete();
-};
-~~~
-:::::
+# Modèle / Vue
 
 ::::: {.col}
-- `useModel` accesses all the data on the model
-- `model.payload`: reactive state with the values of the form
-- `model.fields` contains all information on the field,
-  including `onchange` methods to update the payload.
-:::::
 
-# Form and List Views
+### Modèle
 
-- Read views are just read-only versions of form views
-- Automatic routing can be done to choose the view type
+~~~ javascript
+class Resident extends Model {
 
-~~~ typescript
-const FormView = () => {
-    model = useModel(props.Model, props.action, props.query);
-    if (props.children) {
-        return (
-            <>
-                {props.children}
-            </>
-        )
-    }
-    return (
-        <>
-            {model.fields.map((field, i) =>
-                <Field data={field} key={i}/>
-            )}
-        </>
-    )
+    _table = "Residents.RESIDENTS"
+
+    @field({ label: "First name", required: True })
+    firstName: string;
+
+    @field({ label: "Last name", required: True })
+    lastName: string;
+
+    @email
+    @field({ label: "Email adress", required: True })
+    email: string;
+
 }
 ~~~
 
+:::::
+
+::::: {.col}
+
+### Vue
+
+~~~ typescript
+const Form = ({ Button, Field }) => (
+    <>
+        <Field name="firstName" />
+        <Field name="lastName" />
+        <Field name="email" />
+        // Probablement pas nécéssaire
+        <Button action="save" />
+    </>
+);
+~~~
+
+~~~ {.typescript .fragment}
+const List = ({ Button, Field }) => (
+    <>
+        // Va peut-être changer...
+        <Field name="firstName" />
+        <Field name="lastName" />
+        <Field name="email" />
+    </>
+)
+~~~
+
+:::::
+
+# Fonctionnement
+
+- D'une URL comme `resident/1`:
+    - **Modèle**: `Resident` de `models/Resident.tsx`
+
+    - **Action**: view
+
+    - **Vue**: `Form` de `templates/Resident.tsx`
+
+
+- D'une URL comme `resident/1`:
+    - **Modèle**: `Resident` de `models/Resident.tsx`
+
+    - **Action**: view
+
+    - **Vue**: `Form` de `templates/Resident.tsx`
+
+- D'une URL comme `resident/`:
+
+    - **Modèle**: `Resident` de `models/Resident.tsx`
+
+    - **Action**: lister les records
+
+    - **Vue**: `List` de `templates/Resident.tsx`
+
+# Avancement
+
+- [X] \ Générer les requêtes simples
+- [ ] \ Requêtes "JOIN" (facile avec Hasura)
+- [X] \ CRUD
+- [X] \ Intégration avec React
+- [X] \ Routing automatique
+- [ ] \ Validation automatique des formulaires
+- [ ] \ Gestion d'erreur
+- [ ] \ Design
+- [ ] \ Tests, tests, tests
