@@ -1057,6 +1057,57 @@ If $\mat A \mathcal U \subset \mathcal U$, then
 Ritz vectors are eigenvectors.
 :::
 
+# 19 April 2023
+
+::::: {.col}
+
+### Simultaneous iteration
+
+- **Step 1**: Apply $\mat A$
+
+- **Step 2**: Apply Gram-Schmidt
+
+~~~ julia
+for i in 1:n
+    X, _ = qr(A * X)
+end
+~~~
+
+### $\mat Q \mat R$ algorithm
+
+- Simultaneous iteration with $\mat X_0 \defeq \mat I$.
+- Apply $\mat Q \mat R$ only on the last two terms
+
+~~~ julia
+Q, R = I, A
+for i in 1:n
+    O, R = qr(R* Q)
+    X *= Q
+end
+~~~
+
+:::::
+
+::::: {.col}
+
+### Ritz vectors
+
+Given $\mathcal U \subset \R^n$,
+a **Ritz vector** is an eigenvector of the restriction of $A$ on $\mathcal U$,
+
+\begin{align*}
+\proj_{\mathcal{U}} \mat A \vec x = \lambda \vec x.
+\end{align*}
+
+
+### Announcements
+
+- PageRank homework due on Monday
+- You have to implement the **damped** version
+- You may use the Arnoldi instead of the power iteration (extra credits, faster)
+
+:::::
+
 # Projection
 
 Let $\vec u_1, \dots, \vec u_p$ be an orthonormal basis of $\mathcal U$.
@@ -1119,6 +1170,221 @@ There is a subset $\lambda_1, \dots, \lambda_p \in \spectrum \mat A$ which satis
 \max_{j \in \{1, \dots, p\}} \abs{\lambda_j - \widehat{\lambda}_j}
 \leq \norm{ (\mat I - \mat P_{\mathcal U} ) \mat A \mat P_{\mathcal U} }_2
 \end{align*}
+:::
+
+# Lanczos/Arnoldi iteration [@vaes22, p. 158]
+
+::: {.info title="Lo que hemos visto hasta ahora"}
+- Ritz vectors are eigenvectors approximations
+- Ritz vectors are eigenvectors when $\mathcal U$ is invariant under $\mat A$.
+- Ritz vectors of $\mat A$ are eigenvectors of $\mat U^T \mat A \mat U$,
+:::
+
+::: algorithm
+Step 1
+:   We choose
+
+\begin{align*}
+\mathcal U \defeq \span\{\vec x_0, \mat A \vec x_0, \dots, \mat A^k \vec x_0\}
+\end{align*}
+
+Step 2
+:   Find an orthonormal basis of $\mathcal U$.
+
+Step 3
+:   Calculate $\mat U^T \mat A \mat U$.
+
+Step 4
+:   Find the eigenvectors of $\mat H \defeq \mat U^T \mat A \mat U$.
+
+Step 5
+:   Start over with $\vec x_0$ being the largest Ritz vector
+:::
+
+# Krylov space
+
+We introduce our choice of $\mathcal U$ given an initial guess $\vec x_0$.
+
+::: {.definition title="Krylov spaces"}
+\begin{align*}
+\mathcal K_{k + 1}(\mat A, \vec x_0)
+\defeq
+\span \{ \vec x_0, \mat A \vec x_0, \dots, \mat A^k \vec x_0 \}
+\end{align*}
+:::
+
+::: info
+**Krylov spaces** are useful because they are "almost" invariant under $\mat A$.
+Keep in mind that an invariant subspace yields **exact eigenvectors**.
+:::
+
+# Step 2: Gram-Schmidt
+
+Create an orthonormal basis of
+\begin{align*}
+\mathcal U \defeq \span\{\vec x_0, \mat A \vec x_0, \dots, \mat A^{p - 1} \vec x_0\}
+\end{align*}
+
+~~~ julia
+U = u / √(u'u)
+for j in 1:p - 1
+    u = A * u
+
+    # Gram-Schmidt
+    for i in 1:j
+        u -= u'U[:,i] * U[:,i]
+    end
+    u /= √(u'u)
+
+    # Add it to the matrix U
+    U = [U u]
+end
+~~~
+
+# Hessenberg property
+
+::: proposition
+The matrix $\mat H = \mat U^T \mat A \mat U$,
+satisfies
+\begin{align*}
+\mat H_{ij} \defeq 0
+\qquad \text{if } i > j + 1.
+\end{align*}
+:::
+
+\begin{align*}
+H_{ij} = \ip{ \vec u_i, A \vec u_j }
+\end{align*}
+
+# Step 3: Calculate $\mat H = \mat U^T \mat A \mat U$ {.nosplit}
+
+Note that
+\begin{align*}
+H_{ij} = \ip{ \vec u_i, A \vec u_j }
+\end{align*}
+
+::: row
+::::: {.col}
+
+### Gram-Schmidt
+
+~~~ julia
+U = u / √(u'u)
+for j in 1:p - 1
+    u = A * u
+
+    # Gram-Schmidt
+    for i in 1:j
+        u -= u'U[:,i] * U[:,i]
+    end
+    u /= √(u'u)
+
+    # Add it to the matrix U
+    U = [U u]
+end
+~~~
+:::::
+
+::::: {.col}
+
+### Gram-Schmidt with $\mat H$ calculation (Arnoldi)
+
+~~~ julia
+U = u / √(u'u)
+H = zeros(p)
+for j in 1:p
+    u = A * u
+
+    # Gram-Schmidt
+    for i in 1:j
+        H[i, j] = u'U[:,i]
+        u -= H[i, j] * U[:,i]
+    end
+    H[j + 1, j] = √(u'u)
+    u /= H[j + 1, j]
+
+    U = [U u]
+end
+~~~
+:::::
+
+:::
+
+# Restarted Arnoldi iteration [@vaes22, p. 157]
+
+~~~ julia
+p = 10
+
+u = # Initial guess
+for k in 1:N
+    # Calculate H and U
+    U = u / √(u'u)
+    H = zeros(p)
+    for j in 1:p
+        u = A * u
+
+        # Gram-Schmidt
+        for i in 1:j
+            H[i, j] = u'U[:,i]
+            u -= H[i, j] * U[:,i]
+        end
+        H[j + 1, j] = √(u'u)
+        u /= H[j + 1, j]
+
+        U = [U u]
+    end
+
+    # Largest Ritz vector
+    u = eigen(H).vectors[:,end]
+end
+~~~
+
+# When $\mat A$ is symmetric
+
+::: proposition
+If $\mat A$ is symmetric,
+the matrix $\mat H = \mat U^T \mat A \mat U$
+is tridiagonal and symmetric.
+:::
+
+::: info
+In particular, a full Gram-Schmidt algorithm is not necessary.
+:::
+
+# Lanczos iteration [@vaes22, p. 158]
+
+::: exercise
+
+Adapt the previous algorithm (given below)
+to the fact that $\mat H$ is tridiagonal and symmetric.
+
+~~~ julia
+p = 10
+
+u = # Initial guess
+for k in 1:N
+    # Calculate H and U
+    U = u / √(u'u)
+    H = zeros(p)
+    for j in 1:p
+        u = A * u
+
+        # Gram-Schmidt, TODO: to simplify
+        for i in 1:j
+            H[i, j] = u'U[:,i]
+            u -= H[i, j] * U[:,i]
+        end
+        H[j + 1, j] = √(u'u)
+        u /= H[j + 1, j]
+
+        U = [U u]
+    end
+
+    # Largest Ritz vector
+    u = eigen(H).vectors[:,end]
+end
+~~~
+
 :::
 
 # Bibliography
