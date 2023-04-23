@@ -1063,7 +1063,7 @@ Ritz vectors are eigenvectors.
 
 ### Simultaneous iteration
 
-- **Step 1**: Apply $\mat A$
+- **Step 1**: Left-multiply by $\mat A$
 
 - **Step 2**: Apply Gram-Schmidt
 
