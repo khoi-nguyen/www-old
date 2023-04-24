@@ -104,6 +104,27 @@ f(t) = \sum_{n \in \Z} \widehat f(n) e^{i 2 \pi n t}
 
 We call the RHS the *Fourier series*.
 
+# Interpretation of complex Fourier coefficients
+
+~~~ {.yaml .widget name="youtube"}
+url: https://www.youtube.com/watch?v=QVuU2YCwHjw
+zoom: 2
+~~~
+
+# Riemann-Lebesgue Lemma
+
+::: proposition
+The Fourier coefficients $\widehat f(n)$ tend to $0$
+as $n \to +\infty$.
+:::
+
+Proof: try for a characteristic function.
+
+::: info
+This means that it makes sense to "remove"
+high frequency terms.
+:::
+
 # Parseval's theorem
 
 ::: theorem
@@ -187,15 +208,23 @@ Y_n
 This split allows us to calculate two Fourier coefficient!
 :::
 
+::: Exercise
+Calculate $Y_{n + N/2}$ and compare to $Y_n$.
+:::
+
 # Cooley-Tukey: complexity
 
 ::: proposition
 The complexity is $\bigo(N \log N)$
 :::
 
+$N = 2^L \implies L = \log 2 N$
+
 \begin{align*}
-f(N) &= N \times f(N / 2)\\
-N \log N &= N \times \frac N 2 \log \frac N 2
+T(N) &= 2 T(N / 2) + \bigo(N)\\
+&= 2 (2 T(N / 4) + \bigo(N / 2)) + \bigo(N)\\
+&= 4 T(N/4) + 2 \bigo(N)\\
+&= N T(1) + \bigo(N \log N)
 \end{align*}
 
 # Cooley-Tukey algorithm: Julia implementation
@@ -209,6 +238,8 @@ function FFT(y)
     Y = zeros(length(N))
     O = FFT(y[1:N:2])
     E = FFT(y[2:N:2])
+
+    # Conquer
     for k in 1:N/2
         p, q = O[k], exp(-im * 2 * π * k / N) * E[k]
         Y[k] = p + q
