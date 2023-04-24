@@ -5,6 +5,16 @@ split: true
 notes: |
 ...
 
+# PageRank
+
+- <https://urbain.vaes.uk/static/teaching/numerical_analysis/misc/data_hw7.tar.gz>
+- Deadline: 5 May
+
+## Finals
+
+- Chapters 4, 5, 6
+- Wednesday and Wednesday: revision questions
+
 # Motivations
 
 Assume we know that
