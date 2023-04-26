@@ -6,6 +6,8 @@ notes: |
   - 05/04: Random browsing, stochastic matrices, PageRank and eigenvalues (1-11)
   - 12/04: Eigenvalues, power iteration and essential convergence (12-22)
   - 14/04: Inverse iteration, Rayleigh quotient, QR decomposition (23-33)
+  - 17/04: QR factorisation, Ritz vectors
+  - 19/04: End of chapter
 ...
 
 # Introduction: random browsing
