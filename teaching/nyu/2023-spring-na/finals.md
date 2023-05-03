@@ -54,7 +54,22 @@ title: Finals
 List of the algorithms you need to be able to write in pseudo-code
 
 - Splitting methods (general case)
+- Bisection method
 - Newton-Raphson
 - Power iteration
 - Subspace iteration
 - QR algorithm
+
+# Questions you need to be able to answer
+
+- Why is an iterative method preferable over a classical method such as the LU decomposition
+  when solving a system?
+- Interpret the Richardson method as an optimization problem.
+- In your own words, explain what it means for a sequence to converge quadratically.
+  Give an example of such sequence.
+- Explain the link between iteration and fixed point problems.
+  Give an example of an iteration that cannot be written as a fixed point problem.
+- Give the interpretation of the Newton-Raphson method
+- Why could the Newton-Raphson method fail?
+- Explain the PageRank algorithm, what it represents and its link to eigenvalue problems.
+- Why do we talk about **essential convergence** in the power iteration?
