@@ -33,19 +33,6 @@ notes: |
 
 ![](/static/images/1682509279.png)
 
-# Around Banach's fixed point theorem
-
-We consider a splitting
-$\mat A = \mat M - \mat N$ such that
-$\rho(\mat M^{-1} \mat N) < 1$,
-which yields the iteration
-\begin{align*}
-\vec x^{(k + 1)} = \mat M^{-1} \mat N \vec x^{(k)}
-\end{align*}
-
-#. Show that there exists a norm for which the iteration is defined
-  by a contraction. Conclude that it converges via Banach.
-
 # Generalized Banach fixed point theorem
 
 We consider a splitting
@@ -65,3 +52,27 @@ Show that the iteration satisfies
 \end{align*}
 
 Hence, prove that the iteration converges towards a unique fixed point.
+
+# Pagerank
+
+::::: col
+![](/static/images/1683113504.png)
+:::::
+
+::::: col
+- Find the transition matrix (without damping)
+- Find the transition matrix with a damping factor $\epsilon = 0.5$
+- Find the PageRank vector with $\epsilon = 0.5$.
+:::::
+
+# Newton-Raphson
+
+![](/static/images/1683114990.png)
+![](/static/images/1683115102.png)
+![](/static/images/1683115155.png)
+![](/static/images/1683115372.png)
+
+# Newton-Raphson: solutions {.nosplit}
+
+<iframe src="https://personal.math.ubc.ca/~anstee/math104/104newton-solution.pdf" width="900" height="600">
+</iframe>
