@@ -24,6 +24,20 @@ Website
 Textbook
 :    Differential Equations with Boundary-Value problems, D.G. Zill
 
+# Short introduction
+
+::::: text-center
+![](https://upload.wikimedia.org/wikipedia/commons/3/3b/Portrait_of_Sir_Isaac_Newton%2C_1689.jpg){height=300}
+:::::
+
+::: {.quote title="Albert Einstein"}
+In order to put his system into mathematical form at all,
+Newton had to devise the concept of differential quotients and
+propound the laws of motion in the form of total **differential 
+equations**—perhaps the **greatest advance in thought** that a
+single individual was ever privileged to make.
+:::
+
 # Definition and terminology p. 3
 
 ::: definition
@@ -72,6 +86,7 @@ a_n(x) \frac {\dd^n y} {\dd x^n}
 + a_{n - 1}(x) \frac {\dd^{n - 1} y} {\dd x^{n - 1}}
 + \dots
 + a_1(x) \frac {\dd y} {\dd x}
+= g(x).
 \end{align*}
 
 # Examples: type
