@@ -317,7 +317,7 @@ Two (actually three) questions arise when considering IVPs.
 
 # Existence and uniqueness
 
-::: {.theorem title="Picard, Lindolöf, Lipschitz, Cauchy"}
+::: {.theorem title="Picard, Lindelöf, Lipschitz, Cauchy"}
 If $f(x, y)$ and $\partial f / \partial y$ are continuous around $(x_0, y_0)$,
 then locally around $x_0$,
 the solution of
@@ -343,7 +343,7 @@ To check the solution exists:
 
 # Picard-Lindelöf-Cauchy-Lipschitz theorem
 
-::: {.theorem title="Picard, Lindolöf, Lipschitz, Cauchy"}
+::: {.theorem title="Picard, Lindelöf, Lipschitz, Cauchy"}
 If $f(x, y)$ and $\partial f / \partial y$ are continuous around $(x_0, y_0)$,
 then locally around $x_0$,
 the solution of
