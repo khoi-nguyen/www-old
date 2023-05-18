@@ -14,7 +14,7 @@ My email
 :   <nguyen.khoi@nyu.edu>
 
 Room
-:   406
+:   Bastille
 
 Lectures
 :   Monday to Friday, 12:00-14:00
