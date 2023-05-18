@@ -263,7 +263,7 @@ I need to ensure you can do so without getting in trouble with the law,
 or you might miss differential equations the next day
 (we don't want that).
 
-**Je veux parler à mon avocat** - *I want to speak to my lawyer*.
+**Je veux parler à mon avocat∙e** - *I want to speak to my lawyer*.
 :::::
 
 # Initial Value problems
