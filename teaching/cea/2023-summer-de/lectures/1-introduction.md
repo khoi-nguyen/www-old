@@ -3,7 +3,8 @@ title: "Chapter 1: Introduction to Differential Equations"
 output: revealjs
 kernel: python
 notes: |
-  - 09/05: type, order, linearity, implicit form, and solutions (1-20)
+  - 17/05: type, order, linearity, implicit form, and solutions (1-20)
+  - 18/05: initial value problems, Cauchy-Lipschitz theorem, modelling
 ...
 
 # Introduction
