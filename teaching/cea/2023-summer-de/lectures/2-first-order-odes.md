@@ -2,8 +2,7 @@
 title: "Chapter 2: First-Order Differential Equations"
 output: revealjs
 kernel: python
-notes: |
-  - 09/05: type, order, linearity, implicit form, and solutions (1-20)
+notes: ""
 ...
 
 # Direction fields
@@ -154,7 +153,13 @@ then so is $\tilde y(x) \defeq y(x + k)$.
 
 # Exercises 2.1
 
+::::: {.col}
 <pdf-reader src="/static/documents/zill-2.1.pdf" width="100%" height="900" />
+:::::
+
+::::: {.col}
+Selection: 19, 21, 27, 29, 39, 41
+:::::
 
 # Answers
 
@@ -218,7 +223,13 @@ Be careful when **dividing**.
 
 # Exercises 2.2
 
+::: col
 <pdf-reader src="/static/documents/zill-2.2.pdf" width="100%" height="900" />
+:::
+
+::::: {.col}
+Selection: 5, 13, 23, 27, (29), 38
+:::::
 
 # Answers 2.2
 

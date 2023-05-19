@@ -454,6 +454,51 @@ $A$: amount of salt
 
 ![](/static/images/1684391260.png)
 
+# 19/05/2023
+
+::::: {.col}
+
+### IVP - *problèmes de Cauchy*
+
+::: {.theorem title="Cauchy-Picard"}
+Si $f(x, y)$ et $\frac {\partial f} {\partial y}$ sont
+définies et continues **autour** de $(x_0, y_0)$,
+alors le *problème de Cauchy*
+\begin{align*}
+\begin{cases}
+y' = f(x, y)\\
+y(x_0) = y_0
+\end{cases}
+\end{align*}
+admet une **solution unique**.
+:::
+
+:::::
+
+::::: {.col}
+
+### French sentence of the day
+
+There will be different categories of French sentences:
+survival (like yesterday), integration (today), offending thy neighbour,
+pretending you can speak French and employability^[Teaching you a French
+accent will fall into literally all of the above]
+
+::: {.info title="French sentence of the day"}
+**Enfermez-le/la** - *Lock him/her up*.
+:::
+
+This is to use at the next strike. "Le" to refer to Emmanuel Macron (Manu),
+"la" for "Élisabeth Borne" (Lily).
+
+::: remark
+If you get arrested, don't forget to *ask for your lawyer*.
+If it goes to trial, tell the court they didn't inform you of your *Miranda rights*.
+You're welcome.
+:::
+
+:::::
+
 # Draining a tank
 
 ::::: {.col}
@@ -516,3 +561,7 @@ m \frac {\dd v} {\dd t} = mg - kv
 
 ![](/static/images/1684394576.png)
 ![](/static/images/1684394592.png)
+
+# Review
+
+<pdf-reader src="/static/documents/zill-1.pdf" width="100%" height="900" />
