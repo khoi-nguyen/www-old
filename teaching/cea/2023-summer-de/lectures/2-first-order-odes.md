@@ -28,6 +28,9 @@ t = linspace(-5, 5, 100)
 plot(t, 0.2 * exp(0.1 * t ** 2), color="red")
 ~~~
 
+If solutions are always unique,
+the direction fields don't cross.
+
 # Direction fields with Python
 
 ~~~ {.python .jupyter}
