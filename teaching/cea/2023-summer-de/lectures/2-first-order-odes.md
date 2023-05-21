@@ -239,3 +239,159 @@ Selection: 5, 13, 23, 27, (29), 38
 
 ![](/static/images/1684450887.png)
 ![](/static/images/1684450897.png)
+
+# Solving linear equations
+
+An ODE is **linear** if it's linear in $y$
+
+::: definition
+A first-order ODE is linear if ith as the form
+\begin{align*}
+a_1(x) \frac {\dd y} {\dd x} + a_0(x) y = g(x),
+\end{align*}
+:::
+
+Normalizing the highest order coefficient yields the so-called **standard form**.
+
+::: {.remark title="Standard form"}
+\begin{align*}
+\frac {\dd y} {\dd x} + P(x) y = f(x).
+\end{align*}
+:::
+
+# Integrating factors
+
+Start with the standard form:
+\begin{align*}
+\frac {\dd y} {\dd x} + P(x) y = f(x)
+\end{align*}
+
+Multiply both sides by $\mu(x)$:
+\begin{align*}
+{\color{red}\mu(x)} \frac {\dd y} {\dd x} + {\color{red}\mu(x)} P(x) y = {\color{red}\mu(x)} f(x).
+\end{align*}
+
+If $\mu$ is chosen so that $\boxed{\mu'(x) = \mu(x) P(x)}$, then we get:
+\begin{align*}
+\frac {\dd (\mu y)} {\dd x} = \mu(x) f(x),
+\end{align*}
+which is much easier to solve.
+
+::: {.definition title="Integrating factor"}
+\begin{align*}
+\mu(x) \defeq e^{\int P(x) \dd x} \dd x
+\end{align*}
+:::
+
+# Solving a linear equation: example
+
+#. Write the equation in standard form.
+#. Choose $\mu(x) \defeq e^{\int P(x) \dd x}$.
+#. Multiply everything by $\mu$
+#. Recognize the product rule on the LHS.
+
+![](/static/images/1684701158.png)
+![](/static/images/1684701184.png)
+
+# General solution
+
+![](/static/images/1684702676.png){width=100%}
+
+# General solution: example 2
+
+![](/static/images/1684702706.png){width=100%}
+
+# Linear IVP: example
+
+![](/static/images/1684702749.png){width=100%}
+
+# Piecewise-linear DEs
+
+![](/static/images/1684703099.png){width=100%}
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-2.3.pdf" width="100%" height="900" />
+
+# 2.4 Exact equations
+
+We now turn our attention to functions $f: \R^2 \to \R$.
+
+::: definition
+The differential of $f$ is
+\begin{align*}
+\dd f = \frac {\partial f} {\partial x} \dd x + \frac {\partial f} {\partial y} \dd y.
+\end{align*}
+:::
+
+::: question
+Given $M$ and $N$, find $f$ such that
+\begin{align*}
+\dd f = M(x, y) \dd x + N(x, y) \dd y.
+\end{align*}
+:::
+
+This will be helpful, as $\dd f = 0 \iff f(x, y) = c$.
+
+# Symmetry of the derivatives
+
+\begin{align*}
+\dd f = M(x, y) \dd x + N(x, y) \dd y.
+\iff
+\begin{cases}
+\partial_x f(x, y) = M(x, y)\\
+\partial_y f(x, y) = N(x, y)\\
+\end{cases}
+\end{align*}
+
+As $\partial_x \partial_y f = \partial_y \partial_x f$,
+the equation is only solvable if
+\begin{align*}
+\partial_y M(x, y) = \partial_x N(x, y)
+\end{align*}
+
+# Example: solving an exact DE
+
+![](/static/images/1684704066.png){width=100%}
+
+# Example 2: solving an exact DE
+
+![](/static/images/1684704779.png){width=100%}
+![](/static/images/1684704796.png){width=100%}
+
+# Example: IVP
+
+![](/static/images/1684704834.png){width=100%}
+
+# Integrating factors
+
+Let's find $\mu$ to make the equation exact.
+
+\begin{align*}
+\mu(x, y) M(x, y) \dd x + \mu(x, y) N(x, y) \dd y = 0.
+\end{align*}
+
+::: proposition
+The above equation is exact iff
+\begin{align*}
+(\partial_x \mu) N - (\partial_y \mu) M = (\partial_y M - \partial_x N) \mu
+\end{align*}
+:::
+
+This is difficult, and we shall therefore assume that $\mu$ depends only on one variable:
+
+\begin{align*}
+\frac {\dd \mu} {\dd x} = \frac {\partial_y M - \partial_x N} N \mu.
+\quad \text{or} \quad
+\frac {\dd \mu} {\dd y} = \frac {\partial_x N - \partial_y M} M \mu.
+\end{align*}
+
+# Example: DE made exact
+
+![](/static/images/1684705812.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-2.4.pdf" width="100%" height="900" />
+
+# Substitutions
