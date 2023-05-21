@@ -394,4 +394,53 @@ This is difficult, and we shall therefore assume that $\mu$ depends only on one 
 
 <pdf-reader src="/static/documents/zill-2.4.pdf" width="100%" height="900" />
 
-# Substitutions
+# Homogeneous equations
+
+::: definition
+The function $f(x, y)$ is **homogeneous** of degree $\alpha$ if
+\begin{align*}
+f(tx, ty) = t^\alpha f(x, y)
+\end{align*}
+:::
+
+::: definition
+A first-order DE in differential form
+\begin{align*}
+M(x, y) \dd x + N(x, y) \dd y = 0
+\end{align*}
+is **homogeneous** of degree $\alpha$
+if both $M$ and $N$ are homogeneous of degree $\alpha$ as well.
+:::
+
+# Example: solving a homogeneous DE
+
+Write $y = ux$ (or $x = uy$).
+
+![](/static/images/1684707103.png){width=100%}
+
+# Bernouilli's equation
+
+::: {.definition title="Bernouilli's equation"}
+\begin{align*}
+\frac {\dd y} {\dd x} + P(x) y = f(x) y^n
+\end{align*}
+:::
+
+Write $u = y^{1 - n}$.
+
+# Example: Bernouilli's equation
+
+![](/static/images/1684707304.png){width=100%}
+
+# Reduction to separation of variables
+
+\begin{align*}
+\frac {\dd y} {\dd x} = f(\underbrace{Ax + By + C}_u)
+\end{align*}
+
+![](/static/images/1684707481.png)
+![](/static/images/1684707501.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-2.5.pdf" width="100%" height="900" />
