@@ -4,7 +4,8 @@ output: revealjs
 kernel: python
 notes: |
   - 17/05: type, order, linearity, implicit form, and solutions (1-20)
-  - 18/05: initial value problems, Cauchy-Lipschitz theorem, modelling
+  - 18/05: initial value problems, Cauchy-Lipschitz theorem, modelling (21-41)
+  - 19/05: modelling
 ...
 
 # Introduction

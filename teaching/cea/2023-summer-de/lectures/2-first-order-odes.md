@@ -2,7 +2,8 @@
 title: "Chapter 2: First-Order Differential Equations"
 output: revealjs
 kernel: python
-notes: ""
+notes: |
+  - 19/05: Direction fields, autonomous equations, phase portraits, separable equations (1-18)
 ...
 
 # Direction fields
