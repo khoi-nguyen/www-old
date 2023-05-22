@@ -494,3 +494,60 @@ Write $u = y^{1 - n}$.
 # Exercises
 
 <pdf-reader src="/static/documents/zill-2.5.pdf" width="100%" height="900" />
+
+# Euler's method
+
+::: col
+\begin{align*}
+\begin{cases}
+y' &= f(x, y)\\
+y(x_0) &= y_0\\
+\end{cases}
+\end{align*}
+
+As $y' \approx \Delta y / \Delta x$,
+we know that
+\begin{align*}
+\underbrace{y_1 - y_0}_{\Delta y}
+\approx \underbrace{f(x_0, y_0)}_{y'}
+\underbrace{(x_1 - x_0)}_{\Delta x}
+\implies
+y_1 \approx y_0 + f(x_0, y_0) (x_1 - x_0)
+\end{align*}
+
+If $x_k = x_0 + kh$, then
+\begin{align*}
+\boxed{
+y_{k + 1} \approx y_k + f(x_k, y_k) h
+}
+\end{align*}
+:::
+
+::: col
+![](/static/images/1684781701.png)
+:::
+
+# Python implementation
+
+~~~ {.python .jupyter}
+from matplotlib.pyplot import *
+from numpy import *
+
+def euler(f, x_0, y_0, h, n):
+    x = [x_0 + i * h for i in range(n)]
+    y = [y_0] + [0] * (n - 1)
+    for i in range(1, n):
+        y[i] = y[i - 1] + f(x[i - 1], y[i - 1]) * h
+    return x, y
+
+f = lambda x, y: exp(x)
+
+# Plot numerical solution
+n = 100
+x, y = euler(f, 0, 1, 1/n, n + 1)
+plot(x, y)
+
+# Plot real solution
+x = linspace(0, 1, 1000)
+plot(x, exp(x))
+~~~
