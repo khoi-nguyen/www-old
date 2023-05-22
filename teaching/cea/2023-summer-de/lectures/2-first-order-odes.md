@@ -217,6 +217,52 @@ Be careful when **dividing**.
 ![](/static/images/1684449959.png)
 ![](/static/images/1684449975.png)
 
+# 22/05/2023
+
+::::: {.col}
+
+### Autonomous first-order ODEs $y' = f(y)$
+
+#. The only constant solutions are critical points (roots of $f$)
+#. Critical points can be: attractors, repellers, semi-stable
+#. Direction fields are translation invariant and can be summarized via **phase portraits**.
+
+~~~ {.python .plot width=100%}
+x = linspace(-3, 3, 30)
+y = linspace(-3, 3, 30)
+X, Y = meshgrid(x, y)
+slope = cos(Y)
+quiver(X, Y, ones_like(slope), slope, color="#255994")
+~~~
+:::::
+
+::::: {.col}
+
+### Solving separable first-order ODEs
+
+\begin{align*}
+\frac {\dd y} {\dd x} = \frac {g(x)} {h(y)}
+\implies
+\int h(y) \dd y = \int g(x) \dd x
+\end{align*}
+
+### Announcements
+
+I've decided to wait a bit more before giving you homework.
+
+You will always have a full week's notice.
+
+### French sentence of the day
+
+::: {.info title="French sentence of the day"}
+**Peux-tu répéter?**^[If mispronounced, you'll say "can you fart again?". No pressure] - *Can you repeat?*
+:::
+
+Always blame the other person when you don't understand their French.
+You can add a "**non (euhhhh) parlo (euhhh) español**".
+Don't forget to speak louder than them.
+:::::
+
 # IVPs
 
 ![](/static/images/1684450099.png){width=100%}
