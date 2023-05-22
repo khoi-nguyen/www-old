@@ -11,7 +11,7 @@ title: Differential Equations
 #### Practical information {.card-title}
 
 My email
-:   <nguyen.khoi@nyu.edu>
+:   <knguyen@ceastudyabroad.com>
 
 Room
 :   Bastille
