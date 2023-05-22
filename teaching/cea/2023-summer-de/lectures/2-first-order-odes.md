@@ -246,6 +246,10 @@ quiver(X, Y, ones_like(slope), slope, color="#255994")
 \int h(y) \dd y = \int g(x) \dd x
 \end{align*}
 
+::: remark
+Be careful when dividing by 0!
+:::
+
 ### Announcements
 
 I've decided to wait a bit more before giving you homework.
