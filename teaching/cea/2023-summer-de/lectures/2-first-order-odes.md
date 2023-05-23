@@ -551,3 +551,7 @@ plot(x, y)
 x = linspace(0, 1, 1000)
 plot(x, exp(x))
 ~~~
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-2.pdf" width="100%" height="900" />
