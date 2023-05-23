@@ -4,6 +4,7 @@ output: revealjs
 kernel: python
 notes: |
   - 19/05: Direction fields, autonomous equations, phase portraits, separable equations (1-18)
+  - 22/05: separable equations, linear equations (19-31)
 ...
 
 # Direction fields
@@ -362,6 +363,41 @@ which is much easier to solve.
 # Exercises
 
 <pdf-reader src="/static/documents/zill-2.3.pdf" width="100%" height="900" />
+
+# 23/05/2023
+
+::::: {.col}
+
+### Linear first-order equations
+
+\begin{align*}
+\frac {\dd y} {\dd x} + P(x) y = f(x)
+\end{align*}
+
+If $\mu(x) = e^{\int P(x) \dd x}$, then
+multiplying by $\mu$ gives
+\begin{align*}
+(\mu(x) y(x))' = \mu(x) f(x)
+\end{align*}
+
+You just need to integrate both sides.
+
+:::::
+
+::::: {.col}
+
+### French sentence of the day
+
+**L'ordinateur portable de Hunter Biden** - *Hunter Biden's laptop*.
+
+Useful for the midterm when you don't know how to answer a question.
+
+This shows two features of French:
+
+- the *h* is silent ('ello, 'ow arrre you?)
+- French forms the possessive differently (the laptop **OF** Hunter Biden)
+
+:::::
 
 # 2.4 Exact equations
 
