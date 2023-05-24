@@ -560,6 +560,10 @@ Write $u = y^{1 - n}$.
 
 <pdf-reader src="/static/documents/zill-2.5.pdf" width="100%" height="900" />
 
+# Answers
+
+![](/static/images/1684924043.png){width=100%}
+
 # Euler's method
 
 ::: col
