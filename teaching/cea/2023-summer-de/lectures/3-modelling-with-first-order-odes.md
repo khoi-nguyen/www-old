@@ -2,6 +2,8 @@
 title: "Chapter 3: Modelling with First-Order ODEs"
 output: revealjs
 kernel: python
+notes: |
+  24/05: All chapter
 ...
 
 # Example 1: Bacterial growth
