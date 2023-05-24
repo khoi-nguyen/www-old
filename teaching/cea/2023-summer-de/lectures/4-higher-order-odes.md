@@ -6,9 +6,31 @@ kernel: python
 
 # 25 May 2023
 
-## Announcements: homework
+## Homework
+
+::::: {.col}
 
 Homework is on Moodle
+
+![](/static/images/1684968700.png){width=100%}
+
+:::::
+
+::::: {.col}
+
+## French sentence of the day
+
+![](/static/images/1684969790.png){height=500px}
+
+If you ever find yourself in Emily's situation,
+you can tell your new friend the following:
+
+**Tu pues, va te laver** - *you stink, have a shower*.
+
+Again, you're welcome.
+
+:::::
+
 
 # IVP vs BVP
 
