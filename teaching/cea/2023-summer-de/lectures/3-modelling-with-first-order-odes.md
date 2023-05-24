@@ -90,5 +90,7 @@ To solve them, we use separation of variables.
 
 ![](/static/images/1684911012.png)
 
+# Exercises
+
 <pdf-reader src="/static/documents/zill-3.2.pdf" width="100%" height="900" />
 
