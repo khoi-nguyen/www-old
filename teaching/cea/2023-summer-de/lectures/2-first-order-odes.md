@@ -5,6 +5,7 @@ kernel: python
 notes: |
   - 19/05: Direction fields, autonomous equations, phase portraits, separable equations (1-18)
   - 22/05: separable equations, linear equations (19-31)
+  - 23/05:
 ...
 
 # Direction fields
@@ -503,6 +504,34 @@ if both $M$ and $N$ are homogeneous of degree $\alpha$ as well.
 Write $y = ux$ (or $x = uy$).
 
 ![](/static/images/1684707103.png){width=100%}
+
+# 24/05
+
+::::: {.col}
+
+### Change of variables
+
+- **Homogeneous**: $y = ux$
+- **Bernouilli**: $u = y^{1 - n}$
+\begin{align*}
+\frac {\dd y} {\dd x} + P(x) y = f(x) y^n
+\end{align*}
+- Reduction of separation of variables
+\begin{align*}
+\frac {\dd y} {\dd x} = f(\underbrace{Ax + By + C}_u)
+\end{align*}
+:::::
+
+::::: {.col}
+
+### Homework
+
+Bad news, homework will be set tonight on Chapter 2 and 3.1.
+
+### French sentence of the 05/24/2023
+
+**Je veux parler à votre supérieur** - *I want to speak to the manager*.
+:::::
 
 # Bernouilli's equation
 
