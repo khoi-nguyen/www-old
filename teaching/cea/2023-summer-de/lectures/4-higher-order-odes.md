@@ -264,3 +264,142 @@ allows to find another solution.
 # Answers
 
 ![](/static/images/1684967469.png)
+
+# Homogeneous linear equations with constant coefficients
+
+We'll focus on how to solve
+\begin{align*}
+ay'' + by' + c = 0.
+\end{align*}
+
+::: proposition
+Let $y = e^{mx}$.
+
+\begin{align*}
+ay'' + by' + c = 0 \iff \underbrace{am^2 + bm + c = 0}_{\text{auxiliary equation}}
+\end{align*}
+:::
+
+# Different cases
+
+Let $y = e^{mx}$.
+\begin{align*}
+ay'' + by' + c = 0 \iff \underbrace{am^2 + bm + c = 0}_{\text{auxiliary equation}}
+\end{align*}
+
+**Distinct real roots** ($\Delta > 0$) $m_1 \neq m_2$.
+\begin{align*}
+y = c_1 e^{m_1 x} + c_2 e^{m_2 x}
+\end{align*}
+
+**Repeated real roots** ($\Delta = 0$) $m_1 = m_2$.
+\begin{align*}
+y = c_1 e^{m_1 x} + c_2 {\color{red} x} e^{m_1 x}
+\end{align*}
+
+**Complex conjugate solutions** ($\Delta < 0$) $m_1 = \alpha + i \beta$, $m_2 = \alpha - i \beta$
+\begin{align*}
+y &= c_1 e^{m_1 x} + c_2 e^{m_2 x}\\
+&= e^{\alpha x} (c_1 \cos \beta x + c_2 \sin \beta x)
+\end{align*}
+
+::: exercise
+Use reduction of order to find the second solution for the $\Delta = 0$ case.
+:::
+
+# Example 1
+
+![](/static/images/1685049949.png)
+
+# Example 2: IVP
+
+![](/static/images/1685049980.png)
+
+# Example 3: third-order
+
+![](/static/images/1685050006.png)
+
+# Example 4: fourth-order
+
+![](/static/images/1685050076.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-4.3.pdf" width="100%" height="900" />
+
+# Answers
+
+![](/static/images/1685052199.png)
+![](/static/images/1685052220.png)
+
+# Undetermined Coefficients approach
+
+Now the book goes into a very lengthy description of the method.
+I have a short attention span, so let me TLDR it for you:
+
+Guess and pray
+
+# Example 1: polynomials
+
+![](/static/images/1685050763.png){width=100%}
+
+# Example 2: trigonometric functions
+
+![](/static/images/1685050784.png){width=100%}
+
+# Example 3: exponentials
+
+![](/static/images/1685050934.png){height=100%}
+
+# Example 4: exponentials
+
+![](/static/images/1685050976.png)
+
+# More Examples {.nosplit}
+
+![](/static/images/1685051003.png){width=100%}
+
+# General method
+
+#. Solve the homogenous equation
+
+#. Try a linear combination of $g(x)$, $g'(x)$, $g''(x)$
+
+#. If a term appears in both the above steps, multiply by $x^n$ with $n$ as
+small as possible
+
+# Example: guessing the form
+
+![](/static/images/1685051379.png){width=100%}
+
+# Example: using superposition
+
+![](/static/images/1685051425.png){width=100%}
+
+# Case 2
+
+![](/static/images/1685051565.png){width=100%}
+
+# Example 8
+
+![](/static/images/1685051995.png){width=100%}
+
+# Example 9
+
+![](/static/images/1685052022.png){width=100%}
+
+# Example 10
+
+![](/static/images/1685052064.png){width=100%}
+
+# Example 11
+
+![](/static/images/1685052080.png){width=100%}
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-4.4.pdf" width="100%" height="900" />
+
+# Answers
+
+![](/static/images/1685052164.png){height=100%}
