@@ -144,7 +144,7 @@ any linear combination of two solutions is also a solution.
 # Linear independence
 
 ::: definition
-A function $f_1$, $\dots, $f_n$ are **linearly dependent** on $I$
+The functions $f_1$, $\dots$, $f_n$ are **linearly dependent** on $I$
 if there exist constants $c_1, \dots, c_n$, not all zero, such that
 \begin{align*}
 c_1 f_1(x) + c_2 f_2(x) + \dots + c_n f_n(x) = 0
