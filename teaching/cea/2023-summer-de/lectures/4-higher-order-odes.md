@@ -265,6 +265,49 @@ allows to find another solution.
 
 ![](/static/images/1684967469.png)
 
+# French culture through Youtube
+
+You might have been lured into visiting France under false pretences
+such as a lower drinking age, phallic monuments,
+overpriced wine and animated movies involving rats.
+But fear not, for I am here to show you *ze true France*.
+
+::::: {.col}
+
+~~~ {.yaml .widget name="youtube"}
+url: https://www.youtube.com/watch?v=16k-yhcRNk8
+zoom: 1
+~~~
+
+Driving while blind
+
+~~~ {.yaml .widget name="youtube"}
+url: https://www.youtube.com/watch?v=MytfhzcSF-Y
+zoom: 1
+~~~
+
+Getting dressed as Mario, go kart into a shop to steal bananas
+
+:::::
+
+::::: {.col}
+
+~~~ {.yaml .widget name="youtube"}
+url: https://www.youtube.com/watch?v=JTiPqZbM5ls
+zoom: 1
+~~~
+
+Getting dressed as a sheep and go into a kebab shop with flowers
+
+~~~ {.yaml .widget name="youtube"}
+url: https://www.youtube.com/watch?v=gHCxdlZ7G18
+zoom: 1
+~~~
+
+Geting dressed as a snail and slow down traffic.
+
+:::::
+
 # Homogeneous linear equations with constant coefficients
 
 We'll focus on how to solve
