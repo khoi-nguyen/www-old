@@ -446,3 +446,149 @@ small as possible
 # Answers
 
 ![](/static/images/1685052164.png){height=100%}
+
+# 29/05/2023
+
+\begin{align*}
+ay'' + by' + cy = g(x)
+\end{align*}
+
+- Solve the homogeneous equation (rhs equals 0)
+  - Solve auxiliary equation: $am^2 + bm + c = 0$.
+  - Solution is a linear combination of
+  \begin{align*}
+  c_1 e^{m_1 x} + c_2 e^{m_2 x}
+  \quad \text{or} \quad
+  c_1 e^{m_1 x} + c_2 x e^{m_2 x}
+  \end{align*}
+- Find a particular solution.
+  Try a linear combination of $g, g', g''$.
+- Combine:
+  \begin{align*}
+  y = y_p + y_h
+  \end{align*}
+
+# Factoring and annihilator operators
+
+**Factoring operators**:
+\begin{align*}
+(D^2 + 5 D + 6) y = (D + 2) (D + 3) y
+\end{align*}
+
+**Annihilator operator**:
+\begin{align*}
+L(f(x)) = 0
+\end{align*}
+
+::: example
+- $y = k$ is **annihilated** by $D$
+- $y = x$ is **annihilated** by $D^2$
+:::
+
+::: proposition
+The operator $(D - \alpha)^n$ annihilates the following functions:
+\begin{align*}
+e^{\alpha x}, x e^{\alpha x}, x^2 e^{\alpha x}, \dots,
+x^{n - 1} e^{\alpha x}
+\end{align*}
+:::
+
+# Annihilator operators: example
+
+![](/static/images/1685309898.png){width=100%}
+
+# Annihilatore operators: second example
+
+![](/static/images/1685310199.png)
+![](/static/images/1685310223.png)
+
+# Annihilating a sum
+
+::: proposition
+Let $L_1$ and $L_2$ be two linear differential operators with constant coefficients.
+If $L_1(y_1) = L_2(y_2) = 0$,
+then
+\begin{align*}
+L_1 L_2 (y_1 + y_2) = 0
+\end{align*}
+:::
+
+# Undetermined coefficients - annihilator method
+
+![](/static/images/1685312227.png)
+
+# Undetermined coefficients
+
+![](/static/images/1685310944.png){width=100%}
+
+# Undetermined coefficients, 2nd example
+
+![](/static/images/1685310962.png){width=100%}
+
+# Undetermined coefficients
+
+![](/static/images/1685311151.png){width=100%}
+
+# Form of a particular solution
+
+![](/static/images/1685312191.png)
+
+# Form of a particular solution
+
+![](/static/images/1685312214.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-4.5.pdf" width="100%" height="900" />
+
+# Answers
+
+::::: {.col}
+![](/static/images/1685314249.png)
+:::::
+
+::::: {.col}
+![](/static/images/1685314263.png)
+:::::
+
+# Variation of parameters
+
+::: idea
+\begin{align*}
+y'' + P(x) y' + Q(x) y = f(x)
+\end{align*}
+
+Assume $y_h(x) = c_1 y_1(x) + c_2 y_2(x)$.
+To solve the general ODE, we consider
+\begin{align*}
+y_p(x) \defeq u_1(x) y_1(x) + u_2(x) y_2(x)
+\end{align*}
+:::
+
+After some long calculations...
+
+![](/static/images/1685313060.png){width=100%}
+
+# Variation of parameters: example
+
+![](/static/images/1685313114.png){width=100%}
+
+# Variation of parameters: example
+
+![](/static/images/1685313132.png){width=100%}
+
+No need to introduce any integration constants. Why?
+
+#  Variation of parameters with non-elementary integral
+
+![](/static/images/1685313616.png)
+
+![](/static/images/1685313580.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-4.6.pdf" width="100%" height="900" />
+
+# Answers
+
+![](/static/images/1685314224.png){height=100%}
