@@ -600,3 +600,57 @@ No need to introduce any integration constants. Why?
 # Answers
 
 ![](/static/images/1685314224.png){height=100%}
+
+# Cauchy-Euler Equations: summary
+
+![](/static/images/1685400879.png)
+
+Constant coefficients                                 Cauchy-Euler
+----------------------                                -------------
+$ay'' + by' + cy = g(x)$                              $ax^2y'' + bxy' + cy = g(x)$
+$e^{mx}$                                              $x^m$
+$am^2 + bm + c = 0$                                   $am^2 + (b - a)m + c = 0$
+$c_1 e^{m x} + c_2 x e^{m x}$                         $c^1 x^m + c_2 x^m \ln x$
+$e^{\alpha x}(c_1 \cos \beta x + c_2 \sin \beta x)$   $x^{\alpha} (c_1 \cos (\beta \ln x) + c_2 \sin (\beta \ln x)$
+
+# Method of solution
+
+Substitute $y = x^m$ into $ax^2 y'' + bx y' + cy = 0$.
+
+# Distinct roots
+
+![](/static/images/1685399497.png){width=100%}
+
+# Repeated roots
+
+![](/static/images/1685399524.png){width=100%}
+
+# IVP
+
+![](/static/images/1685399712.png){width=100%}
+
+# Third order equation
+
+![](/static/images/1685399740.png){width=100%}
+
+# Variation of parameters
+
+![](/static/images/1685400003.png)
+![](/static/images/1685400013.png)
+
+# Reduction to constant coefficients
+
+![](/static/images/1685400064.png)
+
+# Example
+
+![](/static/images/1685400452.png)
+![](/static/images/1685400483.png)
+
+# Concluding remarks
+
+![](/static/images/1685400781.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-4.7.pdf" width="100%" height="900" />
