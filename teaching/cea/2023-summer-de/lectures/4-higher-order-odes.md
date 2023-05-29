@@ -449,6 +449,7 @@ small as possible
 
 # 29/05/2023
 
+::::: {.col}
 \begin{align*}
 ay'' + by' + cy = g(x)
 \end{align*}
@@ -460,6 +461,7 @@ ay'' + by' + cy = g(x)
   c_1 e^{m_1 x} + c_2 e^{m_2 x}
   \quad \text{or} \quad
   c_1 e^{m_1 x} + c_2 x e^{m_2 x}
+  \text{ if } m_1 = m_2
   \end{align*}
 - Find a particular solution.
   Try a linear combination of $g, g', g''$.
@@ -467,6 +469,12 @@ ay'' + by' + cy = g(x)
   \begin{align*}
   y = y_p + y_h
   \end{align*}
+:::::
+
+::::: {.col}
+<iframe src="../index.html" width="100%" height="900">
+</iframe>
+:::::
 
 # Factoring and annihilator operators
 
@@ -493,15 +501,6 @@ x^{n - 1} e^{\alpha x}
 \end{align*}
 :::
 
-# Annihilator operators: example
-
-![](/static/images/1685309898.png){width=100%}
-
-# Annihilatore operators: second example
-
-![](/static/images/1685310199.png)
-![](/static/images/1685310223.png)
-
 # Annihilating a sum
 
 ::: proposition
@@ -512,6 +511,15 @@ then
 L_1 L_2 (y_1 + y_2) = 0
 \end{align*}
 :::
+
+# Annihilator operators: example
+
+![](/static/images/1685309898.png){width=100%}
+
+# Annihilatore operators: second example
+
+![](/static/images/1685310199.png)
+![](/static/images/1685310223.png)
 
 # Undetermined coefficients - annihilator method
 
