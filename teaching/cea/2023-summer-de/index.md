@@ -21,6 +21,8 @@ Lectures
 
 :::
 
+[Midterm formula booklet](formulae)
+
 Lectures
 --------
 
