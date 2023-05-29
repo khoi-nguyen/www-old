@@ -654,3 +654,86 @@ Substitute $y = x^m$ into $ax^2 y'' + bx y' + cy = 0$.
 # Exercises
 
 <pdf-reader src="/static/documents/zill-4.7.pdf" width="100%" height="900" />
+
+# Initial value problems
+
+\begin{align*}
+\begin{cases}
+y'' + P(x) y' + Q(x) y &= f(x)\\
+y(x_0) = y_0, y'(x_0) = y_1
+\end{cases}
+\end{align*}
+
+\begin{align*}
+y(x) = \underbrace{y_h(x)}_{\substack{y(x_0) = y_0\\ y'(x_0) = y_1}}
++ \underbrace{y_p(x)}_{\substack{y(x_0) = 0\\ y'(x_0) = 0}}
+\end{align*}
+
+# Green function
+
+![](/static/images/1685401875.png){width=100%}
+
+\begin{align*}
+y_p(x) = \int_{x_0}^x G(x, t) f(t) \dd t,
+\quad G(x, t) \defeq \frac {y_1(t) y_2(x) - y_1(x) y_2(t)} {W(t)}
+\end{align*}
+
+# Example: particular solution
+
+![](/static/images/1685401997.png)
+
+# Example: general solution
+
+![](/static/images/1685402052.png)
+![](/static/images/1685402063.png)
+
+# Solution of the IVP
+
+::: theorem
+The function
+\begin{cases}
+y_p(x) = \int_{x_0}^x G(x, t) f(t) \dd t,
+\end{cases}
+is a solution of
+\begin{cases}
+y'' + P(x) y' + Q(x) y &= f(x)\\
+y(x_0) = 0, y'(x_0) = 0
+\end{cases}
+:::
+
+![](/static/images/1685402182.png)
+
+# Example: IVP
+
+![](/static/images/1685402322.png)
+![](/static/images/1685402332.png)
+
+# Example: calculating green functions
+
+\begin{align*}
+y_p(x) = \int_{x_0}^x G(x, t) f(t) \dd t,
+\quad G(x, t) \defeq \frac {y_1(t) y_2(x) - y_1(x) y_2(t)} {W(t)}
+\end{align*}
+
+![](/static/images/1685402384.png)
+
+# Example: solving complete IVP
+
+![](/static/images/1685402419.png)
+
+# BVPs
+
+![](/static/images/1685402987.png)
+![](/static/images/1685402996.png)
+
+# Examples
+
+![](/static/images/1685403040.png)
+
+# Example
+
+![](/static/images/1685403058.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-4.8.pdf" width="100%" height="900" />
