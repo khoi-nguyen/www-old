@@ -26,12 +26,24 @@ y' + P(x) y = f(x)
 \node (N) at (1, 0) {$N(x, y) dy$};
 \node at (2.3, 0) {$=0$};
 \node (f) at (0, -2) {$f(x, y)$};
-
-\draw [->,out=0,in=180] (M.west) -- node[left]{$\int dx$} (f.west);
-\draw [->] (f) -- node[right]{$\partial_x$} (M);
-\draw [->] (f) -- node[left]{$\partial_x$} (N);
-\draw [->] (N.east) -- node[right]{$\int dx$} (f.east);
+\draw [->] (M) to[out=225,in=180] node[left]{$\int dx$} (f);
+\draw [->] (f) -- node[left]{$\partial_x$} (M);
+\draw [->] (f) -- node[right]{$\partial_y$} (N);
+\draw [->] (N) to[out=-45,in=0] node[right]{$\int dy$} (f);
 ~~~
+
+### Non-exact equations
+
+\begin{align*}
+\mu(x) = e^{\int \frac {M_y - N_x} N \dd x}
+\quad \text{or} \quad
+\mu(y) = e^{\int \frac {N_x - M_y} M \dd y}
+\end{align*}
+
+\begin{align*}
+\mu M \dd x + \mu N \dd y = 0
+\implies \text{exact case}
+\end{align*}
 
 ### Substitutions
 
@@ -54,8 +66,8 @@ y &= y_p + y_h
 
 \begin{align*}
 y(x) = \begin{cases}
-c_1 e^{m_1 x} + c_2 e^{m_2 x}\\
-c_1 e^{m x} + c_2 x e^{m x}\\
-c_1 e^{m x} + c_2 x e^{m x}\\
+c_1 e^{m_1 x} + c_2 e^{m_2 x} & \text{if two solutions}\\
+c_1 e^{m x} + c_2 x e^{m x} & \text{if one solution}\\
+e^{\alpha x} (c_1 \cos \beta x + c_2 \sin \beta x) & \text{complex solutions}\ \alpha \pm i \beta\\
 \end{cases}
 \end{align*}
