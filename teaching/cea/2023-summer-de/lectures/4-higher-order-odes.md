@@ -601,6 +601,27 @@ No need to introduce any integration constants. Why?
 
 ![](/static/images/1685314224.png){height=100%}
 
+# 30/05/2023
+
+::::: {.col}
+
+### Exam
+
+- You can bring a double-sided A4 page with you
+
+:::::
+
+::::: {.col}
+
+### French sentence of the day
+
+Dating may have been hard in the US,
+but your new roommate is here to help.
+
+**Je peux t'obtenir une carte verte** - I can get you a green card.
+
+:::::
+
 # Cauchy-Euler Equations: summary
 
 ![](/static/images/1685400879.png)
