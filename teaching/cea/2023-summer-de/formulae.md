@@ -2,6 +2,14 @@
 
 ## First order ODEs
 
+### Substitutions
+
+Type                    Substitution
+-----                   --------------
+Homogeneous             $y = ux$
+$y' + P(x)y = f(x)y^n$  $u = y^{1 - n}$
+$y' = f(Ax+By+C)$       $u = Ax + By + C$
+
 ### Separable equations
 
 \begin{align*}
@@ -45,14 +53,6 @@ y' + P(x) y = f(x)
 \implies \text{exact case}
 \end{align*}
 
-### Substitutions
-
-Type                    Substitution
------                   --------------
-Homogeneous             $y = ux$
-$y' + P(x)y = f(x)y^n$  $u = y^{1 - n}$
-$y' = f(Ax+By+C)$       $u = Ax + By + C$
-
 ## Second-order ODEs
 
 ### Linear equations with constant coefficients
@@ -70,4 +70,78 @@ c_1 e^{m_1 x} + c_2 e^{m_2 x} & \text{if two solutions}\\
 c_1 e^{m x} + c_2 x e^{m x} & \text{if one solution}\\
 e^{\alpha x} (c_1 \cos \beta x + c_2 \sin \beta x) & \text{complex solutions}\ \alpha \pm i \beta\\
 \end{cases}
+\end{align*}
+
+### Undetermined coefficients
+
+Try a combination of $g$, $g'$, $g''$ to find $y_p$:
+\begin{align*}
+a y'' + by' + cy = g(x)
+\end{align*}
+
+### Variation of Parameters
+
+Put the equation in the form $y'' + \dots = f(x)$
+
+\begin{align*}
+y_p = u_1(x) y_1(x) + u_2(x) y_2(x)
+\quad \text{where} \quad
+u_1' =
+\frac {
+\begin{vmatrix}
+0 & y_2\\
+f(x) & y_2'
+\end{vmatrix}
+} {
+\begin{vmatrix}
+y_1 & y_2\\
+y_1' & y_2'
+\end{vmatrix}
+}
+\quad
+u_2' =
+\frac {
+\begin{vmatrix}
+y_1 & 0\\
+y_1' & f(x)
+\end{vmatrix}
+} {
+\begin{vmatrix}
+y_1 & y_2\\
+y_1' & y_2'
+\end{vmatrix}
+}
+\end{align*}
+
+### Cauchy-Euler
+
+Information                    Formulae
+------------                   ---------
+Equation                       $ax^2y'' + bxy' + cy = g(x)$
+Auxiliary equation             $am^2 + (b - a)x + c = 0$
+Two solutions                  $c_1 x^{m_1} + c_2 x^{m_2}$
+Double solution                $c_1 x^m + c_2 x^m \ln x$
+Complex solutions              $x^{\alpha} (c_1 \cos (\beta \ln x) + c_2 \sin (\beta \ln x)$
+
+## Green's function
+
+\begin{align*}
+y_p(x) = \int_{x_0}^x G(x, t) f(t) \dd t,
+\quad G(x, t) = \frac {y_1(t) y_2(x) - y_1(x) y_2(t)} {W(t)}
+\end{align*}
+
+## General theory
+
+\begin{align*}
+\text{Linearly independent}
+\iff
+\underbrace{
+\begin{vmatrix}
+f_1 & f_2 & \dots & f_n\\
+f_1'& f_2'& \dots & f_n'\\
+\vdots & \vdots & & \vdots\\
+f_1^{(n-1)} & f_2^{(n - 1)} & \dots & f_n^{(n - 1)}
+\end{vmatrix}
+}_{\text{Wronskian}}
+\neq 0
 \end{align*}
