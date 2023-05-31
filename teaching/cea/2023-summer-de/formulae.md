@@ -55,6 +55,12 @@ y' + P(x) y = f(x)
 
 ## Second-order ODEs
 
+### Reduction of order
+
+\begin{align*}
+y_2(x) = u(x) y_1(x)
+\end{align*}
+
 ### Linear equations with constant coefficients
 
 \begin{align*}
