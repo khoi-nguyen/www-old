@@ -758,3 +758,20 @@ y_p(x) = \int_{x_0}^x G(x, t) f(t) \dd t,
 # Exercises
 
 <pdf-reader src="/static/documents/zill-4.8.pdf" width="100%" height="900" />
+
+# Solving systems by elimination
+
+![](/static/images/1685506280.png){width=100%}
+
+# Example
+
+![](/static/images/1685506312.png){width=100%}
+
+# Example
+
+![](/static/images/1685506388.png)
+![](/static/images/1685506404.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-4.9.pdf" width="100%" height="900" />
