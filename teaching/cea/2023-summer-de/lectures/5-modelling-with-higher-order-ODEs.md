@@ -130,3 +130,32 @@ L \frac {\dd^2 q} {\dd t^2} + R \frac {\dd q} {\dd t} + \frac 1 C x = E(t)
 # Exercises
 
 <pdf-reader src="/static/documents/zill-5.1.pdf" width="100%" height="900" />
+
+# Deflection of a beam
+
+::::: {.col}
+![](/static/images/1685660311.png){height=900}
+:::::
+
+
+::::: {.col}
+\begin{align*}
+E I \frac {\dd^4 y} {\dd x^4} = w(x)
+\end{align*}
+
+- $y(x)$: deflection
+- $w(x)$ is the load per unit length
+:::::
+
+# Example: embedded beam
+
+![](/static/images/1685660421.png){height=900px}
+
+# Eigenvalue problems
+
+![](/static/images/1685660617.png)
+![](/static/images/1685660636.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-5.2.pdf" width="100%" height="900" />
