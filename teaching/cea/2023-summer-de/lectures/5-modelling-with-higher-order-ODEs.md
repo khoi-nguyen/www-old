@@ -4,6 +4,9 @@ output: revealjs
 kernel: python
 ...
 
+# Announcements
+
+
 # Hooke's law
 
 ![](/static/images/1685657021.png)
