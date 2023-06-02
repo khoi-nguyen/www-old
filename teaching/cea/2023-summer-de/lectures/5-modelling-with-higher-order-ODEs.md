@@ -4,7 +4,52 @@ output: revealjs
 kernel: python
 ...
 
-# Announcements
+# 02/06
+
+::::: {.col}
+
+### Linear equations with constant coefficients
+
+\begin{align*}
+ay'' + by' + cy &= g(x)\\
+y &= y_p + y_h
+\end{align*}
+
+#### Équation homogène
+
+\begin{align*}
+y(x) = \begin{cases}
+c_1 e^{m_1 x} + c_2 e^{m_2 x} & \text{deux solutions}\\
+c_1 e^{m x} + c_2 x e^{m x} & \text{une solution}\\
+e^{\alpha x} (c_1 \cos \beta x + c_2 \sin \beta x) & \text{solutions complexes}\ \alpha \pm i \beta\\
+\end{cases}
+\end{align*}
+
+### Coefficients indéterminés
+
+Essayez une combinaison de $g$, $g'$, $g''$ pour trouver $y_p$:
+\begin{align*}
+a y'' + by' + cy = g(x)
+\end{align*}
+
+:::::
+
+::::: {.col}
+
+## Today
+
+Interpreting linear second-order ODEs.
+
+#. $ay'' + cy = 0$
+#. $ay'' + by' + cy = 0$
+#. $ay'' + by' + cy = g(x)$
+
+## Announcements
+
+- **French sentence of the day**: nycthémère - one day and one night
+- **Pride Month** (1/06 - 30/06).
+
+:::::
 
 
 # Hooke's law
