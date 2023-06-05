@@ -4,6 +4,35 @@ output: revealjs
 kernel: python
 ...
 
+# 05-06
+
+::::: {.col}
+
+### Announcements
+
+- I'll give you your **midterms on Wednesday**
+- **Today**: using Taylor series
+
+#### French sentence of the day
+
+You might feel discouraged that French always switch to English when you speak to them.
+Don't worry, I have a solution.
+
+**Hé... euh... You speak ze Eengleesh?**
+
+Don't forget to be a bit agressive.
+That bloody foreigner is making you switch to English.
+Make it a bit sensual too, wee'rre in ze ceetee of love (ask Christopher how it's done).
+
+:::::
+
+::::: {.col}
+A lot of work goes into the French sentence of the day,
+and ChatGPT refuses to help.
+
+![](/static/images/1685958276.png)
+:::::
+
 # Power series: review
 
 Power series **centered at $a$**.
