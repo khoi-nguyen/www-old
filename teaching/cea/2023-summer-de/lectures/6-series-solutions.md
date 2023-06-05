@@ -22,7 +22,7 @@ Don't worry, I have a solution.
 
 Don't forget to be a bit agressive.
 That bloody foreigner is making you switch to English.
-Make it a bit sensual too, wee'rre in ze ceetee of love (ask Christopher how it's done).
+Make it a bit sensual too, wee'rre in ze ceetee of love.
 
 :::::
 
