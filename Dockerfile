@@ -12,7 +12,7 @@ RUN pacman --noconfirm --needed -Syy \
     pandoc \
     python-pip \
     ripgrep \
-    texlive-most
+    texlive
 
 ENV ENVIRONMENT=production
 WORKDIR /www
