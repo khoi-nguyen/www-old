@@ -146,6 +146,57 @@ when integrating at endpoints.
 
 <pdf-reader src="/static/documents/zill-6.1.pdf" width="100%" height="900" />
 
+# 06/06
+
+I've decided to write the date the American way today.
+
+::::: {.col}
+
+## Power series
+
+\begin{align*}
+y = \sum_{n = 0}^{+\infty} c_n(x - a)^n
+\end{align*}
+
+Substitute in the ODE,
+use the **identity property** (uniqueness of power series expansion).
+
+Today, we'll do the same, but with equations of order $2$.
+We'll need two solutions.
+
+:::::
+
+::::: {.col}
+
+## French **song** of the day
+
+
+~~~ {.widget name="youtube"}
+url: https://www.youtube.com/watch?v=JAs4edeYUJY
+~~~
+
+  " Tout mes amis ont une queue, mais moi non. (...) Je sais ce que je ferais si j'avais une queue !
+
+  (musique) Si j'avais une queue, elle me ferait bondir, frétiller (!!)
+
+  (...) J'en serais si fière que jamais je ne la laisserais tomber, je la balancerais : elle pointerait vers le soleil !
+
+  Ma queue serait grande, puissante et jolie. Touffue (!!) et violette aussi ! Et tout le monde dirait qu'elle n'as pas son pareil, si j'avais une queue comme les amis ! (/musique)
+
+  Je dois trouver une queue Winnie, mais... Comment ?!?! "
+
+:::::
+
+# Raili is lazy
+
+::::: {.col}
+![](/static/images/1686045359.png)
+:::::
+
+::::: {.col}
+![](/static/images/1686045395.png)
+:::::
+
 # Ordinary and singular points
 
 \begin{align*}
