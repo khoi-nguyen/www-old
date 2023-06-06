@@ -17,7 +17,6 @@ RUN pacman --noconfirm --needed -Syy \
 ENV ENVIRONMENT=production
 WORKDIR /www
 
-RUN luaotfload-tool --update
 COPY Makefile ./
 
 # Precompile Julia environment
