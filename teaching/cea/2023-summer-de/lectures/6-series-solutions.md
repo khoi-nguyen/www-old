@@ -253,3 +253,100 @@ is greater than the distance from $x_0$ to the closest singular point.
 # Exercises
 
 <pdf-reader src="/static/documents/zill-6.2.pdf" width="100%" height="900" />
+
+# 07/06
+
+::::: {.col}
+:::::
+
+::::: {.col}
+
+### Dating while in France
+
+- Je suis majeur^[Suggestion by Arnuv]
+- Bon gars avec une arme à feu
+- Montrez-moi votre tour Eiffel
+- Chercher à goûter les meilleures baguettes françaises
+:::::
+
+# Regular singular point
+
+::: definition
+A **singular** point of a linear differential equation
+\begin{align*}
+y'' + P(x) y' + Q(x) y = 0
+\end{align*}
+is **regular** if $(x - x_0) P(x)$ and $(x - x_0)^2 Q(x)$ are analytic at $x_0$.
+:::
+
+Irregular if not regular.
+
+When the coefficient is polynomial,
+this means $(x - x_0)$ can appear at most to the first order in the denominator of $P$
+and at most to the second order in the denominator of $Q$.
+
+# Classification of singular points
+
+![](/static/images/1686089315.png)
+![](/static/images/1686089329.png)
+
+# Frobenius's method
+
+::: theorem
+If $x_0$ is a regular singular point,
+there is at least a solution of the form
+\begin{align*}
+y = \sum_{n = 0}^{+\infty} c_n (x - x_0)^{n + r}
+\end{align*}
+:::
+
+::: remark
+- We need to find $r$
+- $r \notin \N$, not a power series
+- We don't necessarily have two solutions
+:::
+
+# Example: two series solution
+
+![](/static/images/1686089583.png)
+
+# Indicial equation
+
+As $xP(x)$ and $x^2 Q(x)$ are **analytic**, we can write
+\begin{align*}
+x P(x) &= \sum_{n = 0}^n a_n x^n\\
+x^2 Q(x) &= \sum_{n = 0}^n b_n x^n\\
+\end{align*}
+
+Multiplying by $x^2$ and substituting $y = \sum c_n x^{n + r}$ in
+\begin{align*}
+x^2 y'' + x(xP(x)) y' + [x^2Q(x)]y = 0
+\end{align*}
+yields
+\begin{align*}
+r(r - 1) + a_0 r + b_0 = 0.
+\end{align*}
+
+# One series solution
+
+![](/static/images/1686090987.png)
+
+# One or two series solution
+
+Let $r_1$ and $r_2$ be the indicial roots, with $r_1 \geq r_2$.
+
+- $r_1 - r_2$ is not an integer, then we'll have two solutions
+
+- $r_1 - r_2$ is a positive integer, we may only find one solution
+
+- $r_1 = r_2$, we will only find one solution.
+
+The second solution is obtained via **reduction of order**.
+
+\begin{align*}
+y_2(x) = y_1(x) \int \frac {e^{-\int P(x) \dd x}} {y_1^2(x)} \dd x.
+\end{align*}
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-6.3.pdf" width="100%" height="900" />
