@@ -257,16 +257,32 @@ is greater than the distance from $x_0$ to the closest singular point.
 # 07/06
 
 ::::: {.col}
+
+### Ordinary points
+
+Ordinary point: coefficients in standard form are analytic.
+
+- Substitute $y = \sum c_n x^n$ into an ODE
+- Rewrite the equation as one power series
+- The coefficients vanish -> recurrence relation
+- two terms: separate in two sums ($c_0$, $c_1$)
+- three terms: Assume $c_0 = 0$, get one solution, assume $c_1 = 0$, get the other.
+
 :::::
 
 ::::: {.col}
 
+- Courtney's parents are from Ohio
+  and she hates Michigan.
+  It's a secret, Khoi, don't put that on the slide.
+
 ### Dating while in France
 
-- Je suis majeur^[Suggestion by Arnuv]
-- Bon gars avec une arme à feu
-- Montrez-moi votre tour Eiffel
-- Chercher à goûter les meilleures baguettes françaises
+- Je suis majeur^[Suggestion by Arnuv] - I am of legal age
+- Bon gars avec une arme à feu - Good guy with a gun
+- Montrez-moi votre belle tour Eiffel - Show me your beautiful Eiffel tower
+- Chercher à goûter les meilleures baguettes françaises - Looking to taste the best French baguettes.
+
 :::::
 
 # Regular singular point
