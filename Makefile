@@ -71,6 +71,11 @@ clean:
 test: node_modules
 	@npm run test
 
+docker:
+	docker build -t env -f env/Dockerfile .
+	docker tag env bknguyen/env
+	docker push bknguyen/env
+
 watch:
 	while true; do\
 		make -j 4 lint all;\
