@@ -272,16 +272,13 @@ Ordinary point: coefficients in standard form are analytic.
 
 ::::: {.col}
 
-- Courtney's parents are from Ohio
-  and she hates Michigan.
+- <big><strong>Courtney's parents are from Ohio
+  and she hates Michigan.</strong></big>
   It's a secret, Khoi, don't put that on the slide.
 
 ### Dating while in France
 
 - Je suis majeur^[Suggestion by Arnuv] - I am of legal age
-- Bon gars avec une arme à feu - Good guy with a gun
-- Montrez-moi votre belle tour Eiffel - Show me your beautiful Eiffel tower
-- Chercher à goûter les meilleures baguettes françaises - Looking to taste the best French baguettes.
 
 :::::
 
