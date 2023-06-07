@@ -55,6 +55,7 @@ ROOT = "/figures/"
 
 
 def plot(element: pf.Element, doc: pf.Doc) -> None | pf.Element:
+    return None
     """Replaces code blocks by a plot when appropriate
 
     At the moment, only matlplotlib (Python) and Plots (Julia) are supported.
