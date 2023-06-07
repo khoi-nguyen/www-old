@@ -1,5 +1,11 @@
 FROM archlinux:latest
 
+RUN pacman --noconfirm -Syy \
+    archlinux-keyring
+
+RUN rm -R /etc/pacman.d/gnupg
+RUN pacman-key --init && pacman-key --populate archlinux
+
 RUN pacman --noconfirm --needed -Syy \
     biber \
     ghostscript \
