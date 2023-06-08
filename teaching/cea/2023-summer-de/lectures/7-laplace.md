@@ -18,6 +18,8 @@ The **Laplace transform** transforms an IVP in an algebraic equation.
 \end{align*}
 :::
 
+Notation: $F \defeq \mathscr L f$
+
 # Example: $1$
 
 ![](/static/images/1686173616.png)
