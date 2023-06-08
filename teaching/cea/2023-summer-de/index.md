@@ -21,7 +21,8 @@ Lectures
 
 :::
 
-[Midterm formula booklet](formulae)
+- [Midterm formula booklet](formulae)
+- [Midterm markscheme](/static/documents/cea_midterm_markscheme.pdf)
 
 Lectures
 --------
