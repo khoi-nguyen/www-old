@@ -10,6 +10,19 @@ The **Laplace transform** transforms an IVP in an algebraic equation.
 
 ![](/static/images/1686174276.png)
 
+::: {.info title="French sentence of the day"}
+**Désolé, monsieur le policier, je ne savais pas,
+c'est légal dans le Michigan** - *Sorry officer,
+I didn't know, it's legal in Michigan*.
+:::
+
+# Guys it's on the way!!
+
+Wearing an Ohio State T-shirt was not cool.
+Don't worry, I ordered a new one.
+
+![](/static/images/1686217661.png)
+
 # Laplace transform
 
 ::: {.definition title="Laplace transform"}
