@@ -97,6 +97,21 @@ Notation: $F \defeq \mathscr L f$
 
 <pdf-reader src="/static/documents/zill-7.2.pdf" width="100%" height="900" />
 
+# 09/06
+
+### Laplace transform
+
+\begin{align*}
+\mathscr L f(s) = \int_0^{+\infty} e^{-st} f(t) \dd t
+\end{align*}
+
+![](/static/images/1686173757.png)
+
+The Laplace transform is successful thanks to integration by parts,
+and the behaviour of exponentials under differentiation, integration,
+and translation.
+Other transforms (e.g. Fourier) also rely on this.
+
 # $s$-translation property
 
 ::: {.theorem title="s-translations"}
