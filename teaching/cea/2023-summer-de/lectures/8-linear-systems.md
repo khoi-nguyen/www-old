@@ -1,4 +1,5 @@
 ---
+title: "Chapter 8: Linear systems"
 output: revealjs
 ...
 
