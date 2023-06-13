@@ -88,6 +88,22 @@ and $\mat K$ an **eigenvector**.
 ![](/static/images/1686526866.png)
 ![](/static/images/1686526877.png)
 
+# 13/06
+
+The general solution of $\vec X' = \mat A \vec X + \vec F(t)$
+has the form
+\begin{align*}
+\vec X = \vec X_p + \underbrace{c_1 \vec X_1 + \dots + c_n \vec X_n}_{\vec X_h}.
+\end{align*}
+
+- An $n$-dim system, requires $n$ linearly independent solutions of the homogeneous system
+- Linear independence is checked via the Wronskian (without derivatives)
+- For each eigenpair $(\lambda, \vec K)$ of $\mat A$, $c \vec K e^{\lambda t}$ is a solution to the homogeneous equation.
+
+## Announcements
+
+- Karma caught up with me, I dropped my phone in the gutter. Lesson learnt, I shall not wear that T-shirt again.
+
 # Distinct eigenvalues
 
 ![](/static/images/1686549904.png)
