@@ -77,6 +77,8 @@ Let's try a solution of the form
 We call $\lambda$ an **eigenvalue**
 and $\mat K$ an **eigenvector**.
 
+# Eigenvectors and eigenvalues
+
 # Distinct eigenvalues
 
 ![](/static/images/1686526847.png)
@@ -130,3 +132,53 @@ and $\mat K$ an **eigenvector**.
 # Exercises
 
 <pdf-reader src="/static/documents/zill-8.2.pdf" width="100%" height="900" />
+
+# Nonhomogeneous linear systems
+
+\begin{align*}
+\vec X' = \mat A \vec X + \vec F(t)
+\end{align*}
+
+\begin{align*}
+\vec X = \vec X_p + \underbrace{c_1 \vec X_1 + \dots + c_n \vec X_n}_{\vec X_h}
+\end{align*}
+
+- Undetermined coefficients (quicker)
+- Variation of parameters (more powerful)
+
+# Undetermined coefficients
+
+![](/static/images/1686632474.png)
+![](/static/images/1686632493.png)
+
+# Undetermined coefficients
+
+![](/static/images/1686632532.png)
+![](/static/images/1686632551.png)
+
+# Variation of parameters
+
+\begin{align*}
+\vec X_p = \vec \Phi(t) \vec U(t),
+\quad U(t) \defeq (u_1(t), \dots, u_n(t))^T
+\end{align*}
+
+![](/static/images/1686633489.png)
+![](/static/images/1686633499.png)
+
+# Variation of parameters example
+
+![](/static/images/1686633550.png)
+
+# Variation of parameters part II
+
+![](/static/images/1686633621.png)
+![](/static/images/1686633631.png)
+
+# IVP
+
+![](/static/images/1686633646.png)
+
+# Exercises
+
+<pdf-reader src="/static/documents/zill-8.3.pdf" width="100%" height="900" />

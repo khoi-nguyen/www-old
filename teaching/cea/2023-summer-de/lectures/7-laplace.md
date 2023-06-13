@@ -234,6 +234,10 @@ Let $a > 0$.
 
 # Unit impulse
 
+::: question
+What is the inverse Laplace transform of $1$?
+:::
+
 ![](/static/images/1686264503.png)
 ![](/static/images/1686264537.png)
 
