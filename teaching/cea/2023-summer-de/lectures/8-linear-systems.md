@@ -227,9 +227,26 @@ We find $\vec U(t)$ so that
 \begin{align*}
 \vec X_p' = \mat A \vec X_p + \vec F(t).
 \end{align*}
+
+### French sentence of the day
+
+**Ceci est une *chasse aux sorcières* lancée par ...**
+- This is a witch-hunt started by
+
+Suggestions: les Illuminati, la fondation Clinton, Ohio State,
+
 :::::
 
 # Variation of parameters
+
+\begin{align*}
+\mat \Phi(t) =
+\begin{pmatrix}
+\vec X_1 & \dots & \vec X_n
+\end{pmatrix}
+\implies
+\mat \Phi'(t) = \mat A \Phi(t)
+\end{align*}
 
 \begin{align*}
 \vec X_p = \mat \Phi(t) \vec U(t),
@@ -287,13 +304,11 @@ x_{k + 1} &\defeq x_k + h\\
 
 \begin{align*}
 y(x + h)
-&= y(x) + h y'(x) + \frac {h^2} 2 y''(x) + \bigo(h^3)\\
 &= y(x) + h f(x, y) + \frac {h^2} 2 \left[\partial_x f(x, y) + \partial_y f(x, y) f(x, y)\right] + \bigo(h^3)
 \end{align*}
 
 \begin{align*}
-y(x) + &h\left(w_1 f(x, y) + w_2 f(x + \alpha h, y + \beta h k)\right)\\
-&= y(x) + h \left(w_1 f(x, y) + w_2 f(x, y) + w_2 \alpha h \partial_x f(x, y) + w_2 \beta h k \partial_y f(x, y)\right) + O(h^3)\\
+y&(x) + h\left(w_1 f(x, y) + w_2 f(x + \alpha h, y + \beta h k)\right)\\
 &= y(x) + h (w_1 + w_2) f(x, y)
 + h^2 \left(w_2 \alpha \partial_x f(x, y) + w_2 \beta k \partial_y f(x, y) \right)
 + O(h^3)
@@ -302,3 +317,20 @@ y(x) + &h\left(w_1 f(x, y) + w_2 f(x + \alpha h, y + \beta h k)\right)\\
 # RK-4
 
 ![](/static/images/1686701950.png)
+
+# Python RK-4
+
+~~~ python
+def rungekutta4(f, y0, x):
+    n = len(x)
+    y = np.zeros((n, len(y0)))
+    y[0] = y0
+    for i in range(n - 1):
+        h = x[i+1] - x[i]
+        k1 = f(y[i], x[i])
+        k2 = f(x[i] + h / 2., y[i] + k1 * h / 2.)
+        k3 = f(x[i] + h / 2., y[i] + k2 * h / 2.)
+        k4 = f(x[i] + h, y[i] + k3 * h)
+        y[i+1] = y[i] + (h / 6.) * (k1 + 2*k2 + 2*k3 + k4)
+    return y
+~~~
