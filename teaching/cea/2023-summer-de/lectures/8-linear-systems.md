@@ -1,6 +1,7 @@
 ---
 title: "Chapter 8: Linear systems"
 output: revealjs
+kernel: python
 ...
 
 # Linear systems
@@ -172,15 +173,75 @@ has the form
 ![](/static/images/1686632532.png)
 ![](/static/images/1686632551.png)
 
+# 14/06
+
+::::: {.col}
+
+### Homogeneous systems $\mat X' = \mat A \mat X$.
+
+\begin{align*}
+\vec X = c_1 \vec X_1 + \dots + c_n \vec X_n.
+\end{align*}
+
+\begin{align*}
+\vec X_i = \vec K e^{\lambda t},
+\qquad (\vec K, \lambda) \ \text{eigenpair of} \ \mat A.
+\end{align*}
+
+If we need more vectors,
+\begin{align*}
+\vec X_i = \vec K t e^{\lambda t} + \vec P e^{\lambda t},
+\qquad \begin{cases}
+(\vec K, \lambda) \ \text{eigenpair of} \ \mat A,\\
+\ \vec (\mat A - \lambda \mat I) \vec P = \vec K.
+\end{cases}
+\end{align*}
+
+## Finding $\vec X_p$
+
+- Method of undetermined coefficients (exactly like for second order systems)
+- Variation of parameters
+
+:::::
+
+::::: {.col}
+
+### Variation of parameters
+
+\begin{align*}
+\vec X_p
+&= u_1(t) \vec X_1 + \dots + u_n(t) \vec X_n\\
+&= \underbrace{\begin{pmatrix}
+\vec X_1 & \dots & \vec X_n
+\end{pmatrix}}_{\mat \Phi(t)}
+\underbrace{
+\begin{pmatrix}
+u_1(t)\\
+\vdots\\
+u_n(t)
+\end{pmatrix}
+}_{\vec U(t)}
+\end{align*}
+
+We find $\vec U(t)$ so that
+\begin{align*}
+\vec X_p' = \mat A \vec X_p + \vec F(t).
+\end{align*}
+:::::
+
 # Variation of parameters
 
 \begin{align*}
-\vec X_p = \vec \Phi(t) \vec U(t),
-\quad U(t) \defeq (u_1(t), \dots, u_n(t))^T
+\vec X_p = \mat \Phi(t) \vec U(t),
+\quad \vec U(t) \defeq (u_1(t), \dots, u_n(t))^T
 \end{align*}
 
-![](/static/images/1686633489.png)
-![](/static/images/1686633499.png)
+Substituting into
+$\vec X_p' = \mat A \vec X_p + \vec F(t)$,
+we obtain
+\begin{align*}
+\vec X_p = \mat \Phi(t) \int \mat \Phi^{-1}(t) \mat F(t) \dd t.
+\end{align*}
 
 # Variation of parameters example
 
@@ -198,3 +259,46 @@ has the form
 # Exercises
 
 <pdf-reader src="/static/documents/zill-8.3.pdf" width="100%" height="900" />
+
+# Euler's method
+
+\begin{align*}
+\begin{cases}
+y' &= f(x, y)\\
+y(x_0) &= y_0\\
+\end{cases}
+\end{align*}
+
+By Taylor,
+\begin{align*}
+y(x + h)
+&= y(x) + y'(x) h + \bigo(h^2)\\
+&= y(x) + h f(x, y) + \bigo(h^2)
+\end{align*}
+
+::: {.info title="Euler's method"}
+\begin{align*}
+x_{k + 1} &\defeq x_k + h\\
+\widehat y_{k + 1} &\defeq \widehat y_k + h f(x_k, \widehat y_k)
+\end{align*}
+:::
+
+# Improving Euler
+
+\begin{align*}
+y(x + h)
+&= y(x) + h y'(x) + \frac {h^2} 2 y''(x) + \bigo(h^3)\\
+&= y(x) + h f(x, y) + \frac {h^2} 2 \left[\partial_x f(x, y) + \partial_y f(x, y) f(x, y)\right] + \bigo(h^3)
+\end{align*}
+
+\begin{align*}
+y(x) + &h\left(w_1 f(x, y) + w_2 f(x + \alpha h, y + \beta h k)\right)\\
+&= y(x) + h \left(w_1 f(x, y) + w_2 f(x, y) + w_2 \alpha h \partial_x f(x, y) + w_2 \beta h k \partial_y f(x, y)\right) + O(h^3)\\
+&= y(x) + h (w_1 + w_2) f(x, y)
++ h^2 \left(w_2 \alpha \partial_x f(x, y) + w_2 \beta k \partial_y f(x, y) \right)
++ O(h^3)
+\end{align*}
+
+# RK-4
+
+![](/static/images/1686701950.png)
