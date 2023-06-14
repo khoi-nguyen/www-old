@@ -14,6 +14,20 @@ y'' - 2xy' + 8y = 0,
 <!-- 6.2.21 -->
 :::
 
+# Ordinary point: three-term recurrence relation
+
+::: exercise
+\begin{align*}
+y'' - (1 + x) y = 0.
+\end{align*}
+:::
+
+Answer:
+\begin{align*}
+y_1 = 1 + \frac 1 2 x^2 + \frac 1 6 x^3 + \frac 1 {24} x^24 + \frac 1 {30} x^5 + \dots
+y_2 = x + \frac 1 6 x^3 + \frac 1 {12} x^4 + \frac 1 {120} x^5 + \dots
+\end{align*}
+
 # Other exercises: Series
 
 <iframe src="https://math.libretexts.org/Bookshelves/Calculus/Calculus_(OpenStax)/17%3A_Second-Order_Differential_Equations/17.04%3A_Series_Solutions_of_Differential_Equations/17.4E%3A_Exercises_for_Section_17.4" height=900 width="100%">
